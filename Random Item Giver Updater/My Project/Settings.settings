@@ -2,16 +2,16 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="Prefix" Type="System.String" Scope="User">
+    <Setting Name="DefaultPrefix" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="NBTTag" Type="System.String" Scope="User">
+    <Setting Name="DefaultNBTTag" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Path" Type="System.String" Scope="User">
+    <Setting Name="DefaultPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Version" Type="System.String" Scope="User">
+    <Setting Name="DefaultVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

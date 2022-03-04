@@ -57,48 +57,48 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property Prefix() As String
+        Public Property DefaultPrefix() As String
             Get
-                Return CType(Me("Prefix"),String)
+                Return CType(Me("DefaultPrefix"),String)
             End Get
             Set
-                Me("Prefix") = value
+                Me("DefaultPrefix") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property NBTTag() As String
+        Public Property DefaultNBTTag() As String
             Get
-                Return CType(Me("NBTTag"),String)
+                Return CType(Me("DefaultNBTTag"),String)
             End Get
             Set
-                Me("NBTTag") = value
+                Me("DefaultNBTTag") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property Path() As String
+        Public Property DefaultPath() As String
             Get
-                Return CType(Me("Path"),String)
+                Return CType(Me("DefaultPath"),String)
             End Get
             Set
-                Me("Path") = value
+                Me("DefaultPath") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property Version() As String
+        Public Property DefaultVersion() As String
             Get
-                Return CType(Me("Version"),String)
+                Return CType(Me("DefaultVersion"),String)
             End Get
             Set
-                Me("Version") = value
+                Me("DefaultVersion") = value
             End Set
         End Property
     End Class
