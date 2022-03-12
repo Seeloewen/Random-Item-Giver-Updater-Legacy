@@ -26,13 +26,15 @@ Partial Class frmAbout
         Me.btnOK = New System.Windows.Forms.Button()
         Me.lblBuild = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
-        Me.llblLicense = New System.Windows.Forms.LinkLabel()
+        Me.gbLicense = New System.Windows.Forms.GroupBox()
+        Me.rtbLicense = New System.Windows.Forms.RichTextBox()
+        Me.gbLicense.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnOK
         '
         Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOK.Location = New System.Drawing.Point(105, 99)
+        Me.btnOK.Location = New System.Drawing.Point(105, 307)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(148, 26)
         Me.btnOK.TabIndex = 5
@@ -45,9 +47,9 @@ Partial Class frmAbout
         Me.lblBuild.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBuild.Location = New System.Drawing.Point(74, 38)
         Me.lblBuild.Name = "lblBuild"
-        Me.lblBuild.Size = New System.Drawing.Size(210, 20)
+        Me.lblBuild.Size = New System.Drawing.Size(210, 40)
         Me.lblBuild.TabIndex = 4
-        Me.lblBuild.Text = "Version 0.0.1-a (05.03.2022)"
+        Me.lblBuild.Text = "Version 0.1.0-a (13.03.2022)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)"
         Me.lblBuild.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblHeader
@@ -60,24 +62,35 @@ Partial Class frmAbout
         Me.lblHeader.TabIndex = 3
         Me.lblHeader.Text = "Random Item Giver Updater"
         '
-        'llblLicense
+        'gbLicense
         '
-        Me.llblLicense.AutoSize = True
-        Me.llblLicense.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblLicense.Location = New System.Drawing.Point(74, 66)
-        Me.llblLicense.Name = "llblLicense"
-        Me.llblLicense.Size = New System.Drawing.Size(214, 20)
-        Me.llblLicense.TabIndex = 6
-        Me.llblLicense.TabStop = True
-        Me.llblLicense.Text = "Licensed under GNU GPL v3"
+        Me.gbLicense.Controls.Add(Me.rtbLicense)
+        Me.gbLicense.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gbLicense.Location = New System.Drawing.Point(17, 81)
+        Me.gbLicense.Name = "gbLicense"
+        Me.gbLicense.Size = New System.Drawing.Size(331, 220)
+        Me.gbLicense.TabIndex = 6
+        Me.gbLicense.TabStop = False
+        Me.gbLicense.Text = "License"
+        '
+        'rtbLicense
+        '
+        Me.rtbLicense.BackColor = System.Drawing.Color.White
+        Me.rtbLicense.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.rtbLicense.Location = New System.Drawing.Point(7, 22)
+        Me.rtbLicense.Name = "rtbLicense"
+        Me.rtbLicense.ReadOnly = True
+        Me.rtbLicense.Size = New System.Drawing.Size(318, 192)
+        Me.rtbLicense.TabIndex = 0
+        Me.rtbLicense.Text = resources.GetString("rtbLicense.Text")
         '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(361, 137)
-        Me.Controls.Add(Me.llblLicense)
+        Me.ClientSize = New System.Drawing.Size(361, 345)
+        Me.Controls.Add(Me.gbLicense)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblBuild)
         Me.Controls.Add(Me.lblHeader)
@@ -88,6 +101,7 @@ Partial Class frmAbout
         Me.Name = "frmAbout"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "About"
+        Me.gbLicense.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -96,5 +110,6 @@ Partial Class frmAbout
     Friend WithEvents btnOK As Button
     Friend WithEvents lblBuild As Label
     Friend WithEvents lblHeader As Label
-    Friend WithEvents llblLicense As LinkLabel
+    Friend WithEvents gbLicense As GroupBox
+    Friend WithEvents rtbLicense As RichTextBox
 End Class
