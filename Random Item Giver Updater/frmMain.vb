@@ -29,7 +29,7 @@ Public Class frmMain
     Dim NewDPVersion As String
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early test build at your own caution.", MsgBoxStyle.Exclamation, "Notice")
+        MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early test build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Notice")
         qm = Quotationmark.Text
     End Sub
 
@@ -898,7 +898,7 @@ Public Class frmMain
     End Sub
 
     Private Sub ChangelogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangelogToolStripMenuItem.Click
-        MsgBox("Work in progress")
+        frmChangelog.Show()
     End Sub
 
     Private Sub SoftwareHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoftwareHelpToolStripMenuItem.Click
