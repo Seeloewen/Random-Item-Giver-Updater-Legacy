@@ -14,3 +14,4 @@ C:\Users\Louis\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random It
 C:\Users\Louis\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random Item Giver Updater.exe
 C:\Users\Louis\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random Item Giver Updater.xml
 C:\Users\Louis\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random Item Giver Updater.pdb
+C:\Users\Louis\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random_Item_Giver_Updater.frmChangelog.resources
