@@ -47,8 +47,7 @@ Partial Class frmChangelog
         Me.RichTextBox1.ReadOnly = True
         Me.RichTextBox1.Size = New System.Drawing.Size(445, 336)
         Me.RichTextBox1.TabIndex = 1
-        Me.RichTextBox1.Text = "Version 0.1.0 (12.03.2022)" & Global.Microsoft.VisualBasic.ChrW(10) & "+ Added changelog" & Global.Microsoft.VisualBasic.ChrW(10) & "+ Added license in 'about' window" & Global.Microsoft.VisualBasic.ChrW(10) & "* " &
-    "Fixed typo in startup message" & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(10) & "Version 0.0.1 (05.03.2022)" & Global.Microsoft.VisualBasic.ChrW(10) & "* Initial pre-release"
+        Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
         '
         'btnOK
         '
