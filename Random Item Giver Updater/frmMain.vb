@@ -69,7 +69,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -113,7 +113,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "2", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "2", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -157,7 +157,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "3", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "3", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -201,7 +201,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "5", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "5", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -245,7 +245,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "10", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "10", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -289,7 +289,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "32", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "32", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -333,7 +333,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "64", "1.16", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "64", "1.16", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -378,7 +378,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.17", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.17", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -424,7 +424,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -468,7 +468,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "2", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "2", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -512,7 +512,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "3", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "3", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -556,7 +556,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "5", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "5", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -600,7 +600,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "10", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "10", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -644,7 +644,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "32", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "32", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
@@ -688,7 +688,7 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "64", "1.18", "special_xvv")
                 End If
-                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "64", "1.18", "special_xxv")
                 End If
                 If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
