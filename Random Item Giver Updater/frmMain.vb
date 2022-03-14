@@ -46,9 +46,9 @@ Public Class frmMain
             rbtnSpawnEgg.Checked = False
         End If
 
-        If rbtnRIG116.Checked Then
+        If String.IsNullOrEmpty(tbID.Text) = False Then
 
-            If String.IsNullOrEmpty(tbID.Text) = False Then
+            If rbtnRIG116.Checked Then
 
                 'Add item to loot tables for 1 item
                 If cbNormalItem.Checked Then
@@ -57,20 +57,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "1", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "1", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "1", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "1", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "1", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "1", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "1", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "1", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "1", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "1", "1.16", "suspicious_stews")
@@ -98,20 +101,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "2", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "2", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "2", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "2", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "2", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "2", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "2", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "2", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "2", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "2", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "2", "1.16", "suspicious_stews")
@@ -139,20 +145,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "3", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "3", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "3", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "3", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "3", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "3", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "3", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "3", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "3", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "3", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "3", "1.16", "suspicious_stews")
@@ -180,20 +189,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "5", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "5", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "5", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "5", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "5", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "5", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "5", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "5", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "5", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "5", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "5", "1.16", "suspicious_stews")
@@ -221,20 +233,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "10", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "10", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "10", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "10", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "10", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "10", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "10", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "10", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "10", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "10", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "10", "1.16", "suspicious_stews")
@@ -262,20 +277,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "32", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "32", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "32", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "32", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "32", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "32", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "32", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "32", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "32", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "32", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "32", "1.16", "suspicious_stews")
@@ -303,20 +321,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "64", "1.16", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "64", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "64", "1.16", "special_xvx")
-                    AddItem(tbID.Text, "64", "1.16", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "64", "1.16", "special_xxv")
-                    AddItem(tbID.Text, "64", "1.16", "special_xvv")
-                    AddItem(tbID.Text, "64", "1.16", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "64", "1.16", "special_vvx")
-                    AddItem(tbID.Text, "64", "1.16", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "64", "1.16", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.16", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.16", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.16", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.16", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.16", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "64", "1.16", "suspicious_stews")
@@ -336,53 +357,53 @@ Public Class frmMain
                 If cbTippedArrow.Checked Then
                     AddItem(tbID.Text, "64", "1.16", "tipped_arrows")
                 End If
-            End If
 
-        ElseIf rbtnRIG117.Checked Then
+            ElseIf rbtnRIG117.Checked Then
 
-            If cbNormalItem.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "main")
-            End If
-            If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "main_without_creative-only")
-            End If
-            If rbtnCommandBlock.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "special_xvv")
-                AddItem(tbID.Text, "1", "1.17", "special_xvx")
-                AddItem(tbID.Text, "1", "1.17", "special_vvx")
-            End If
-            If rbtnOtherItem.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "special_xxv")
-                AddItem(tbID.Text, "1", "1.17", "special_xvv")
-                AddItem(tbID.Text, "1", "1.17", "special_vxv")
-            End If
-            If rbtnSpawnEgg.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "special_vvx")
-                AddItem(tbID.Text, "1", "1.17", "special_vxv")
-                AddItem(tbID.Text, "1", "1.17", "special_vxx")
-            End If
-            If cbSuspiciousStew.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "suspicious_stews")
-            End If
-            If cbEnchantedBook.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "enchanted_books")
-            End If
-            If cbPotion.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "potions")
-            End If
-            If cbSplashPotion.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "splash_potions")
-            End If
-            If cbLingeringPotion.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "lingering_potions")
-            End If
-            If cbTippedArrow.Checked Then
-                AddItem(tbID.Text, "1", "1.17", "tipped_arrows")
-            End If
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.17", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.17", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.17", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.17", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.17", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.17", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "1", "1.17", "tipped_arrows")
+                End If
 
-        ElseIf rbtnRIG118.Checked Then
-
-            If String.IsNullOrEmpty(tbID.Text) = False Then
+            ElseIf rbtnRIG118.Checked Then
 
                 'Add item to loot tables for 1 item
                 If cbNormalItem.Checked Then
@@ -391,20 +412,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "1", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "1", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "1", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "1", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "1", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "1", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "1", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "1", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "1", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "1", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "1", "1.18", "suspicious_stews")
@@ -432,20 +456,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "2", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "2", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "2", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "2", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "2", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "2", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "2", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "2", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "2", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "2", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "2", "1.18", "suspicious_stews")
@@ -473,20 +500,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "3", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "3", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "3", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "3", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "3", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "3", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "3", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "3", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "3", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "3", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "3", "1.18", "suspicious_stews")
@@ -514,20 +544,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "5", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "5", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "5", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "5", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "5", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "5", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "5", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "5", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "5", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "5", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "5", "1.18", "suspicious_stews")
@@ -555,20 +588,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "10", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "10", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "10", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "10", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "10", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "10", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "10", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "10", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "10", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "10", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "10", "1.18", "suspicious_stews")
@@ -596,20 +632,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "32", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "32", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "32", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "32", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "32", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "32", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "32", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "32", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "32", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "32", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "32", "1.18", "suspicious_stews")
@@ -637,20 +676,23 @@ Public Class frmMain
                 If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
                     AddItem(tbID.Text, "64", "1.18", "main_without_creative-only")
                 End If
-                If rbtnCommandBlock.Checked Then
-                    AddItem(tbID.Text, "64", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "64", "1.18", "special_xvx")
-                    AddItem(tbID.Text, "64", "1.18", "special_vvx")
-                End If
-                If rbtnOtherItem.Checked Then
-                    AddItem(tbID.Text, "64", "1.18", "special_xxv")
-                    AddItem(tbID.Text, "64", "1.18", "special_xvv")
-                    AddItem(tbID.Text, "64", "1.18", "special_vxv")
-                End If
-                If rbtnSpawnEgg.Checked Then
-                    AddItem(tbID.Text, "64", "1.18", "special_vvx")
-                    AddItem(tbID.Text, "64", "1.18", "special_vxv")
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
                     AddItem(tbID.Text, "64", "1.18", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.18", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.18", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.18", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = True And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.18", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.18", "special_vxv")
                 End If
                 If cbSuspiciousStew.Checked Then
                     AddItem(tbID.Text, "64", "1.18", "suspicious_stews")
@@ -671,6 +713,7 @@ Public Class frmMain
                     AddItem(tbID.Text, "64", "1.18", "tipped_arrows")
                 End If
             End If
+        Else MsgBox("Please enter a text in the ID textbox!", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 

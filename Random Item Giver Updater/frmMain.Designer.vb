@@ -219,7 +219,7 @@ Partial Class frmMain
         Me.cbNormalItem.Checked = True
         Me.cbNormalItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbNormalItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbNormalItem.Location = New System.Drawing.Point(449, 53)
+        Me.cbNormalItem.Location = New System.Drawing.Point(300, 49)
         Me.cbNormalItem.Name = "cbNormalItem"
         Me.cbNormalItem.Size = New System.Drawing.Size(98, 20)
         Me.cbNormalItem.TabIndex = 80
@@ -291,7 +291,7 @@ Partial Class frmMain
         Me.rbtnCommandBlock.AutoSize = True
         Me.rbtnCommandBlock.Enabled = False
         Me.rbtnCommandBlock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCommandBlock.Location = New System.Drawing.Point(463, 124)
+        Me.rbtnCommandBlock.Location = New System.Drawing.Point(463, 94)
         Me.rbtnCommandBlock.Name = "rbtnCommandBlock"
         Me.rbtnCommandBlock.Size = New System.Drawing.Size(124, 20)
         Me.rbtnCommandBlock.TabIndex = 72
@@ -304,7 +304,7 @@ Partial Class frmMain
         Me.rbtnOtherItem.AutoSize = True
         Me.rbtnOtherItem.Enabled = False
         Me.rbtnOtherItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnOtherItem.Location = New System.Drawing.Point(463, 148)
+        Me.rbtnOtherItem.Location = New System.Drawing.Point(463, 118)
         Me.rbtnOtherItem.Name = "rbtnOtherItem"
         Me.rbtnOtherItem.Size = New System.Drawing.Size(169, 20)
         Me.rbtnOtherItem.TabIndex = 71
@@ -317,7 +317,7 @@ Partial Class frmMain
         Me.rbtnSpawnEgg.AutoSize = True
         Me.rbtnSpawnEgg.Enabled = False
         Me.rbtnSpawnEgg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnSpawnEgg.Location = New System.Drawing.Point(463, 101)
+        Me.rbtnSpawnEgg.Location = New System.Drawing.Point(463, 71)
         Me.rbtnSpawnEgg.Name = "rbtnSpawnEgg"
         Me.rbtnSpawnEgg.Size = New System.Drawing.Size(94, 20)
         Me.rbtnSpawnEgg.TabIndex = 70
@@ -329,7 +329,7 @@ Partial Class frmMain
         '
         Me.cbSplashPotion.AutoSize = True
         Me.cbSplashPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSplashPotion.Location = New System.Drawing.Point(294, 124)
+        Me.cbSplashPotion.Location = New System.Drawing.Point(300, 142)
         Me.cbSplashPotion.Name = "cbSplashPotion"
         Me.cbSplashPotion.Size = New System.Drawing.Size(109, 20)
         Me.cbSplashPotion.TabIndex = 69
@@ -340,7 +340,7 @@ Partial Class frmMain
         '
         Me.cbLingeringPotion.AutoSize = True
         Me.cbLingeringPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbLingeringPotion.Location = New System.Drawing.Point(294, 148)
+        Me.cbLingeringPotion.Location = New System.Drawing.Point(300, 166)
         Me.cbLingeringPotion.Name = "cbLingeringPotion"
         Me.cbLingeringPotion.Size = New System.Drawing.Size(122, 20)
         Me.cbLingeringPotion.TabIndex = 68
@@ -351,7 +351,7 @@ Partial Class frmMain
         '
         Me.cbTippedArrow.AutoSize = True
         Me.cbTippedArrow.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbTippedArrow.Location = New System.Drawing.Point(294, 174)
+        Me.cbTippedArrow.Location = New System.Drawing.Point(300, 192)
         Me.cbTippedArrow.Name = "cbTippedArrow"
         Me.cbTippedArrow.Size = New System.Drawing.Size(107, 20)
         Me.cbTippedArrow.TabIndex = 67
@@ -362,7 +362,7 @@ Partial Class frmMain
         '
         Me.cbSuspiciousStew.AutoSize = True
         Me.cbSuspiciousStew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSuspiciousStew.Location = New System.Drawing.Point(294, 53)
+        Me.cbSuspiciousStew.Location = New System.Drawing.Point(300, 71)
         Me.cbSuspiciousStew.Name = "cbSuspiciousStew"
         Me.cbSuspiciousStew.Size = New System.Drawing.Size(117, 20)
         Me.cbSuspiciousStew.TabIndex = 66
@@ -373,7 +373,7 @@ Partial Class frmMain
         '
         Me.cbPotion.AutoSize = True
         Me.cbPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbPotion.Location = New System.Drawing.Point(294, 100)
+        Me.cbPotion.Location = New System.Drawing.Point(300, 118)
         Me.cbPotion.Name = "cbPotion"
         Me.cbPotion.Size = New System.Drawing.Size(64, 20)
         Me.cbPotion.TabIndex = 65
@@ -384,7 +384,7 @@ Partial Class frmMain
         '
         Me.cbEnchantedBook.AutoSize = True
         Me.cbEnchantedBook.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbEnchantedBook.Location = New System.Drawing.Point(294, 76)
+        Me.cbEnchantedBook.Location = New System.Drawing.Point(300, 94)
         Me.cbEnchantedBook.Name = "cbEnchantedBook"
         Me.cbEnchantedBook.Size = New System.Drawing.Size(125, 20)
         Me.cbEnchantedBook.TabIndex = 64
@@ -395,7 +395,7 @@ Partial Class frmMain
         '
         Me.cbCreativeOnly.AutoSize = True
         Me.cbCreativeOnly.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCreativeOnly.Location = New System.Drawing.Point(449, 79)
+        Me.cbCreativeOnly.Location = New System.Drawing.Point(449, 49)
         Me.cbCreativeOnly.Name = "cbCreativeOnly"
         Me.cbCreativeOnly.Size = New System.Drawing.Size(107, 20)
         Me.cbCreativeOnly.TabIndex = 61
@@ -510,24 +510,24 @@ Partial Class frmMain
         'SoftwareHelpToolStripMenuItem
         '
         Me.SoftwareHelpToolStripMenuItem.Name = "SoftwareHelpToolStripMenuItem"
-        Me.SoftwareHelpToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SoftwareHelpToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SoftwareHelpToolStripMenuItem.Text = "Software help"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(143, 6)
         '
         'ChangelogToolStripMenuItem
         '
         Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ChangelogToolStripMenuItem.Text = "Changelog"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'fbdMainFolderPath
@@ -630,7 +630,8 @@ Partial Class frmMain
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmMain"
-        Me.Text = "Random Item Giver Updater ALPHA 0.1.0"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Random Item Giver Updater ALPHA 0.1.1"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
