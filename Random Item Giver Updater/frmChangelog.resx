@@ -118,7 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RichTextBox1.Text" xml:space="preserve">
-    <value>Version 0.1.1 (14.03.2022)
+    <value>Version 0.1.2 (19.03.2022)
++ Added 1.19 support
++ Added 1.16 support
+
+Version 0.1.1 (14.03.2022)
 * Fixed a bug which caused items to not be added to the correct loot tables
 * Fixed a bug where the application would crash if no text was entered in the ID textbox
 * Windows now start at the center of the screen
