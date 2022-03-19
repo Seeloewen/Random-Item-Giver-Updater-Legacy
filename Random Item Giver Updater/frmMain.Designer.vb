@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,11 @@ Partial Class frmMain
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbDatapack = New System.Windows.Forms.GroupBox()
-        Me.llblWhy116disabled = New System.Windows.Forms.LinkLabel()
         Me.rbtnRIG116 = New System.Windows.Forms.RadioButton()
         Me.rbtnRIG117 = New System.Windows.Forms.RadioButton()
         Me.rbtnRIG118 = New System.Windows.Forms.RadioButton()
@@ -77,6 +76,7 @@ Partial Class frmMain
         Me.rtb3Items = New System.Windows.Forms.RichTextBox()
         Me.rtb5Items = New System.Windows.Forms.RichTextBox()
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
+        Me.rbtnRIG119 = New System.Windows.Forms.RadioButton()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -94,7 +94,7 @@ Partial Class frmMain
         '
         'gbDatapack
         '
-        Me.gbDatapack.Controls.Add(Me.llblWhy116disabled)
+        Me.gbDatapack.Controls.Add(Me.rbtnRIG119)
         Me.gbDatapack.Controls.Add(Me.rbtnRIG116)
         Me.gbDatapack.Controls.Add(Me.rbtnRIG117)
         Me.gbDatapack.Controls.Add(Me.rbtnRIG118)
@@ -109,37 +109,26 @@ Partial Class frmMain
         Me.gbDatapack.TabStop = False
         Me.gbDatapack.Text = "Select datapack"
         '
-        'llblWhy116disabled
-        '
-        Me.llblWhy116disabled.AutoSize = True
-        Me.llblWhy116disabled.Location = New System.Drawing.Point(529, 70)
-        Me.llblWhy116disabled.Name = "llblWhy116disabled"
-        Me.llblWhy116disabled.Size = New System.Drawing.Size(18, 20)
-        Me.llblWhy116disabled.TabIndex = 6
-        Me.llblWhy116disabled.TabStop = True
-        Me.llblWhy116disabled.Text = "?"
-        '
         'rbtnRIG116
         '
         Me.rbtnRIG116.AutoSize = True
-        Me.rbtnRIG116.Enabled = False
         Me.rbtnRIG116.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG116.Location = New System.Drawing.Point(361, 71)
+        Me.rbtnRIG116.Location = New System.Drawing.Point(370, 69)
         Me.rbtnRIG116.Name = "rbtnRIG116"
-        Me.rbtnRIG116.Size = New System.Drawing.Size(167, 20)
+        Me.rbtnRIG116.Size = New System.Drawing.Size(98, 20)
         Me.rbtnRIG116.TabIndex = 5
-        Me.rbtnRIG116.Text = "Random Item Giver 1.16"
+        Me.rbtnRIG116.Text = "Version 1.16"
         Me.rbtnRIG116.UseVisualStyleBackColor = True
         '
         'rbtnRIG117
         '
         Me.rbtnRIG117.AutoSize = True
         Me.rbtnRIG117.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG117.Location = New System.Drawing.Point(188, 71)
+        Me.rbtnRIG117.Location = New System.Drawing.Point(266, 69)
         Me.rbtnRIG117.Name = "rbtnRIG117"
-        Me.rbtnRIG117.Size = New System.Drawing.Size(167, 20)
+        Me.rbtnRIG117.Size = New System.Drawing.Size(98, 20)
         Me.rbtnRIG117.TabIndex = 4
-        Me.rbtnRIG117.Text = "Random Item Giver 1.17"
+        Me.rbtnRIG117.Text = "Version 1.17"
         Me.rbtnRIG117.UseVisualStyleBackColor = True
         '
         'rbtnRIG118
@@ -147,12 +136,12 @@ Partial Class frmMain
         Me.rbtnRIG118.AutoSize = True
         Me.rbtnRIG118.Checked = True
         Me.rbtnRIG118.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG118.Location = New System.Drawing.Point(15, 71)
+        Me.rbtnRIG118.Location = New System.Drawing.Point(158, 69)
         Me.rbtnRIG118.Name = "rbtnRIG118"
-        Me.rbtnRIG118.Size = New System.Drawing.Size(167, 20)
+        Me.rbtnRIG118.Size = New System.Drawing.Size(98, 20)
         Me.rbtnRIG118.TabIndex = 3
         Me.rbtnRIG118.TabStop = True
-        Me.rbtnRIG118.Text = "Random Item Giver 1.18"
+        Me.rbtnRIG118.Text = "Version 1.18" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rbtnRIG118.UseVisualStyleBackColor = True
         '
         'btnBrowseDatapackPath
@@ -605,6 +594,18 @@ Partial Class frmMain
         Me.rtb2Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 2" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
+        'rbtnRIG119
+        '
+        Me.rbtnRIG119.AutoSize = True
+        Me.rbtnRIG119.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbtnRIG119.Location = New System.Drawing.Point(15, 69)
+        Me.rbtnRIG119.Name = "rbtnRIG119"
+        Me.rbtnRIG119.Size = New System.Drawing.Size(137, 20)
+        Me.rbtnRIG119.TabIndex = 6
+        Me.rbtnRIG119.TabStop = True
+        Me.rbtnRIG119.Text = "Version 1.19 (Beta)"
+        Me.rbtnRIG119.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -631,7 +632,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.1.1"
+        Me.Text = "Random Item Giver Updater ALPHA 0.1.2"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
@@ -696,5 +697,5 @@ Partial Class frmMain
     Friend WithEvents rtb3Items As RichTextBox
     Friend WithEvents rtb5Items As RichTextBox
     Friend WithEvents rtb2Items As RichTextBox
-    Friend WithEvents llblWhy116disabled As LinkLabel
+    Friend WithEvents rbtnRIG119 As RadioButton
 End Class

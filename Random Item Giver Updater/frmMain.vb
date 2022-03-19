@@ -40,6 +40,10 @@ Public Class frmMain
             MsgBox("Warning: Version 1.17 does not support the newest features of the Random Item Giver!" + vbNewLine + "It was last officially updated on 20.01.2022, Version 1.1.5", MsgBoxStyle.Exclamation, "Warning")
         End If
 
+        If rbtnRIG119.Checked Then
+            MsgBox("Warning: Version 1.19 is not officially supported by the Random Item Giver yet." + vbNewLine + "You can still use it but can't expect it to work properly.", MsgBoxStyle.Exclamation, "Warning")
+        End If
+
         If cbCreativeOnly.Checked = False Then
             rbtnCommandBlock.Checked = False
             rbtnOtherItem.Checked = False
@@ -712,7 +716,318 @@ Public Class frmMain
                 If cbTippedArrow.Checked Then
                     AddItem(tbID.Text, "64", "1.18", "tipped_arrows")
                 End If
+
+            ElseIf rbtnRIG119.Checked Then
+
+                'Add item to loot tables for 1 item
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "1", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "1", "1.19", "tipped_arrows")
+                End If
+
+                'Add item to loot tables for 2 items
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "2", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "2", "1.19", "tipped_arrows")
+                End If
+
+                'Add item to loot tables for 3 items
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "3", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "3", "1.19", "tipped_arrows")
+                End If
+
+                'Add item to loot tables for 5 items
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "5", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "5", "1.19", "tipped_arrows")
+                End If
+
+                'Add item to loot tables for 10 items
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "10", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "10", "1.19", "tipped_arrows")
+                End If
+
+                'Add item to loot tables for 32 items
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "32", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "32", "1.19", "tipped_arrows")
+                End If
+
+                'Add item to loot tables for 64 items
+                If cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "main")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "main_without_creative-only")
+                End If
+                If rbtnCommandBlock.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.19", "special_vxx")
+                End If
+                If rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.19", "special_vvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnOtherItem.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.19", "special_xvx")
+                End If
+                If rbtnSpawnEgg.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.19", "special_xvv")
+                End If
+                If rbtnSpawnEgg.Checked = False And rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.19", "special_xxv")
+                End If
+                If rbtnCommandBlock.Checked = False And cbNormalItem.Checked = True Then
+                    AddItem(tbID.Text, "64", "1.19", "special_vxv")
+                End If
+                If cbSuspiciousStew.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "suspicious_stews")
+                End If
+                If cbEnchantedBook.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "enchanted_books")
+                End If
+                If cbPotion.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "potions")
+                End If
+                If cbSplashPotion.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "splash_potions")
+                End If
+                If cbLingeringPotion.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "lingering_potions")
+                End If
+                If cbTippedArrow.Checked Then
+                    AddItem(tbID.Text, "64", "1.19", "tipped_arrows")
+                End If
             End If
+
         Else MsgBox("Please enter a text in the ID textbox!", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
@@ -735,7 +1050,7 @@ Public Class frmMain
 
         Try
 
-            If Version = "1.16" OrElse Version = "1.18" Then
+            If Version = "1.16" OrElse Version = "1.18" OrElse Version = "1.19" Then
 
                 If Item_Amount = 1 Then
                     LineRemoveLoop = 8
@@ -878,6 +1193,7 @@ Public Class frmMain
                     End If
 
                 End If
+
             ElseIf Version = "1.17" Then
 
                 'Convert Settings to 1.17 RIG format
@@ -999,7 +1315,7 @@ Public Class frmMain
         MsgBox("Work in progress")
     End Sub
 
-    Private Sub llblWhy116disabled_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblWhy116disabled.LinkClicked
+    Private Sub llblWhy116disabled_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) 
         MsgBox("1.16 is not available until the 1.16 version receives the 'multiple items' update.", MsgBoxStyle.Critical, "Warning")
     End Sub
 End Class
