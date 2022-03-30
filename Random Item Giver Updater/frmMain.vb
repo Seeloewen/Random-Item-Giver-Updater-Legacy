@@ -13,20 +13,6 @@ Public Class frmMain
     Dim NBTtag As String
     Dim Prefix As String
     Dim ExceptionAddItem As String
-    Dim LinesReload118(1000) As String
-    Dim LinesInfo118(1000) As String
-    Dim LinesPack118(1000) As String
-    Dim LinesUninstall118(1000) As String
-    Dim LinesReload117(1000) As String
-    Dim LinesInfo117(1000) As String
-    Dim LinesPack117(1000) As String
-    Dim LinesUninstall117(1000) As String
-    Dim LinesReload116(1000) As String
-    Dim LinesInfo116(1000) As String
-    Dim LinesPack116(1000) As String
-    Dim LinesUninstall116(1000) As String
-    Dim NewMCVersion As String
-    Dim NewDPVersion As String
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early test build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Notice")
@@ -1250,6 +1236,52 @@ Public Class frmMain
     Private Sub btnBrowseDatapackPath_Click(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.Click
         fbdMainFolderPath.ShowDialog()
         tbDatapackPath.Text = fbdMainFolderPath.SelectedPath
+
+        If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
+            If My.Computer.FileSystem.FileExists(tbDatapackPath.Text + "/pack.mcmeta") Then
+
+                Dim VersionString As String = System.IO.File.ReadAllLines(tbDatapackPath.Text + "/pack.mcmeta")(2)
+                Dim ParseVersion As String = Replace(VersionString, "    " + qm + "pack_format" + qm + ": ", "")
+                Dim Version As String = Replace(ParseVersion, ",", "")
+
+                Try
+                    If Convert.ToInt32(Version) > 10 Then
+                        lblDatapackDetection.Text = "Detected datapack, but could not determine version"
+                        MsgBox("A datapack has been detected but the Version number is greater than 10." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
+                        rbtnRIG119.Checked = True
+                    ElseIf Version = "10" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.19"
+                        rbtnRIG119.Checked = True
+                    ElseIf Version = "9" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.18"
+                        rbtnRIG118.Checked = True
+                    ElseIf Version = "8" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.18. Please note that your version of 1.18 is outdated."
+                        rbtnRIG118.Checked = True
+                    ElseIf Version = "7" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.17"
+                        rbtnRIG117.Checked = True
+                    ElseIf Version = "6" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.16"
+                        rbtnRIG116.Checked = True
+                    ElseIf Convert.ToInt32(Version) < 6 Then
+                        lblDatapackDetection.Text = "Detected datapack, but version is most likely unsupported"
+                        MsgBox("A datapack has been detected but the version number is smaller than 6." + vbNewLine + "This means that the datapack version is older than 1.15 which the Random Item Giver does not support." + vbNewLine + "The oldest available version has been selected but will most likely not work.", MsgBoxStyle.Exclamation, "Warning")
+                        rbtnRIG116.Checked = True
+                    Else
+                        lblDatapackDetection.Text = "Detected datapack, but could not determine version."
+                    End If
+                Catch ex As Exception
+                    MsgBox("Error when selecting datapack: " + ex.Message, MsgBoxStyle.Critical, "Error")
+                    lblDatapackDetection.Text = "Detected datapack, but could not determine version."
+                    rbtnRIG119.Checked = True
+                End Try
+            Else
+                    lblDatapackDetection.Text = "Folder found, but could not detect datapack."
+            End If
+        Else
+            lblDatapackDetection.Text = "No datapack detected."
+        End If
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click

@@ -25,6 +25,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbDatapack = New System.Windows.Forms.GroupBox()
+        Me.lblDatapackDetection = New System.Windows.Forms.Label()
+        Me.rbtnRIG119 = New System.Windows.Forms.RadioButton()
         Me.rbtnRIG116 = New System.Windows.Forms.RadioButton()
         Me.rbtnRIG117 = New System.Windows.Forms.RadioButton()
         Me.rbtnRIG118 = New System.Windows.Forms.RadioButton()
@@ -76,7 +78,6 @@ Partial Class frmMain
         Me.rtb3Items = New System.Windows.Forms.RichTextBox()
         Me.rtb5Items = New System.Windows.Forms.RichTextBox()
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
-        Me.rbtnRIG119 = New System.Windows.Forms.RadioButton()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -94,6 +95,7 @@ Partial Class frmMain
         '
         'gbDatapack
         '
+        Me.gbDatapack.Controls.Add(Me.lblDatapackDetection)
         Me.gbDatapack.Controls.Add(Me.rbtnRIG119)
         Me.gbDatapack.Controls.Add(Me.rbtnRIG116)
         Me.gbDatapack.Controls.Add(Me.rbtnRIG117)
@@ -104,16 +106,39 @@ Partial Class frmMain
         Me.gbDatapack.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbDatapack.Location = New System.Drawing.Point(16, 63)
         Me.gbDatapack.Name = "gbDatapack"
-        Me.gbDatapack.Size = New System.Drawing.Size(638, 98)
+        Me.gbDatapack.Size = New System.Drawing.Size(638, 127)
         Me.gbDatapack.TabIndex = 57
         Me.gbDatapack.TabStop = False
         Me.gbDatapack.Text = "Select datapack"
+        '
+        'lblDatapackDetection
+        '
+        Me.lblDatapackDetection.AutoSize = True
+        Me.lblDatapackDetection.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDatapackDetection.ForeColor = System.Drawing.Color.Black
+        Me.lblDatapackDetection.Location = New System.Drawing.Point(11, 71)
+        Me.lblDatapackDetection.Name = "lblDatapackDetection"
+        Me.lblDatapackDetection.Size = New System.Drawing.Size(156, 18)
+        Me.lblDatapackDetection.TabIndex = 7
+        Me.lblDatapackDetection.Text = "No datapack detected."
+        '
+        'rbtnRIG119
+        '
+        Me.rbtnRIG119.AutoSize = True
+        Me.rbtnRIG119.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbtnRIG119.Location = New System.Drawing.Point(15, 96)
+        Me.rbtnRIG119.Name = "rbtnRIG119"
+        Me.rbtnRIG119.Size = New System.Drawing.Size(137, 20)
+        Me.rbtnRIG119.TabIndex = 6
+        Me.rbtnRIG119.TabStop = True
+        Me.rbtnRIG119.Text = "Version 1.19 (Beta)"
+        Me.rbtnRIG119.UseVisualStyleBackColor = True
         '
         'rbtnRIG116
         '
         Me.rbtnRIG116.AutoSize = True
         Me.rbtnRIG116.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG116.Location = New System.Drawing.Point(370, 69)
+        Me.rbtnRIG116.Location = New System.Drawing.Point(370, 96)
         Me.rbtnRIG116.Name = "rbtnRIG116"
         Me.rbtnRIG116.Size = New System.Drawing.Size(98, 20)
         Me.rbtnRIG116.TabIndex = 5
@@ -124,7 +149,7 @@ Partial Class frmMain
         '
         Me.rbtnRIG117.AutoSize = True
         Me.rbtnRIG117.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG117.Location = New System.Drawing.Point(266, 69)
+        Me.rbtnRIG117.Location = New System.Drawing.Point(266, 96)
         Me.rbtnRIG117.Name = "rbtnRIG117"
         Me.rbtnRIG117.Size = New System.Drawing.Size(98, 20)
         Me.rbtnRIG117.TabIndex = 4
@@ -136,7 +161,7 @@ Partial Class frmMain
         Me.rbtnRIG118.AutoSize = True
         Me.rbtnRIG118.Checked = True
         Me.rbtnRIG118.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG118.Location = New System.Drawing.Point(158, 69)
+        Me.rbtnRIG118.Location = New System.Drawing.Point(158, 96)
         Me.rbtnRIG118.Name = "rbtnRIG118"
         Me.rbtnRIG118.Size = New System.Drawing.Size(98, 20)
         Me.rbtnRIG118.TabIndex = 3
@@ -195,7 +220,7 @@ Partial Class frmMain
         Me.gbItem.Controls.Add(Me.tbID)
         Me.gbItem.Controls.Add(Me.lblAddNewItems)
         Me.gbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gbItem.Location = New System.Drawing.Point(16, 167)
+        Me.gbItem.Location = New System.Drawing.Point(16, 196)
         Me.gbItem.Name = "gbItem"
         Me.gbItem.Size = New System.Drawing.Size(638, 254)
         Me.gbItem.TabIndex = 58
@@ -422,7 +447,7 @@ Partial Class frmMain
         'btnShowOutput
         '
         Me.btnShowOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowOutput.Location = New System.Drawing.Point(465, 429)
+        Me.btnShowOutput.Location = New System.Drawing.Point(465, 456)
         Me.btnShowOutput.Name = "btnShowOutput"
         Me.btnShowOutput.Size = New System.Drawing.Size(189, 34)
         Me.btnShowOutput.TabIndex = 74
@@ -432,7 +457,7 @@ Partial Class frmMain
         'btnAddItem
         '
         Me.btnAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddItem.Location = New System.Drawing.Point(16, 429)
+        Me.btnAddItem.Location = New System.Drawing.Point(16, 456)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(443, 34)
         Me.btnAddItem.TabIndex = 63
@@ -594,24 +619,12 @@ Partial Class frmMain
         Me.rtb2Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 2" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
-        'rbtnRIG119
-        '
-        Me.rbtnRIG119.AutoSize = True
-        Me.rbtnRIG119.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG119.Location = New System.Drawing.Point(15, 69)
-        Me.rbtnRIG119.Name = "rbtnRIG119"
-        Me.rbtnRIG119.Size = New System.Drawing.Size(137, 20)
-        Me.rbtnRIG119.TabIndex = 6
-        Me.rbtnRIG119.TabStop = True
-        Me.rbtnRIG119.Text = "Version 1.19 (Beta)"
-        Me.rbtnRIG119.UseVisualStyleBackColor = True
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(664, 476)
+        Me.ClientSize = New System.Drawing.Size(664, 500)
         Me.Controls.Add(Me.Quotationmark)
         Me.Controls.Add(Me.rtbCodeEnd)
         Me.Controls.Add(Me.rtb64Items)
@@ -632,7 +645,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.1.2"
+        Me.Text = "Random Item Giver Updater ALPHA 0.1.3"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
@@ -698,4 +711,5 @@ Partial Class frmMain
     Friend WithEvents rtb5Items As RichTextBox
     Friend WithEvents rtb2Items As RichTextBox
     Friend WithEvents rbtnRIG119 As RadioButton
+    Friend WithEvents lblDatapackDetection As Label
 End Class
