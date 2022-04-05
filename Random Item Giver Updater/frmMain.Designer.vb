@@ -64,6 +64,8 @@ Partial Class frmMain
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FindDuplicatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SoftwareHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -193,9 +195,9 @@ Partial Class frmMain
         Me.lblSelectDatapack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSelectDatapack.Location = New System.Drawing.Point(12, 22)
         Me.lblSelectDatapack.Name = "lblSelectDatapack"
-        Me.lblSelectDatapack.Size = New System.Drawing.Size(323, 16)
+        Me.lblSelectDatapack.Size = New System.Drawing.Size(331, 16)
         Me.lblSelectDatapack.TabIndex = 0
-        Me.lblSelectDatapack.Text = "Please chose the datapack and which version it is for."
+        Me.lblSelectDatapack.Text = "Please choose the datapack and which version it is for."
         '
         'gbItem
         '
@@ -466,7 +468,7 @@ Partial Class frmMain
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(664, 24)
@@ -513,6 +515,19 @@ Partial Class frmMain
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
         Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.CloseToolStripMenuItem.Text = "Close"
+        '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FindDuplicatesToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
+        Me.ToolsToolStripMenuItem.Text = "Tools"
+        '
+        'FindDuplicatesToolStripMenuItem
+        '
+        Me.FindDuplicatesToolStripMenuItem.Name = "FindDuplicatesToolStripMenuItem"
+        Me.FindDuplicatesToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
+        Me.FindDuplicatesToolStripMenuItem.Text = "Duplicate finder"
         '
         'HelpToolStripMenuItem
         '
@@ -624,7 +639,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(664, 500)
+        Me.ClientSize = New System.Drawing.Size(664, 503)
         Me.Controls.Add(Me.Quotationmark)
         Me.Controls.Add(Me.rtbCodeEnd)
         Me.Controls.Add(Me.rtb64Items)
@@ -712,4 +727,6 @@ Partial Class frmMain
     Friend WithEvents rtb2Items As RichTextBox
     Friend WithEvents rbtnRIG119 As RadioButton
     Friend WithEvents lblDatapackDetection As Label
+    Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FindDuplicatesToolStripMenuItem As ToolStripMenuItem
 End Class
