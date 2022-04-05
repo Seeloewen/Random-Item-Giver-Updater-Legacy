@@ -53,6 +53,15 @@
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <OutputPath>bin\Dev\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
+    <OutputPath>bin\Test\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Seal|AnyCPU'">
+    <OutputPath>bin\Seal\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -89,6 +98,12 @@
       <DependentUpon>frmChangelog.vb</DependentUpon>
     </Compile>
     <Compile Include="frmChangelog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDuplicateFinder.Designer.vb">
+      <DependentUpon>frmDuplicateFinder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDuplicateFinder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHelp.Designer.vb">
@@ -139,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangelog.resx">
       <DependentUpon>frmChangelog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDuplicateFinder.resx">
+      <DependentUpon>frmDuplicateFinder.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
