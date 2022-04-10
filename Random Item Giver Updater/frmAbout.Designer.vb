@@ -28,13 +28,14 @@ Partial Class frmAbout
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbLicense = New System.Windows.Forms.GroupBox()
         Me.rtbLicense = New System.Windows.Forms.RichTextBox()
+        Me.llblGithub = New System.Windows.Forms.LinkLabel()
         Me.gbLicense.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnOK
         '
         Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOK.Location = New System.Drawing.Point(105, 307)
+        Me.btnOK.Location = New System.Drawing.Point(108, 341)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(148, 26)
         Me.btnOK.TabIndex = 5
@@ -84,12 +85,24 @@ Partial Class frmAbout
         Me.rtbLicense.TabIndex = 0
         Me.rtbLicense.Text = resources.GetString("rtbLicense.Text")
         '
+        'llblGithub
+        '
+        Me.llblGithub.AutoSize = True
+        Me.llblGithub.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.llblGithub.Location = New System.Drawing.Point(42, 309)
+        Me.llblGithub.Name = "llblGithub"
+        Me.llblGithub.Size = New System.Drawing.Size(282, 20)
+        Me.llblGithub.TabIndex = 7
+        Me.llblGithub.TabStop = True
+        Me.llblGithub.Text = "Random Item Giver Updater - Github"
+        '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(361, 345)
+        Me.ClientSize = New System.Drawing.Size(361, 379)
+        Me.Controls.Add(Me.llblGithub)
         Me.Controls.Add(Me.gbLicense)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblBuild)
@@ -112,4 +125,5 @@ Partial Class frmAbout
     Friend WithEvents lblHeader As Label
     Friend WithEvents gbLicense As GroupBox
     Friend WithEvents rtbLicense As RichTextBox
+    Friend WithEvents llblGithub As LinkLabel
 End Class
