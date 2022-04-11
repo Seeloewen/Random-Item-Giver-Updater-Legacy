@@ -7,6 +7,7 @@
         If String.IsNullOrEmpty(tbDatapackPath.Text) = False Then
             If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
                 btnCheck.Enabled = False
+                lblChecking.Show()
                 btnCheck.Text = "Checking..."
                 MsgBox("Duplicate finder will now search for duplicates in the selected datapack. This may take a while.", MsgBoxStyle.Information, "Duplicate checker")
                 lvDuplicates.Clear()
@@ -18,6 +19,7 @@
                 MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list down below.", MsgBoxStyle.Information, "Duplicate checker")
                 btnCheck.Enabled = True
                 btnCheck.Text = "Check"
+                lblChecking.Hide()
             Else
                 MsgBox("The datapack path you have entered is not valid.", MsgBoxStyle.Critical, "Error")
             End If
@@ -146,15 +148,6 @@
         If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "function" + frmMain.qm + ": " + frmMain.qm + "minecraft:set_count" + frmMain.qm + ",") Then
             rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "function" + frmMain.qm + ": " + frmMain.qm + "minecraft:set_count" + frmMain.qm + ",", "")
         End If
-        If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 2") Then
-            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 2", "")
-        End If
-        If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 3") Then
-            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 3", "")
-        End If
-        If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 5") Then
-            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 5", "")
-        End If
         If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 10") Then
             rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 10", "")
         End If
@@ -163,6 +156,15 @@
         End If
         If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 64") Then
             rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 64", "")
+        End If
+        If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 2") Then
+            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 2", "")
+        End If
+        If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 3") Then
+            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 3", "")
+        End If
+        If rtbWithDuplicates.Text.Contains("" + frmMain.qm + "count" + frmMain.qm + ": 5") Then
+            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("" + frmMain.qm + "count" + frmMain.qm + ": 5", "")
         End If
         If rtbWithDuplicates.Text.Contains("minecraft:") Then
             rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("minecraft:", "")
@@ -183,8 +185,6 @@
             rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace("]", "")
         End If
 
-        rtbWithoutDuplicates.Text = rtbWithDuplicates.Text
-
         'Remove empty lines from rtbWithDuplicates
         Dim WithoutEmptyLines As New List(Of String)
         For Each s As String In rtbWithDuplicates.Lines
@@ -194,56 +194,19 @@
         Next
         rtbWithDuplicates.Lines = WithoutEmptyLines.ToArray
 
-        'Remove empty lines from rtbWithoutDuplicates
-        Dim WithoutEmptyLines2 As New List(Of String)
-        For Each s As String In rtbWithoutDuplicates.Lines
-            If Not s.Trim.Equals(String.Empty) Then
-                WithoutEmptyLines2.Add(s)
-            End If
-        Next
-        rtbWithoutDuplicates.Lines = WithoutEmptyLines2.ToArray
-
-        'Remove duplicates from rtbWithoutDuplicates
-        Dim WithoutDuplicates As New List(Of String)(rtbWithoutDuplicates.Lines)
-        For i As Integer = WithoutDuplicates.Count - 1 To 1 Step -1
-            If WithoutDuplicates(i) = WithoutDuplicates(i - 1) Then
-                WithoutDuplicates.RemoveAt(i)
-            End If
-        Next
-        rtbWithoutDuplicates.Lines = WithoutDuplicates.ToArray
-
-        'Compare lines from rtbWithDuplicates to rtbWithoutDuplicates
-        Dim LinesWith As String() = rtbWithDuplicates.Lines
-        Dim LinesWithout As String() = rtbWithoutDuplicates.Lines
-        Dim CheckLine As Integer = 0
-        Dim CheckLineWith As Integer = 0
-        Dim CheckLineWithout As Integer = 0
-        Dim DoLoop As Boolean = True
-        Dim NumLinesWith As Integer = rtbWithDuplicates.Lines.Length
+        Dim Line As Integer = 0
+        Dim Length As Integer = rtbWithDuplicates.Lines.Count - 1
+        Dim Line2 As Integer = 0
         Dim TempItem As String
 
-        While DoLoop = True
-            If CheckLineWith = NumLinesWith Then
-                DoLoop = False
-            Else
-                TempItem = LinesWith(CheckLineWith)
-                LinesWith(CheckLineWith).Replace(LinesWith(CheckLineWith), "")
-                If LinesWith.Contains(TempItem) Then
-                    rtbDuplicates.AppendText(TempItem + vbNewLine)
-                End If
-                CheckLineWith = CheckLineWith + 1
-                rtbreplace.Lines = LinesWith
-                rtbreplace.Text.Replace(TempItem, "")
-                LinesWith = rtbreplace.Lines
-            End If
-        End While
+        Dim duplicates As List(Of String) =
+  rtbWithDuplicates.Lines.GroupBy(Function(n) n) _
+  .Where(Function(g) g.Count() > 1) _
+  .Select(Function(g) g.First) _
+  .ToList()
 
-        rtbWithDuplicates.Lines = LinesWith
-
-        'Remove quotationmarks from item names
-        If rtbWithDuplicates.Text.Contains(frmMain.qm) Then
-            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace(frmMain.qm, "")
-        End If
+        Dim ArrayResult As String() = duplicates.ToArray
+        rtbDuplicates.Lines = ArrayResult
 
         'Remove empty lines from rtbWithDuplicates
         Dim WithoutEmptyLines3 As New List(Of String)
@@ -254,29 +217,30 @@
         Next
         rtbWithDuplicates.Lines = WithoutEmptyLines3.ToArray
 
-        'Remove duplicates from rtbWithoutDuplicates
-        Dim WithoutDuplicates2 As New List(Of String)(rtbWithDuplicates.Lines)
-        For i As Integer = WithoutDuplicates2.Count - 1 To 1 Step -1
-            If WithoutDuplicates2(i) = WithoutDuplicates2(i - 1) Then
-                WithoutDuplicates2.RemoveAt(i)
-            End If
-        Next
-        rtbWithDuplicates.Lines = WithoutDuplicates2.ToArray
+        'Remove quotationmarks from item names
+        If rtbWithDuplicates.Text.Contains(frmMain.qm) Then
+            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace(frmMain.qm, "")
+        End If
 
         'Remove Non-Duplicates
-        Dim NumLinesOnlyDups As Integer = rtbWithDuplicates.Lines.Length
+        Dim NumLinesOnlyDups As Integer = ArrayResult.Length
         Dim DoLoopNum As Integer
         Dim str(1) As String
         Dim itm As ListViewItem
 
-
         While DoLoopNum < NumLinesOnlyDups
-            str(0) = rtbWithDuplicates.Lines(DoLoopNum)
+            str(0) = ArrayResult(DoLoopNum)
             str(1) = PathAmount + LootTable
             itm = New ListViewItem(str)
             lvDuplicates.Items.Add(itm)
             DoLoopNum = DoLoopNum + 1
         End While
+    End Sub
+
+    Private Sub ChangeLineInrtbWithDuplicates(Num As Integer)
+        Dim lines() As String = rtbWithDuplicates.Lines
+        lines(Num) = ""
+        rtbWithDuplicates.Lines = lines
     End Sub
 
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
