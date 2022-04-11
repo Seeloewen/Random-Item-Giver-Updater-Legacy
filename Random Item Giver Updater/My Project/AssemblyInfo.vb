@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Werte der Assemblyattribute überprüfen
 
 <Assembly: AssemblyTitle("Random Item Giver Updater")>
-<Assembly: AssemblyDescription("Simple tool to add new items to the Random Item Giver datapack")>
+<Assembly: AssemblyDescription("Simple tool to add new items to the Random Item Giver datapack with several other features")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Random Item Giver Updater by Seeloewen")>
 <Assembly: AssemblyCopyright("")>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.1.3.0")>
+<Assembly: AssemblyVersion("0.1.4.0")>
 <Assembly: AssemblyFileVersion("0.0.0.0")>

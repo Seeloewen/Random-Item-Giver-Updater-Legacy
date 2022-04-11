@@ -1387,6 +1387,6 @@ Public Class frmMain
     End Sub
 
     Private Sub FindDuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindDuplicatesToolStripMenuItem.Click
-        MsgBox("Work in progress")
+        frmDuplicateFinder.Show()
     End Sub
 End Class
