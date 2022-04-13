@@ -9,14 +9,14 @@
                 btnCheck.Enabled = False
                 lblChecking.Show()
                 btnCheck.Text = "Checking..."
-                MsgBox("Duplicate finder will now search for duplicates in the selected datapack. This may take a while.", MsgBoxStyle.Information, "Duplicate checker")
+                MsgBox("Duplicate finder will now search for duplicates in the selected datapack. This may take a while." + vbNewLine + "The software might show the state " + frmMain.qm + "Not responding" + frmMain.qm + ", this is intended.", MsgBoxStyle.Information, "Duplicate checker")
                 lvDuplicates.Clear()
                 lvDuplicates.Columns.Add("Item")
                 lvDuplicates.Columns(0).Width = 256
                 lvDuplicates.Columns.Add("Loot Table")
                 lvDuplicates.Columns(1).Width = 266
                 CallChecker()
-                MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list down below.", MsgBoxStyle.Information, "Duplicate checker")
+                MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list behind this message." + vbNewLine + "If the list is empty then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
                 btnCheck.Enabled = True
                 btnCheck.Text = "Check"
                 lblChecking.Hide()
@@ -194,42 +194,30 @@
         Next
         rtbWithDuplicates.Lines = WithoutEmptyLines.ToArray
 
-        Dim Line As Integer = 0
-        Dim Length As Integer = rtbWithDuplicates.Lines.Count - 1
-        Dim Line2 As Integer = 0
-        Dim TempItem As String
-
+        'Find duplicate lines and put them into a list
         Dim duplicates As List(Of String) =
   rtbWithDuplicates.Lines.GroupBy(Function(n) n) _
   .Where(Function(g) g.Count() > 1) _
   .Select(Function(g) g.First) _
   .ToList()
 
+        'Convert duplicate list to array and load into richtextbox
         Dim ArrayResult As String() = duplicates.ToArray
         rtbDuplicates.Lines = ArrayResult
 
-        'Remove empty lines from rtbWithDuplicates
-        Dim WithoutEmptyLines3 As New List(Of String)
-        For Each s As String In rtbWithDuplicates.Lines
-            If Not s.Trim.Equals(String.Empty) Then
-                WithoutEmptyLines3.Add(s)
-            End If
-        Next
-        rtbWithDuplicates.Lines = WithoutEmptyLines3.ToArray
-
-        'Remove quotationmarks from item names
-        If rtbWithDuplicates.Text.Contains(frmMain.qm) Then
-            rtbWithDuplicates.Text = rtbWithDuplicates.Text.Replace(frmMain.qm, "")
+        'Remove quotationmarks from item names in the duplicates richtextbox
+        If rtbDuplicates.Text.Contains(frmMain.qm) Then
+            rtbDuplicates.Text = rtbDuplicates.Text.Replace(frmMain.qm, "")
         End If
 
-        'Remove Non-Duplicates
-        Dim NumLinesOnlyDups As Integer = ArrayResult.Length
+        'Log duplicates into listview
+        Dim NumLinesOnlyDups As Integer = rtbDuplicates.Lines.Length
         Dim DoLoopNum As Integer
         Dim str(1) As String
         Dim itm As ListViewItem
 
         While DoLoopNum < NumLinesOnlyDups
-            str(0) = ArrayResult(DoLoopNum)
+            str(0) = rtbDuplicates.Lines(DoLoopNum)
             str(1) = PathAmount + LootTable
             itm = New ListViewItem(str)
             lvDuplicates.Items.Add(itm)
@@ -250,13 +238,5 @@
 
     Private Sub tbDatapackPath_TextChanged(sender As Object, e As EventArgs) Handles tbDatapackPath.TextChanged
         DatapackPath = tbDatapackPath.Text + "/data/randomitemgiver/loot_tables/"
-    End Sub
-
-    Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
-        MsgBox("Please note that loot tables for potions, enchanted books, lingering arrows and suspicious stews are not supported yet as well as datapacks for version 1.17." + vbNewLine + vbNewLine + "Support for these will be added in a future version.", MsgBoxStyle.Exclamation, "Warning")
-    End Sub
-
-    Private Sub frmDuplicateFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
     End Sub
 End Class

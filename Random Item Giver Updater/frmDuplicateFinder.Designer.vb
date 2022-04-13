@@ -33,7 +33,6 @@ Partial Class frmDuplicateFinder
         Me.rtbWithDuplicates = New System.Windows.Forms.RichTextBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.fbdMainFolderPath = New System.Windows.Forms.FolderBrowserDialog()
-        Me.btnHelp = New System.Windows.Forms.Button()
         Me.rtbDuplicates = New System.Windows.Forms.RichTextBox()
         Me.lblChecking = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -54,10 +53,9 @@ Partial Class frmDuplicateFinder
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(20, 49)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(407, 32)
+        Me.Label2.Size = New System.Drawing.Size(469, 32)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "This tool can be used to check if items appear in the loot table twice." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Select t" &
-    "he datapack you want to check"
+        Me.Label2.Text = "This tool can be used to check if items appear in the loot table more than once." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Select the datapack you want to check:"
         '
         'lvDuplicates
         '
@@ -120,16 +118,6 @@ Partial Class frmDuplicateFinder
         '
         Me.fbdMainFolderPath.Description = "Select the datapack which you want to check."
         '
-        'btnHelp
-        '
-        Me.btnHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHelp.Location = New System.Drawing.Point(500, 11)
-        Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.Size = New System.Drawing.Size(50, 37)
-        Me.btnHelp.TabIndex = 8
-        Me.btnHelp.Text = "!"
-        Me.btnHelp.UseVisualStyleBackColor = True
-        '
         'rtbDuplicates
         '
         Me.rtbDuplicates.Location = New System.Drawing.Point(23, 620)
@@ -157,7 +145,6 @@ Partial Class frmDuplicateFinder
         Me.ClientSize = New System.Drawing.Size(572, 500)
         Me.Controls.Add(Me.lblChecking)
         Me.Controls.Add(Me.rtbDuplicates)
-        Me.Controls.Add(Me.btnHelp)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.rtbWithDuplicates)
         Me.Controls.Add(Me.tbDatapackPath)
@@ -187,7 +174,6 @@ Partial Class frmDuplicateFinder
     Friend WithEvents rtbWithDuplicates As RichTextBox
     Friend WithEvents btnBrowse As Button
     Friend WithEvents fbdMainFolderPath As FolderBrowserDialog
-    Friend WithEvents btnHelp As Button
     Friend WithEvents rtbDuplicates As RichTextBox
     Friend WithEvents lblChecking As Label
 End Class
