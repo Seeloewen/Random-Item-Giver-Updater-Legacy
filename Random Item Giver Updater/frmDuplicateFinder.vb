@@ -2,6 +2,7 @@
 
     Dim DatapackPath As String
     Dim PathAmount As String
+    Dim DatapackVersion As String
 
     Private Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
         If String.IsNullOrEmpty(tbDatapackPath.Text) = False Then
@@ -29,98 +30,121 @@
     End Sub
 
     Private Sub CallChecker()
-        Try
-            '1 item
-            CheckLootTable(1, "main")
-            CheckLootTable(1, "main_without_creative-only")
-            CheckLootTable(1, "special_vvx")
-            CheckLootTable(1, "special_vxv")
-            CheckLootTable(1, "special_vxx")
-            CheckLootTable(1, "special_xvv")
-            CheckLootTable(1, "special_xvx")
-            CheckLootTable(1, "special_xxv")
 
-            '2 items
-            CheckLootTable(2, "main")
-            CheckLootTable(2, "main_without_creative-only")
-            CheckLootTable(2, "special_vvx")
-            CheckLootTable(2, "special_vxv")
-            CheckLootTable(2, "special_vxx")
-            CheckLootTable(2, "special_xvv")
-            CheckLootTable(2, "special_xvx")
-            CheckLootTable(2, "special_xxv")
+        If DatapackVersion = "1.19" Or DatapackVersion = "1.18" Or DatapackVersion = "1.16" Then
+            Try
+                '1 item
+                CheckLootTable(1, "main")
+                CheckLootTable(1, "main_without_creative-only")
+                CheckLootTable(1, "special_vvx")
+                CheckLootTable(1, "special_vxv")
+                CheckLootTable(1, "special_vxx")
+                CheckLootTable(1, "special_xvv")
+                CheckLootTable(1, "special_xvx")
+                CheckLootTable(1, "special_xxv")
 
-            '3 items
-            CheckLootTable(3, "main")
-            CheckLootTable(3, "main_without_creative-only")
-            CheckLootTable(3, "special_vvx")
-            CheckLootTable(3, "special_vxv")
-            CheckLootTable(3, "special_vxx")
-            CheckLootTable(3, "special_xvv")
-            CheckLootTable(3, "special_xvx")
-            CheckLootTable(3, "special_xxv")
+                '2 items
+                CheckLootTable(2, "main")
+                CheckLootTable(2, "main_without_creative-only")
+                CheckLootTable(2, "special_vvx")
+                CheckLootTable(2, "special_vxv")
+                CheckLootTable(2, "special_vxx")
+                CheckLootTable(2, "special_xvv")
+                CheckLootTable(2, "special_xvx")
+                CheckLootTable(2, "special_xxv")
 
-            '5 items
-            CheckLootTable(5, "main")
-            CheckLootTable(5, "main_without_creative-only")
-            CheckLootTable(5, "special_vvx")
-            CheckLootTable(5, "special_vxv")
-            CheckLootTable(5, "special_vxx")
-            CheckLootTable(5, "special_xvv")
-            CheckLootTable(5, "special_xvx")
-            CheckLootTable(5, "special_xxv")
+                '3 items
+                CheckLootTable(3, "main")
+                CheckLootTable(3, "main_without_creative-only")
+                CheckLootTable(3, "special_vvx")
+                CheckLootTable(3, "special_vxv")
+                CheckLootTable(3, "special_vxx")
+                CheckLootTable(3, "special_xvv")
+                CheckLootTable(3, "special_xvx")
+                CheckLootTable(3, "special_xxv")
 
-            '10 items
-            CheckLootTable(10, "main")
-            CheckLootTable(10, "main_without_creative-only")
-            CheckLootTable(10, "special_vvx")
-            CheckLootTable(10, "special_vxv")
-            CheckLootTable(10, "special_vxx")
-            CheckLootTable(10, "special_xvv")
-            CheckLootTable(10, "special_xvx")
-            CheckLootTable(10, "special_xxv")
+                '5 items
+                CheckLootTable(5, "main")
+                CheckLootTable(5, "main_without_creative-only")
+                CheckLootTable(5, "special_vvx")
+                CheckLootTable(5, "special_vxv")
+                CheckLootTable(5, "special_vxx")
+                CheckLootTable(5, "special_xvv")
+                CheckLootTable(5, "special_xvx")
+                CheckLootTable(5, "special_xxv")
 
-            '32 items
-            CheckLootTable(32, "main")
-            CheckLootTable(32, "main_without_creative-only")
-            CheckLootTable(32, "special_vvx")
-            CheckLootTable(32, "special_vxv")
-            CheckLootTable(32, "special_vxx")
-            CheckLootTable(32, "special_xvv")
-            CheckLootTable(32, "special_xvx")
-            CheckLootTable(32, "special_xxv")
+                '10 items
+                CheckLootTable(10, "main")
+                CheckLootTable(10, "main_without_creative-only")
+                CheckLootTable(10, "special_vvx")
+                CheckLootTable(10, "special_vxv")
+                CheckLootTable(10, "special_vxx")
+                CheckLootTable(10, "special_xvv")
+                CheckLootTable(10, "special_xvx")
+                CheckLootTable(10, "special_xxv")
 
-            '64 items
-            CheckLootTable(64, "main")
-            CheckLootTable(64, "main_without_creative-only")
-            CheckLootTable(64, "special_vvx")
-            CheckLootTable(64, "special_vxv")
-            CheckLootTable(64, "special_vxx")
-            CheckLootTable(64, "special_xvv")
-            CheckLootTable(64, "special_xvx")
-            CheckLootTable(64, "special_xxv")
-        Catch ex As Exception
-            MsgBox("Error: " + ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
+                '32 items
+                CheckLootTable(32, "main")
+                CheckLootTable(32, "main_without_creative-only")
+                CheckLootTable(32, "special_vvx")
+                CheckLootTable(32, "special_vxv")
+                CheckLootTable(32, "special_vxx")
+                CheckLootTable(32, "special_xvv")
+                CheckLootTable(32, "special_xvx")
+                CheckLootTable(32, "special_xxv")
+
+                '64 items
+                CheckLootTable(64, "main")
+                CheckLootTable(64, "main_without_creative-only")
+                CheckLootTable(64, "special_vvx")
+                CheckLootTable(64, "special_vxv")
+                CheckLootTable(64, "special_vxx")
+                CheckLootTable(64, "special_xvv")
+                CheckLootTable(64, "special_xvx")
+                CheckLootTable(64, "special_xxv")
+            Catch ex As Exception
+                MsgBox("Error: " + ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        ElseIf DatapackVersion = "1.17" Then
+            Try
+                CheckLootTable(1, "main")
+                CheckLootTable(1, "main_without_creative-only")
+                CheckLootTable(1, "special_vvx")
+                CheckLootTable(1, "special_vxv")
+                CheckLootTable(1, "special_vxx")
+                CheckLootTable(1, "special_xvv")
+                CheckLootTable(1, "special_xvx")
+                CheckLootTable(1, "special_xxv")
+            Catch ex As Exception
+                MsgBox("Error: " + ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        ElseIf DatapackVersion = "None" Then
+        Else
+            MsgBox("An unknown error occured." + vbNewLine + "Cannot search for duplicates.", MsgBoxStyle.Critical, "Error")
+        End If
     End Sub
 
     Private Sub CheckLootTable(ItemAmount As Integer, LootTable As String)
 
         'Setup variables
-        If ItemAmount = 1 Then
-            PathAmount = "1item/"
-        ElseIf ItemAmount = 2 Then
-            PathAmount = "2sameitems/"
-        ElseIf ItemAmount = 3 Then
-            PathAmount = "3sameitems/"
-        ElseIf ItemAmount = 5 Then
-            PathAmount = "5sameitems/"
-        ElseIf ItemAmount = 10 Then
-            PathAmount = "10sameitems/"
-        ElseIf ItemAmount = 32 Then
-            PathAmount = "32sameitems/"
-        ElseIf ItemAmount = 64 Then
-            PathAmount = "64sameitems/"
+        If DatapackVersion = "1.17" Then
+            PathAmount = ""
+        Else
+            If ItemAmount = 1 Then
+                PathAmount = "1item/"
+            ElseIf ItemAmount = 2 Then
+                PathAmount = "2sameitems/"
+            ElseIf ItemAmount = 3 Then
+                PathAmount = "3sameitems/"
+            ElseIf ItemAmount = 5 Then
+                PathAmount = "5sameitems/"
+            ElseIf ItemAmount = 10 Then
+                PathAmount = "10sameitems/"
+            ElseIf ItemAmount = 32 Then
+                PathAmount = "32sameitems/"
+            ElseIf ItemAmount = 64 Then
+                PathAmount = "64sameitems/"
+            End If
         End If
 
         'Load text into richtextbox
@@ -237,6 +261,29 @@
     End Sub
 
     Private Sub tbDatapackPath_TextChanged(sender As Object, e As EventArgs) Handles tbDatapackPath.TextChanged
-        DatapackPath = tbDatapackPath.Text + "/data/randomitemgiver/loot_tables/"
+        Try
+            DatapackPath = tbDatapackPath.Text + "/data/randomitemgiver/loot_tables/"
+
+            Dim VersionString As String = System.IO.File.ReadAllLines(tbDatapackPath.Text + "/pack.mcmeta")(2)
+            Dim ParseVersion As String = Replace(VersionString, "    " + frmMain.qm + "pack_format" + frmMain.qm + ": ", "")
+            Dim Version As String = Replace(ParseVersion, ",", "")
+
+            If Version = "10" Then
+                DatapackVersion = "1.19"
+            ElseIf Version = "9" Then
+                DatapackVersion = "1.18"
+            ElseIf Version = "8" Then
+                DatapackVersion = "1.18"
+            ElseIf Version = "7" Then
+                DatapackVersion = "1.17"
+            ElseIf Version = "6" Then
+                DatapackVersion = "1.16"
+            Else
+                DatapackVersion = "Null"
+            End If
+        Catch ex As Exception
+            MsgBox("Error: " + ex.Message + vbNewLine + vbNewLine + "The datapack path is not detected as valid and therefor the duplicate finder might fail.", MsgBoxStyle.Critical, "Error")
+        End Try
+
     End Sub
 End Class
