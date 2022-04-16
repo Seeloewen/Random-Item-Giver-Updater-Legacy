@@ -19,7 +19,7 @@ Public Class frmMain
     Dim IgnoreDuplicates As Boolean = False
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early test build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Notice")
+        MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         qm = Quotationmark.Text
     End Sub
 
@@ -1332,15 +1332,15 @@ Public Class frmMain
     End Sub
 
     Private Sub SoftwareHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoftwareHelpToolStripMenuItem.Click
-        MsgBox("Work in progress")
+        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.4.0.", MsgBoxStyle.Exclamation, "Not available yet")
     End Sub
 
     Private Sub OutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputToolStripMenuItem.Click
-        MsgBox("Work in progress")
+        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.2.0.", MsgBoxStyle.Exclamation, "Not available yet")
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
-        MsgBox("Work in progress")
+        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.3.0.", MsgBoxStyle.Exclamation, "Not available yet")
     End Sub
 
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
@@ -1348,7 +1348,7 @@ Public Class frmMain
     End Sub
 
     Private Sub OpenDatapackFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDatapackFolderToolStripMenuItem.Click
-        MsgBox("Work in progress")
+        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.2.0.", MsgBoxStyle.Exclamation, "Not available yet")
     End Sub
 
     Private Sub cbCustomPrefix_CheckedChanged(sender As Object, e As EventArgs) Handles cbCustomPrefix.CheckedChanged
@@ -1383,7 +1383,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnShowOutput_Click(sender As Object, e As EventArgs) Handles btnShowOutput.Click
-        MsgBox("Work in progress")
+        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.2.0.", MsgBoxStyle.Exclamation, "Not available yet")
     End Sub
 
     Private Sub FindDuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindDuplicatesToolStripMenuItem.Click

@@ -118,7 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RichTextBox1.Text" xml:space="preserve">
-    <value>Version 0.1.4 (11.04.2022)
+    <value>Version 0.1.5 (16.04.2022)
++ Added support for 1.17 to the duplicate finder
+* Improved several messages in the duplicate finder
+* Improved message that shows up when a feature is not available yet
+* The items in the duplicate finder list now no longer have quotation marks
+
+Version 0.1.4 (11.04.2022)
 + Added link to GitHub page in 'about' menu
 + Added Duplicate finder
 

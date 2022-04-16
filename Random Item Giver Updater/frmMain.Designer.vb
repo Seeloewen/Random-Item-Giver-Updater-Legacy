@@ -539,24 +539,24 @@ Partial Class frmMain
         'SoftwareHelpToolStripMenuItem
         '
         Me.SoftwareHelpToolStripMenuItem.Name = "SoftwareHelpToolStripMenuItem"
-        Me.SoftwareHelpToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SoftwareHelpToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.SoftwareHelpToolStripMenuItem.Text = "Software help"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(143, 6)
         '
         'ChangelogToolStripMenuItem
         '
         Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ChangelogToolStripMenuItem.Text = "Changelog"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'fbdMainFolderPath
@@ -660,7 +660,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.1.4"
+        Me.Text = "Random Item Giver Updater ALPHA 0.1.5"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
