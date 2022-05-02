@@ -39,8 +39,8 @@ Partial Class frmMain
         Me.tbNBT = New System.Windows.Forms.TextBox()
         Me.tbSmallOutput = New System.Windows.Forms.TextBox()
         Me.lblOutput = New System.Windows.Forms.Label()
-        Me.tbCustomPrefix = New System.Windows.Forms.TextBox()
-        Me.cbCustomPrefix = New System.Windows.Forms.CheckBox()
+        Me.tbSamePrefix = New System.Windows.Forms.TextBox()
+        Me.cbSamePrefix = New System.Windows.Forms.CheckBox()
         Me.rbtnCommandBlock = New System.Windows.Forms.RadioButton()
         Me.rbtnOtherItem = New System.Windows.Forms.RadioButton()
         Me.rbtnSpawnEgg = New System.Windows.Forms.RadioButton()
@@ -52,8 +52,9 @@ Partial Class frmMain
         Me.cbEnchantedBook = New System.Windows.Forms.CheckBox()
         Me.cbCreativeOnly = New System.Windows.Forms.CheckBox()
         Me.lblID = New System.Windows.Forms.Label()
-        Me.tbID = New System.Windows.Forms.TextBox()
         Me.lblAddNewItems = New System.Windows.Forms.Label()
+        Me.gbItemID = New System.Windows.Forms.GroupBox()
+        Me.rtbItem = New System.Windows.Forms.RichTextBox()
         Me.btnShowOutput = New System.Windows.Forms.Button()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -66,6 +67,7 @@ Partial Class frmMain
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FindDuplicatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportItemListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SoftwareHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -82,6 +84,7 @@ Partial Class frmMain
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
+        Me.gbItemID.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -206,8 +209,8 @@ Partial Class frmMain
         Me.gbItem.Controls.Add(Me.tbNBT)
         Me.gbItem.Controls.Add(Me.tbSmallOutput)
         Me.gbItem.Controls.Add(Me.lblOutput)
-        Me.gbItem.Controls.Add(Me.tbCustomPrefix)
-        Me.gbItem.Controls.Add(Me.cbCustomPrefix)
+        Me.gbItem.Controls.Add(Me.tbSamePrefix)
+        Me.gbItem.Controls.Add(Me.cbSamePrefix)
         Me.gbItem.Controls.Add(Me.rbtnCommandBlock)
         Me.gbItem.Controls.Add(Me.rbtnOtherItem)
         Me.gbItem.Controls.Add(Me.rbtnSpawnEgg)
@@ -219,12 +222,12 @@ Partial Class frmMain
         Me.gbItem.Controls.Add(Me.cbEnchantedBook)
         Me.gbItem.Controls.Add(Me.cbCreativeOnly)
         Me.gbItem.Controls.Add(Me.lblID)
-        Me.gbItem.Controls.Add(Me.tbID)
         Me.gbItem.Controls.Add(Me.lblAddNewItems)
+        Me.gbItem.Controls.Add(Me.gbItemID)
         Me.gbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbItem.Location = New System.Drawing.Point(16, 196)
         Me.gbItem.Name = "gbItem"
-        Me.gbItem.Size = New System.Drawing.Size(638, 254)
+        Me.gbItem.Size = New System.Drawing.Size(638, 300)
         Me.gbItem.TabIndex = 58
         Me.gbItem.TabStop = False
         Me.gbItem.Text = "Add item"
@@ -235,7 +238,7 @@ Partial Class frmMain
         Me.cbNormalItem.Checked = True
         Me.cbNormalItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbNormalItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbNormalItem.Location = New System.Drawing.Point(300, 49)
+        Me.cbNormalItem.Location = New System.Drawing.Point(300, 61)
         Me.cbNormalItem.Name = "cbNormalItem"
         Me.cbNormalItem.Size = New System.Drawing.Size(98, 20)
         Me.cbNormalItem.TabIndex = 80
@@ -246,7 +249,7 @@ Partial Class frmMain
         '
         Me.cbNBT.AutoSize = True
         Me.cbNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbNBT.Location = New System.Drawing.Point(15, 150)
+        Me.cbNBT.Location = New System.Drawing.Point(14, 205)
         Me.cbNBT.Name = "cbNBT"
         Me.cbNBT.Size = New System.Drawing.Size(171, 20)
         Me.cbNBT.TabIndex = 79
@@ -257,15 +260,15 @@ Partial Class frmMain
         '
         Me.tbNBT.Enabled = False
         Me.tbNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbNBT.Location = New System.Drawing.Point(15, 176)
+        Me.tbNBT.Location = New System.Drawing.Point(14, 231)
         Me.tbNBT.Name = "tbNBT"
-        Me.tbNBT.Size = New System.Drawing.Size(197, 22)
+        Me.tbNBT.Size = New System.Drawing.Size(242, 22)
         Me.tbNBT.TabIndex = 78
         '
         'tbSmallOutput
         '
         Me.tbSmallOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbSmallOutput.Location = New System.Drawing.Point(66, 219)
+        Me.tbSmallOutput.Location = New System.Drawing.Point(66, 268)
         Me.tbSmallOutput.Multiline = True
         Me.tbSmallOutput.Name = "tbSmallOutput"
         Me.tbSmallOutput.ReadOnly = True
@@ -276,38 +279,41 @@ Partial Class frmMain
         '
         Me.lblOutput.AutoSize = True
         Me.lblOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOutput.Location = New System.Drawing.Point(12, 219)
+        Me.lblOutput.Location = New System.Drawing.Point(12, 268)
         Me.lblOutput.Name = "lblOutput"
         Me.lblOutput.Size = New System.Drawing.Size(48, 16)
         Me.lblOutput.TabIndex = 76
         Me.lblOutput.Text = "Output:"
         '
-        'tbCustomPrefix
+        'tbSamePrefix
         '
-        Me.tbCustomPrefix.Enabled = False
-        Me.tbCustomPrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbCustomPrefix.Location = New System.Drawing.Point(15, 122)
-        Me.tbCustomPrefix.Name = "tbCustomPrefix"
-        Me.tbCustomPrefix.Size = New System.Drawing.Size(197, 22)
-        Me.tbCustomPrefix.TabIndex = 75
+        Me.tbSamePrefix.Enabled = False
+        Me.tbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbSamePrefix.Location = New System.Drawing.Point(14, 177)
+        Me.tbSamePrefix.Name = "tbSamePrefix"
+        Me.tbSamePrefix.Size = New System.Drawing.Size(242, 22)
+        Me.tbSamePrefix.TabIndex = 75
+        Me.tbSamePrefix.Text = "minecraft"
         '
-        'cbCustomPrefix
+        'cbSamePrefix
         '
-        Me.cbCustomPrefix.AutoSize = True
-        Me.cbCustomPrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCustomPrefix.Location = New System.Drawing.Point(15, 99)
-        Me.cbCustomPrefix.Name = "cbCustomPrefix"
-        Me.cbCustomPrefix.Size = New System.Drawing.Size(181, 20)
-        Me.cbCustomPrefix.TabIndex = 73
-        Me.cbCustomPrefix.Text = "Custom Prefix (Mod-Items)"
-        Me.cbCustomPrefix.UseVisualStyleBackColor = True
+        Me.cbSamePrefix.AutoSize = True
+        Me.cbSamePrefix.Checked = True
+        Me.cbSamePrefix.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbSamePrefix.Location = New System.Drawing.Point(14, 154)
+        Me.cbSamePrefix.Name = "cbSamePrefix"
+        Me.cbSamePrefix.Size = New System.Drawing.Size(214, 20)
+        Me.cbSamePrefix.TabIndex = 73
+        Me.cbSamePrefix.Text = "Use the same prefix for all items"
+        Me.cbSamePrefix.UseVisualStyleBackColor = True
         '
         'rbtnCommandBlock
         '
         Me.rbtnCommandBlock.AutoSize = True
         Me.rbtnCommandBlock.Enabled = False
         Me.rbtnCommandBlock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCommandBlock.Location = New System.Drawing.Point(463, 94)
+        Me.rbtnCommandBlock.Location = New System.Drawing.Point(463, 106)
         Me.rbtnCommandBlock.Name = "rbtnCommandBlock"
         Me.rbtnCommandBlock.Size = New System.Drawing.Size(124, 20)
         Me.rbtnCommandBlock.TabIndex = 72
@@ -320,7 +326,7 @@ Partial Class frmMain
         Me.rbtnOtherItem.AutoSize = True
         Me.rbtnOtherItem.Enabled = False
         Me.rbtnOtherItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnOtherItem.Location = New System.Drawing.Point(463, 118)
+        Me.rbtnOtherItem.Location = New System.Drawing.Point(463, 130)
         Me.rbtnOtherItem.Name = "rbtnOtherItem"
         Me.rbtnOtherItem.Size = New System.Drawing.Size(169, 20)
         Me.rbtnOtherItem.TabIndex = 71
@@ -333,7 +339,7 @@ Partial Class frmMain
         Me.rbtnSpawnEgg.AutoSize = True
         Me.rbtnSpawnEgg.Enabled = False
         Me.rbtnSpawnEgg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnSpawnEgg.Location = New System.Drawing.Point(463, 71)
+        Me.rbtnSpawnEgg.Location = New System.Drawing.Point(463, 83)
         Me.rbtnSpawnEgg.Name = "rbtnSpawnEgg"
         Me.rbtnSpawnEgg.Size = New System.Drawing.Size(94, 20)
         Me.rbtnSpawnEgg.TabIndex = 70
@@ -345,7 +351,7 @@ Partial Class frmMain
         '
         Me.cbSplashPotion.AutoSize = True
         Me.cbSplashPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSplashPotion.Location = New System.Drawing.Point(300, 142)
+        Me.cbSplashPotion.Location = New System.Drawing.Point(300, 154)
         Me.cbSplashPotion.Name = "cbSplashPotion"
         Me.cbSplashPotion.Size = New System.Drawing.Size(109, 20)
         Me.cbSplashPotion.TabIndex = 69
@@ -356,7 +362,7 @@ Partial Class frmMain
         '
         Me.cbLingeringPotion.AutoSize = True
         Me.cbLingeringPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbLingeringPotion.Location = New System.Drawing.Point(300, 166)
+        Me.cbLingeringPotion.Location = New System.Drawing.Point(300, 178)
         Me.cbLingeringPotion.Name = "cbLingeringPotion"
         Me.cbLingeringPotion.Size = New System.Drawing.Size(122, 20)
         Me.cbLingeringPotion.TabIndex = 68
@@ -367,7 +373,7 @@ Partial Class frmMain
         '
         Me.cbTippedArrow.AutoSize = True
         Me.cbTippedArrow.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbTippedArrow.Location = New System.Drawing.Point(300, 192)
+        Me.cbTippedArrow.Location = New System.Drawing.Point(300, 204)
         Me.cbTippedArrow.Name = "cbTippedArrow"
         Me.cbTippedArrow.Size = New System.Drawing.Size(107, 20)
         Me.cbTippedArrow.TabIndex = 67
@@ -378,7 +384,7 @@ Partial Class frmMain
         '
         Me.cbSuspiciousStew.AutoSize = True
         Me.cbSuspiciousStew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSuspiciousStew.Location = New System.Drawing.Point(300, 71)
+        Me.cbSuspiciousStew.Location = New System.Drawing.Point(300, 83)
         Me.cbSuspiciousStew.Name = "cbSuspiciousStew"
         Me.cbSuspiciousStew.Size = New System.Drawing.Size(117, 20)
         Me.cbSuspiciousStew.TabIndex = 66
@@ -389,7 +395,7 @@ Partial Class frmMain
         '
         Me.cbPotion.AutoSize = True
         Me.cbPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbPotion.Location = New System.Drawing.Point(300, 118)
+        Me.cbPotion.Location = New System.Drawing.Point(300, 130)
         Me.cbPotion.Name = "cbPotion"
         Me.cbPotion.Size = New System.Drawing.Size(64, 20)
         Me.cbPotion.TabIndex = 65
@@ -400,7 +406,7 @@ Partial Class frmMain
         '
         Me.cbEnchantedBook.AutoSize = True
         Me.cbEnchantedBook.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbEnchantedBook.Location = New System.Drawing.Point(300, 94)
+        Me.cbEnchantedBook.Location = New System.Drawing.Point(300, 106)
         Me.cbEnchantedBook.Name = "cbEnchantedBook"
         Me.cbEnchantedBook.Size = New System.Drawing.Size(125, 20)
         Me.cbEnchantedBook.TabIndex = 64
@@ -411,7 +417,7 @@ Partial Class frmMain
         '
         Me.cbCreativeOnly.AutoSize = True
         Me.cbCreativeOnly.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCreativeOnly.Location = New System.Drawing.Point(449, 49)
+        Me.cbCreativeOnly.Location = New System.Drawing.Point(449, 61)
         Me.cbCreativeOnly.Name = "cbCreativeOnly"
         Me.cbCreativeOnly.Size = New System.Drawing.Size(107, 20)
         Me.cbCreativeOnly.TabIndex = 61
@@ -422,34 +428,45 @@ Partial Class frmMain
         '
         Me.lblID.AutoSize = True
         Me.lblID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblID.Location = New System.Drawing.Point(12, 53)
+        Me.lblID.Location = New System.Drawing.Point(12, 50)
         Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(51, 16)
+        Me.lblID.Size = New System.Drawing.Size(56, 16)
         Me.lblID.TabIndex = 60
-        Me.lblID.Text = "Item ID:"
-        '
-        'tbID
-        '
-        Me.tbID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbID.Location = New System.Drawing.Point(15, 71)
-        Me.tbID.Name = "tbID"
-        Me.tbID.Size = New System.Drawing.Size(197, 22)
-        Me.tbID.TabIndex = 57
+        Me.lblID.Text = "Item (ID)"
         '
         'lblAddNewItems
         '
         Me.lblAddNewItems.AutoSize = True
         Me.lblAddNewItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAddNewItems.Location = New System.Drawing.Point(12, 22)
+        Me.lblAddNewItems.Location = New System.Drawing.Point(12, 24)
         Me.lblAddNewItems.Name = "lblAddNewItems"
         Me.lblAddNewItems.Size = New System.Drawing.Size(261, 16)
         Me.lblAddNewItems.TabIndex = 56
         Me.lblAddNewItems.Text = "Add new items and blocks to the datapack."
         '
+        'gbItemID
+        '
+        Me.gbItemID.Controls.Add(Me.rtbItem)
+        Me.gbItemID.Location = New System.Drawing.Point(14, 65)
+        Me.gbItemID.Name = "gbItemID"
+        Me.gbItemID.Size = New System.Drawing.Size(242, 83)
+        Me.gbItemID.TabIndex = 82
+        Me.gbItemID.TabStop = False
+        '
+        'rtbItem
+        '
+        Me.rtbItem.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.rtbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rtbItem.Location = New System.Drawing.Point(6, 18)
+        Me.rtbItem.Name = "rtbItem"
+        Me.rtbItem.Size = New System.Drawing.Size(230, 58)
+        Me.rtbItem.TabIndex = 81
+        Me.rtbItem.Text = ""
+        '
         'btnShowOutput
         '
         Me.btnShowOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowOutput.Location = New System.Drawing.Point(465, 456)
+        Me.btnShowOutput.Location = New System.Drawing.Point(465, 502)
         Me.btnShowOutput.Name = "btnShowOutput"
         Me.btnShowOutput.Size = New System.Drawing.Size(189, 34)
         Me.btnShowOutput.TabIndex = 74
@@ -459,7 +476,7 @@ Partial Class frmMain
         'btnAddItem
         '
         Me.btnAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddItem.Location = New System.Drawing.Point(16, 456)
+        Me.btnAddItem.Location = New System.Drawing.Point(16, 502)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(443, 34)
         Me.btnAddItem.TabIndex = 63
@@ -518,7 +535,7 @@ Partial Class frmMain
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FindDuplicatesToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FindDuplicatesToolStripMenuItem, Me.ImportItemListToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
@@ -526,8 +543,14 @@ Partial Class frmMain
         'FindDuplicatesToolStripMenuItem
         '
         Me.FindDuplicatesToolStripMenuItem.Name = "FindDuplicatesToolStripMenuItem"
-        Me.FindDuplicatesToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
-        Me.FindDuplicatesToolStripMenuItem.Text = "Duplicate finder"
+        Me.FindDuplicatesToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.FindDuplicatesToolStripMenuItem.Text = "Duplicate Finder"
+        '
+        'ImportItemListToolStripMenuItem
+        '
+        Me.ImportItemListToolStripMenuItem.Name = "ImportItemListToolStripMenuItem"
+        Me.ImportItemListToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.ImportItemListToolStripMenuItem.Text = "Item List Importer"
         '
         'HelpToolStripMenuItem
         '
@@ -639,7 +662,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(664, 503)
+        Me.ClientSize = New System.Drawing.Size(664, 549)
         Me.Controls.Add(Me.Quotationmark)
         Me.Controls.Add(Me.rtbCodeEnd)
         Me.Controls.Add(Me.rtb64Items)
@@ -660,11 +683,12 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.1.5"
+        Me.Text = "Random Item Giver Updater ALPHA 0.2.0"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
         Me.gbItem.PerformLayout()
+        Me.gbItemID.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -680,9 +704,9 @@ Partial Class frmMain
     Friend WithEvents tbNBT As TextBox
     Friend WithEvents tbSmallOutput As TextBox
     Friend WithEvents lblOutput As Label
-    Friend WithEvents tbCustomPrefix As TextBox
+    Friend WithEvents tbSamePrefix As TextBox
     Friend WithEvents btnShowOutput As Button
-    Friend WithEvents cbCustomPrefix As CheckBox
+    Friend WithEvents cbSamePrefix As CheckBox
     Friend WithEvents rbtnCommandBlock As RadioButton
     Friend WithEvents rbtnOtherItem As RadioButton
     Friend WithEvents rbtnSpawnEgg As RadioButton
@@ -694,7 +718,6 @@ Partial Class frmMain
     Friend WithEvents cbEnchantedBook As CheckBox
     Friend WithEvents cbCreativeOnly As CheckBox
     Friend WithEvents lblID As Label
-    Friend WithEvents tbID As TextBox
     Friend WithEvents lblAddNewItems As Label
     Friend WithEvents btnAddItem As Button
     Friend WithEvents btnBrowseDatapackPath As Button
@@ -729,4 +752,7 @@ Partial Class frmMain
     Friend WithEvents lblDatapackDetection As Label
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FindDuplicatesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportItemListToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents rtbItem As RichTextBox
+    Friend WithEvents gbItemID As GroupBox
 End Class
