@@ -43,9 +43,9 @@ Partial Class frmDuplicateFinder
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHeader.Location = New System.Drawing.Point(18, 14)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(178, 25)
+        Me.lblHeader.Size = New System.Drawing.Size(185, 25)
         Me.lblHeader.TabIndex = 0
-        Me.lblHeader.Text = "Duplicate finder"
+        Me.lblHeader.Text = "Duplicate Finder"
         '
         'Label2
         '
