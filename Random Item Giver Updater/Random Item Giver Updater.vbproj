@@ -112,6 +112,12 @@
     <Compile Include="frmHelp.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmItemImporter.Designer.vb">
+      <DependentUpon>frmItemImporter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmItemImporter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDuplicateFinder.resx">
       <DependentUpon>frmDuplicateFinder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmItemImporter.resx">
+      <DependentUpon>frmItemImporter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>

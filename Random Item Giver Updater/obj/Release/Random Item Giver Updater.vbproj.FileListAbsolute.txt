@@ -34,3 +34,4 @@ C:\Users\Herbert 2\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Rando
 C:\Users\Herbert 2\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random Item Giver Updater.exe
 C:\Users\Herbert 2\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random Item Giver Updater.xml
 C:\Users\Herbert 2\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random Item Giver Updater.pdb
+C:\Users\Louis\OneDrive\Dokumente\Programmieren\Visual Studio Projekte\Random Item Giver Updater\Random-Item-Giver-Updater\Random Item Giver Updater\obj\Release\Random_Item_Giver_Updater.frmItemImporter.resources
