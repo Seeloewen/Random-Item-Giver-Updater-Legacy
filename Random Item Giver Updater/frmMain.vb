@@ -1,9 +1,12 @@
 ﻿Imports System.IO
+Imports System.Environment
 
 Public Class frmMain
 
     'General variables for the software
     Public qm As String
+    Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
+    Public version As String = "0.2.0 DEV (09.05.2022)"
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
@@ -23,6 +26,14 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         qm = Quotationmark.Text
+
+        If My.Computer.FileSystem.DirectoryExists(AppData + "/Random Item Giver Updater/") = False Then
+            My.Computer.FileSystem.CreateDirectory(AppData + "/Random Item Giver Updater/")
+            WriteToLog("Created the 'Random Item Giver' directory in the Appdata folder for application files.", "Info")
+        End If
+
+        WriteToLog("Random Item Giver " + version, "Info")
+        WriteToLog("You are running an alpha build, may be unstable!", "Warning")
     End Sub
 
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
@@ -40,9 +51,11 @@ Public Class frmMain
 
         If rtbItem.Lines.Length = 1 Then
             Item = rtbItem.Text
+            WriteToLog("Preparing to add a single item.", "Info")
             CallAddItem()
         ElseIf rtbItem.Lines.Length = 0 Then
         Else
+            WriteToLog("Preparing to add multiple items.", "Info")
             AddMultipleItems()
         End If
     End Sub
@@ -1049,21 +1062,46 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Sub WriteToLog(Message As String, Type As String)
+        If Type = "Error" Then
+            rtbLog.SelectionColor = Color.Red
+            rtbLog.AppendText("[" + DateTime.Now + "] " + "[ERROR] " + Message + vbNewLine)
+        ElseIf Type = "Info" Then
+            rtbLog.SelectionColor = Color.FromArgb(50, 177, 205)
+            rtbLog.AppendText("[" + DateTime.Now + "] " + "[INFO] " + Message + vbNewLine)
+        ElseIf Type = "Warning" Then
+            rtbLog.SelectionColor = Color.DarkOrange
+            rtbLog.AppendText("[" + DateTime.Now + "] " + "[WARNING] " + Message + vbNewLine)
+        Else
+            rtbLog.SelectionColor = Color.Red
+            rtbLog.AppendText("--> Critical Log Error: Invalid type received" + vbNewLine)
+        End If
+    End Sub
+
+    Private Sub rtbLog_TextChanged(sender As Object, e As EventArgs) Handles rtbLog.TextChanged
+        rtbLog.SaveFile(AppData + "/Random Item Giver Updater/DebugLogTemp")
+        frmOutput.rtbLog.LoadFile(AppData + "/Random Item Giver Updater/DebugLogTemp")
+    End Sub
+
     Private Sub AddItem(Item_ID As String, Item_Amount As Integer, Version As String, Loot_Table As String)
 
         If DuplicateDetected = False Or (DuplicateDetected = False And IgnoreDuplicates = True) Then
+            WriteToLog("-- Adding item --", "Info")
             ExceptionAddItem = ""
 
             If cbNBT.Checked Then
                 NBTtag = tbNBT.Text
+                WriteToLog("Adding NBT tag: " + NBTtag, "Info")
             Else
                 NBTtag = "NONE"
+                WriteToLog("No NBT tag selected.", "Info")
             End If
 
             If cbSamePrefix.Checked Then
                 Prefix = tbSamePrefix.Text
+                WriteToLog("Using the same prefix for all items: " + Prefix, "Info")
             Else
-                Prefix = "minecraft"
+                WriteToLog("Not using the same prefix for all items, will read prefix from item list.", "Info")
             End If
 
             If cbSamePrefix.Checked Then
@@ -1075,9 +1113,12 @@ Public Class frmMain
             'Define ItemAmountPath depending on Item_Amount
             If Item_Amount = 1 Then
                 ItemAmountPath = "1item\"
+                WriteToLog("Item amount detected as 1, using default path for 1 item. ", "Info")
             ElseIf Item_Amount > 1 Then
                 ItemAmountPath = Item_Amount.ToString + "sameitems\"
+                WriteToLog("Item amount detected as bigger than 1, using path for multiple items.", "Info")
             End If
+
 
             'Check if item you want to add already exists
             FileTemp = My.Computer.FileSystem.ReadAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + ItemAmountPath + Loot_Table + ".json")
@@ -1268,25 +1309,29 @@ Public Class frmMain
 
                     End If
 
-
                 Catch Exception As Exception
                     ExceptionAddItem = Exception.Message
                 End Try
 
                 If String.IsNullOrEmpty(ExceptionAddItem) Then
-                    frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Succesfully added " + FullItemName + " to " + Loot_Table + " in Version " + Version + " (NBT: " + NBTtag + ")" + vbNewLine)
-                    tbSmallOutput.Text = "Succesfully added " + FullItemName + " to " + Loot_Table + " in Version " + Version + " (NBT: " + NBTtag + ")"
+                    frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")" + vbNewLine)
+                    tbSmallOutput.Text = "Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")"
+                    WriteToLog("Added item " + FullItemName + " to loot table " + Loot_Table + " with amount " + Item_Amount.ToString, "Info")
                 Else
                     tbSmallOutput.Text = "Error: " + ExceptionAddItem
                     frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Error: " + ExceptionAddItem + vbNewLine)
+                    WriteToLog("Error when adding item: " + ExceptionAddItem, "Error")
                 End If
 
             Else
+                WriteToLog("Detected duplicate when adding item.", "Info")
                 Select Case MessageBox.Show("The item you are trying to add already exists in the datapack." + vbNewLine + "Are you sure you want to add it again? This will result in duplicates.", "Warning", MessageBoxButtons.YesNo)
                     Case Windows.Forms.DialogResult.Yes
+                        WriteToLog("Ignoring warning, adding duplicate.", "Info")
                         IgnoreDuplicates = True
                         CallAddItem()
                     Case Windows.Forms.DialogResult.No
+                        WriteToLog("Not adding duplicate, cancelling.", "Info")
                         IgnoreDuplicates = False
                         DuplicateDetected = True
                         tbSmallOutput.Text = "Cancelled adding " + FullItemName + " to " + Loot_Table + " in Version " + Version + " (NBT: " + NBTtag + ")"
@@ -1383,9 +1428,9 @@ Public Class frmMain
         End If
 
         If cbSamePrefix.Checked Then
-            lblID.Text = "Item (ID)"
+            lblID.Text = "Items (ID)"
         Else
-            lblID.Text = "Item (Prefix:ID)"
+            lblID.Text = "Items (Prefix:ID)"
         End If
     End Sub
 

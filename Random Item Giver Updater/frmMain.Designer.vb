@@ -82,6 +82,7 @@ Partial Class frmMain
         Me.rtb3Items = New System.Windows.Forms.RichTextBox()
         Me.rtb5Items = New System.Windows.Forms.RichTextBox()
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
+        Me.rtbLog = New System.Windows.Forms.RichTextBox()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
@@ -386,9 +387,9 @@ Partial Class frmMain
         Me.cbSuspiciousStew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbSuspiciousStew.Location = New System.Drawing.Point(300, 83)
         Me.cbSuspiciousStew.Name = "cbSuspiciousStew"
-        Me.cbSuspiciousStew.Size = New System.Drawing.Size(117, 20)
+        Me.cbSuspiciousStew.Size = New System.Drawing.Size(124, 20)
         Me.cbSuspiciousStew.TabIndex = 66
-        Me.cbSuspiciousStew.Text = "Supicious Stew"
+        Me.cbSuspiciousStew.Text = "Suspicious Stew"
         Me.cbSuspiciousStew.UseVisualStyleBackColor = True
         '
         'cbPotion
@@ -430,9 +431,9 @@ Partial Class frmMain
         Me.lblID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblID.Location = New System.Drawing.Point(12, 50)
         Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(56, 16)
+        Me.lblID.Size = New System.Drawing.Size(63, 16)
         Me.lblID.TabIndex = 60
-        Me.lblID.Text = "Item (ID)"
+        Me.lblID.Text = "Items (ID)"
         '
         'lblAddNewItems
         '
@@ -657,12 +658,21 @@ Partial Class frmMain
         Me.rtb2Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 2" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
+        'rtbLog
+        '
+        Me.rtbLog.Location = New System.Drawing.Point(102, 706)
+        Me.rtbLog.Name = "rtbLog"
+        Me.rtbLog.Size = New System.Drawing.Size(51, 54)
+        Me.rtbLog.TabIndex = 83
+        Me.rtbLog.Text = ""
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(664, 549)
+        Me.ClientSize = New System.Drawing.Size(664, 545)
+        Me.Controls.Add(Me.rtbLog)
         Me.Controls.Add(Me.Quotationmark)
         Me.Controls.Add(Me.rtbCodeEnd)
         Me.Controls.Add(Me.rtb64Items)
@@ -755,4 +765,5 @@ Partial Class frmMain
     Friend WithEvents ImportItemListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents rtbItem As RichTextBox
     Friend WithEvents gbItemID As GroupBox
+    Friend WithEvents rtbLog As RichTextBox
 End Class
