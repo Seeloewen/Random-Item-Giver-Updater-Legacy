@@ -8,9 +8,11 @@
         If String.IsNullOrEmpty(tbDatapackPath.Text) = False Then
             If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
                 btnCheck.Enabled = False
+                lblDuplicatesAmount.Hide()
                 lblChecking.Show()
                 btnCheck.Text = "Checking..."
                 MsgBox("Duplicate finder will now search for duplicates in the selected datapack. This may take a while." + vbNewLine + "The software might show the state " + frmMain.qm + "Not responding" + frmMain.qm + ", this is intended.", MsgBoxStyle.Information, "Duplicate checker")
+                frmMain.WriteToLog("-- Checking for duplicates --", "Info")
                 lvDuplicates.Clear()
                 lvDuplicates.Columns.Add("Item")
                 lvDuplicates.Columns(0).Width = 256
@@ -18,6 +20,9 @@
                 lvDuplicates.Columns(1).Width = 266
                 CallChecker()
                 MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list behind this message." + vbNewLine + "If the list is empty then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
+                frmMain.WriteToLog("Checking for duplicates completed. Found " + lvDuplicates.Items.Count.ToString + " duplicates totally.", "Info")
+                lblDuplicatesAmount.Show()
+                lblDuplicatesAmount.Text = "Found " + lvDuplicates.Items.Count.ToString + " duplicates totally."
                 btnCheck.Enabled = True
                 btnCheck.Text = "Check"
                 lblChecking.Hide()
@@ -247,6 +252,8 @@
             lvDuplicates.Items.Add(itm)
             DoLoopNum = DoLoopNum + 1
         End While
+
+        frmMain.WriteToLog("Completed checking " + LootTable, "Info")
     End Sub
 
     Private Sub ChangeLineInrtbWithDuplicates(Num As Integer)
@@ -281,8 +288,11 @@
             Else
                 DatapackVersion = "Null"
             End If
+
+            frmMain.WriteToLog("Detected datapack as version " + DatapackVersion + " in duplicate finder", "Info")
         Catch ex As Exception
             MsgBox("Error: " + ex.Message + vbNewLine + vbNewLine + "The datapack path is not detected as valid and therefor the duplicate finder might fail.", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog("Selected datapack path in duplicate finder is invalid.", "Error")
         End Try
 
     End Sub

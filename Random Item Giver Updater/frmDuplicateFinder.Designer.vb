@@ -35,6 +35,7 @@ Partial Class frmDuplicateFinder
         Me.fbdMainFolderPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.rtbDuplicates = New System.Windows.Forms.RichTextBox()
         Me.lblChecking = New System.Windows.Forms.Label()
+        Me.lblDuplicatesAmount = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblHeader
@@ -137,12 +138,24 @@ Partial Class frmDuplicateFinder
         Me.lblChecking.Text = "Checking for duplicates, please wait..."
         Me.lblChecking.Visible = False
         '
+        'lblDuplicatesAmount
+        '
+        Me.lblDuplicatesAmount.AutoSize = True
+        Me.lblDuplicatesAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDuplicatesAmount.Location = New System.Drawing.Point(210, 488)
+        Me.lblDuplicatesAmount.Name = "lblDuplicatesAmount"
+        Me.lblDuplicatesAmount.Size = New System.Drawing.Size(171, 16)
+        Me.lblDuplicatesAmount.TabIndex = 11
+        Me.lblDuplicatesAmount.Text = "Found {0} duplicates totally."
+        Me.lblDuplicatesAmount.Visible = False
+        '
         'frmDuplicateFinder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(572, 500)
+        Me.ClientSize = New System.Drawing.Size(572, 513)
+        Me.Controls.Add(Me.lblDuplicatesAmount)
         Me.Controls.Add(Me.lblChecking)
         Me.Controls.Add(Me.rtbDuplicates)
         Me.Controls.Add(Me.btnBrowse)
@@ -176,4 +189,5 @@ Partial Class frmDuplicateFinder
     Friend WithEvents fbdMainFolderPath As FolderBrowserDialog
     Friend WithEvents rtbDuplicates As RichTextBox
     Friend WithEvents lblChecking As Label
+    Friend WithEvents lblDuplicatesAmount As Label
 End Class
