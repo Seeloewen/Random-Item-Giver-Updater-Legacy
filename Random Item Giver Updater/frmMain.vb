@@ -6,7 +6,7 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public version As String = "0.2.0 DEV (09.05.2022)"
+    Public version As String = "0.2.0-a (10.05.2022)"
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
@@ -37,26 +37,30 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
-        IgnoreDuplicates = False
-        DuplicateDetected = False
-        EditFilePath = tbDatapackPath.Text
+        If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
+            IgnoreDuplicates = False
+            DuplicateDetected = False
+            EditFilePath = tbDatapackPath.Text
 
-        If rbtnRIG117.Checked Then
-            MsgBox("Warning: Version 1.17 does not support the newest features of the Random Item Giver!" + vbNewLine + "It was last officially updated on 20.01.2022, Version 1.1.5", MsgBoxStyle.Exclamation, "Warning")
-        End If
+            If rbtnRIG117.Checked Then
+                MsgBox("Warning: Version 1.17 does not support the newest features of the Random Item Giver!" + vbNewLine + "It was last officially updated on 20.01.2022, Version 1.1.5", MsgBoxStyle.Exclamation, "Warning")
+            End If
 
-        If rbtnRIG119.Checked Then
-            MsgBox("Warning: Version 1.19 is currently in Beta." + vbNewLine + "You can still use it but can't expect it to work properly.", MsgBoxStyle.Exclamation, "Warning")
-        End If
+            If rbtnRIG119.Checked Then
+                MsgBox("Warning: Version 1.19 is currently in Beta." + vbNewLine + "You can still use it but can't expect it to work properly.", MsgBoxStyle.Exclamation, "Warning")
+            End If
 
-        If rtbItem.Lines.Length = 1 Then
-            Item = rtbItem.Text
-            WriteToLog("Preparing to add a single item.", "Info")
-            CallAddItem()
-        ElseIf rtbItem.Lines.Length = 0 Then
+            If rtbItem.Lines.Length = 1 Then
+                Item = rtbItem.Text
+                WriteToLog("Preparing to add a single item.", "Info")
+                CallAddItem()
+            ElseIf rtbItem.Lines.Length = 0 Then
+            Else
+                WriteToLog("Preparing to add multiple items.", "Info")
+                AddMultipleItems()
+            End If
         Else
-            WriteToLog("Preparing to add multiple items.", "Info")
-            AddMultipleItems()
+            MsgBox("Please enter a datapack path!", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
@@ -1121,18 +1125,180 @@ Public Class frmMain
 
 
             'Check if item you want to add already exists
-            FileTemp = My.Computer.FileSystem.ReadAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + ItemAmountPath + Loot_Table + ".json")
+            If My.Computer.FileSystem.FileExists(EditFilePath + "\data\randomitemgiver\loot_tables\" + ItemAmountPath + Loot_Table + ".json") Then
+                FileTemp = My.Computer.FileSystem.ReadAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + ItemAmountPath + Loot_Table + ".json")
+            End If
 
             If FileTemp.Contains(qm + FullItemName + qm) = False Or IgnoreDuplicates = True Then
-                Try
-                    If Version = "1.16" OrElse Version = "1.18" OrElse Version = "1.19" Then
+                    Try
+                        If Version = "1.16" OrElse Version = "1.18" OrElse Version = "1.19" Then
 
-                        If Item_Amount = 1 Then
+                            If Item_Amount = 1 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "Special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            ElseIf Item_Amount = 2 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb2Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb2Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            ElseIf Item_Amount = 3 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb3Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb3Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            ElseIf Item_Amount = 5 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb5Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb5Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            ElseIf Item_Amount = 10 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb10Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb10Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            ElseIf Item_Amount = 32 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb32Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb32Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            ElseIf Item_Amount = 64 Then
+                                LineRemoveLoop = 8
+
+                                While LineRemoveLoop > 0
+                                    Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json")
+                                    Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                    EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                    FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                    FileStreamEditFile.Close()
+
+                                    LineRemoveLoop = LineRemoveLoop - 1
+                                End While
+
+                                If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb64Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                    My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb64Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                End If
+
+                            End If
+
+                        ElseIf Version = "1.17" Then
+
+                            'Convert Settings to 1.17 RIG format
+                            If Loot_Table = "potions" Then
+                                Loot_Table = "potion"
+                            End If
+                            If Loot_Table = "splash_potions" Then
+                                Loot_Table = "splash_potion"
+                            End If
+                            If Loot_Table = "lingering_potions" Then
+                                Loot_Table = "lingering_potion"
+                            End If
+                            If Loot_Table = "suspicious_stews" Then
+                                Loot_Table = "suspicious_stew"
+                            End If
+                            If Loot_Table = "tipped_arrows" Then
+                                Loot_Table = "tipped_arrow"
+                            End If
+
                             LineRemoveLoop = 8
 
                             While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json")
+                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 EditFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
@@ -1142,202 +1308,42 @@ Public Class frmMain
                             End While
 
                             If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "Special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\1item\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            End If
-
-                        ElseIf Item_Amount = 2 Then
-                            LineRemoveLoop = 8
-
-                            While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                                FileStreamEditFile.Close()
-
-                                LineRemoveLoop = LineRemoveLoop - 1
-                            End While
-
-                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb2Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\2sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb2Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            End If
-
-                        ElseIf Item_Amount = 3 Then
-                            LineRemoveLoop = 8
-
-                            While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                                FileStreamEditFile.Close()
-
-                                LineRemoveLoop = LineRemoveLoop - 1
-                            End While
-
-                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb3Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\3sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb3Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            End If
-
-                        ElseIf Item_Amount = 5 Then
-                            LineRemoveLoop = 8
-
-                            While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                                FileStreamEditFile.Close()
-
-                                LineRemoveLoop = LineRemoveLoop - 1
-                            End While
-
-                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb5Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\5sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb5Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            End If
-
-                        ElseIf Item_Amount = 10 Then
-                            LineRemoveLoop = 8
-
-                            While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                                FileStreamEditFile.Close()
-
-                                LineRemoveLoop = LineRemoveLoop - 1
-                            End While
-
-                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb10Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\10sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb10Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            End If
-
-                        ElseIf Item_Amount = 32 Then
-                            LineRemoveLoop = 8
-
-                            While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                                FileStreamEditFile.Close()
-
-                                LineRemoveLoop = LineRemoveLoop - 1
-                            End While
-
-                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb32Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\32sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb32Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            End If
-
-                        ElseIf Item_Amount = 64 Then
-                            LineRemoveLoop = 8
-
-                            While LineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json")
-                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                                FileStreamEditFile.Close()
-
-                                LineRemoveLoop = LineRemoveLoop - 1
-                            End While
-
-                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb64Items.Text + vbNewLine + "          ]" + vbNewLine + rtbCodeEnd.Text, True)
-                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + rtb64Items.Text + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + vbNewLine + rtbCodeEnd.Text, True)
+                            ElseIf Loot_Table = "suspicious_stew" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potion" OrElse Loot_Table = "splash_potion" OrElse Loot_Table = "lingering_potion" OrElse Loot_Table = "tipped_arrow" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
                             End If
 
                         End If
 
-                    ElseIf Version = "1.17" Then
+                    Catch Exception As Exception
+                        ExceptionAddItem = Exception.Message
+                    End Try
 
-                        'Convert Settings to 1.17 RIG format
-                        If Loot_Table = "potions" Then
-                            Loot_Table = "potion"
-                        End If
-                        If Loot_Table = "splash_potions" Then
-                            Loot_Table = "splash_potion"
-                        End If
-                        If Loot_Table = "lingering_potions" Then
-                            Loot_Table = "lingering_potion"
-                        End If
-                        If Loot_Table = "suspicious_stews" Then
-                            Loot_Table = "suspicious_stew"
-                        End If
-                        If Loot_Table = "tipped_arrows" Then
-                            Loot_Table = "tipped_arrow"
-                        End If
-
-                        LineRemoveLoop = 8
-
-                        While LineRemoveLoop > 0
-                            Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json")
-                            Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
-                            EditFileLastLineLength = EditFileLines.Last.Length.ToString
-
-                            FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
-                            FileStreamEditFile.Close()
-
-                            LineRemoveLoop = LineRemoveLoop - 1
-                        End While
-
-                        If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "Special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
-                            My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + vbNewLine + rtbCodeEnd.Text, True)
-                        ElseIf Loot_Table = "suspicious_stew" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potion" OrElse Loot_Table = "splash_potion" OrElse Loot_Table = "lingering_potion" OrElse Loot_Table = "tipped_arrow" Then
-                            My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + rtbCodeEnd.Text, True)
-                        End If
-
+                    If String.IsNullOrEmpty(ExceptionAddItem) Then
+                        frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")" + vbNewLine)
+                        tbSmallOutput.Text = "Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")"
+                        WriteToLog("Added item " + FullItemName + " to loot table " + Loot_Table + " with amount " + Item_Amount.ToString, "Info")
+                    Else
+                        tbSmallOutput.Text = "Error: " + ExceptionAddItem
+                        frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Error: " + ExceptionAddItem + vbNewLine)
+                        WriteToLog("Error when adding item: " + ExceptionAddItem, "Error")
                     End If
 
-                Catch Exception As Exception
-                    ExceptionAddItem = Exception.Message
-                End Try
-
-                If String.IsNullOrEmpty(ExceptionAddItem) Then
-                    frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")" + vbNewLine)
-                    tbSmallOutput.Text = "Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")"
-                    WriteToLog("Added item " + FullItemName + " to loot table " + Loot_Table + " with amount " + Item_Amount.ToString, "Info")
                 Else
-                    tbSmallOutput.Text = "Error: " + ExceptionAddItem
-                    frmOutput.rtbLog.AppendText("[" + DateTime.Now + "]" + " Error: " + ExceptionAddItem + vbNewLine)
-                    WriteToLog("Error when adding item: " + ExceptionAddItem, "Error")
+                    WriteToLog("Detected duplicate when adding item.", "Info")
+                    Select Case MessageBox.Show("The item you are trying to add (" + FullItemName + ") already exists in the datapack." + vbNewLine + "Are you sure you want to add it again? This will result in duplicates.", "Warning", MessageBoxButtons.YesNo)
+                        Case Windows.Forms.DialogResult.Yes
+                            WriteToLog("Ignoring warning, adding duplicate.", "Info")
+                            IgnoreDuplicates = True
+                            CallAddItem()
+                        Case Windows.Forms.DialogResult.No
+                            WriteToLog("Not adding duplicate, cancelling.", "Info")
+                            IgnoreDuplicates = False
+                            DuplicateDetected = True
+                            tbSmallOutput.Text = "Cancelled adding " + FullItemName + " to " + Loot_Table + " in Version " + Version + " (NBT: " + NBTtag + ")"
+                    End Select
                 End If
-
-            Else
-                WriteToLog("Detected duplicate when adding item.", "Info")
-                Select Case MessageBox.Show("The item you are trying to add already exists in the datapack." + vbNewLine + "Are you sure you want to add it again? This will result in duplicates.", "Warning", MessageBoxButtons.YesNo)
-                    Case Windows.Forms.DialogResult.Yes
-                        WriteToLog("Ignoring warning, adding duplicate.", "Info")
-                        IgnoreDuplicates = True
-                        CallAddItem()
-                    Case Windows.Forms.DialogResult.No
-                        WriteToLog("Not adding duplicate, cancelling.", "Info")
-                        IgnoreDuplicates = False
-                        DuplicateDetected = True
-                        tbSmallOutput.Text = "Cancelled adding " + FullItemName + " to " + Loot_Table + " in Version " + Version + " (NBT: " + NBTtag + ")"
-                End Select
             End If
-        End If
     End Sub
 
     Private Sub btnBrowseDatapackPath_Click(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.Click
@@ -1356,36 +1362,46 @@ Public Class frmMain
                     If Convert.ToInt32(Version) > 10 Then
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version"
                         MsgBox("A datapack has been detected but the Version number is greater than 10." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
+                        WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
                         rbtnRIG119.Checked = True
                     ElseIf Version = "10" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.19"
+                        WriteToLog("Detected datapack version 1.19.", "Info")
                         rbtnRIG119.Checked = True
                     ElseIf Version = "9" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.18"
+                        WriteToLog("Detected datapack version 1.18.", "Info")
                         rbtnRIG118.Checked = True
                     ElseIf Version = "8" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.18. Please note that your version of 1.18 is outdated."
+                        WriteToLog("Detected datapack version 1.18.", "Info")
                         rbtnRIG118.Checked = True
                     ElseIf Version = "7" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.17"
+                        WriteToLog("Detected datapack version 1.17.", "Info")
                         rbtnRIG117.Checked = True
                     ElseIf Version = "6" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.16"
+                        WriteToLog("Detected datapack version 1.16.", "Info")
                         rbtnRIG116.Checked = True
                     ElseIf Convert.ToInt32(Version) < 6 Then
                         lblDatapackDetection.Text = "Detected datapack, but version is most likely unsupported"
                         MsgBox("A datapack has been detected but the version number is smaller than 6." + vbNewLine + "This means that the datapack version is older than 1.15 which the Random Item Giver does not support." + vbNewLine + "The oldest available version has been selected but will most likely not work.", MsgBoxStyle.Exclamation, "Warning")
+                        WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
                         rbtnRIG116.Checked = True
                     Else
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version."
+                        WriteToLog("Detected datapack, couldn't determine version.", "Error")
                     End If
                 Catch ex As Exception
                     MsgBox("Error when selecting datapack: " + ex.Message, MsgBoxStyle.Critical, "Error")
                     lblDatapackDetection.Text = "Detected datapack, but could not determine version."
+                    WriteToLog("Detected datapack, couldn't determine version.", "Error")
                     rbtnRIG119.Checked = True
                 End Try
             Else
                 lblDatapackDetection.Text = "Folder found, but could not detect datapack."
+                WriteToLog("Couldn't detect datapack.", "Error")
             End If
         Else
             lblDatapackDetection.Text = "No datapack detected."
@@ -1417,7 +1433,11 @@ Public Class frmMain
     End Sub
 
     Private Sub OpenDatapackFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDatapackFolderToolStripMenuItem.Click
-        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.2.0.", MsgBoxStyle.Exclamation, "Not available yet")
+        If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
+            Process.Start("explorer.exe", tbDatapackPath.Text)
+        Else
+            MsgBox("Cannot open datapack folder, please select a valid path.", MsgBoxStyle.Critical, "Error")
+        End If
     End Sub
 
     Private Sub cbCustomPrefix_CheckedChanged(sender As Object, e As EventArgs) Handles cbSamePrefix.CheckedChanged

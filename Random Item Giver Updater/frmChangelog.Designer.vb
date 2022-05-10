@@ -23,50 +23,62 @@ Partial Class frmChangelog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChangelog))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.lblChangelog = New System.Windows.Forms.Label()
+        Me.rtbChangelog = New System.Windows.Forms.RichTextBox()
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.gbChangelog = New System.Windows.Forms.GroupBox()
+        Me.gbChangelog.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblChangelog
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 12)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(103, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Changelog"
+        Me.lblChangelog.AutoSize = True
+        Me.lblChangelog.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChangelog.Location = New System.Drawing.Point(12, 12)
+        Me.lblChangelog.Name = "lblChangelog"
+        Me.lblChangelog.Size = New System.Drawing.Size(103, 24)
+        Me.lblChangelog.TabIndex = 0
+        Me.lblChangelog.Text = "Changelog"
         '
-        'RichTextBox1
+        'rtbChangelog
         '
-        Me.RichTextBox1.BackColor = System.Drawing.Color.White
-        Me.RichTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox1.Location = New System.Drawing.Point(12, 49)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.ReadOnly = True
-        Me.RichTextBox1.Size = New System.Drawing.Size(445, 336)
-        Me.RichTextBox1.TabIndex = 1
-        Me.RichTextBox1.Text = resources.GetString("RichTextBox1.Text")
+        Me.rtbChangelog.BackColor = System.Drawing.Color.White
+        Me.rtbChangelog.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.rtbChangelog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rtbChangelog.Location = New System.Drawing.Point(15, 19)
+        Me.rtbChangelog.Name = "rtbChangelog"
+        Me.rtbChangelog.ReadOnly = True
+        Me.rtbChangelog.Size = New System.Drawing.Size(424, 322)
+        Me.rtbChangelog.TabIndex = 1
+        Me.rtbChangelog.Text = resources.GetString("rtbChangelog.Text")
         '
         'btnOK
         '
-        Me.btnOK.Location = New System.Drawing.Point(173, 392)
+        Me.btnOK.Location = New System.Drawing.Point(167, 399)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(133, 24)
         Me.btnOK.TabIndex = 2
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
+        'gbChangelog
+        '
+        Me.gbChangelog.Controls.Add(Me.rtbChangelog)
+        Me.gbChangelog.Location = New System.Drawing.Point(12, 39)
+        Me.gbChangelog.Name = "gbChangelog"
+        Me.gbChangelog.Size = New System.Drawing.Size(445, 353)
+        Me.gbChangelog.TabIndex = 3
+        Me.gbChangelog.TabStop = False
+        '
         'frmChangelog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(469, 425)
+        Me.ClientSize = New System.Drawing.Size(469, 434)
+        Me.Controls.Add(Me.gbChangelog)
         Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.RichTextBox1)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblChangelog)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -74,12 +86,14 @@ Partial Class frmChangelog
         Me.Name = "frmChangelog"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Changelog"
+        Me.gbChangelog.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents lblChangelog As Label
+    Friend WithEvents rtbChangelog As RichTextBox
     Friend WithEvents btnOK As Button
+    Friend WithEvents gbChangelog As GroupBox
 End Class

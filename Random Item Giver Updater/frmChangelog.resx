@@ -117,13 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RichTextBox1.Text" xml:space="preserve">
-    <value>Version 0.2.0 (xx.xx.xxxx)
+  <data name="rtbChangelog.Text" xml:space="preserve">
+    <value>Version 0.2.0 (10.05.2022)
 + Added output log
 + Added feature to import item lists from text file
 + Added feature to add a list of items
++ Added option to open datapack folder in the menu
 * Its now possible to select wether all items should use the same prefix or you want to give each item its own prefix manually
 * Improved duplicate detection when adding items
+* Improved design of changelog
+* Duplicate finder now also shows amount of total duplicates
+* Fixed exception when datapack path was invalid
 * Fixed several typos
 
 Version 0.1.5 (16.04.2022)
