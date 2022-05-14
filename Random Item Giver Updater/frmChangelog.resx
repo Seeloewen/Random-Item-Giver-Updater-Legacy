@@ -118,7 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.2.0 (10.05.2022)
+    <value>Version 0.2.1 (14.05.2022)
++ Added support for goat horn loot table (1.19+)
+* Slightly changed application icon
+* Fixed a typo in the Item List Importer
+
+Version 0.2.0 (10.05.2022)
 + Added output log
 + Added feature to import item lists from text file
 + Added feature to add a list of items

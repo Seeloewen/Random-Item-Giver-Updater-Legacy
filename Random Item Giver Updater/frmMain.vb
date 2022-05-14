@@ -6,7 +6,7 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public version As String = "0.2.0-a (10.05.2022)"
+    Public version As String = "0.2.1-a (14.05.2022)"
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
