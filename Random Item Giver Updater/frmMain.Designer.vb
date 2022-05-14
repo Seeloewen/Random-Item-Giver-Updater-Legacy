@@ -83,6 +83,7 @@ Partial Class frmMain
         Me.rtb5Items = New System.Windows.Forms.RichTextBox()
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
+        Me.cbGoatHorn = New System.Windows.Forms.CheckBox()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
@@ -205,6 +206,7 @@ Partial Class frmMain
         '
         'gbItem
         '
+        Me.gbItem.Controls.Add(Me.cbGoatHorn)
         Me.gbItem.Controls.Add(Me.cbNormalItem)
         Me.gbItem.Controls.Add(Me.cbNBT)
         Me.gbItem.Controls.Add(Me.tbNBT)
@@ -666,6 +668,17 @@ Partial Class frmMain
         Me.rtbLog.TabIndex = 83
         Me.rtbLog.Text = ""
         '
+        'cbGoatHorn
+        '
+        Me.cbGoatHorn.AutoSize = True
+        Me.cbGoatHorn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbGoatHorn.Location = New System.Drawing.Point(300, 230)
+        Me.cbGoatHorn.Name = "cbGoatHorn"
+        Me.cbGoatHorn.Size = New System.Drawing.Size(87, 20)
+        Me.cbGoatHorn.TabIndex = 83
+        Me.cbGoatHorn.Text = "Goat Horn"
+        Me.cbGoatHorn.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -766,4 +779,5 @@ Partial Class frmMain
     Friend WithEvents rtbItem As RichTextBox
     Friend WithEvents gbItemID As GroupBox
     Friend WithEvents rtbLog As RichTextBox
+    Friend WithEvents cbGoatHorn As CheckBox
 End Class
