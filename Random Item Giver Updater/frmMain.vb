@@ -42,14 +42,6 @@ Public Class frmMain
             DuplicateDetected = False
             EditFilePath = tbDatapackPath.Text
 
-            If rbtnRIG117.Checked Then
-                MsgBox("Warning: Version 1.17 does not support the newest features of the Random Item Giver!" + vbNewLine + "It was last officially updated on 20.01.2022, Version 1.1.5", MsgBoxStyle.Exclamation, "Warning")
-            End If
-
-            If rbtnRIG119.Checked Then
-                MsgBox("Warning: Version 1.19 is currently in Beta." + vbNewLine + "You can still use it but can't expect it to work properly.", MsgBoxStyle.Exclamation, "Warning")
-            End If
-
             If rtbItem.Lines.Length = 1 Then
                 Item = rtbItem.Text
                 WriteToLog("Preparing to add a single item.", "Info")
@@ -84,7 +76,7 @@ Public Class frmMain
 
             btnAddItem.Text = "Adding item..."
 
-            If rbtnRIG116.Checked Then
+            If cbxVersion.SelectedItem = "Version 1.16" Then
 
                 'Add item to loot tables for 1 item
                 If cbNormalItem.Checked Then
@@ -394,7 +386,7 @@ Public Class frmMain
                     AddItem(Item, "64", "1.16", "tipped_arrows")
                 End If
 
-            ElseIf rbtnRIG117.Checked Then
+            ElseIf cbxVersion.SelectedItem = "Version 1.17" Then
 
                 If cbNormalItem.Checked Then
                     AddItem(Item, "1", "1.17", "main")
@@ -439,7 +431,7 @@ Public Class frmMain
                     AddItem(Item, "1", "1.17", "tipped_arrows")
                 End If
 
-            ElseIf rbtnRIG118.Checked Then
+            ElseIf cbxVersion.SelectedItem = "Version 1.18" Then
 
                 'Add item to loot tables for 1 item
                 If cbNormalItem.Checked Then
@@ -749,7 +741,7 @@ Public Class frmMain
                     AddItem(Item, "64", "1.18", "tipped_arrows")
                 End If
 
-            ElseIf rbtnRIG119.Checked Then
+            ElseIf cbxVersion.SelectedItem = "Version 1.19" Then
 
                 'Add item to loot tables for 1 item
                 If cbNormalItem.Checked Then
@@ -1398,32 +1390,32 @@ Public Class frmMain
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version"
                         MsgBox("A datapack has been detected but the Version number is greater than 10." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
                         WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
-                        rbtnRIG119.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.19"
                     ElseIf Version = "10" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.19"
                         WriteToLog("Detected datapack version 1.19.", "Info")
-                        rbtnRIG119.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.19"
                     ElseIf Version = "9" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.18"
                         WriteToLog("Detected datapack version 1.18.", "Info")
-                        rbtnRIG118.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.18"
                     ElseIf Version = "8" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.18. Please note that your version of 1.18 is outdated."
                         WriteToLog("Detected datapack version 1.18.", "Info")
-                        rbtnRIG118.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.18"
                     ElseIf Version = "7" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.17"
                         WriteToLog("Detected datapack version 1.17.", "Info")
-                        rbtnRIG117.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.17"
                     ElseIf Version = "6" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.16"
                         WriteToLog("Detected datapack version 1.16.", "Info")
-                        rbtnRIG116.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.16"
                     ElseIf Convert.ToInt32(Version) < 6 Then
                         lblDatapackDetection.Text = "Detected datapack, but version is most likely unsupported"
                         MsgBox("A datapack has been detected but the version number is smaller than 6." + vbNewLine + "This means that the datapack version is older than 1.15 which the Random Item Giver does not support." + vbNewLine + "The oldest available version has been selected but will most likely not work.", MsgBoxStyle.Exclamation, "Warning")
                         WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
-                        rbtnRIG116.Checked = True
+                        cbxVersion.SelectedItem = "Version 1.16"
                     Else
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                         WriteToLog("Detected datapack, couldn't determine version.", "Error")
@@ -1432,7 +1424,7 @@ Public Class frmMain
                     MsgBox("Error when selecting datapack: " + ex.Message, MsgBoxStyle.Critical, "Error")
                     lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                     WriteToLog("Detected datapack, couldn't determine version.", "Error")
-                    rbtnRIG119.Checked = True
+                    cbxVersion.SelectedItem = "Version 1.19"
                 End Try
             Else
                 lblDatapackDetection.Text = "Folder found, but could not detect datapack."
@@ -1441,6 +1433,10 @@ Public Class frmMain
         Else
             lblDatapackDetection.Text = "No datapack detected."
         End If
+    End Sub
+
+    Private Sub DetermineDatapackVersion()
+
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click

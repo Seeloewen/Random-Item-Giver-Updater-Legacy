@@ -26,14 +26,11 @@ Partial Class frmMain
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbDatapack = New System.Windows.Forms.GroupBox()
         Me.lblDatapackDetection = New System.Windows.Forms.Label()
-        Me.rbtnRIG119 = New System.Windows.Forms.RadioButton()
-        Me.rbtnRIG116 = New System.Windows.Forms.RadioButton()
-        Me.rbtnRIG117 = New System.Windows.Forms.RadioButton()
-        Me.rbtnRIG118 = New System.Windows.Forms.RadioButton()
         Me.btnBrowseDatapackPath = New System.Windows.Forms.Button()
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
         Me.lblSelectDatapack = New System.Windows.Forms.Label()
         Me.gbItem = New System.Windows.Forms.GroupBox()
+        Me.cbGoatHorn = New System.Windows.Forms.CheckBox()
         Me.cbNormalItem = New System.Windows.Forms.CheckBox()
         Me.cbNBT = New System.Windows.Forms.CheckBox()
         Me.tbNBT = New System.Windows.Forms.TextBox()
@@ -83,7 +80,8 @@ Partial Class frmMain
         Me.rtb5Items = New System.Windows.Forms.RichTextBox()
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
-        Me.cbGoatHorn = New System.Windows.Forms.CheckBox()
+        Me.cbxVersion = New System.Windows.Forms.ComboBox()
+        Me.lblVersion = New System.Windows.Forms.Label()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
@@ -102,11 +100,9 @@ Partial Class frmMain
         '
         'gbDatapack
         '
+        Me.gbDatapack.Controls.Add(Me.lblVersion)
+        Me.gbDatapack.Controls.Add(Me.cbxVersion)
         Me.gbDatapack.Controls.Add(Me.lblDatapackDetection)
-        Me.gbDatapack.Controls.Add(Me.rbtnRIG119)
-        Me.gbDatapack.Controls.Add(Me.rbtnRIG116)
-        Me.gbDatapack.Controls.Add(Me.rbtnRIG117)
-        Me.gbDatapack.Controls.Add(Me.rbtnRIG118)
         Me.gbDatapack.Controls.Add(Me.btnBrowseDatapackPath)
         Me.gbDatapack.Controls.Add(Me.tbDatapackPath)
         Me.gbDatapack.Controls.Add(Me.lblSelectDatapack)
@@ -123,58 +119,11 @@ Partial Class frmMain
         Me.lblDatapackDetection.AutoSize = True
         Me.lblDatapackDetection.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDatapackDetection.ForeColor = System.Drawing.Color.Black
-        Me.lblDatapackDetection.Location = New System.Drawing.Point(11, 71)
+        Me.lblDatapackDetection.Location = New System.Drawing.Point(14, 70)
         Me.lblDatapackDetection.Name = "lblDatapackDetection"
         Me.lblDatapackDetection.Size = New System.Drawing.Size(156, 18)
         Me.lblDatapackDetection.TabIndex = 7
         Me.lblDatapackDetection.Text = "No datapack detected."
-        '
-        'rbtnRIG119
-        '
-        Me.rbtnRIG119.AutoSize = True
-        Me.rbtnRIG119.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG119.Location = New System.Drawing.Point(15, 96)
-        Me.rbtnRIG119.Name = "rbtnRIG119"
-        Me.rbtnRIG119.Size = New System.Drawing.Size(137, 20)
-        Me.rbtnRIG119.TabIndex = 6
-        Me.rbtnRIG119.TabStop = True
-        Me.rbtnRIG119.Text = "Version 1.19 (Beta)"
-        Me.rbtnRIG119.UseVisualStyleBackColor = True
-        '
-        'rbtnRIG116
-        '
-        Me.rbtnRIG116.AutoSize = True
-        Me.rbtnRIG116.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG116.Location = New System.Drawing.Point(370, 96)
-        Me.rbtnRIG116.Name = "rbtnRIG116"
-        Me.rbtnRIG116.Size = New System.Drawing.Size(98, 20)
-        Me.rbtnRIG116.TabIndex = 5
-        Me.rbtnRIG116.Text = "Version 1.16"
-        Me.rbtnRIG116.UseVisualStyleBackColor = True
-        '
-        'rbtnRIG117
-        '
-        Me.rbtnRIG117.AutoSize = True
-        Me.rbtnRIG117.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG117.Location = New System.Drawing.Point(266, 96)
-        Me.rbtnRIG117.Name = "rbtnRIG117"
-        Me.rbtnRIG117.Size = New System.Drawing.Size(98, 20)
-        Me.rbtnRIG117.TabIndex = 4
-        Me.rbtnRIG117.Text = "Version 1.17"
-        Me.rbtnRIG117.UseVisualStyleBackColor = True
-        '
-        'rbtnRIG118
-        '
-        Me.rbtnRIG118.AutoSize = True
-        Me.rbtnRIG118.Checked = True
-        Me.rbtnRIG118.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnRIG118.Location = New System.Drawing.Point(158, 96)
-        Me.rbtnRIG118.Name = "rbtnRIG118"
-        Me.rbtnRIG118.Size = New System.Drawing.Size(98, 20)
-        Me.rbtnRIG118.TabIndex = 3
-        Me.rbtnRIG118.TabStop = True
-        Me.rbtnRIG118.Text = "Version 1.18" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.rbtnRIG118.UseVisualStyleBackColor = True
         '
         'btnBrowseDatapackPath
         '
@@ -234,6 +183,17 @@ Partial Class frmMain
         Me.gbItem.TabIndex = 58
         Me.gbItem.TabStop = False
         Me.gbItem.Text = "Add item"
+        '
+        'cbGoatHorn
+        '
+        Me.cbGoatHorn.AutoSize = True
+        Me.cbGoatHorn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbGoatHorn.Location = New System.Drawing.Point(300, 230)
+        Me.cbGoatHorn.Name = "cbGoatHorn"
+        Me.cbGoatHorn.Size = New System.Drawing.Size(87, 20)
+        Me.cbGoatHorn.TabIndex = 83
+        Me.cbGoatHorn.Text = "Goat Horn"
+        Me.cbGoatHorn.UseVisualStyleBackColor = True
         '
         'cbNormalItem
         '
@@ -668,16 +628,26 @@ Partial Class frmMain
         Me.rtbLog.TabIndex = 83
         Me.rtbLog.Text = ""
         '
-        'cbGoatHorn
+        'cbxVersion
         '
-        Me.cbGoatHorn.AutoSize = True
-        Me.cbGoatHorn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbGoatHorn.Location = New System.Drawing.Point(300, 230)
-        Me.cbGoatHorn.Name = "cbGoatHorn"
-        Me.cbGoatHorn.Size = New System.Drawing.Size(87, 20)
-        Me.cbGoatHorn.TabIndex = 83
-        Me.cbGoatHorn.Text = "Goat Horn"
-        Me.cbGoatHorn.UseVisualStyleBackColor = True
+        Me.cbxVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxVersion.FormattingEnabled = True
+        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.16", "Version 1.17", "Version 1.18", "Version 1.19"})
+        Me.cbxVersion.Location = New System.Drawing.Point(79, 94)
+        Me.cbxVersion.Name = "cbxVersion"
+        Me.cbxVersion.Size = New System.Drawing.Size(241, 24)
+        Me.cbxVersion.TabIndex = 8
+        '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(17, 97)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(56, 16)
+        Me.lblVersion.TabIndex = 9
+        Me.lblVersion.Text = "Version:"
         '
         'frmMain
         '
@@ -706,7 +676,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.2.1"
+        Me.Text = "Random Item Giver Updater ALPHA 0.2.2"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
@@ -757,9 +727,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ChangelogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents rbtnRIG116 As RadioButton
-    Friend WithEvents rbtnRIG117 As RadioButton
-    Friend WithEvents rbtnRIG118 As RadioButton
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents OutputToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents fbdMainFolderPath As FolderBrowserDialog
@@ -771,7 +738,6 @@ Partial Class frmMain
     Friend WithEvents rtb3Items As RichTextBox
     Friend WithEvents rtb5Items As RichTextBox
     Friend WithEvents rtb2Items As RichTextBox
-    Friend WithEvents rbtnRIG119 As RadioButton
     Friend WithEvents lblDatapackDetection As Label
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FindDuplicatesToolStripMenuItem As ToolStripMenuItem
@@ -780,4 +746,6 @@ Partial Class frmMain
     Friend WithEvents gbItemID As GroupBox
     Friend WithEvents rtbLog As RichTextBox
     Friend WithEvents cbGoatHorn As CheckBox
+    Friend WithEvents lblVersion As Label
+    Friend WithEvents cbxVersion As ComboBox
 End Class
