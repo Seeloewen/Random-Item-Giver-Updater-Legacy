@@ -6,7 +6,7 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public version As String = "0.2.1-a (14.05.2022)"
+    Public version As String = "0.2.2-a (07.06.2022)"
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
@@ -26,6 +26,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         qm = Quotationmark.Text
+        cbxVersion.SelectedItem = "Version 1.19"
 
         If My.Computer.FileSystem.DirectoryExists(AppData + "/Random Item Giver Updater/") = False Then
             My.Computer.FileSystem.CreateDirectory(AppData + "/Random Item Giver Updater/")
@@ -1361,9 +1362,8 @@ Public Class frmMain
                     Select Case MessageBox.Show("The item you are trying to add (" + FullItemName + ") already exists in the datapack." + vbNewLine + "Are you sure you want to add it again? This will result in duplicates.", "Warning", MessageBoxButtons.YesNo)
                         Case Windows.Forms.DialogResult.Yes
                             WriteToLog("Ignoring warning, adding duplicate.", "Info")
-                            IgnoreDuplicates = True
-                            CallAddItem()
-                        Case Windows.Forms.DialogResult.No
+                        IgnoreDuplicates = True
+                    Case Windows.Forms.DialogResult.No
                             WriteToLog("Not adding duplicate, cancelling.", "Info")
                             IgnoreDuplicates = False
                             DuplicateDetected = True
