@@ -25,6 +25,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbDatapack = New System.Windows.Forms.GroupBox()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.cbxVersion = New System.Windows.Forms.ComboBox()
         Me.lblDatapackDetection = New System.Windows.Forms.Label()
         Me.btnBrowseDatapackPath = New System.Windows.Forms.Button()
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
@@ -80,8 +82,6 @@ Partial Class frmMain
         Me.rtb5Items = New System.Windows.Forms.RichTextBox()
         Me.rtb2Items = New System.Windows.Forms.RichTextBox()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
-        Me.cbxVersion = New System.Windows.Forms.ComboBox()
-        Me.lblVersion = New System.Windows.Forms.Label()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
@@ -113,6 +113,27 @@ Partial Class frmMain
         Me.gbDatapack.TabIndex = 57
         Me.gbDatapack.TabStop = False
         Me.gbDatapack.Text = "Select datapack"
+        '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(17, 97)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(56, 16)
+        Me.lblVersion.TabIndex = 9
+        Me.lblVersion.Text = "Version:"
+        '
+        'cbxVersion
+        '
+        Me.cbxVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxVersion.FormattingEnabled = True
+        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.16", "Version 1.17", "Version 1.18", "Version 1.19"})
+        Me.cbxVersion.Location = New System.Drawing.Point(79, 94)
+        Me.cbxVersion.Name = "cbxVersion"
+        Me.cbxVersion.Size = New System.Drawing.Size(241, 24)
+        Me.cbxVersion.TabIndex = 8
         '
         'lblDatapackDetection
         '
@@ -627,27 +648,6 @@ Partial Class frmMain
         Me.rtbLog.Size = New System.Drawing.Size(51, 54)
         Me.rtbLog.TabIndex = 83
         Me.rtbLog.Text = ""
-        '
-        'cbxVersion
-        '
-        Me.cbxVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxVersion.FormattingEnabled = True
-        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.16", "Version 1.17", "Version 1.18", "Version 1.19"})
-        Me.cbxVersion.Location = New System.Drawing.Point(79, 94)
-        Me.cbxVersion.Name = "cbxVersion"
-        Me.cbxVersion.Size = New System.Drawing.Size(241, 24)
-        Me.cbxVersion.TabIndex = 8
-        '
-        'lblVersion
-        '
-        Me.lblVersion.AutoSize = True
-        Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(17, 97)
-        Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(56, 16)
-        Me.lblVersion.TabIndex = 9
-        Me.lblVersion.Text = "Version:"
         '
         'frmMain
         '
