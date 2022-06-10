@@ -45,6 +45,7 @@ Partial Class frmSettings
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -277,12 +278,22 @@ Partial Class frmSettings
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Select the profile that should automatically be loaded when the software starts:"
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(365, 22)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 8
+        Me.Button4.Text = "Clear temp"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(606, 457)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -329,4 +340,5 @@ Partial Class frmSettings
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Label9 As Label
+    Friend WithEvents Button4 As Button
 End Class
