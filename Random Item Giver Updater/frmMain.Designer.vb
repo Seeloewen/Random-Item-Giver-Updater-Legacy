@@ -32,10 +32,11 @@ Partial Class frmMain
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
         Me.lblSelectDatapack = New System.Windows.Forms.Label()
         Me.gbItem = New System.Windows.Forms.GroupBox()
+        Me.cbAddItemsFast = New System.Windows.Forms.CheckBox()
         Me.cbGoatHorn = New System.Windows.Forms.CheckBox()
         Me.cbNormalItem = New System.Windows.Forms.CheckBox()
-        Me.cbNBT = New System.Windows.Forms.CheckBox()
-        Me.tbNBT = New System.Windows.Forms.TextBox()
+        Me.cbCustomNBT = New System.Windows.Forms.CheckBox()
+        Me.tbCustomNBT = New System.Windows.Forms.TextBox()
         Me.tbSmallOutput = New System.Windows.Forms.TextBox()
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.tbSamePrefix = New System.Windows.Forms.TextBox()
@@ -56,7 +57,7 @@ Partial Class frmMain
         Me.rtbItem = New System.Windows.Forms.RichTextBox()
         Me.btnShowOutput = New System.Windows.Forms.Button()
         Me.btnAddItem = New System.Windows.Forms.Button()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.msMain = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenDatapackFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
@@ -75,17 +76,20 @@ Partial Class frmMain
         Me.fbdMainFolderPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.Quotationmark = New System.Windows.Forms.Label()
         Me.rtbCodeEnd = New System.Windows.Forms.RichTextBox()
-        Me.rtb64Items = New System.Windows.Forms.RichTextBox()
-        Me.rtb32Items = New System.Windows.Forms.RichTextBox()
-        Me.rtb10Items = New System.Windows.Forms.RichTextBox()
-        Me.rtb3Items = New System.Windows.Forms.RichTextBox()
-        Me.rtb5Items = New System.Windows.Forms.RichTextBox()
-        Me.rtb2Items = New System.Windows.Forms.RichTextBox()
+        Me.rtbItems64 = New System.Windows.Forms.RichTextBox()
+        Me.rtbItems32 = New System.Windows.Forms.RichTextBox()
+        Me.rtbItems10 = New System.Windows.Forms.RichTextBox()
+        Me.rtbItems3 = New System.Windows.Forms.RichTextBox()
+        Me.rtbItems5 = New System.Windows.Forms.RichTextBox()
+        Me.rtbItems2 = New System.Windows.Forms.RichTextBox()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
+        Me.pbAddingItemsProgress = New System.Windows.Forms.ProgressBar()
+        Me.bgwAddItems = New System.ComponentModel.BackgroundWorker()
+        Me.lblAddingItems = New System.Windows.Forms.Label()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
+        Me.msMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblHeader
@@ -176,10 +180,11 @@ Partial Class frmMain
         '
         'gbItem
         '
+        Me.gbItem.Controls.Add(Me.cbAddItemsFast)
         Me.gbItem.Controls.Add(Me.cbGoatHorn)
         Me.gbItem.Controls.Add(Me.cbNormalItem)
-        Me.gbItem.Controls.Add(Me.cbNBT)
-        Me.gbItem.Controls.Add(Me.tbNBT)
+        Me.gbItem.Controls.Add(Me.cbCustomNBT)
+        Me.gbItem.Controls.Add(Me.tbCustomNBT)
         Me.gbItem.Controls.Add(Me.tbSmallOutput)
         Me.gbItem.Controls.Add(Me.lblOutput)
         Me.gbItem.Controls.Add(Me.tbSamePrefix)
@@ -200,10 +205,21 @@ Partial Class frmMain
         Me.gbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbItem.Location = New System.Drawing.Point(16, 196)
         Me.gbItem.Name = "gbItem"
-        Me.gbItem.Size = New System.Drawing.Size(638, 300)
+        Me.gbItem.Size = New System.Drawing.Size(638, 322)
         Me.gbItem.TabIndex = 58
         Me.gbItem.TabStop = False
         Me.gbItem.Text = "Add item"
+        '
+        'cbAddItemsFast
+        '
+        Me.cbAddItemsFast.AutoSize = True
+        Me.cbAddItemsFast.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbAddItemsFast.Location = New System.Drawing.Point(14, 265)
+        Me.cbAddItemsFast.Name = "cbAddItemsFast"
+        Me.cbAddItemsFast.Size = New System.Drawing.Size(499, 20)
+        Me.cbAddItemsFast.TabIndex = 84
+        Me.cbAddItemsFast.Text = "Add items fast (Only adds items to main loot table, recommended for 100+ items)"
+        Me.cbAddItemsFast.UseVisualStyleBackColor = True
         '
         'cbGoatHorn
         '
@@ -229,30 +245,30 @@ Partial Class frmMain
         Me.cbNormalItem.Text = "Normal item"
         Me.cbNormalItem.UseVisualStyleBackColor = True
         '
-        'cbNBT
+        'cbCustomNBT
         '
-        Me.cbNBT.AutoSize = True
-        Me.cbNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbNBT.Location = New System.Drawing.Point(14, 205)
-        Me.cbNBT.Name = "cbNBT"
-        Me.cbNBT.Size = New System.Drawing.Size(171, 20)
-        Me.cbNBT.TabIndex = 79
-        Me.cbNBT.Text = "NBT Tag (Potions, etc...)"
-        Me.cbNBT.UseVisualStyleBackColor = True
+        Me.cbCustomNBT.AutoSize = True
+        Me.cbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCustomNBT.Location = New System.Drawing.Point(14, 205)
+        Me.cbCustomNBT.Name = "cbCustomNBT"
+        Me.cbCustomNBT.Size = New System.Drawing.Size(171, 20)
+        Me.cbCustomNBT.TabIndex = 79
+        Me.cbCustomNBT.Text = "NBT Tag (Potions, etc...)"
+        Me.cbCustomNBT.UseVisualStyleBackColor = True
         '
-        'tbNBT
+        'tbCustomNBT
         '
-        Me.tbNBT.Enabled = False
-        Me.tbNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbNBT.Location = New System.Drawing.Point(14, 231)
-        Me.tbNBT.Name = "tbNBT"
-        Me.tbNBT.Size = New System.Drawing.Size(242, 22)
-        Me.tbNBT.TabIndex = 78
+        Me.tbCustomNBT.Enabled = False
+        Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbCustomNBT.Location = New System.Drawing.Point(14, 231)
+        Me.tbCustomNBT.Name = "tbCustomNBT"
+        Me.tbCustomNBT.Size = New System.Drawing.Size(242, 22)
+        Me.tbCustomNBT.TabIndex = 78
         '
         'tbSmallOutput
         '
         Me.tbSmallOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbSmallOutput.Location = New System.Drawing.Point(66, 268)
+        Me.tbSmallOutput.Location = New System.Drawing.Point(66, 293)
         Me.tbSmallOutput.Multiline = True
         Me.tbSmallOutput.Name = "tbSmallOutput"
         Me.tbSmallOutput.ReadOnly = True
@@ -263,7 +279,7 @@ Partial Class frmMain
         '
         Me.lblOutput.AutoSize = True
         Me.lblOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOutput.Location = New System.Drawing.Point(12, 268)
+        Me.lblOutput.Location = New System.Drawing.Point(12, 296)
         Me.lblOutput.Name = "lblOutput"
         Me.lblOutput.Size = New System.Drawing.Size(48, 16)
         Me.lblOutput.TabIndex = 76
@@ -450,7 +466,7 @@ Partial Class frmMain
         'btnShowOutput
         '
         Me.btnShowOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowOutput.Location = New System.Drawing.Point(465, 502)
+        Me.btnShowOutput.Location = New System.Drawing.Point(465, 524)
         Me.btnShowOutput.Name = "btnShowOutput"
         Me.btnShowOutput.Size = New System.Drawing.Size(189, 34)
         Me.btnShowOutput.TabIndex = 74
@@ -460,21 +476,21 @@ Partial Class frmMain
         'btnAddItem
         '
         Me.btnAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddItem.Location = New System.Drawing.Point(16, 502)
+        Me.btnAddItem.Location = New System.Drawing.Point(16, 524)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(443, 34)
         Me.btnAddItem.TabIndex = 63
         Me.btnAddItem.Text = "Add item to datapack"
         Me.btnAddItem.UseVisualStyleBackColor = True
         '
-        'MenuStrip1
+        'msMain
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(664, 24)
-        Me.MenuStrip1.TabIndex = 65
-        Me.MenuStrip1.Text = "msMain"
+        Me.msMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.msMain.Location = New System.Drawing.Point(0, 0)
+        Me.msMain.Name = "msMain"
+        Me.msMain.Size = New System.Drawing.Size(667, 24)
+        Me.msMain.TabIndex = 65
+        Me.msMain.Text = "msMain"
         '
         'FileToolStripMenuItem
         '
@@ -587,88 +603,112 @@ Partial Class frmMain
         Me.rtbCodeEnd.TabIndex = 81
         Me.rtbCodeEnd.Text = "        }" & Global.Microsoft.VisualBasic.ChrW(10) & "      ]" & Global.Microsoft.VisualBasic.ChrW(10) & "    }" & Global.Microsoft.VisualBasic.ChrW(10) & "  ]" & Global.Microsoft.VisualBasic.ChrW(10) & "}"
         '
-        'rtb64Items
+        'rtbItems64
         '
-        Me.rtb64Items.Location = New System.Drawing.Point(927, 166)
-        Me.rtb64Items.Name = "rtb64Items"
-        Me.rtb64Items.Size = New System.Drawing.Size(49, 45)
-        Me.rtb64Items.TabIndex = 80
-        Me.rtb64Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
+        Me.rtbItems64.Location = New System.Drawing.Point(927, 166)
+        Me.rtbItems64.Name = "rtbItems64"
+        Me.rtbItems64.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItems64.TabIndex = 80
+        Me.rtbItems64.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 64" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
-        'rtb32Items
+        'rtbItems32
         '
-        Me.rtb32Items.Location = New System.Drawing.Point(872, 166)
-        Me.rtb32Items.Name = "rtb32Items"
-        Me.rtb32Items.Size = New System.Drawing.Size(49, 45)
-        Me.rtb32Items.TabIndex = 79
-        Me.rtb32Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
+        Me.rtbItems32.Location = New System.Drawing.Point(872, 166)
+        Me.rtbItems32.Name = "rtbItems32"
+        Me.rtbItems32.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItems32.TabIndex = 79
+        Me.rtbItems32.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 32" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
-        'rtb10Items
+        'rtbItems10
         '
-        Me.rtb10Items.Location = New System.Drawing.Point(927, 115)
-        Me.rtb10Items.Name = "rtb10Items"
-        Me.rtb10Items.Size = New System.Drawing.Size(49, 45)
-        Me.rtb10Items.TabIndex = 78
-        Me.rtb10Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
+        Me.rtbItems10.Location = New System.Drawing.Point(927, 115)
+        Me.rtbItems10.Name = "rtbItems10"
+        Me.rtbItems10.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItems10.TabIndex = 78
+        Me.rtbItems10.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 10" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
-        'rtb3Items
+        'rtbItems3
         '
-        Me.rtb3Items.Location = New System.Drawing.Point(927, 63)
-        Me.rtb3Items.Name = "rtb3Items"
-        Me.rtb3Items.Size = New System.Drawing.Size(49, 45)
-        Me.rtb3Items.TabIndex = 77
-        Me.rtb3Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
+        Me.rtbItems3.Location = New System.Drawing.Point(927, 63)
+        Me.rtbItems3.Name = "rtbItems3"
+        Me.rtbItems3.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItems3.TabIndex = 77
+        Me.rtbItems3.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 3" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
-        'rtb5Items
+        'rtbItems5
         '
-        Me.rtb5Items.Location = New System.Drawing.Point(872, 115)
-        Me.rtb5Items.Name = "rtb5Items"
-        Me.rtb5Items.Size = New System.Drawing.Size(49, 45)
-        Me.rtb5Items.TabIndex = 76
-        Me.rtb5Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
+        Me.rtbItems5.Location = New System.Drawing.Point(872, 115)
+        Me.rtbItems5.Name = "rtbItems5"
+        Me.rtbItems5.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItems5.TabIndex = 76
+        Me.rtbItems5.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 5" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
-        'rtb2Items
+        'rtbItems2
         '
-        Me.rtb2Items.Location = New System.Drawing.Point(872, 63)
-        Me.rtb2Items.Name = "rtb2Items"
-        Me.rtb2Items.Size = New System.Drawing.Size(49, 45)
-        Me.rtb2Items.TabIndex = 75
-        Me.rtb2Items.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
+        Me.rtbItems2.Location = New System.Drawing.Point(872, 63)
+        Me.rtbItems2.Name = "rtbItems2"
+        Me.rtbItems2.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItems2.TabIndex = 75
+        Me.rtbItems2.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
     "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 2" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
         '
         'rtbLog
         '
-        Me.rtbLog.Location = New System.Drawing.Point(102, 706)
+        Me.rtbLog.Location = New System.Drawing.Point(16, 608)
         Me.rtbLog.Name = "rtbLog"
         Me.rtbLog.Size = New System.Drawing.Size(51, 54)
         Me.rtbLog.TabIndex = 83
         Me.rtbLog.Text = ""
+        '
+        'pbAddingItemsProgress
+        '
+        Me.pbAddingItemsProgress.Location = New System.Drawing.Point(158, 529)
+        Me.pbAddingItemsProgress.Name = "pbAddingItemsProgress"
+        Me.pbAddingItemsProgress.Size = New System.Drawing.Size(288, 23)
+        Me.pbAddingItemsProgress.TabIndex = 84
+        '
+        'bgwAddItems
+        '
+        Me.bgwAddItems.WorkerReportsProgress = True
+        Me.bgwAddItems.WorkerSupportsCancellation = True
+        '
+        'lblAddingItems
+        '
+        Me.lblAddingItems.AutoSize = True
+        Me.lblAddingItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAddingItems.Location = New System.Drawing.Point(17, 528)
+        Me.lblAddingItems.Name = "lblAddingItems"
+        Me.lblAddingItems.Size = New System.Drawing.Size(135, 24)
+        Me.lblAddingItems.TabIndex = 86
+        Me.lblAddingItems.Text = "Adding items..."
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(664, 545)
+        Me.ClientSize = New System.Drawing.Size(667, 567)
+        Me.Controls.Add(Me.btnAddItem)
+        Me.Controls.Add(Me.lblAddingItems)
+        Me.Controls.Add(Me.pbAddingItemsProgress)
         Me.Controls.Add(Me.rtbLog)
         Me.Controls.Add(Me.Quotationmark)
         Me.Controls.Add(Me.rtbCodeEnd)
-        Me.Controls.Add(Me.rtb64Items)
-        Me.Controls.Add(Me.rtb32Items)
-        Me.Controls.Add(Me.rtb10Items)
-        Me.Controls.Add(Me.rtb3Items)
-        Me.Controls.Add(Me.rtb5Items)
-        Me.Controls.Add(Me.rtb2Items)
-        Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.rtbItems64)
+        Me.Controls.Add(Me.rtbItems32)
+        Me.Controls.Add(Me.rtbItems10)
+        Me.Controls.Add(Me.rtbItems3)
+        Me.Controls.Add(Me.rtbItems5)
+        Me.Controls.Add(Me.rtbItems2)
+        Me.Controls.Add(Me.msMain)
         Me.Controls.Add(Me.gbItem)
         Me.Controls.Add(Me.gbDatapack)
         Me.Controls.Add(Me.lblHeader)
-        Me.Controls.Add(Me.btnAddItem)
         Me.Controls.Add(Me.btnShowOutput)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -676,14 +716,14 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.2.2"
+        Me.Text = "Random Item Giver Updater ALPHA 0.2.3"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
         Me.gbItem.PerformLayout()
         Me.gbItemID.ResumeLayout(False)
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.msMain.ResumeLayout(False)
+        Me.msMain.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -693,8 +733,8 @@ Partial Class frmMain
     Friend WithEvents gbDatapack As GroupBox
     Friend WithEvents gbItem As GroupBox
     Friend WithEvents cbNormalItem As CheckBox
-    Friend WithEvents cbNBT As CheckBox
-    Friend WithEvents tbNBT As TextBox
+    Friend WithEvents cbCustomNBT As CheckBox
+    Friend WithEvents tbCustomNBT As TextBox
     Friend WithEvents tbSmallOutput As TextBox
     Friend WithEvents lblOutput As Label
     Friend WithEvents tbSamePrefix As TextBox
@@ -716,7 +756,7 @@ Partial Class frmMain
     Friend WithEvents btnBrowseDatapackPath As Button
     Friend WithEvents tbDatapackPath As TextBox
     Friend WithEvents lblSelectDatapack As Label
-    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents msMain As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenDatapackFolderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
@@ -732,12 +772,12 @@ Partial Class frmMain
     Friend WithEvents fbdMainFolderPath As FolderBrowserDialog
     Friend WithEvents Quotationmark As Label
     Friend WithEvents rtbCodeEnd As RichTextBox
-    Friend WithEvents rtb64Items As RichTextBox
-    Friend WithEvents rtb32Items As RichTextBox
-    Friend WithEvents rtb10Items As RichTextBox
-    Friend WithEvents rtb3Items As RichTextBox
-    Friend WithEvents rtb5Items As RichTextBox
-    Friend WithEvents rtb2Items As RichTextBox
+    Friend WithEvents rtbItems64 As RichTextBox
+    Friend WithEvents rtbItems32 As RichTextBox
+    Friend WithEvents rtbItems10 As RichTextBox
+    Friend WithEvents rtbItems3 As RichTextBox
+    Friend WithEvents rtbItems5 As RichTextBox
+    Friend WithEvents rtbItems2 As RichTextBox
     Friend WithEvents lblDatapackDetection As Label
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FindDuplicatesToolStripMenuItem As ToolStripMenuItem
@@ -748,4 +788,8 @@ Partial Class frmMain
     Friend WithEvents cbGoatHorn As CheckBox
     Friend WithEvents lblVersion As Label
     Friend WithEvents cbxVersion As ComboBox
+    Friend WithEvents cbAddItemsFast As CheckBox
+    Friend WithEvents pbAddingItemsProgress As ProgressBar
+    Friend WithEvents bgwAddItems As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblAddingItems As Label
 End Class
