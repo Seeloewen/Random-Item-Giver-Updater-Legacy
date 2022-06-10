@@ -35,6 +35,9 @@ Partial Class frmOutput
         '
         'rtbLog
         '
+        Me.rtbLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbLog.BackColor = System.Drawing.Color.White
         Me.rtbLog.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.rtbLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -47,6 +50,7 @@ Partial Class frmOutput
         '
         'btnSave
         '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Location = New System.Drawing.Point(551, 5)
         Me.btnSave.Name = "btnSave"
@@ -57,6 +61,9 @@ Partial Class frmOutput
         '
         'gbLog
         '
+        Me.gbLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.gbLog.Controls.Add(Me.rtbLog)
         Me.gbLog.Location = New System.Drawing.Point(12, 39)
         Me.gbLog.Name = "gbLog"
@@ -76,6 +83,7 @@ Partial Class frmOutput
         '
         'btnClear
         '
+        Me.btnClear.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.Location = New System.Drawing.Point(632, 5)
         Me.btnClear.Name = "btnClear"
@@ -86,6 +94,7 @@ Partial Class frmOutput
         '
         'btnClose
         '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.Location = New System.Drawing.Point(713, 5)
         Me.btnClose.Name = "btnClose"
@@ -111,10 +120,7 @@ Partial Class frmOutput
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.gbLog)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.Name = "frmOutput"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Output Log"
