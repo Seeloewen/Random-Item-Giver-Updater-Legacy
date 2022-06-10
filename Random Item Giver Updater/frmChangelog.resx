@@ -118,7 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.2.2 (07.06.2022)
+    <value>Version 0.2.3 (10.06.2022)
++ Added progress bar to duplicate finder and when adding items
++ Added fast item adding method
+* Fixed software freezing on duplicate finder and when adding items
+* Improved performance and speed for several actions
+* You can no longer edit settings while adding items
+* Output is now resizable
+
+Version 0.2.2 (07.06.2022)
 * Fixed critical lag spike issue
 * Change version selector
 * Remove warnings when adding items to 1.19 or 1.17 datapack
