@@ -30,12 +30,15 @@ Partial Class frmDuplicateFinder
         Me.cbLootTable = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnCheck = New System.Windows.Forms.Button()
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
-        Me.rtbWithDuplicates = New System.Windows.Forms.RichTextBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.fbdMainFolderPath = New System.Windows.Forms.FolderBrowserDialog()
-        Me.rtbDuplicates = New System.Windows.Forms.RichTextBox()
-        Me.lblChecking = New System.Windows.Forms.Label()
         Me.lblDuplicatesAmount = New System.Windows.Forms.Label()
+        Me.bgwSearchForDuplicates = New System.ComponentModel.BackgroundWorker()
+        Me.Quotationmark = New System.Windows.Forms.Label()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.lblChecking = New System.Windows.Forms.Label()
+        Me.pbProgress = New System.Windows.Forms.ProgressBar()
         Me.SuspendLayout()
         '
         'lblHeader
@@ -97,14 +100,6 @@ Partial Class frmDuplicateFinder
         Me.tbDatapackPath.Size = New System.Drawing.Size(404, 26)
         Me.tbDatapackPath.TabIndex = 4
         '
-        'rtbWithDuplicates
-        '
-        Me.rtbWithDuplicates.Location = New System.Drawing.Point(23, 522)
-        Me.rtbWithDuplicates.Name = "rtbWithDuplicates"
-        Me.rtbWithDuplicates.Size = New System.Drawing.Size(527, 92)
-        Me.rtbWithDuplicates.TabIndex = 5
-        Me.rtbWithDuplicates.Text = ""
-        '
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -119,47 +114,79 @@ Partial Class frmDuplicateFinder
         '
         Me.fbdMainFolderPath.Description = "Select the datapack which you want to check."
         '
-        'rtbDuplicates
-        '
-        Me.rtbDuplicates.Location = New System.Drawing.Point(23, 620)
-        Me.rtbDuplicates.Name = "rtbDuplicates"
-        Me.rtbDuplicates.Size = New System.Drawing.Size(527, 92)
-        Me.rtbDuplicates.TabIndex = 9
-        Me.rtbDuplicates.Text = ""
-        '
-        'lblChecking
-        '
-        Me.lblChecking.AutoSize = True
-        Me.lblChecking.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblChecking.Location = New System.Drawing.Point(125, 303)
-        Me.lblChecking.Name = "lblChecking"
-        Me.lblChecking.Size = New System.Drawing.Size(324, 24)
-        Me.lblChecking.TabIndex = 10
-        Me.lblChecking.Text = "Checking for duplicates, please wait..."
-        Me.lblChecking.Visible = False
-        '
         'lblDuplicatesAmount
         '
         Me.lblDuplicatesAmount.AutoSize = True
         Me.lblDuplicatesAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDuplicatesAmount.Location = New System.Drawing.Point(210, 488)
+        Me.lblDuplicatesAmount.Location = New System.Drawing.Point(210, 494)
         Me.lblDuplicatesAmount.Name = "lblDuplicatesAmount"
         Me.lblDuplicatesAmount.Size = New System.Drawing.Size(171, 16)
         Me.lblDuplicatesAmount.TabIndex = 11
         Me.lblDuplicatesAmount.Text = "Found {0} duplicates totally."
         Me.lblDuplicatesAmount.Visible = False
         '
+        'bgwSearchForDuplicates
+        '
+        Me.bgwSearchForDuplicates.WorkerReportsProgress = True
+        '
+        'Quotationmark
+        '
+        Me.Quotationmark.AutoSize = True
+        Me.Quotationmark.Location = New System.Drawing.Point(508, 559)
+        Me.Quotationmark.Name = "Quotationmark"
+        Me.Quotationmark.Size = New System.Drawing.Size(12, 13)
+        Me.Quotationmark.TabIndex = 13
+        Me.Quotationmark.Text = """"
+        '
+        'ListView1
+        '
+        Me.ListView1.HideSelection = False
+        Me.ListView1.Location = New System.Drawing.Point(12, 530)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(121, 97)
+        Me.ListView1.TabIndex = 14
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(266, 600)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(100, 96)
+        Me.RichTextBox1.TabIndex = 15
+        Me.RichTextBox1.Text = ""
+        '
+        'lblChecking
+        '
+        Me.lblChecking.AutoSize = True
+        Me.lblChecking.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChecking.Location = New System.Drawing.Point(19, 490)
+        Me.lblChecking.Name = "lblChecking"
+        Me.lblChecking.Size = New System.Drawing.Size(186, 20)
+        Me.lblChecking.TabIndex = 10
+        Me.lblChecking.Text = "Checking for duplicates..."
+        Me.lblChecking.Visible = False
+        '
+        'pbProgress
+        '
+        Me.pbProgress.Location = New System.Drawing.Point(212, 490)
+        Me.pbProgress.Name = "pbProgress"
+        Me.pbProgress.Size = New System.Drawing.Size(338, 23)
+        Me.pbProgress.TabIndex = 16
+        Me.pbProgress.Visible = False
+        '
         'frmDuplicateFinder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(572, 513)
-        Me.Controls.Add(Me.lblDuplicatesAmount)
+        Me.ClientSize = New System.Drawing.Size(572, 523)
+        Me.Controls.Add(Me.pbProgress)
         Me.Controls.Add(Me.lblChecking)
-        Me.Controls.Add(Me.rtbDuplicates)
+        Me.Controls.Add(Me.RichTextBox1)
+        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.Quotationmark)
+        Me.Controls.Add(Me.lblDuplicatesAmount)
         Me.Controls.Add(Me.btnBrowse)
-        Me.Controls.Add(Me.rtbWithDuplicates)
         Me.Controls.Add(Me.tbDatapackPath)
         Me.Controls.Add(Me.btnCheck)
         Me.Controls.Add(Me.lvDuplicates)
@@ -184,10 +211,14 @@ Partial Class frmDuplicateFinder
     Friend WithEvents cbLootTable As ColumnHeader
     Friend WithEvents btnCheck As Button
     Friend WithEvents tbDatapackPath As TextBox
-    Friend WithEvents rtbWithDuplicates As RichTextBox
     Friend WithEvents btnBrowse As Button
     Friend WithEvents fbdMainFolderPath As FolderBrowserDialog
-    Friend WithEvents rtbDuplicates As RichTextBox
-    Friend WithEvents lblChecking As Label
     Friend WithEvents lblDuplicatesAmount As Label
+    Friend WithEvents bgwSearchForDuplicates As System.ComponentModel.BackgroundWorker
+    Friend WithEvents qm As Label
+    Friend WithEvents Quotationmark As Label
+    Friend WithEvents ListView1 As ListView
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents lblChecking As Label
+    Friend WithEvents pbProgress As ProgressBar
 End Class
