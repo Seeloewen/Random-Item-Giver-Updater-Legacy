@@ -19,7 +19,7 @@
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        sfdLog.FileName = "Random_Item_Giver_Log_" + DateTime.Now + "_Ver_" + frmMain.version
+        sfdLog.FileName = "Random_Item_Giver_Updater_Log_" + DateTime.Now + "_Ver_" + frmMain.VersionLog
         sfdLog.FileName = sfdLog.FileName.Replace(":", "-")
         sfdLog.FileName = sfdLog.FileName.Replace(".", "-")
         sfdLog.FileName = sfdLog.FileName.Replace(" ", "_")
