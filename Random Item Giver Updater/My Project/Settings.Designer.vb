@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -56,49 +56,85 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DefaultPrefix() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DisableLogging() As Boolean
             Get
-                Return CType(Me("DefaultPrefix"),String)
+                Return CType(Me("DisableLogging"),Boolean)
             End Get
             Set
-                Me("DefaultPrefix") = value
+                Me("DisableLogging") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HideAlphaWarning() As Boolean
+            Get
+                Return CType(Me("HideAlphaWarning"),Boolean)
+            End Get
+            Set
+                Me("HideAlphaWarning") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property LoadDefaultProfile() As Boolean
+            Get
+                Return CType(Me("LoadDefaultProfile"),Boolean)
+            End Get
+            Set
+                Me("LoadDefaultProfile") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DefaultNBTTag() As String
+        Public Property DefaultProfile() As String
             Get
-                Return CType(Me("DefaultNBTTag"),String)
+                Return CType(Me("DefaultProfile"),String)
             End Get
             Set
-                Me("DefaultNBTTag") = value
+                Me("DefaultProfile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SelectDefaultScheme() As Boolean
+            Get
+                Return CType(Me("SelectDefaultScheme"),Boolean)
+            End Get
+            Set
+                Me("SelectDefaultScheme") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DefaultPath() As String
+        Public Property DefaultScheme() As String
             Get
-                Return CType(Me("DefaultPath"),String)
+                Return CType(Me("DefaultScheme"),String)
             End Get
             Set
-                Me("DefaultPath") = value
+                Me("DefaultScheme") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DefaultVersion() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DontImportVanillaItemsByDefault() As Boolean
             Get
-                Return CType(Me("DefaultVersion"),String)
+                Return CType(Me("DontImportVanillaItemsByDefault"),Boolean)
             End Get
             Set
-                Me("DefaultVersion") = value
+                Me("DontImportVanillaItemsByDefault") = value
             End Set
         End Property
     End Class
