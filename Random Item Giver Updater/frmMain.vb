@@ -6,7 +6,10 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public version As String = "0.2.3-a (10.06.2022)"
+    Public VersionLog As String = "0.3.0-a (25.06.2022)"
+    Public SettingsVersion As String = "1"
+    Dim SettingsArray As String()
+    Dim LoadedSettingsVersion As Double
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
@@ -58,16 +61,18 @@ Public Class frmMain
     Dim Items64 As String()
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        InitializeLoadingSettings()
+
         MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         qm = Quotationmark.Text
         cbxVersion.SelectedItem = "Version 1.19"
 
         If My.Computer.FileSystem.DirectoryExists(AppData + "/Random Item Giver Updater/") = False Then
             My.Computer.FileSystem.CreateDirectory(AppData + "/Random Item Giver Updater/")
-            WriteToLog("Created the 'Random Item Giver' directory in the Appdata folder for application files.", "Info")
+            WriteToLog("Created the 'Random Item Giver Updater' directory in the Appdata folder for application files.", "Info")
         End If
 
-        WriteToLog("Random Item Giver " + version, "Info")
+        WriteToLog("Random Item Giver Updater" + VersionLog, "Info")
         WriteToLog("You are running an alpha build, may be unstable!", "Warning")
 
         CodeEnd = rtbCodeEnd.Lines
@@ -160,6 +165,60 @@ Public Class frmMain
         Else
             MsgBox("Please enter a datapack path!", MsgBoxStyle.Critical, "Error")
         End If
+    End Sub
+
+    Private Sub InitializeLoadingSettings()
+        If My.Computer.FileSystem.FileExists(AppData + "/Random Item Giver Updater/settings.txt") Then
+            SettingsArray = File.ReadAllLines(AppData + "/Random Item Giver Updater/settings.txt")
+            LoadedSettingsVersion = SettingsArray(1).Replace("Version=", "")
+            WriteToLog("Found settings version " + LoadedSettingsVersion, "Info")
+
+            If LoadedSettingsVersion < SettingsVersion Then
+
+                Select Case MsgBox("Your settings from a previous version were found." + vbNewLine + "Do you want to try to import them?" + vbNewLine + " This will overwrite your current settings.", MessageBoxButtons.YesNo, "Found older settings")
+                    Case Windows.Forms.DialogResult.Yes
+                        WriteToLog("Importing settings from older version. Please note that due to version differences not everything might be imported.", "Warning")
+                        LoadSettings()
+                        MsgBox("Finished Importing settings. Please note that not everything might have been imported due to the settings file being an older version.", MsgBoxStyle.Information, "Import older settings")
+                        WriteToLog("Finished importing settings from older version.", "Info")
+                    Case Windows.Forms.DialogResult.No
+                        WriteToLog("Ignored settings from previous version. Creating new file, current one will be renamed to settings.old", "Info")
+                        My.Computer.FileSystem.RenameFile(AppData + "/Random Item Giver Updater/settings.txt", "settings.old")
+                        My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
+                        frmSettings.SaveSettings()
+                End Select
+
+            ElseIf LoadedSettingsVersion > SettingsVersion Then
+
+                Select Case MsgBox("The settings file that was detected belongs to a newer version of the Random Item Giver Updater." + vbNewLine + "Loading it can cause issues. Do you still want to load it?", MessageBoxButtons.YesNo, "Found newer settings")
+                    Case Windows.Forms.DialogResult.Yes
+                        WriteToLog("Importing settings from newer version. Please note that due to version differences this can issues.", "Warning")
+                        LoadSettings()
+                        MsgBox("Finished Importing settings. Please note that not everything might work correctly.", MsgBoxStyle.Information, "Imported newer settings")
+                        WriteToLog("Finished importing settings from newer version.", "Info")
+                    Case Windows.Forms.DialogResult.No
+                        WriteToLog("Ignored settings from newer version. Creating new file, current one will be renamed to settings.old", "Info")
+                        My.Computer.FileSystem.RenameFile(AppData + "/Random Item Giver Updater/settings.txt", "settings.old")
+                        My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
+                        frmSettings.SaveSettings()
+                End Select
+
+            Else
+
+                WriteToLog("Loading settings...", "Info")
+                LoadSettings()
+
+            End If
+
+        Else
+            WriteToLog("Could not find settings file. Creating a new one (Version " + SettingsVersion + ").", "Warning")
+            My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
+            frmSettings.SaveSettings()
+        End If
+    End Sub
+
+    Private Sub LoadSettings()
+
     End Sub
 
     Private Sub AddMultipleItems()
@@ -1600,7 +1659,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
-        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.3.0.", MsgBoxStyle.Exclamation, "Not available yet")
+        frmSettings.ShowDialog()
     End Sub
 
     Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
