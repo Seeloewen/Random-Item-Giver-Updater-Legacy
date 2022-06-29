@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmSettings
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,325 +20,406 @@ Partial Class frmSettings
     'Hinweis: Die folgende Prozedur ist für den Windows Form-Designer erforderlich.
     'Das Bearbeiten ist mit dem Windows Form-Designer möglich.  
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSettings))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.lblEditProfiles = New System.Windows.Forms.Label()
+        Me.btnQuitWithoutSaving = New System.Windows.Forms.Button()
+        Me.btnSaveSettings = New System.Windows.Forms.Button()
+        Me.btnClearTempFiles = New System.Windows.Forms.Button()
+        Me.btnOpenProfileEditor = New System.Windows.Forms.Button()
+        Me.cbLoadDefaultProfile = New System.Windows.Forms.CheckBox()
+        Me.cbxDefaultProfile = New System.Windows.Forms.ComboBox()
+        Me.tcSettings = New System.Windows.Forms.TabControl()
+        Me.tpSoftware = New System.Windows.Forms.TabPage()
+        Me.cbHideAlphaWarning = New System.Windows.Forms.CheckBox()
+        Me.lblAlphaWarning = New System.Windows.Forms.Label()
+        Me.lblLogging = New System.Windows.Forms.Label()
+        Me.cbDisableLogging = New System.Windows.Forms.CheckBox()
+        Me.btnViewTempDir = New System.Windows.Forms.Button()
+        Me.lblTempFiles = New System.Windows.Forms.Label()
+        Me.tpProfiles = New System.Windows.Forms.TabPage()
+        Me.tpSchemes = New System.Windows.Forms.TabPage()
+        Me.cbxDefaultScheme = New System.Windows.Forms.ComboBox()
+        Me.lblEditSchemeEditor = New System.Windows.Forms.Label()
+        Me.cbSelectDefaultScheme = New System.Windows.Forms.CheckBox()
+        Me.btnOpenSchemeEditor = New System.Windows.Forms.Button()
+        Me.tpListImporter = New System.Windows.Forms.TabPage()
+        Me.cbDontImportVanillaItemsByDefault = New System.Windows.Forms.CheckBox()
+        Me.lblDefaultSettingsItemImporter = New System.Windows.Forms.Label()
+        Me.lblImportExportSettings = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.tcSettings.SuspendLayout()
+        Me.tpSoftware.SuspendLayout()
+        Me.tpProfiles.SuspendLayout()
+        Me.tpSchemes.SuspendLayout()
+        Me.tpListImporter.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
+        'lblHeader
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(84, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Settings"
+        Me.lblHeader.AutoSize = True
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Location = New System.Drawing.Point(13, 13)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(84, 24)
+        Me.lblHeader.TabIndex = 0
+        Me.lblHeader.Text = "Settings"
         '
-        'Label2
+        'lblEditProfiles
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(6, 97)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(43, 16)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Prefix:"
+        Me.lblEditProfiles.AutoSize = True
+        Me.lblEditProfiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEditProfiles.Location = New System.Drawing.Point(10, 16)
+        Me.lblEditProfiles.Name = "lblEditProfiles"
+        Me.lblEditProfiles.Size = New System.Drawing.Size(442, 32)
+        Me.lblEditProfiles.TabIndex = 9
+        Me.lblEditProfiles.Text = "Edit your profiles which can be saved and loaded in the main window." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "These profi" &
+    "les are a combination of datapack path and datapack version."
         '
-        'Label3
+        'btnQuitWithoutSaving
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(6, 122)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(66, 16)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "NBT Tag:"
+        Me.btnQuitWithoutSaving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitWithoutSaving.Location = New System.Drawing.Point(17, 345)
+        Me.btnQuitWithoutSaving.Name = "btnQuitWithoutSaving"
+        Me.btnQuitWithoutSaving.Size = New System.Drawing.Size(241, 27)
+        Me.btnQuitWithoutSaving.TabIndex = 5
+        Me.btnQuitWithoutSaving.Text = "Quit without saving"
+        Me.btnQuitWithoutSaving.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'btnSaveSettings
         '
-        Me.GroupBox1.Controls.Add(Me.ComboBox3)
-        Me.GroupBox1.Controls.Add(Me.Label8)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Button3)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 50)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(581, 181)
-        Me.GroupBox1.TabIndex = 3
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Profiles"
+        Me.btnSaveSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveSettings.Location = New System.Drawing.Point(264, 345)
+        Me.btnSaveSettings.Name = "btnSaveSettings"
+        Me.btnSaveSettings.Size = New System.Drawing.Size(241, 27)
+        Me.btnSaveSettings.TabIndex = 6
+        Me.btnSaveSettings.Text = "Save settings"
+        Me.btnSaveSettings.UseVisualStyleBackColor = True
         '
-        'ComboBox3
+        'btnClearTempFiles
         '
-        Me.ComboBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"Version 1.16", "Version 1.17", "Version 1.18", "Version 1.19"})
-        Me.ComboBox3.Location = New System.Drawing.Point(68, 60)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(185, 24)
-        Me.ComboBox3.TabIndex = 11
+        Me.btnClearTempFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClearTempFiles.Location = New System.Drawing.Point(9, 48)
+        Me.btnClearTempFiles.Name = "btnClearTempFiles"
+        Me.btnClearTempFiles.Size = New System.Drawing.Size(228, 23)
+        Me.btnClearTempFiles.TabIndex = 8
+        Me.btnClearTempFiles.Text = "Clear temporary files"
+        Me.btnClearTempFiles.UseVisualStyleBackColor = True
         '
-        'Label8
+        'btnOpenProfileEditor
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(6, 63)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(56, 16)
-        Me.Label8.TabIndex = 10
-        Me.Label8.Text = "Profile:"
+        Me.btnOpenProfileEditor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOpenProfileEditor.Location = New System.Drawing.Point(13, 51)
+        Me.btnOpenProfileEditor.Name = "btnOpenProfileEditor"
+        Me.btnOpenProfileEditor.Size = New System.Drawing.Size(185, 25)
+        Me.btnOpenProfileEditor.TabIndex = 10
+        Me.btnOpenProfileEditor.Text = "Open Profile Editor"
+        Me.btnOpenProfileEditor.UseVisualStyleBackColor = True
         '
-        'Label5
+        'cbLoadDefaultProfile
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 22)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(418, 32)
-        Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Edit your profiles which can be saved and loaded in the main window. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Each datap" &
-    "ack version has 1 profile."
+        Me.cbLoadDefaultProfile.AutoSize = True
+        Me.cbLoadDefaultProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbLoadDefaultProfile.Location = New System.Drawing.Point(13, 93)
+        Me.cbLoadDefaultProfile.Name = "cbLoadDefaultProfile"
+        Me.cbLoadDefaultProfile.Size = New System.Drawing.Size(158, 20)
+        Me.cbLoadDefaultProfile.TabIndex = 11
+        Me.cbLoadDefaultProfile.Text = "Load profile by default"
+        Me.cbLoadDefaultProfile.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cbxDefaultProfile
         '
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(476, 143)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(90, 23)
-        Me.Button3.TabIndex = 8
-        Me.Button3.Text = "Browse"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.cbxDefaultProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxDefaultProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxDefaultProfile.FormattingEnabled = True
+        Me.cbxDefaultProfile.Location = New System.Drawing.Point(13, 119)
+        Me.cbxDefaultProfile.Name = "cbxDefaultProfile"
+        Me.cbxDefaultProfile.Size = New System.Drawing.Size(301, 24)
+        Me.cbxDefaultProfile.TabIndex = 12
         '
-        'TextBox3
+        'tcSettings
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(110, 144)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(360, 22)
-        Me.TextBox3.TabIndex = 7
+        Me.tcSettings.Controls.Add(Me.tpSoftware)
+        Me.tcSettings.Controls.Add(Me.tpProfiles)
+        Me.tcSettings.Controls.Add(Me.tpSchemes)
+        Me.tcSettings.Controls.Add(Me.tpListImporter)
+        Me.tcSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tcSettings.Location = New System.Drawing.Point(17, 49)
+        Me.tcSettings.Name = "tcSettings"
+        Me.tcSettings.SelectedIndex = 0
+        Me.tcSettings.Size = New System.Drawing.Size(488, 288)
+        Me.tcSettings.TabIndex = 7
         '
-        'TextBox2
+        'tpSoftware
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(78, 119)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(198, 22)
-        Me.TextBox2.TabIndex = 6
+        Me.tpSoftware.Controls.Add(Me.Button2)
+        Me.tpSoftware.Controls.Add(Me.Button1)
+        Me.tpSoftware.Controls.Add(Me.lblImportExportSettings)
+        Me.tpSoftware.Controls.Add(Me.cbHideAlphaWarning)
+        Me.tpSoftware.Controls.Add(Me.lblAlphaWarning)
+        Me.tpSoftware.Controls.Add(Me.lblLogging)
+        Me.tpSoftware.Controls.Add(Me.cbDisableLogging)
+        Me.tpSoftware.Controls.Add(Me.btnViewTempDir)
+        Me.tpSoftware.Controls.Add(Me.lblTempFiles)
+        Me.tpSoftware.Controls.Add(Me.btnClearTempFiles)
+        Me.tpSoftware.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tpSoftware.Location = New System.Drawing.Point(4, 25)
+        Me.tpSoftware.Name = "tpSoftware"
+        Me.tpSoftware.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpSoftware.Size = New System.Drawing.Size(480, 259)
+        Me.tpSoftware.TabIndex = 1
+        Me.tpSoftware.Text = "Software"
+        Me.tpSoftware.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'cbHideAlphaWarning
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(55, 94)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(198, 22)
-        Me.TextBox1.TabIndex = 5
+        Me.cbHideAlphaWarning.AutoSize = True
+        Me.cbHideAlphaWarning.Location = New System.Drawing.Point(12, 166)
+        Me.cbHideAlphaWarning.Name = "cbHideAlphaWarning"
+        Me.cbHideAlphaWarning.Size = New System.Drawing.Size(188, 20)
+        Me.cbHideAlphaWarning.TabIndex = 14
+        Me.cbHideAlphaWarning.Text = "Hide alpha version warning"
+        Me.cbHideAlphaWarning.UseVisualStyleBackColor = True
         '
-        'Label4
+        'lblAlphaWarning
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 147)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(98, 16)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Datapack path:"
+        Me.lblAlphaWarning.AutoSize = True
+        Me.lblAlphaWarning.Location = New System.Drawing.Point(6, 147)
+        Me.lblAlphaWarning.Name = "lblAlphaWarning"
+        Me.lblAlphaWarning.Size = New System.Drawing.Size(288, 16)
+        Me.lblAlphaWarning.TabIndex = 13
+        Me.lblAlphaWarning.Text = "There is a warning shown when starting the app."
         '
-        'GroupBox2
+        'lblLogging
         '
-        Me.GroupBox2.Controls.Add(Me.ComboBox2)
-        Me.GroupBox2.Controls.Add(Me.ComboBox1)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 325)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(582, 89)
-        Me.GroupBox2.TabIndex = 4
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Software settings"
+        Me.lblLogging.AutoSize = True
+        Me.lblLogging.Location = New System.Drawing.Point(6, 87)
+        Me.lblLogging.Name = "lblLogging"
+        Me.lblLogging.Size = New System.Drawing.Size(464, 16)
+        Me.lblLogging.TabIndex = 12
+        Me.lblLogging.Text = "The software uses a log to make actions more clear and help with debugging."
         '
-        'ComboBox2
+        'cbDisableLogging
         '
-        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(78, 53)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(211, 24)
-        Me.ComboBox2.TabIndex = 3
+        Me.cbDisableLogging.AutoSize = True
+        Me.cbDisableLogging.Location = New System.Drawing.Point(12, 106)
+        Me.cbDisableLogging.Name = "cbDisableLogging"
+        Me.cbDisableLogging.Size = New System.Drawing.Size(244, 20)
+        Me.cbDisableLogging.TabIndex = 11
+        Me.cbDisableLogging.Text = "Disable logging (Not recommended)"
+        Me.cbDisableLogging.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'btnViewTempDir
         '
-        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(95, 23)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(211, 24)
-        Me.ComboBox1.TabIndex = 2
+        Me.btnViewTempDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnViewTempDir.Location = New System.Drawing.Point(243, 48)
+        Me.btnViewTempDir.Name = "btnViewTempDir"
+        Me.btnViewTempDir.Size = New System.Drawing.Size(228, 23)
+        Me.btnViewTempDir.TabIndex = 10
+        Me.btnViewTempDir.Text = "View temporary files directory"
+        Me.btnViewTempDir.UseVisualStyleBackColor = True
         '
-        'Label7
+        'lblTempFiles
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(19, 56)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(53, 16)
-        Me.Label7.TabIndex = 1
-        Me.Label7.Text = "Design:"
+        Me.lblTempFiles.AutoSize = True
+        Me.lblTempFiles.Location = New System.Drawing.Point(6, 13)
+        Me.lblTempFiles.Name = "lblTempFiles"
+        Me.lblTempFiles.Size = New System.Drawing.Size(447, 32)
+        Me.lblTempFiles.TabIndex = 9
+        Me.lblTempFiles.Text = "The software stores some data in temporary text files to make some " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "processes ea" &
+    "sier. These files should only use up a few kilobytes of space."
         '
-        'Label6
+        'tpProfiles
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(18, 26)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(71, 16)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Language:"
+        Me.tpProfiles.Controls.Add(Me.cbxDefaultProfile)
+        Me.tpProfiles.Controls.Add(Me.lblEditProfiles)
+        Me.tpProfiles.Controls.Add(Me.cbLoadDefaultProfile)
+        Me.tpProfiles.Controls.Add(Me.btnOpenProfileEditor)
+        Me.tpProfiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tpProfiles.Location = New System.Drawing.Point(4, 25)
+        Me.tpProfiles.Name = "tpProfiles"
+        Me.tpProfiles.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpProfiles.Size = New System.Drawing.Size(480, 259)
+        Me.tpProfiles.TabIndex = 0
+        Me.tpProfiles.Text = "Datapack Profiles"
+        Me.tpProfiles.UseVisualStyleBackColor = True
+        '
+        'tpSchemes
+        '
+        Me.tpSchemes.Controls.Add(Me.cbxDefaultScheme)
+        Me.tpSchemes.Controls.Add(Me.lblEditSchemeEditor)
+        Me.tpSchemes.Controls.Add(Me.cbSelectDefaultScheme)
+        Me.tpSchemes.Controls.Add(Me.btnOpenSchemeEditor)
+        Me.tpSchemes.Location = New System.Drawing.Point(4, 25)
+        Me.tpSchemes.Name = "tpSchemes"
+        Me.tpSchemes.Size = New System.Drawing.Size(480, 196)
+        Me.tpSchemes.TabIndex = 3
+        Me.tpSchemes.Text = "Schemes"
+        Me.tpSchemes.UseVisualStyleBackColor = True
+        '
+        'cbxDefaultScheme
+        '
+        Me.cbxDefaultScheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxDefaultScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxDefaultScheme.FormattingEnabled = True
+        Me.cbxDefaultScheme.Location = New System.Drawing.Point(16, 156)
+        Me.cbxDefaultScheme.Name = "cbxDefaultScheme"
+        Me.cbxDefaultScheme.Size = New System.Drawing.Size(301, 24)
+        Me.cbxDefaultScheme.TabIndex = 16
+        '
+        'lblEditSchemeEditor
+        '
+        Me.lblEditSchemeEditor.AutoSize = True
+        Me.lblEditSchemeEditor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEditSchemeEditor.Location = New System.Drawing.Point(13, 12)
+        Me.lblEditSchemeEditor.Name = "lblEditSchemeEditor"
+        Me.lblEditSchemeEditor.Size = New System.Drawing.Size(426, 64)
+        Me.lblEditSchemeEditor.TabIndex = 13
+        Me.lblEditSchemeEditor.Text = resources.GetString("lblEditSchemeEditor.Text")
+        '
+        'cbSelectDefaultScheme
+        '
+        Me.cbSelectDefaultScheme.AutoSize = True
+        Me.cbSelectDefaultScheme.Checked = True
+        Me.cbSelectDefaultScheme.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbSelectDefaultScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbSelectDefaultScheme.Location = New System.Drawing.Point(16, 130)
+        Me.cbSelectDefaultScheme.Name = "cbSelectDefaultScheme"
+        Me.cbSelectDefaultScheme.Size = New System.Drawing.Size(176, 20)
+        Me.cbSelectDefaultScheme.TabIndex = 15
+        Me.cbSelectDefaultScheme.Text = "Select scheme by default"
+        Me.cbSelectDefaultScheme.UseVisualStyleBackColor = True
+        '
+        'btnOpenSchemeEditor
+        '
+        Me.btnOpenSchemeEditor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOpenSchemeEditor.Location = New System.Drawing.Point(16, 79)
+        Me.btnOpenSchemeEditor.Name = "btnOpenSchemeEditor"
+        Me.btnOpenSchemeEditor.Size = New System.Drawing.Size(185, 25)
+        Me.btnOpenSchemeEditor.TabIndex = 14
+        Me.btnOpenSchemeEditor.Text = "Open Scheme Editor"
+        Me.btnOpenSchemeEditor.UseVisualStyleBackColor = True
+        '
+        'tpListImporter
+        '
+        Me.tpListImporter.Controls.Add(Me.cbDontImportVanillaItemsByDefault)
+        Me.tpListImporter.Controls.Add(Me.lblDefaultSettingsItemImporter)
+        Me.tpListImporter.Location = New System.Drawing.Point(4, 25)
+        Me.tpListImporter.Name = "tpListImporter"
+        Me.tpListImporter.Size = New System.Drawing.Size(480, 196)
+        Me.tpListImporter.TabIndex = 2
+        Me.tpListImporter.Text = "Item List Importer"
+        Me.tpListImporter.UseVisualStyleBackColor = True
+        '
+        'cbDontImportVanillaItemsByDefault
+        '
+        Me.cbDontImportVanillaItemsByDefault.AutoSize = True
+        Me.cbDontImportVanillaItemsByDefault.Checked = True
+        Me.cbDontImportVanillaItemsByDefault.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbDontImportVanillaItemsByDefault.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbDontImportVanillaItemsByDefault.Location = New System.Drawing.Point(18, 35)
+        Me.cbDontImportVanillaItemsByDefault.Name = "cbDontImportVanillaItemsByDefault"
+        Me.cbDontImportVanillaItemsByDefault.Size = New System.Drawing.Size(434, 20)
+        Me.cbDontImportVanillaItemsByDefault.TabIndex = 7
+        Me.cbDontImportVanillaItemsByDefault.Text = "Don't import vanilla items (Recommended when using the TellMe file)"
+        Me.cbDontImportVanillaItemsByDefault.UseVisualStyleBackColor = True
+        '
+        'lblDefaultSettingsItemImporter
+        '
+        Me.lblDefaultSettingsItemImporter.AutoSize = True
+        Me.lblDefaultSettingsItemImporter.Location = New System.Drawing.Point(15, 16)
+        Me.lblDefaultSettingsItemImporter.Name = "lblDefaultSettingsItemImporter"
+        Me.lblDefaultSettingsItemImporter.Size = New System.Drawing.Size(300, 16)
+        Me.lblDefaultSettingsItemImporter.TabIndex = 1
+        Me.lblDefaultSettingsItemImporter.Text = "Select the default settings for the Item List Importer"
+        '
+        'lblImportExportSettings
+        '
+        Me.lblImportExportSettings.AutoSize = True
+        Me.lblImportExportSettings.Location = New System.Drawing.Point(6, 203)
+        Me.lblImportExportSettings.Name = "lblImportExportSettings"
+        Me.lblImportExportSettings.Size = New System.Drawing.Size(241, 16)
+        Me.lblImportExportSettings.TabIndex = 15
+        Me.lblImportExportSettings.Text = "You can import and export settings files."
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 422)
+        Me.Button1.Location = New System.Drawing.Point(9, 222)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(294, 27)
-        Me.Button1.TabIndex = 5
-        Me.Button1.Text = "Discard settings"
+        Me.Button1.Size = New System.Drawing.Size(228, 23)
+        Me.Button1.TabIndex = 16
+        Me.Button1.Text = "Import settings"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(312, 422)
+        Me.Button2.Location = New System.Drawing.Point(243, 222)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(282, 27)
-        Me.Button2.TabIndex = 6
-        Me.Button2.Text = "Save settings"
+        Me.Button2.Size = New System.Drawing.Size(228, 23)
+        Me.Button2.TabIndex = 17
+        Me.Button2.Text = "Export settings"
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.ComboBox4)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 238)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(582, 81)
-        Me.GroupBox3.TabIndex = 7
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Default profile"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"None", "Version 1.16", "Version 1.17", "Version 1.18", "Version 1.19"})
-        Me.ComboBox4.Location = New System.Drawing.Point(10, 45)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(185, 24)
-        Me.ComboBox4.TabIndex = 1
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(7, 26)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(466, 16)
-        Me.Label9.TabIndex = 0
-        Me.Label9.Text = "Select the profile that should automatically be loaded when the software starts:"
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(365, 22)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 8
-        Me.Button4.Text = "Clear temp"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(606, 457)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Label1)
+        Me.ClientSize = New System.Drawing.Size(523, 383)
+        Me.Controls.Add(Me.tcSettings)
+        Me.Controls.Add(Me.btnSaveSettings)
+        Me.Controls.Add(Me.btnQuitWithoutSaving)
+        Me.Controls.Add(Me.lblHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmSettings"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmSettings"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.Text = "Settings"
+        Me.tcSettings.ResumeLayout(False)
+        Me.tpSoftware.ResumeLayout(False)
+        Me.tpSoftware.PerformLayout()
+        Me.tpProfiles.ResumeLayout(False)
+        Me.tpProfiles.PerformLayout()
+        Me.tpSchemes.ResumeLayout(False)
+        Me.tpSchemes.PerformLayout()
+        Me.tpListImporter.ResumeLayout(False)
+        Me.tpListImporter.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents lblHeader As Label
+    Friend WithEvents btnQuitWithoutSaving As Button
+    Friend WithEvents btnSaveSettings As Button
+    Friend WithEvents lblEditProfiles As Label
+    Friend WithEvents btnClearTempFiles As Button
+    Friend WithEvents cbxDefaultProfile As ComboBox
+    Friend WithEvents cbLoadDefaultProfile As CheckBox
+    Friend WithEvents btnOpenProfileEditor As Button
+    Friend WithEvents tcSettings As TabControl
+    Friend WithEvents tpProfiles As TabPage
+    Friend WithEvents tpSoftware As TabPage
+    Friend WithEvents lblTempFiles As Label
+    Friend WithEvents btnViewTempDir As Button
+    Friend WithEvents tpListImporter As TabPage
+    Friend WithEvents lblLogging As Label
+    Friend WithEvents cbDisableLogging As CheckBox
+    Friend WithEvents cbDontImportVanillaItemsByDefault As CheckBox
+    Friend WithEvents lblDefaultSettingsItemImporter As Label
+    Friend WithEvents cbHideAlphaWarning As CheckBox
+    Friend WithEvents lblAlphaWarning As Label
+    Friend WithEvents tpSchemes As TabPage
+    Friend WithEvents cbxDefaultScheme As ComboBox
+    Friend WithEvents lblEditSchemeEditor As Label
+    Friend WithEvents cbSelectDefaultScheme As CheckBox
+    Friend WithEvents btnOpenSchemeEditor As Button
+    Friend WithEvents lblImportExportSettings As Label
     Friend WithEvents Button2 As Button
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Button3 As Button
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents ComboBox4 As ComboBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Button4 As Button
+    Friend WithEvents Button1 As Button
 End Class
