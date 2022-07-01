@@ -6,8 +6,8 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public VersionLog As String = "0.3.0-a (25.06.2022)"
-    Public SettingsVersion As String = "1"
+    Public VersionLog As String = "0.3.0-a (02.07.2022)"
+    Public SettingsVersion As Double = 1
     Dim SettingsArray As String()
     Dim LoadedSettingsVersion As Double
 
@@ -61,6 +61,9 @@ Public Class frmMain
     Dim Items64 As String()
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        WriteToLog("Random Item Giver Updater " + VersionLog, "Info")
+        WriteToLog("You are running an alpha build, may be unstable!", "Warning")
+
         InitializeLoadingSettings()
 
         MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
@@ -71,9 +74,6 @@ Public Class frmMain
             My.Computer.FileSystem.CreateDirectory(AppData + "/Random Item Giver Updater/")
             WriteToLog("Created the 'Random Item Giver Updater' directory in the Appdata folder for application files.", "Info")
         End If
-
-        WriteToLog("Random Item Giver Updater" + VersionLog, "Info")
-        WriteToLog("You are running an alpha build, may be unstable!", "Warning")
 
         CodeEnd = rtbCodeEnd.Lines
         Items2 = rtbItems2.Lines
@@ -171,7 +171,7 @@ Public Class frmMain
         If My.Computer.FileSystem.FileExists(AppData + "/Random Item Giver Updater/settings.txt") Then
             SettingsArray = File.ReadAllLines(AppData + "/Random Item Giver Updater/settings.txt")
             LoadedSettingsVersion = SettingsArray(1).Replace("Version=", "")
-            WriteToLog("Found settings version " + LoadedSettingsVersion, "Info")
+            WriteToLog("Found settings version " + LoadedSettingsVersion.ToString, "Info")
 
             If LoadedSettingsVersion < SettingsVersion Then
 
@@ -185,7 +185,7 @@ Public Class frmMain
                         WriteToLog("Ignored settings from previous version. Creating new file, current one will be renamed to settings.old", "Info")
                         My.Computer.FileSystem.RenameFile(AppData + "/Random Item Giver Updater/settings.txt", "settings.old")
                         My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-                        frmSettings.SaveSettings()
+                        frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
                 End Select
 
             ElseIf LoadedSettingsVersion > SettingsVersion Then
@@ -200,7 +200,7 @@ Public Class frmMain
                         WriteToLog("Ignored settings from newer version. Creating new file, current one will be renamed to settings.old", "Info")
                         My.Computer.FileSystem.RenameFile(AppData + "/Random Item Giver Updater/settings.txt", "settings.old")
                         My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-                        frmSettings.SaveSettings()
+                        frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
                 End Select
 
             Else
@@ -213,12 +213,53 @@ Public Class frmMain
         Else
             WriteToLog("Could not find settings file. Creating a new one (Version " + SettingsVersion + ").", "Warning")
             My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-            frmSettings.SaveSettings()
+            frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
         End If
     End Sub
 
     Private Sub LoadSettings()
+        Try
 
+            'Load general settings
+            My.Settings.UseAdvancedViewByDefault = Convert.ToBoolean(SettingsArray(4).Replace("UseAdvancedViewByDefault=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(4), "Info")
+            'Load software settings
+            My.Settings.DisableLogging = Convert.ToBoolean(SettingsArray(7).Replace("DisableLogging=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(7), "Info")
+            My.Settings.HideAlphaWarning = Convert.ToBoolean(SettingsArray(8).Replace("HideAlphaWarning=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(8), "Info")
+
+            'Load datapack profiles settings
+            My.Settings.LoadDefaultProfile = Convert.ToBoolean(SettingsArray(11).Replace("LoadDefaultProfile=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(11), "Info")
+            My.Settings.DefaultProfile = SettingsArray(12).Replace("DefaultProfile=", "")
+            WriteToLog("Loaded setting " + SettingsArray(12), "Info")
+
+            'Load scheme settings
+            My.Settings.SelectDefaultScheme = Convert.ToBoolean(SettingsArray(15).Replace("SelectDefaultScheme=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(15), "Info")
+            My.Settings.DefaultScheme = SettingsArray(16).Replace("DefaultScheme=", "")
+            WriteToLog("Loaded setting " + SettingsArray(16), "Info")
+
+            'Load Item List Importer Settings
+            My.Settings.DontImportVanillaItemsByDefault = Convert.ToBoolean(SettingsArray(19).Replace("DontImportVanillaItemsByDefault=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(19), "Info")
+
+        Catch ex As Exception
+
+            MsgBox("Could not load settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
+            WriteToLog("Could not load settings: " + ex.Message, "Error")
+
+            Select Case MsgBox("An error occured while loading your settings. " + vbNewLine + "Do you want to reset your settings? This probably fixes the problem.", MsgBoxStyle.YesNo, "Error")
+                Case Windows.Forms.DialogResult.Yes
+                    My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
+                    frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                    MsgBox("Successfully reset your settings!" + vbNewLine + "Please restart the application for changes to take affect.", MsgBoxStyle.Information, "Reset settings")
+                    WriteToLog("Successfully reset settings!", "Info")
+                    Close()
+            End Select
+
+        End Try
     End Sub
 
     Private Sub AddMultipleItems()

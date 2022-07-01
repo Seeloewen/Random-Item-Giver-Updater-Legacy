@@ -716,7 +716,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.2.3"
+        Me.Text = "Random Item Giver Updater ALPHA 0.3.0-DEV"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
