@@ -25,6 +25,8 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbDatapack = New System.Windows.Forms.GroupBox()
+        Me.btnLoadProfile = New System.Windows.Forms.Button()
+        Me.btnSaveProfile = New System.Windows.Forms.Button()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.cbxVersion = New System.Windows.Forms.ComboBox()
         Me.lblDatapackDetection = New System.Windows.Forms.Label()
@@ -32,6 +34,11 @@ Partial Class frmMain
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
         Me.lblSelectDatapack = New System.Windows.Forms.Label()
         Me.gbItem = New System.Windows.Forms.GroupBox()
+        Me.cbEnableAdvancedView = New System.Windows.Forms.CheckBox()
+        Me.cbxScheme = New System.Windows.Forms.ComboBox()
+        Me.lblScheme = New System.Windows.Forms.Label()
+        Me.btnOverwriteSelectedScheme = New System.Windows.Forms.Button()
+        Me.btnSaveAsNewScheme = New System.Windows.Forms.Button()
         Me.cbAddItemsFast = New System.Windows.Forms.CheckBox()
         Me.cbGoatHorn = New System.Windows.Forms.CheckBox()
         Me.cbNormalItem = New System.Windows.Forms.CheckBox()
@@ -104,6 +111,8 @@ Partial Class frmMain
         '
         'gbDatapack
         '
+        Me.gbDatapack.Controls.Add(Me.btnLoadProfile)
+        Me.gbDatapack.Controls.Add(Me.btnSaveProfile)
         Me.gbDatapack.Controls.Add(Me.lblVersion)
         Me.gbDatapack.Controls.Add(Me.cbxVersion)
         Me.gbDatapack.Controls.Add(Me.lblDatapackDetection)
@@ -117,6 +126,26 @@ Partial Class frmMain
         Me.gbDatapack.TabIndex = 57
         Me.gbDatapack.TabStop = False
         Me.gbDatapack.Text = "Select datapack"
+        '
+        'btnLoadProfile
+        '
+        Me.btnLoadProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLoadProfile.Location = New System.Drawing.Point(364, 94)
+        Me.btnLoadProfile.Name = "btnLoadProfile"
+        Me.btnLoadProfile.Size = New System.Drawing.Size(129, 23)
+        Me.btnLoadProfile.TabIndex = 13
+        Me.btnLoadProfile.Text = "Load profile"
+        Me.btnLoadProfile.UseVisualStyleBackColor = True
+        '
+        'btnSaveProfile
+        '
+        Me.btnSaveProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveProfile.Location = New System.Drawing.Point(499, 94)
+        Me.btnSaveProfile.Name = "btnSaveProfile"
+        Me.btnSaveProfile.Size = New System.Drawing.Size(129, 23)
+        Me.btnSaveProfile.TabIndex = 12
+        Me.btnSaveProfile.Text = "Save profile"
+        Me.btnSaveProfile.UseVisualStyleBackColor = True
         '
         'lblVersion
         '
@@ -180,6 +209,11 @@ Partial Class frmMain
         '
         'gbItem
         '
+        Me.gbItem.Controls.Add(Me.cbEnableAdvancedView)
+        Me.gbItem.Controls.Add(Me.cbxScheme)
+        Me.gbItem.Controls.Add(Me.lblScheme)
+        Me.gbItem.Controls.Add(Me.btnOverwriteSelectedScheme)
+        Me.gbItem.Controls.Add(Me.btnSaveAsNewScheme)
         Me.gbItem.Controls.Add(Me.cbAddItemsFast)
         Me.gbItem.Controls.Add(Me.cbGoatHorn)
         Me.gbItem.Controls.Add(Me.cbNormalItem)
@@ -205,16 +239,69 @@ Partial Class frmMain
         Me.gbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbItem.Location = New System.Drawing.Point(16, 196)
         Me.gbItem.Name = "gbItem"
-        Me.gbItem.Size = New System.Drawing.Size(638, 322)
+        Me.gbItem.Size = New System.Drawing.Size(638, 351)
         Me.gbItem.TabIndex = 58
         Me.gbItem.TabStop = False
         Me.gbItem.Text = "Add item"
         '
+        'cbEnableAdvancedView
+        '
+        Me.cbEnableAdvancedView.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.cbEnableAdvancedView.AutoSize = True
+        Me.cbEnableAdvancedView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbEnableAdvancedView.Location = New System.Drawing.Point(14, 268)
+        Me.cbEnableAdvancedView.Name = "cbEnableAdvancedView"
+        Me.cbEnableAdvancedView.Size = New System.Drawing.Size(166, 20)
+        Me.cbEnableAdvancedView.TabIndex = 89
+        Me.cbEnableAdvancedView.Text = "Enable Advanced View"
+        Me.cbEnableAdvancedView.UseVisualStyleBackColor = True
+        '
+        'cbxScheme
+        '
+        Me.cbxScheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxScheme.FormattingEnabled = True
+        Me.cbxScheme.Location = New System.Drawing.Point(437, 21)
+        Me.cbxScheme.Name = "cbxScheme"
+        Me.cbxScheme.Size = New System.Drawing.Size(191, 24)
+        Me.cbxScheme.TabIndex = 88
+        '
+        'lblScheme
+        '
+        Me.lblScheme.AutoSize = True
+        Me.lblScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblScheme.Location = New System.Drawing.Point(370, 24)
+        Me.lblScheme.Name = "lblScheme"
+        Me.lblScheme.Size = New System.Drawing.Size(60, 16)
+        Me.lblScheme.TabIndex = 87
+        Me.lblScheme.Text = "Scheme:"
+        '
+        'btnOverwriteSelectedScheme
+        '
+        Me.btnOverwriteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOverwriteSelectedScheme.Location = New System.Drawing.Point(449, 198)
+        Me.btnOverwriteSelectedScheme.Name = "btnOverwriteSelectedScheme"
+        Me.btnOverwriteSelectedScheme.Size = New System.Drawing.Size(179, 23)
+        Me.btnOverwriteSelectedScheme.TabIndex = 86
+        Me.btnOverwriteSelectedScheme.Text = "Overwrite selected scheme"
+        Me.btnOverwriteSelectedScheme.UseVisualStyleBackColor = True
+        '
+        'btnSaveAsNewScheme
+        '
+        Me.btnSaveAsNewScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveAsNewScheme.Location = New System.Drawing.Point(449, 227)
+        Me.btnSaveAsNewScheme.Name = "btnSaveAsNewScheme"
+        Me.btnSaveAsNewScheme.Size = New System.Drawing.Size(179, 23)
+        Me.btnSaveAsNewScheme.TabIndex = 85
+        Me.btnSaveAsNewScheme.Text = "Save as new scheme"
+        Me.btnSaveAsNewScheme.UseVisualStyleBackColor = True
+        '
         'cbAddItemsFast
         '
+        Me.cbAddItemsFast.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.cbAddItemsFast.AutoSize = True
         Me.cbAddItemsFast.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbAddItemsFast.Location = New System.Drawing.Point(14, 265)
+        Me.cbAddItemsFast.Location = New System.Drawing.Point(14, 294)
         Me.cbAddItemsFast.Name = "cbAddItemsFast"
         Me.cbAddItemsFast.Size = New System.Drawing.Size(499, 20)
         Me.cbAddItemsFast.TabIndex = 84
@@ -267,8 +354,9 @@ Partial Class frmMain
         '
         'tbSmallOutput
         '
+        Me.tbSmallOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.tbSmallOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbSmallOutput.Location = New System.Drawing.Point(66, 293)
+        Me.tbSmallOutput.Location = New System.Drawing.Point(66, 322)
         Me.tbSmallOutput.Multiline = True
         Me.tbSmallOutput.Name = "tbSmallOutput"
         Me.tbSmallOutput.ReadOnly = True
@@ -277,9 +365,10 @@ Partial Class frmMain
         '
         'lblOutput
         '
+        Me.lblOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblOutput.AutoSize = True
         Me.lblOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOutput.Location = New System.Drawing.Point(12, 296)
+        Me.lblOutput.Location = New System.Drawing.Point(12, 325)
         Me.lblOutput.Name = "lblOutput"
         Me.lblOutput.Size = New System.Drawing.Size(48, 16)
         Me.lblOutput.TabIndex = 76
@@ -455,6 +544,8 @@ Partial Class frmMain
         '
         'rtbItem
         '
+        Me.rtbItem.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbItem.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.rtbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rtbItem.Location = New System.Drawing.Point(6, 18)
@@ -465,8 +556,9 @@ Partial Class frmMain
         '
         'btnShowOutput
         '
+        Me.btnShowOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnShowOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowOutput.Location = New System.Drawing.Point(465, 524)
+        Me.btnShowOutput.Location = New System.Drawing.Point(465, 561)
         Me.btnShowOutput.Name = "btnShowOutput"
         Me.btnShowOutput.Size = New System.Drawing.Size(189, 34)
         Me.btnShowOutput.TabIndex = 74
@@ -475,8 +567,9 @@ Partial Class frmMain
         '
         'btnAddItem
         '
+        Me.btnAddItem.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddItem.Location = New System.Drawing.Point(16, 524)
+        Me.btnAddItem.Location = New System.Drawing.Point(16, 561)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(443, 34)
         Me.btnAddItem.TabIndex = 63
@@ -667,7 +760,8 @@ Partial Class frmMain
         '
         'pbAddingItemsProgress
         '
-        Me.pbAddingItemsProgress.Location = New System.Drawing.Point(158, 529)
+        Me.pbAddingItemsProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pbAddingItemsProgress.Location = New System.Drawing.Point(158, 562)
         Me.pbAddingItemsProgress.Name = "pbAddingItemsProgress"
         Me.pbAddingItemsProgress.Size = New System.Drawing.Size(288, 23)
         Me.pbAddingItemsProgress.TabIndex = 84
@@ -679,9 +773,10 @@ Partial Class frmMain
         '
         'lblAddingItems
         '
+        Me.lblAddingItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblAddingItems.AutoSize = True
         Me.lblAddingItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAddingItems.Location = New System.Drawing.Point(17, 528)
+        Me.lblAddingItems.Location = New System.Drawing.Point(17, 561)
         Me.lblAddingItems.Name = "lblAddingItems"
         Me.lblAddingItems.Size = New System.Drawing.Size(135, 24)
         Me.lblAddingItems.TabIndex = 86
@@ -692,7 +787,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(667, 567)
+        Me.ClientSize = New System.Drawing.Size(667, 608)
         Me.Controls.Add(Me.btnAddItem)
         Me.Controls.Add(Me.lblAddingItems)
         Me.Controls.Add(Me.pbAddingItemsProgress)
@@ -792,4 +887,11 @@ Partial Class frmMain
     Friend WithEvents pbAddingItemsProgress As ProgressBar
     Friend WithEvents bgwAddItems As System.ComponentModel.BackgroundWorker
     Friend WithEvents lblAddingItems As Label
+    Friend WithEvents btnLoadProfile As Button
+    Friend WithEvents btnSaveProfile As Button
+    Friend WithEvents cbxScheme As ComboBox
+    Friend WithEvents lblScheme As Label
+    Friend WithEvents btnOverwriteSelectedScheme As Button
+    Friend WithEvents btnSaveAsNewScheme As Button
+    Friend WithEvents cbEnableAdvancedView As CheckBox
 End Class

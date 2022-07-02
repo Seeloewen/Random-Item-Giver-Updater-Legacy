@@ -73,7 +73,7 @@ Public Class frmMain
             End If
         End If
 
-            If My.Settings.HideAlphaWarning = False Then
+        If My.Settings.HideAlphaWarning = False Then
             MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         End If
 
@@ -95,6 +95,10 @@ Public Class frmMain
 
         If My.Settings.UseAdvancedViewByDefault = True Then
             EnableAdvancedView()
+            cbEnableAdvancedView.Checked = True
+        Else
+            DisableAdvancedView()
+            cbEnableAdvancedView.Checked = False
         End If
     End Sub
 
@@ -277,11 +281,51 @@ Public Class frmMain
     End Sub
 
     Private Sub EnableAdvancedView()
-
+        cbNormalItem.Show()
+        cbSuspiciousStew.Show()
+        cbEnchantedBook.Show()
+        cbPotion.Show()
+        cbSplashPotion.Show()
+        cbLingeringPotion.Show()
+        cbTippedArrow.Show()
+        cbGoatHorn.Show()
+        cbSamePrefix.Show()
+        tbSamePrefix.Show()
+        cbCustomNBT.Show()
+        tbCustomNBT.Show()
+        btnOverwriteSelectedScheme.Show()
+        btnSaveAsNewScheme.Show()
+        gbItemID.Width = 242
+        gbItemID.Height = 83
+        gbItem.Width = 638
+        gbItem.Height = 351
+        Width = 683
+        Height = 647
+        WriteToLog("Enabled advanced view.", "Info")
     End Sub
 
     Private Sub DisableAdvancedView()
-
+        cbNormalItem.Hide()
+        cbSuspiciousStew.Hide()
+        cbEnchantedBook.Hide()
+        cbPotion.Hide()
+        cbSplashPotion.Hide()
+        cbLingeringPotion.Hide()
+        cbTippedArrow.Hide()
+        cbGoatHorn.Hide()
+        cbSamePrefix.Hide()
+        tbSamePrefix.Hide()
+        cbCustomNBT.Hide()
+        tbCustomNBT.Hide()
+        btnOverwriteSelectedScheme.Hide()
+        btnSaveAsNewScheme.Hide()
+        gbItemID.Width = 395
+        gbItemID.Height = 83
+        gbItem.Width = 638
+        gbItem.Height = 237
+        Width = 683
+        Height = 528
+        WriteToLog("Disabled advanced view.", "Info")
     End Sub
 
     Private Sub AddMultipleItems()
@@ -1939,5 +1983,13 @@ Public Class frmMain
 
     Private Sub bgwAddItems_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwAddItems.ProgressChanged
         pbAddingItemsProgress.Value = e.ProgressPercentage
+    End Sub
+
+    Private Sub cbEnableAdvancedView_CheckedChanged(sender As Object, e As EventArgs) Handles cbEnableAdvancedView.CheckedChanged
+        If cbEnableAdvancedView.Checked Then
+            EnableAdvancedView()
+        Else
+            DisableAdvancedView()
+        End If
     End Sub
 End Class
