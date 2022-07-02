@@ -59,4 +59,12 @@
         MsgBox("Copied the command to the clipboard!" + vbNewLine + "Paste it ingame with CTRL + V", MsgBoxStyle.Information, "Copied command")
         frmMain.WriteToLog("Copied command for Item List Importer to clipboard.", "Info")
     End Sub
+
+    Private Sub frmItemImporter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.DontImportVanillaItemsByDefault = True Then
+            cbDontImportVanilla.Checked = True
+        Else
+            cbDontImportVanilla.Checked = False
+        End If
+    End Sub
 End Class

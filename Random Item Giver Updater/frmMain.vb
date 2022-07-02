@@ -66,7 +66,17 @@ Public Class frmMain
 
         InitializeLoadingSettings()
 
-        MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
+        If My.Settings.DisableLogging = True Then
+            frmOutput.rtbLog.Clear()
+            If My.Computer.FileSystem.FileExists(AppData + "/Random Item Giver Updater/DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile(AppData + "/Random Item Giver Updater/DebugLogTemp")
+            End If
+        End If
+
+            If My.Settings.HideAlphaWarning = False Then
+            MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
+        End If
+
         qm = Quotationmark.Text
         cbxVersion.SelectedItem = "Version 1.19"
 
@@ -82,6 +92,10 @@ Public Class frmMain
         Items10 = rtbItems10.Lines
         Items32 = rtbItems32.Lines
         Items64 = rtbItems64.Lines
+
+        If My.Settings.UseAdvancedViewByDefault = True Then
+            EnableAdvancedView()
+        End If
     End Sub
 
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
@@ -260,6 +274,14 @@ Public Class frmMain
             End Select
 
         End Try
+    End Sub
+
+    Private Sub EnableAdvancedView()
+
+    End Sub
+
+    Private Sub DisableAdvancedView()
+
     End Sub
 
     Private Sub AddMultipleItems()
@@ -1286,45 +1308,47 @@ Public Class frmMain
     End Sub
 
     Public Sub WriteToLog(Message As String, Type As String)
-        If Type = "Error" Then
-            If InvokeRequired = True Then
-                Invoke(Sub()
-                           rtbLog.SelectionColor = Color.Red
-                           rtbLog.AppendText("[" + DateTime.Now + "] " + "[ERROR] " + Message + vbNewLine)
-                       End Sub)
+        If My.Settings.DisableLogging = False Then
+            If Type = "Error" Then
+                If InvokeRequired = True Then
+                    Invoke(Sub()
+                               rtbLog.SelectionColor = Color.Red
+                               rtbLog.AppendText("[" + DateTime.Now + "] " + "[ERROR] " + Message + vbNewLine)
+                           End Sub)
+                Else
+                    rtbLog.SelectionColor = Color.Red
+                    rtbLog.AppendText("[" + DateTime.Now + "] " + "[ERROR] " + Message + vbNewLine)
+                End If
+            ElseIf Type = "Info" Then
+                If InvokeRequired = True Then
+                    Invoke(Sub()
+                               rtbLog.SelectionColor = Color.FromArgb(50, 177, 205)
+                               rtbLog.AppendText("[" + DateTime.Now + "] " + "[INFO] " + Message + vbNewLine)
+                           End Sub)
+                Else
+                    rtbLog.SelectionColor = Color.FromArgb(50, 177, 205)
+                    rtbLog.AppendText("[" + DateTime.Now + "] " + "[INFO] " + Message + vbNewLine)
+                End If
+            ElseIf Type = "Warning" Then
+                If InvokeRequired = True Then
+                    Invoke(Sub()
+                               rtbLog.SelectionColor = Color.DarkOrange
+                               rtbLog.AppendText("[" + DateTime.Now + "] " + "[WARNING] " + Message + vbNewLine)
+                           End Sub)
+                Else
+                    rtbLog.SelectionColor = Color.DarkOrange
+                    rtbLog.AppendText("[" + DateTime.Now + "] " + "[WARNING] " + Message + vbNewLine)
+                End If
             Else
-                rtbLog.SelectionColor = Color.Red
-                rtbLog.AppendText("[" + DateTime.Now + "] " + "[ERROR] " + Message + vbNewLine)
-            End If
-        ElseIf Type = "Info" Then
-            If InvokeRequired = True Then
-                Invoke(Sub()
-                           rtbLog.SelectionColor = Color.FromArgb(50, 177, 205)
-                           rtbLog.AppendText("[" + DateTime.Now + "] " + "[INFO] " + Message + vbNewLine)
-                       End Sub)
-            Else
-                rtbLog.SelectionColor = Color.FromArgb(50, 177, 205)
-                rtbLog.AppendText("[" + DateTime.Now + "] " + "[INFO] " + Message + vbNewLine)
-            End If
-        ElseIf Type = "Warning" Then
-            If InvokeRequired = True Then
-                Invoke(Sub()
-                           rtbLog.SelectionColor = Color.DarkOrange
-                           rtbLog.AppendText("[" + DateTime.Now + "] " + "[WARNING] " + Message + vbNewLine)
-                       End Sub)
-            Else
-                rtbLog.SelectionColor = Color.DarkOrange
-                rtbLog.AppendText("[" + DateTime.Now + "] " + "[WARNING] " + Message + vbNewLine)
-            End If
-        Else
-            If InvokeRequired = True Then
-                Invoke(Sub()
-                           rtbLog.SelectionColor = Color.Red
-                           rtbLog.AppendText("--> Critical Log Error: Invalid type received" + vbNewLine)
-                       End Sub)
-            Else
-                rtbLog.SelectionColor = Color.Red
-                rtbLog.AppendText("--> Critical Log Error: Invalid type received" + vbNewLine)
+                If InvokeRequired = True Then
+                    Invoke(Sub()
+                               rtbLog.SelectionColor = Color.Red
+                               rtbLog.AppendText("--> Critical Log Error: Invalid type received" + vbNewLine)
+                           End Sub)
+                Else
+                    rtbLog.SelectionColor = Color.Red
+                    rtbLog.AppendText("--> Critical Log Error: Invalid type received" + vbNewLine)
+                End If
             End If
         End If
     End Sub

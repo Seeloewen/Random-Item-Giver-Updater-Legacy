@@ -42,6 +42,7 @@ Public Class frmSettings
                 My.Settings.DisableLogging = True
             Else
                 My.Settings.DisableLogging = False
+                frmOutput.rtbLog.Clear()
             End If
             SettingsArray(7) = "DisableLogging=" + My.Settings.DisableLogging.ToString
             frmMain.WriteToLog("Saved setting " + SettingsArray(7), "Info")

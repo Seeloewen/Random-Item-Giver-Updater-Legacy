@@ -388,9 +388,9 @@ Partial Class frmSettings
         Me.cbDontImportVanillaItemsByDefault.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbDontImportVanillaItemsByDefault.Location = New System.Drawing.Point(18, 35)
         Me.cbDontImportVanillaItemsByDefault.Name = "cbDontImportVanillaItemsByDefault"
-        Me.cbDontImportVanillaItemsByDefault.Size = New System.Drawing.Size(434, 20)
+        Me.cbDontImportVanillaItemsByDefault.Size = New System.Drawing.Size(235, 20)
         Me.cbDontImportVanillaItemsByDefault.TabIndex = 7
-        Me.cbDontImportVanillaItemsByDefault.Text = "Don't import vanilla items (Recommended when using the TellMe file)"
+        Me.cbDontImportVanillaItemsByDefault.Text = "Don't import vanilla items by default"
         Me.cbDontImportVanillaItemsByDefault.UseVisualStyleBackColor = True
         '
         'lblDefaultSettingsItemImporter
