@@ -50,7 +50,6 @@ Partial Class frmSettings
         Me.cbxDefaultScheme = New System.Windows.Forms.ComboBox()
         Me.lblEditSchemeEditor = New System.Windows.Forms.Label()
         Me.cbSelectDefaultScheme = New System.Windows.Forms.CheckBox()
-        Me.btnOpenSchemeEditor = New System.Windows.Forms.Button()
         Me.tpListImporter = New System.Windows.Forms.TabPage()
         Me.cbDontImportVanillaItemsByDefault = New System.Windows.Forms.CheckBox()
         Me.lblDefaultSettingsItemImporter = New System.Windows.Forms.Label()
@@ -318,7 +317,6 @@ Partial Class frmSettings
         Me.tpSchemes.Controls.Add(Me.cbxDefaultScheme)
         Me.tpSchemes.Controls.Add(Me.lblEditSchemeEditor)
         Me.tpSchemes.Controls.Add(Me.cbSelectDefaultScheme)
-        Me.tpSchemes.Controls.Add(Me.btnOpenSchemeEditor)
         Me.tpSchemes.Location = New System.Drawing.Point(4, 25)
         Me.tpSchemes.Name = "tpSchemes"
         Me.tpSchemes.Size = New System.Drawing.Size(480, 296)
@@ -331,7 +329,7 @@ Partial Class frmSettings
         Me.cbxDefaultScheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxDefaultScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxDefaultScheme.FormattingEnabled = True
-        Me.cbxDefaultScheme.Location = New System.Drawing.Point(16, 156)
+        Me.cbxDefaultScheme.Location = New System.Drawing.Point(16, 121)
         Me.cbxDefaultScheme.Name = "cbxDefaultScheme"
         Me.cbxDefaultScheme.Size = New System.Drawing.Size(301, 24)
         Me.cbxDefaultScheme.TabIndex = 16
@@ -342,7 +340,7 @@ Partial Class frmSettings
         Me.lblEditSchemeEditor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEditSchemeEditor.Location = New System.Drawing.Point(13, 12)
         Me.lblEditSchemeEditor.Name = "lblEditSchemeEditor"
-        Me.lblEditSchemeEditor.Size = New System.Drawing.Size(426, 64)
+        Me.lblEditSchemeEditor.Size = New System.Drawing.Size(450, 64)
         Me.lblEditSchemeEditor.TabIndex = 13
         Me.lblEditSchemeEditor.Text = resources.GetString("lblEditSchemeEditor.Text")
         '
@@ -352,22 +350,12 @@ Partial Class frmSettings
         Me.cbSelectDefaultScheme.Checked = True
         Me.cbSelectDefaultScheme.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbSelectDefaultScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSelectDefaultScheme.Location = New System.Drawing.Point(16, 130)
+        Me.cbSelectDefaultScheme.Location = New System.Drawing.Point(16, 95)
         Me.cbSelectDefaultScheme.Name = "cbSelectDefaultScheme"
         Me.cbSelectDefaultScheme.Size = New System.Drawing.Size(176, 20)
         Me.cbSelectDefaultScheme.TabIndex = 15
         Me.cbSelectDefaultScheme.Text = "Select scheme by default"
         Me.cbSelectDefaultScheme.UseVisualStyleBackColor = True
-        '
-        'btnOpenSchemeEditor
-        '
-        Me.btnOpenSchemeEditor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOpenSchemeEditor.Location = New System.Drawing.Point(16, 79)
-        Me.btnOpenSchemeEditor.Name = "btnOpenSchemeEditor"
-        Me.btnOpenSchemeEditor.Size = New System.Drawing.Size(185, 25)
-        Me.btnOpenSchemeEditor.TabIndex = 14
-        Me.btnOpenSchemeEditor.Text = "Open Scheme Editor"
-        Me.btnOpenSchemeEditor.UseVisualStyleBackColor = True
         '
         'tpListImporter
         '
@@ -476,7 +464,6 @@ Partial Class frmSettings
     Friend WithEvents cbxDefaultScheme As ComboBox
     Friend WithEvents lblEditSchemeEditor As Label
     Friend WithEvents cbSelectDefaultScheme As CheckBox
-    Friend WithEvents btnOpenSchemeEditor As Button
     Friend WithEvents lblImportExportSettings As Label
     Friend WithEvents btnExportSettings As Button
     Friend WithEvents btnImportSettings As Button

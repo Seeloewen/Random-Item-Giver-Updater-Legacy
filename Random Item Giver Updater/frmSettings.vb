@@ -3,6 +3,7 @@
 Public Class frmSettings
 
     Dim SettingsArray As String()
+    Dim ProfileList As String()
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         If My.Computer.FileSystem.FileExists(frmMain.AppData + "/Random Item Giver Updater/settings.txt") Then
@@ -58,7 +59,7 @@ Public Class frmSettings
             'Save datapack profiles settings
             If cbLoadDefaultProfile.Checked Then
                 My.Settings.LoadDefaultProfile = True
-                My.Settings.DefaultProfile = cbxDefaultProfile.Text
+                My.Settings.DefaultProfile = cbxDefaultProfile.SelectedItem
             Else
                 My.Settings.LoadDefaultProfile = False
             End If
@@ -153,8 +154,6 @@ Public Class frmSettings
             cbLoadDefaultProfile.Checked = False
         End If
 
-        'TODO: INSERT CODE FOR LOADING PROFILES AND SCHEMES HERE!
-
         If My.Settings.SelectDefaultScheme = True Then
             cbSelectDefaultScheme.Checked = True
         Else
@@ -166,6 +165,52 @@ Public Class frmSettings
         Else
             cbDontImportVanillaItemsByDefault.Checked = False
         End If
+
+        'Load profiles
+        If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(frmMain.ProfileDirectory)
+        End If
+
+        GetFiles(frmMain.ProfileDirectory)
+
+        If My.Settings.LoadDefaultProfile = True Then
+            cbLoadDefaultProfile.Checked = True
+            If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
+                If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
+                    cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
+                Else
+                    MsgBox("Error: Default profile no longer exists. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
+                    cbLoadDefaultProfile.Checked = False
+                    My.Settings.LoadDefaultProfile = False
+                End If
+            Else
+                MsgBox("Error: Could not load default profile as it is empty. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
+                cbLoadDefaultProfile.Checked = False
+                My.Settings.LoadDefaultProfile = False
+            End If
+        End If
+    End Sub
+
+    Sub GetFiles(Path As String)
+        If Path.Trim().Length = 0 Then
+            Return
+        End If
+
+        ProfileList = Directory.GetFileSystemEntries(Path)
+
+        Try
+            For Each Profile As String In ProfileList
+                If Directory.Exists(Profile) Then
+                    GetFiles(Profile)
+                Else
+                    Profile = Profile.Replace(Path, "")
+                    Profile = Profile.Replace(".txt", "")
+                    cbxDefaultProfile.Items.Add(Profile)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+        End Try
     End Sub
 
     Private Sub btnClearTempFiles_Click(sender As Object, e As EventArgs) Handles btnClearTempFiles.Click
@@ -221,5 +266,9 @@ Public Class frmSettings
             frmMain.WriteToLog("Could not export settings: " + ex.Message, "Error")
         End Try
 
+    End Sub
+
+    Private Sub btnOpenProfileEditor_Click(sender As Object, e As EventArgs) Handles btnOpenProfileEditor.Click
+        frmProfileEditor.ShowDialog()
     End Sub
 End Class
