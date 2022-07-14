@@ -6,10 +6,13 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public VersionLog As String = "0.3.0-a (02.07.2022)"
+    Public VersionLog As String = "0.3.0-a (14.07.2022)"
     Public SettingsVersion As Double = 1
     Dim SettingsArray As String()
     Dim LoadedSettingsVersion As Double
+    Public ProfileDirectory As String = AppData + "\Random Item Giver Updater\Profiles\"
+    Dim ProfileList As String()
+    Dim FirstLoadCompleted As Boolean = False
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
@@ -65,6 +68,7 @@ Public Class frmMain
         WriteToLog("You are running an alpha build, may be unstable!", "Warning")
 
         InitializeLoadingSettings()
+        InitializeProfilesAndSchemes()
 
         If My.Settings.DisableLogging = True Then
             frmOutput.rtbLog.Clear()
@@ -101,6 +105,37 @@ Public Class frmMain
             cbEnableAdvancedView.Checked = False
         End If
     End Sub
+
+    Private Sub InitializeProfilesAndSchemes()
+        If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(ProfileDirectory)
+        End If
+
+        GetFiles(ProfileDirectory)
+
+        If My.Settings.LoadDefaultProfile = True Then
+            frmSettings.cbLoadDefaultProfile.Checked = True
+            If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
+                If My.Computer.FileSystem.FileExists(ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
+                    cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
+                    frmLoadProfileFrom.LoadProfile(cbxDefaultProfile.SelectedItem, False)
+                Else
+                    frmSettings.Show()
+                    frmSettings.cbLoadDefaultProfile.Checked = False
+                    My.Settings.LoadDefaultProfile = False
+                    frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                    frmSettings.Close()
+                End If
+            Else
+                frmSettings.Show()
+                frmSettings.cbLoadDefaultProfile.Checked = False
+                My.Settings.LoadDefaultProfile = False
+                frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                frmSettings.Close()
+            End If
+        End If
+    End Sub
+
 
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
         btnAddItem.Hide()
@@ -235,6 +270,28 @@ Public Class frmMain
         End If
     End Sub
 
+    Sub GetFiles(Path As String)
+        If Path.Trim().Length = 0 Then
+            Return
+        End If
+
+        ProfileList = Directory.GetFileSystemEntries(Path)
+
+        Try
+            For Each Profile As String In ProfileList
+                If Directory.Exists(Profile) Then
+                    GetFiles(Profile)
+                Else
+                    Profile = Profile.Replace(Path, "")
+                    Profile = Profile.Replace(".txt", "")
+                    cbxDefaultProfile.Items.Add(Profile)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+        End Try
+    End Sub
+
     Private Sub LoadSettings()
         Try
 
@@ -295,6 +352,7 @@ Public Class frmMain
         tbCustomNBT.Show()
         btnOverwriteSelectedScheme.Show()
         btnSaveAsNewScheme.Show()
+        btnDeleteSelectedScheme.Show()
         gbItemID.Width = 242
         gbItemID.Height = 83
         gbItem.Width = 638
@@ -319,6 +377,7 @@ Public Class frmMain
         tbCustomNBT.Hide()
         btnOverwriteSelectedScheme.Hide()
         btnSaveAsNewScheme.Hide()
+        btnDeleteSelectedScheme.Hide()
         gbItemID.Width = 395
         gbItemID.Height = 83
         gbItem.Width = 638
@@ -1692,7 +1751,9 @@ Public Class frmMain
     Private Sub btnBrowseDatapackPath_Click(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.Click
         fbdMainFolderPath.ShowDialog()
         tbDatapackPath.Text = fbdMainFolderPath.SelectedPath
+    End Sub
 
+    Public Sub DetermineDatapackVersion()
         'Detect version of the datapack
         If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
             If My.Computer.FileSystem.FileExists(tbDatapackPath.Text + "/pack.mcmeta") Then
@@ -1749,8 +1810,8 @@ Public Class frmMain
         Else
             lblDatapackDetection.Text = "No datapack detected."
         End If
-    End Sub
 
+    End Sub
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
         frmAbout.Show()
     End Sub
@@ -1946,6 +2007,9 @@ Public Class frmMain
 
     Private Sub tbDatapackPath_TextChanged(sender As Object, e As EventArgs) Handles tbDatapackPath.TextChanged
         DatapackPath = tbDatapackPath.Text
+        If FirstLoadCompleted Then
+            DetermineDatapackVersion()
+        End If
     End Sub
 
     Private Sub cbxVersion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxVersion.SelectedIndexChanged
@@ -1991,5 +2055,18 @@ Public Class frmMain
         Else
             DisableAdvancedView()
         End If
+    End Sub
+
+    Private Sub btnLoadProfile_Click(sender As Object, e As EventArgs) Handles btnLoadProfile.Click
+        frmLoadProfileFrom.ShowDialog()
+    End Sub
+
+    Private Sub btnSaveProfile_Click(sender As Object, e As EventArgs) Handles btnSaveProfile.Click
+        frmSaveProfileAs.ShowDialog()
+    End Sub
+
+    Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        DetermineDatapackVersion()
+        FirstLoadCompleted = True
     End Sub
 End Class

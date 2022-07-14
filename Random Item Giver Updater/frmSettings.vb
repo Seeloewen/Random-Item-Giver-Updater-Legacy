@@ -171,6 +171,7 @@ Public Class frmSettings
             My.Computer.FileSystem.CreateDirectory(frmMain.ProfileDirectory)
         End If
 
+        cbxDefaultProfile.Items.Clear()
         GetFiles(frmMain.ProfileDirectory)
 
         If My.Settings.LoadDefaultProfile = True Then
