@@ -82,7 +82,7 @@ Partial Class frmSaveProfileAs
         Me.MinimizeBox = False
         Me.Name = "frmSaveProfileAs"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Save profile as..."
+        Me.Text = "Save Profile as..."
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
