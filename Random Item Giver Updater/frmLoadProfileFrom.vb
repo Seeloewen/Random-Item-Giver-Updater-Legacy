@@ -42,7 +42,16 @@ Public Class frmLoadProfileFrom
     End Sub
 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
-        LoadProfile(cbxProfiles.SelectedItem, True)
+        Try
+            LoadProfile(cbxProfiles.SelectedItem, True)
+        Catch ex As Exception
+            Select Case MsgBox("Error when loading profile. It might be corrupted or outdated. Do you want to delete it?" + vbNewLine + "If you choose 'no', you will be asked again next time you load the profile.", MessageBoxButtons.YesNo)
+                Case Windows.Forms.DialogResult.Yes
+                    My.Computer.FileSystem.DeleteFile(frmMain.ProfileDirectory + cbxProfiles.SelectedItem + ".txt")
+                    cbxProfiles.Items.Remove(cbxProfiles.SelectedItem)
+                    MsgBox("Successfully deleted the corrupted profile.", MsgBoxStyle.Information, "Deleted profile")
+            End Select
+        End Try
     End Sub
 
     Public Sub LoadProfile(Profile, ShowMessage)
