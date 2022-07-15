@@ -34,6 +34,7 @@ Partial Class frmMain
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
         Me.lblSelectDatapack = New System.Windows.Forms.Label()
         Me.gbItem = New System.Windows.Forms.GroupBox()
+        Me.btnDeleteSelectedScheme = New System.Windows.Forms.Button()
         Me.cbEnableAdvancedView = New System.Windows.Forms.CheckBox()
         Me.cbxScheme = New System.Windows.Forms.ComboBox()
         Me.lblScheme = New System.Windows.Forms.Label()
@@ -93,6 +94,8 @@ Partial Class frmMain
         Me.pbAddingItemsProgress = New System.Windows.Forms.ProgressBar()
         Me.bgwAddItems = New System.ComponentModel.BackgroundWorker()
         Me.lblAddingItems = New System.Windows.Forms.Label()
+        Me.cbxDefaultProfile = New System.Windows.Forms.ComboBox()
+        Me.settings = New System.Windows.Forms.RichTextBox()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
@@ -209,6 +212,7 @@ Partial Class frmMain
         '
         'gbItem
         '
+        Me.gbItem.Controls.Add(Me.btnDeleteSelectedScheme)
         Me.gbItem.Controls.Add(Me.cbEnableAdvancedView)
         Me.gbItem.Controls.Add(Me.cbxScheme)
         Me.gbItem.Controls.Add(Me.lblScheme)
@@ -217,8 +221,6 @@ Partial Class frmMain
         Me.gbItem.Controls.Add(Me.cbAddItemsFast)
         Me.gbItem.Controls.Add(Me.cbGoatHorn)
         Me.gbItem.Controls.Add(Me.cbNormalItem)
-        Me.gbItem.Controls.Add(Me.cbCustomNBT)
-        Me.gbItem.Controls.Add(Me.tbCustomNBT)
         Me.gbItem.Controls.Add(Me.tbSmallOutput)
         Me.gbItem.Controls.Add(Me.lblOutput)
         Me.gbItem.Controls.Add(Me.tbSamePrefix)
@@ -236,6 +238,8 @@ Partial Class frmMain
         Me.gbItem.Controls.Add(Me.lblID)
         Me.gbItem.Controls.Add(Me.lblAddNewItems)
         Me.gbItem.Controls.Add(Me.gbItemID)
+        Me.gbItem.Controls.Add(Me.cbCustomNBT)
+        Me.gbItem.Controls.Add(Me.tbCustomNBT)
         Me.gbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gbItem.Location = New System.Drawing.Point(16, 196)
         Me.gbItem.Name = "gbItem"
@@ -243,6 +247,16 @@ Partial Class frmMain
         Me.gbItem.TabIndex = 58
         Me.gbItem.TabStop = False
         Me.gbItem.Text = "Add item"
+        '
+        'btnDeleteSelectedScheme
+        '
+        Me.btnDeleteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteSelectedScheme.Location = New System.Drawing.Point(449, 169)
+        Me.btnDeleteSelectedScheme.Name = "btnDeleteSelectedScheme"
+        Me.btnDeleteSelectedScheme.Size = New System.Drawing.Size(179, 23)
+        Me.btnDeleteSelectedScheme.TabIndex = 90
+        Me.btnDeleteSelectedScheme.Text = "Delete selected scheme"
+        Me.btnDeleteSelectedScheme.UseVisualStyleBackColor = True
         '
         'cbEnableAdvancedView
         '
@@ -336,7 +350,7 @@ Partial Class frmMain
         '
         Me.cbCustomNBT.AutoSize = True
         Me.cbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCustomNBT.Location = New System.Drawing.Point(14, 205)
+        Me.cbCustomNBT.Location = New System.Drawing.Point(14, 154)
         Me.cbCustomNBT.Name = "cbCustomNBT"
         Me.cbCustomNBT.Size = New System.Drawing.Size(171, 20)
         Me.cbCustomNBT.TabIndex = 79
@@ -347,7 +361,7 @@ Partial Class frmMain
         '
         Me.tbCustomNBT.Enabled = False
         Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbCustomNBT.Location = New System.Drawing.Point(14, 231)
+        Me.tbCustomNBT.Location = New System.Drawing.Point(14, 176)
         Me.tbCustomNBT.Name = "tbCustomNBT"
         Me.tbCustomNBT.Size = New System.Drawing.Size(242, 22)
         Me.tbCustomNBT.TabIndex = 78
@@ -378,7 +392,7 @@ Partial Class frmMain
         '
         Me.tbSamePrefix.Enabled = False
         Me.tbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbSamePrefix.Location = New System.Drawing.Point(14, 177)
+        Me.tbSamePrefix.Location = New System.Drawing.Point(14, 229)
         Me.tbSamePrefix.Name = "tbSamePrefix"
         Me.tbSamePrefix.Size = New System.Drawing.Size(242, 22)
         Me.tbSamePrefix.TabIndex = 75
@@ -390,7 +404,7 @@ Partial Class frmMain
         Me.cbSamePrefix.Checked = True
         Me.cbSamePrefix.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSamePrefix.Location = New System.Drawing.Point(14, 154)
+        Me.cbSamePrefix.Location = New System.Drawing.Point(14, 208)
         Me.cbSamePrefix.Name = "cbSamePrefix"
         Me.cbSamePrefix.Size = New System.Drawing.Size(214, 20)
         Me.cbSamePrefix.TabIndex = 73
@@ -761,7 +775,7 @@ Partial Class frmMain
         'pbAddingItemsProgress
         '
         Me.pbAddingItemsProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pbAddingItemsProgress.Location = New System.Drawing.Point(158, 562)
+        Me.pbAddingItemsProgress.Location = New System.Drawing.Point(158, 567)
         Me.pbAddingItemsProgress.Name = "pbAddingItemsProgress"
         Me.pbAddingItemsProgress.Size = New System.Drawing.Size(288, 23)
         Me.pbAddingItemsProgress.TabIndex = 84
@@ -776,11 +790,27 @@ Partial Class frmMain
         Me.lblAddingItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblAddingItems.AutoSize = True
         Me.lblAddingItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAddingItems.Location = New System.Drawing.Point(17, 561)
+        Me.lblAddingItems.Location = New System.Drawing.Point(17, 565)
         Me.lblAddingItems.Name = "lblAddingItems"
         Me.lblAddingItems.Size = New System.Drawing.Size(135, 24)
         Me.lblAddingItems.TabIndex = 86
         Me.lblAddingItems.Text = "Adding items..."
+        '
+        'cbxDefaultProfile
+        '
+        Me.cbxDefaultProfile.FormattingEnabled = True
+        Me.cbxDefaultProfile.Location = New System.Drawing.Point(73, 608)
+        Me.cbxDefaultProfile.Name = "cbxDefaultProfile"
+        Me.cbxDefaultProfile.Size = New System.Drawing.Size(121, 21)
+        Me.cbxDefaultProfile.TabIndex = 87
+        '
+        'settings
+        '
+        Me.settings.Location = New System.Drawing.Point(16, 668)
+        Me.settings.Name = "settings"
+        Me.settings.Size = New System.Drawing.Size(51, 53)
+        Me.settings.TabIndex = 88
+        Me.settings.Text = ""
         '
         'frmMain
         '
@@ -788,7 +818,9 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(667, 608)
+        Me.Controls.Add(Me.settings)
         Me.Controls.Add(Me.btnAddItem)
+        Me.Controls.Add(Me.cbxDefaultProfile)
         Me.Controls.Add(Me.lblAddingItems)
         Me.Controls.Add(Me.pbAddingItemsProgress)
         Me.Controls.Add(Me.rtbLog)
@@ -811,7 +843,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.3.0-DEV"
+        Me.Text = "Random Item Giver Updater ALPHA 0.3.0"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)
@@ -894,4 +926,7 @@ Partial Class frmMain
     Friend WithEvents btnOverwriteSelectedScheme As Button
     Friend WithEvents btnSaveAsNewScheme As Button
     Friend WithEvents cbEnableAdvancedView As CheckBox
+    Friend WithEvents cbxDefaultProfile As ComboBox
+    Friend WithEvents btnDeleteSelectedScheme As Button
+    Friend WithEvents settings As RichTextBox
 End Class
