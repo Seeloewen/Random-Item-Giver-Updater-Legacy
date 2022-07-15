@@ -35,6 +35,7 @@ Partial Class frmProfileEditor
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
         Me.lblDatapackPath = New System.Windows.Forms.Label()
         Me.settings = New System.Windows.Forms.RichTextBox()
+        Me.fbdProfileEditor = New System.Windows.Forms.FolderBrowserDialog()
         Me.gbEditProfile.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -197,4 +198,5 @@ Partial Class frmProfileEditor
     Friend WithEvents cbxDatapackVersion As ComboBox
     Friend WithEvents btnBrowse As Button
     Friend WithEvents settings As RichTextBox
+    Friend WithEvents fbdProfileEditor As FolderBrowserDialog
 End Class

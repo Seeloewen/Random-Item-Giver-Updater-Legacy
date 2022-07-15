@@ -77,11 +77,19 @@ Public Class frmProfileEditor
         DatapackVersion = cbxDatapackVersion.SelectedItem
 
         If String.IsNullOrEmpty(cbxProfile.SelectedItem) = False Then
-            My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory)
-            My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + cbxProfile.SelectedItem + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
-            MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
+            If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
+                My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + cbxProfile.SelectedItem + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
+                MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
+            Else
+                MsgBox("Error: No profile selected.", MsgBoxStyle.Critical, "Error")
+            End If
         Else
             MsgBox("Error: Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
         End If
+    End Sub
+
+    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+        fbdProfileEditor.ShowDialog()
+        tbDatapackPath.Text = fbdProfileEditor.SelectedPath
     End Sub
 End Class
