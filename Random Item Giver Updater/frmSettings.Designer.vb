@@ -56,6 +56,8 @@ Partial Class frmSettings
         Me.SettingsFilePreset = New System.Windows.Forms.RichTextBox()
         Me.ofdImportSettings = New System.Windows.Forms.OpenFileDialog()
         Me.fbdExportSettings = New System.Windows.Forms.FolderBrowserDialog()
+        Me.lblRestoreDefaultSchemes = New System.Windows.Forms.Label()
+        Me.btnRestoreDefaultSchemes = New System.Windows.Forms.Button()
         Me.tcSettings.SuspendLayout()
         Me.tpGeneral.SuspendLayout()
         Me.tpSoftware.SuspendLayout()
@@ -314,6 +316,8 @@ Partial Class frmSettings
         '
         'tpSchemes
         '
+        Me.tpSchemes.Controls.Add(Me.btnRestoreDefaultSchemes)
+        Me.tpSchemes.Controls.Add(Me.lblRestoreDefaultSchemes)
         Me.tpSchemes.Controls.Add(Me.cbxDefaultScheme)
         Me.tpSchemes.Controls.Add(Me.lblEditSchemeEditor)
         Me.tpSchemes.Controls.Add(Me.cbSelectDefaultScheme)
@@ -406,6 +410,24 @@ Partial Class frmSettings
         '
         Me.fbdExportSettings.Description = "Select the folder in which you want to save the exported settings file."
         '
+        'lblRestoreDefaultSchemes
+        '
+        Me.lblRestoreDefaultSchemes.AutoSize = True
+        Me.lblRestoreDefaultSchemes.Location = New System.Drawing.Point(13, 166)
+        Me.lblRestoreDefaultSchemes.Name = "lblRestoreDefaultSchemes"
+        Me.lblRestoreDefaultSchemes.Size = New System.Drawing.Size(454, 48)
+        Me.lblRestoreDefaultSchemes.TabIndex = 9
+        Me.lblRestoreDefaultSchemes.Text = resources.GetString("lblRestoreDefaultSchemes.Text")
+        '
+        'btnRestoreDefaultSchemes
+        '
+        Me.btnRestoreDefaultSchemes.Location = New System.Drawing.Point(16, 227)
+        Me.btnRestoreDefaultSchemes.Name = "btnRestoreDefaultSchemes"
+        Me.btnRestoreDefaultSchemes.Size = New System.Drawing.Size(301, 23)
+        Me.btnRestoreDefaultSchemes.TabIndex = 17
+        Me.btnRestoreDefaultSchemes.Text = "Restore Default Schemes"
+        Me.btnRestoreDefaultSchemes.UseVisualStyleBackColor = True
+        '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -473,4 +495,6 @@ Partial Class frmSettings
     Friend WithEvents lblAdvancedViewByDefault As Label
     Friend WithEvents ofdImportSettings As OpenFileDialog
     Friend WithEvents fbdExportSettings As FolderBrowserDialog
+    Friend WithEvents btnRestoreDefaultSchemes As Button
+    Friend WithEvents lblRestoreDefaultSchemes As Label
 End Class

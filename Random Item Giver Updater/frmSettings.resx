@@ -117,17 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblEditSchemeEditor.Text" xml:space="preserve">
-    <value>Schemes can be saved and loaded in the main window.
-Schemes are a combination of the options available for adding items.
-It can save custom nbt tag, prefix and even more options. You can also
-remove the default schemes. You can edit the schemes in the main window.</value>
-  </data>
   <data name="lblTempFiles.Text" xml:space="preserve">
     <value>The software stores some data in temporary text files to make some 
 processes easier. These files should only use up a few kilobytes of space.
 Please note that some files in this directory also contain profiles and
 schemes, those are not temporary and should not be deleted.</value>
+  </data>
+  <data name="lblRestoreDefaultSchemes.Text" xml:space="preserve">
+    <value>There are a few default schemes that are created when starting the software 
+for the first time. If you deleted them or for some other reason want to restore
+them, then here's just the right feature for you!</value>
+  </data>
+  <data name="lblEditSchemeEditor.Text" xml:space="preserve">
+    <value>Schemes can be saved and loaded in the main window.
+Schemes are a combination of the options available for adding items.
+It can save custom nbt tag, prefix and even more options. You can also
+remove the default schemes. You can edit the schemes in the main window.</value>
   </data>
   <data name="SettingsFilePreset.Text" xml:space="preserve">
     <value>#Random Item Giver Settings File

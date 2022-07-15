@@ -4,6 +4,7 @@ Public Class frmSettings
 
     Dim SettingsArray As String()
     Dim ProfileList As String()
+    Dim SchemeList As String()
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         If My.Computer.FileSystem.FileExists(frmMain.AppData + "/Random Item Giver Updater/settings.txt") Then
@@ -172,7 +173,7 @@ Public Class frmSettings
         End If
 
         cbxDefaultProfile.Items.Clear()
-        GetFiles(frmMain.ProfileDirectory)
+        GetProfileFiles(frmMain.ProfileDirectory)
 
         If My.Settings.LoadDefaultProfile = True Then
             cbLoadDefaultProfile.Checked = True
@@ -190,9 +191,34 @@ Public Class frmSettings
                 My.Settings.LoadDefaultProfile = False
             End If
         End If
+
+        'Load Schemes
+        If My.Computer.FileSystem.DirectoryExists(frmMain.SchemeDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(frmMain.SchemeDirectory)
+        End If
+
+        cbxDefaultScheme.Items.Clear()
+        GetSchemeFiles(frmMain.SchemeDirectory)
+
+        If My.Settings.SelectDefaultScheme = True Then
+            cbSelectDefaultScheme.Checked = True
+            If String.IsNullOrEmpty(My.Settings.DefaultScheme) = False Then
+                If My.Computer.FileSystem.FileExists(frmMain.SchemeDirectory + My.Settings.DefaultScheme + ".txt") Then
+                    cbxDefaultScheme.SelectedItem = My.Settings.DefaultScheme
+                Else
+                    MsgBox("Error: Default scheme no longer exists. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
+                    cbSelectDefaultScheme.Checked = False
+                    My.Settings.SelectDefaultScheme = False
+                End If
+            Else
+                MsgBox("Error: Could not load default scheme as it is empty. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
+                cbSelectDefaultScheme.Checked = False
+                My.Settings.SelectDefaultScheme = False
+            End If
+        End If
     End Sub
 
-    Sub GetFiles(Path As String)
+    Sub GetProfileFiles(Path As String)
         If Path.Trim().Length = 0 Then
             Return
         End If
@@ -202,7 +228,7 @@ Public Class frmSettings
         Try
             For Each Profile As String In ProfileList
                 If Directory.Exists(Profile) Then
-                    GetFiles(Profile)
+                    GetProfileFiles(Profile)
                 Else
                     Profile = Profile.Replace(Path, "")
                     Profile = Profile.Replace(".txt", "")
@@ -213,6 +239,29 @@ Public Class frmSettings
             MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
         End Try
     End Sub
+
+    Sub GetSchemeFiles(Path As String)
+        If Path.Trim().Length = 0 Then
+            Return
+        End If
+
+        SchemeList = Directory.GetFileSystemEntries(Path)
+
+        Try
+            For Each Scheme As String In SchemeList
+                If Directory.Exists(Scheme) Then
+                    GetSchemeFiles(Scheme)
+                Else
+                    Scheme = Scheme.Replace(Path, "")
+                    Scheme = Scheme.Replace(".txt", "")
+                    cbxDefaultScheme.Items.Add(Scheme)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox("Error: Could not load schemes. Please try again." + vbNewLine + "Exception: " + ex.Message)
+        End Try
+    End Sub
+
 
     Private Sub btnClearTempFiles_Click(sender As Object, e As EventArgs) Handles btnClearTempFiles.Click
         Try
@@ -271,5 +320,10 @@ Public Class frmSettings
 
     Private Sub btnOpenProfileEditor_Click(sender As Object, e As EventArgs) Handles btnOpenProfileEditor.Click
         frmProfileEditor.ShowDialog()
+    End Sub
+
+    Private Sub btnRestoreDefaultSchemes_Click(sender As Object, e As EventArgs) Handles btnRestoreDefaultSchemes.Click
+        frmMain.AddDefaultSchemes()
+        MsgBox("Default Schemes were successfully restored! You may need to restart the application to see them.", MsgBoxStyle.Information, "Restored Default Schemes")
     End Sub
 End Class
