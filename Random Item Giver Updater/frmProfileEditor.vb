@@ -28,6 +28,7 @@ Public Class frmProfileEditor
         If String.IsNullOrEmpty(cbxProfile.SelectedItem) = False Then
             My.Computer.FileSystem.DeleteFile(frmMain.ProfileDirectory + cbxProfile.SelectedItem + ".txt")
             MsgBox("Profile was deleted.", MsgBoxStyle.Information, "Deleted")
+            frmMain.WriteToLog("Deleted profile " + cbxProfile.SelectedItem, "Info")
             cbxProfile.Items.Remove(cbxProfile.SelectedItem)
         Else
             MsgBox("Error: Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
@@ -69,6 +70,7 @@ Public Class frmProfileEditor
             Next
         Catch ex As Exception
             MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            frmMain.WriteToLog("Error when loading profiles for Profile Manager: " + ex.Message, "Error")
         End Try
     End Sub
 
@@ -80,6 +82,7 @@ Public Class frmProfileEditor
             If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
                 My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + cbxProfile.SelectedItem + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
                 MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
+                frmMain.WriteToLog("Saved and overwrote profile " + cbxProfile.SelectedItem, "Info")
             Else
                 MsgBox("Error: No profile selected.", MsgBoxStyle.Critical, "Error")
             End If

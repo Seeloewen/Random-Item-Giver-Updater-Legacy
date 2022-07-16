@@ -114,6 +114,7 @@
                                 frmMain.cbxScheme.Items.Clear()
                                 frmMain.GetSchemeFiles(frmMain.SchemeDirectory)
                                 MsgBox("Scheme was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
+                                frmMain.WriteToLog("Saved and overwrote scheme " + NameSource, "Info")
                                 Close()
                             Case Windows.Forms.DialogResult.No
                                 MsgBox("Scheme was not overwritten. Please select a different scheme name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
@@ -123,6 +124,7 @@
                         frmMain.cbxScheme.Items.Clear()
                         frmMain.GetSchemeFiles(frmMain.SchemeDirectory)
                         MsgBox("Scheme was saved.", MsgBoxStyle.Information, "Saved")
+                        frmMain.WriteToLog("Saved scheme " + NameSource, "Info")
                         Close()
                     End If
                 Else
@@ -137,7 +139,8 @@
                     My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + CustomNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine, False)
                     frmMain.cbxScheme.Items.Clear()
                     frmMain.GetSchemeFiles(frmMain.SchemeDirectory)
-                    MsgBox("Scheme was saved.", MsgBoxStyle.Information, "Saved")
+                    MsgBox("Scheme was overwritten and saved.", MsgBoxStyle.Information, "Saved")
+                    frmMain.WriteToLog("Saved and overwrote scheme " + NameSource, "Info")
                     Close()
                 Else
                     MsgBox("Error: Scheme directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")

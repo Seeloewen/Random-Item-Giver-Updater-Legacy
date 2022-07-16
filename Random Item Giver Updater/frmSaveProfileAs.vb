@@ -14,6 +14,7 @@
                         Case Windows.Forms.DialogResult.Yes
                             My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + tbSaveProfileAs.Text + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
                             MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
+                            frmMain.WriteToLog("Saved and overwrote profile " + tbSaveProfileAs.Text, "Info")
                             Close()
                         Case Windows.Forms.DialogResult.No
                             MsgBox("Profile was not overwritten. Please select a different profile name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
@@ -21,6 +22,7 @@
                 Else
                     My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + tbSaveProfileAs.Text + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
                     MsgBox("Profile was saved.", MsgBoxStyle.Information, "Saved")
+                    frmMain.WriteToLog("Saved profile " + tbSaveProfileAs.Text, "Info")
                     Close()
                 End If
             Else

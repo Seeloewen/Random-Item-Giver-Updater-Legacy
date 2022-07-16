@@ -34,6 +34,7 @@ Public Class frmLoadProfileFrom
             Next
         Catch ex As Exception
             MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            frmMain.WriteToLog("Error when loading profiles for 'Load Profile from': " + ex.Message, "Error")
         End Try
     End Sub
 
@@ -44,12 +45,14 @@ Public Class frmLoadProfileFrom
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         Try
             LoadProfile(cbxProfiles.SelectedItem, True)
+            frmMain.WriteToLog("Loaded profile " + cbxProfiles.SelectedItem, "Info")
         Catch ex As Exception
             Select Case MsgBox("Error when loading profile. It might be corrupted or outdated. Do you want to delete it?" + vbNewLine + "If you choose 'no', you will be asked again next time you load the profile.", MessageBoxButtons.YesNo)
                 Case Windows.Forms.DialogResult.Yes
                     My.Computer.FileSystem.DeleteFile(frmMain.ProfileDirectory + cbxProfiles.SelectedItem + ".txt")
                     cbxProfiles.Items.Remove(cbxProfiles.SelectedItem)
                     MsgBox("Successfully deleted the corrupted profile.", MsgBoxStyle.Information, "Deleted profile")
+                    frmMain.WriteToLog("Deleted corrupted profile", "Warning")
             End Select
         End Try
     End Sub

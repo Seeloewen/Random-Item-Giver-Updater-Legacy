@@ -43,8 +43,6 @@ Partial Class frmMain
         Me.cbAddItemsFast = New System.Windows.Forms.CheckBox()
         Me.cbGoatHorn = New System.Windows.Forms.CheckBox()
         Me.cbNormalItem = New System.Windows.Forms.CheckBox()
-        Me.cbCustomNBT = New System.Windows.Forms.CheckBox()
-        Me.tbCustomNBT = New System.Windows.Forms.TextBox()
         Me.tbSmallOutput = New System.Windows.Forms.TextBox()
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.tbSamePrefix = New System.Windows.Forms.TextBox()
@@ -63,6 +61,8 @@ Partial Class frmMain
         Me.lblAddNewItems = New System.Windows.Forms.Label()
         Me.gbItemID = New System.Windows.Forms.GroupBox()
         Me.rtbItem = New System.Windows.Forms.RichTextBox()
+        Me.cbCustomNBT = New System.Windows.Forms.CheckBox()
+        Me.tbCustomNBT = New System.Windows.Forms.TextBox()
         Me.btnShowOutput = New System.Windows.Forms.Button()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.msMain = New System.Windows.Forms.MenuStrip()
@@ -346,26 +346,6 @@ Partial Class frmMain
         Me.cbNormalItem.Text = "Normal item"
         Me.cbNormalItem.UseVisualStyleBackColor = True
         '
-        'cbCustomNBT
-        '
-        Me.cbCustomNBT.AutoSize = True
-        Me.cbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCustomNBT.Location = New System.Drawing.Point(14, 154)
-        Me.cbCustomNBT.Name = "cbCustomNBT"
-        Me.cbCustomNBT.Size = New System.Drawing.Size(171, 20)
-        Me.cbCustomNBT.TabIndex = 79
-        Me.cbCustomNBT.Text = "NBT Tag (Potions, etc...)"
-        Me.cbCustomNBT.UseVisualStyleBackColor = True
-        '
-        'tbCustomNBT
-        '
-        Me.tbCustomNBT.Enabled = False
-        Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbCustomNBT.Location = New System.Drawing.Point(14, 176)
-        Me.tbCustomNBT.Name = "tbCustomNBT"
-        Me.tbCustomNBT.Size = New System.Drawing.Size(242, 22)
-        Me.tbCustomNBT.TabIndex = 78
-        '
         'tbSmallOutput
         '
         Me.tbSmallOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -567,6 +547,26 @@ Partial Class frmMain
         Me.rtbItem.Size = New System.Drawing.Size(230, 58)
         Me.rtbItem.TabIndex = 81
         Me.rtbItem.Text = ""
+        '
+        'cbCustomNBT
+        '
+        Me.cbCustomNBT.AutoSize = True
+        Me.cbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCustomNBT.Location = New System.Drawing.Point(14, 154)
+        Me.cbCustomNBT.Name = "cbCustomNBT"
+        Me.cbCustomNBT.Size = New System.Drawing.Size(171, 20)
+        Me.cbCustomNBT.TabIndex = 79
+        Me.cbCustomNBT.Text = "NBT Tag (Potions, etc...)"
+        Me.cbCustomNBT.UseVisualStyleBackColor = True
+        '
+        'tbCustomNBT
+        '
+        Me.tbCustomNBT.Enabled = False
+        Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbCustomNBT.Location = New System.Drawing.Point(14, 176)
+        Me.tbCustomNBT.Name = "tbCustomNBT"
+        Me.tbCustomNBT.Size = New System.Drawing.Size(242, 22)
+        Me.tbCustomNBT.TabIndex = 78
         '
         'btnShowOutput
         '

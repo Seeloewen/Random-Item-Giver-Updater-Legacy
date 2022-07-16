@@ -237,6 +237,7 @@ Public Class frmSettings
             Next
         Catch ex As Exception
             MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            frmMain.WriteToLog("Error when loading profiles for Settings: " + ex.Message, "Error")
         End Try
     End Sub
 
@@ -259,6 +260,7 @@ Public Class frmSettings
             Next
         Catch ex As Exception
             MsgBox("Error: Could not load schemes. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            frmMain.WriteToLog("Error when loading schemes for Settings: " + ex.Message, "Error")
         End Try
     End Sub
 

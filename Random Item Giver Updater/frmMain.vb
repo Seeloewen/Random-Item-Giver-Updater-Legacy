@@ -6,7 +6,7 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public VersionLog As String = "0.3.0-a (14.07.2022)"
+    Public VersionLog As String = "0.3.0-a (17.07.2022)"
     Public SettingsVersion As Double = 1
     Dim SettingsArray As String()
     Dim LoadedSettingsVersion As Double
@@ -123,9 +123,12 @@ Public Class frmMain
     End Sub
 
     Private Sub InitializeProfilesAndSchemes()
+        WriteToLog("Loading profiles...", "Info")
+
         'Load profiles
         If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) = False Then
             My.Computer.FileSystem.CreateDirectory(ProfileDirectory)
+            WriteToLog("Created profile directory", "Info")
         End If
 
         GetProfileFiles(ProfileDirectory)
@@ -136,12 +139,14 @@ Public Class frmMain
                 If My.Computer.FileSystem.FileExists(ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
                     cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
                     frmLoadProfileFrom.LoadProfile(cbxDefaultProfile.SelectedItem, False)
+                    WriteToLog("Loaded default profile " + cbxDefaultProfile.SelectedItem, "Info")
                 Else
                     frmSettings.Show()
                     frmSettings.cbLoadDefaultProfile.Checked = False
                     My.Settings.LoadDefaultProfile = False
                     frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
                     frmSettings.Close()
+                    WriteToLog("Error when loading profile: Default profile doesn't exist. Disabled 'Load profile by default' option.", "Error")
                 End If
             Else
                 frmSettings.Show()
@@ -149,9 +154,14 @@ Public Class frmMain
                 My.Settings.LoadDefaultProfile = False
                 frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
                 frmSettings.Close()
+                WriteToLog("Error when loading profile: Default profile is empty. Disabled 'Load profile by default' option.", "Error")
             End If
+        Else
+            WriteToLog("No default profile selected.", "Info")
         End If
 
+        WriteToLog("Completed loading profiles!", "Info")
+        WriteToLog("Loading schemes...", "Info")
         'Load Schemes
         If My.Computer.FileSystem.DirectoryExists(SchemeDirectory) = False Then
             My.Computer.FileSystem.CreateDirectory(SchemeDirectory)
@@ -165,13 +175,13 @@ Public Class frmMain
             If String.IsNullOrEmpty(My.Settings.DefaultScheme) = False Then
                 If My.Computer.FileSystem.FileExists(SchemeDirectory + My.Settings.DefaultScheme + ".txt") Then
                     cbxScheme.SelectedItem = My.Settings.DefaultScheme
-                    LoadScheme(cbxScheme.SelectedItem, False)
                 Else
                     frmSettings.Show()
                     frmSettings.cbSelectDefaultScheme.Checked = False
                     My.Settings.SelectDefaultScheme = False
                     frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
                     frmSettings.Close()
+                    WriteToLog("Error when loading scheme: Default scheme doesn't exist. Disabled 'Select scheme by default' option.", "Error")
                 End If
             Else
                 frmSettings.Show()
@@ -179,8 +189,13 @@ Public Class frmMain
                 My.Settings.SelectDefaultScheme = False
                 frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
                 frmSettings.Close()
+                WriteToLog("Error when loading scheme: Default scheme is empty. Disabled 'Select scheme by default' option.", "Error")
             End If
+        Else
+            WriteToLog("No default scheme selected", "Info")
         End If
+
+        WriteToLog("Completed loading schemes!", "Info")
     End Sub
 
     Sub GetProfileFiles(Path As String)
@@ -202,6 +217,7 @@ Public Class frmMain
             Next
         Catch ex As Exception
             MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            WriteToLog("Error when loading profiles for Main Window: " + ex.Message, "Error")
         End Try
     End Sub
 
@@ -224,6 +240,7 @@ Public Class frmMain
             Next
         Catch ex As Exception
             MsgBox("Error: Could not load schemes. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            WriteToLog("Error when loading schemes for Main Window: " + ex.Message, "Error")
         End Try
     End Sub
 
@@ -353,6 +370,8 @@ Public Class frmMain
             If ShowMessage Then
                 MsgBox("Loaded scheme " + Scheme + ".", MsgBoxStyle.Information, "Loaded scheme")
             End If
+
+            WriteToLog("Loaded scheme " + Scheme + ".", "Info")
         Else
             MsgBox("Error: No scheme selected. Please select a scheme to load from.", MsgBoxStyle.Critical, "Error")
         End If
@@ -391,6 +410,8 @@ Public Class frmMain
 
         'Other Creative-Only Item
         My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Other Creative-Only Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
+
+        WriteToLog("Restored default schemes.", "Info")
     End Sub
 
 
@@ -2310,6 +2331,7 @@ Public Class frmMain
                     My.Computer.FileSystem.DeleteFile(SchemeDirectory + cbxScheme.SelectedItem + ".txt")
                     cbxScheme.Items.Remove(cbxScheme.SelectedItem)
                     MsgBox("Successfully deleted the corrupted scheme.", MsgBoxStyle.Information, "Deleted scheme")
+                    WriteToLog("Deleted corrupted scheme", "Warning")
             End Select
         End Try
     End Sub
@@ -2318,6 +2340,7 @@ Public Class frmMain
         If String.IsNullOrEmpty(cbxScheme.SelectedItem) = False Then
             My.Computer.FileSystem.DeleteFile(SchemeDirectory + cbxScheme.SelectedItem + ".txt")
             MsgBox("Scheme was deleted.", MsgBoxStyle.Information, "Deleted")
+            WriteToLog("Deleted scheme " + cbxScheme.SelectedItem, "Info")
             cbxScheme.Items.Remove(cbxScheme.SelectedItem)
         Else
             MsgBox("Error: Scheme directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
