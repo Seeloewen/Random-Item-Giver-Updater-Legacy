@@ -109,6 +109,12 @@
     <Compile Include="frmItemImporter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmLoadProfileFrom.Designer.vb">
+      <DependentUpon>frmLoadProfileFrom.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoadProfileFrom.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,24 @@
       <DependentUpon>frmOutput.vb</DependentUpon>
     </Compile>
     <Compile Include="frmOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProfileEditor.Designer.vb">
+      <DependentUpon>frmProfileEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProfileEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSaveProfileAs.Designer.vb">
+      <DependentUpon>frmSaveProfileAs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSaveProfileAs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSaveSchemeAs.Designer.vb">
+      <DependentUpon>frmSaveSchemeAs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSaveSchemeAs.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmSettings.Designer.vb">
@@ -158,11 +182,23 @@
     <EmbeddedResource Include="frmItemImporter.resx">
       <DependentUpon>frmItemImporter.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmLoadProfileFrom.resx">
+      <DependentUpon>frmLoadProfileFrom.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutput.resx">
       <DependentUpon>frmOutput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProfileEditor.resx">
+      <DependentUpon>frmProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSaveProfileAs.resx">
+      <DependentUpon>frmSaveProfileAs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSaveSchemeAs.resx">
+      <DependentUpon>frmSaveSchemeAs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.vb</DependentUpon>
@@ -189,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
-    <Content Include="Skinbild.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
