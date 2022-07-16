@@ -118,7 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.2.3 (10.06.2022)
+    <value>Version 0.3.0 (17.07.2022)
++ Added Settings
++ Added Datapack Profiles
++ Added Schemes
+* Changed default view in main menu
+* Fixed several occations where the software was only called "Random Item Giver"
+
+Version 0.2.3 (10.06.2022)
 + Added progress bar to duplicate finder and when adding items
 + Added fast item adding method
 * Fixed software freezing on duplicate finder and when adding items

@@ -50,7 +50,7 @@ Partial Class frmAbout
         Me.lblBuild.Name = "lblBuild"
         Me.lblBuild.Size = New System.Drawing.Size(210, 40)
         Me.lblBuild.TabIndex = 4
-        Me.lblBuild.Text = "Version 0.2.3-a (10.06.2022)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)"
+        Me.lblBuild.Text = "Version 0.3.0-a (17.07.2022)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)"
         Me.lblBuild.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblHeader
