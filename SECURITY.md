@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-Only the newest version of the Random Item Giver is supported, so make sure you stay up to date.
+Only the newest version of the Random Item Giver Updater is supported, so make sure you stay up to date.
 
 ## Reporting a Vulnerability
 
