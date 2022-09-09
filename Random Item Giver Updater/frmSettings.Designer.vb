@@ -47,6 +47,8 @@ Partial Class frmSettings
         Me.lblTempFiles = New System.Windows.Forms.Label()
         Me.tpProfiles = New System.Windows.Forms.TabPage()
         Me.tpSchemes = New System.Windows.Forms.TabPage()
+        Me.btnRestoreDefaultSchemes = New System.Windows.Forms.Button()
+        Me.lblRestoreDefaultSchemes = New System.Windows.Forms.Label()
         Me.cbxDefaultScheme = New System.Windows.Forms.ComboBox()
         Me.lblEditSchemeEditor = New System.Windows.Forms.Label()
         Me.cbSelectDefaultScheme = New System.Windows.Forms.CheckBox()
@@ -56,8 +58,9 @@ Partial Class frmSettings
         Me.SettingsFilePreset = New System.Windows.Forms.RichTextBox()
         Me.ofdImportSettings = New System.Windows.Forms.OpenFileDialog()
         Me.fbdExportSettings = New System.Windows.Forms.FolderBrowserDialog()
-        Me.lblRestoreDefaultSchemes = New System.Windows.Forms.Label()
-        Me.btnRestoreDefaultSchemes = New System.Windows.Forms.Button()
+        Me.lblResetSoftware = New System.Windows.Forms.Label()
+        Me.btnResetSoftware = New System.Windows.Forms.Button()
+        Me.lblResetWarning = New System.Windows.Forms.Label()
         Me.tcSettings.SuspendLayout()
         Me.tpGeneral.SuspendLayout()
         Me.tpSoftware.SuspendLayout()
@@ -90,7 +93,7 @@ Partial Class frmSettings
         'btnQuitWithoutSaving
         '
         Me.btnQuitWithoutSaving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitWithoutSaving.Location = New System.Drawing.Point(17, 384)
+        Me.btnQuitWithoutSaving.Location = New System.Drawing.Point(17, 469)
         Me.btnQuitWithoutSaving.Name = "btnQuitWithoutSaving"
         Me.btnQuitWithoutSaving.Size = New System.Drawing.Size(241, 27)
         Me.btnQuitWithoutSaving.TabIndex = 5
@@ -100,7 +103,7 @@ Partial Class frmSettings
         'btnSaveSettings
         '
         Me.btnSaveSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveSettings.Location = New System.Drawing.Point(264, 384)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(264, 469)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(241, 27)
         Me.btnSaveSettings.TabIndex = 6
@@ -159,7 +162,7 @@ Partial Class frmSettings
         Me.tcSettings.Location = New System.Drawing.Point(17, 49)
         Me.tcSettings.Name = "tcSettings"
         Me.tcSettings.SelectedIndex = 0
-        Me.tcSettings.Size = New System.Drawing.Size(488, 325)
+        Me.tcSettings.Size = New System.Drawing.Size(488, 413)
         Me.tcSettings.TabIndex = 7
         '
         'tpGeneral
@@ -196,6 +199,9 @@ Partial Class frmSettings
         '
         'tpSoftware
         '
+        Me.tpSoftware.Controls.Add(Me.lblResetWarning)
+        Me.tpSoftware.Controls.Add(Me.btnResetSoftware)
+        Me.tpSoftware.Controls.Add(Me.lblResetSoftware)
         Me.tpSoftware.Controls.Add(Me.btnExportSettings)
         Me.tpSoftware.Controls.Add(Me.btnImportSettings)
         Me.tpSoftware.Controls.Add(Me.lblImportExportSettings)
@@ -210,7 +216,7 @@ Partial Class frmSettings
         Me.tpSoftware.Location = New System.Drawing.Point(4, 25)
         Me.tpSoftware.Name = "tpSoftware"
         Me.tpSoftware.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpSoftware.Size = New System.Drawing.Size(480, 296)
+        Me.tpSoftware.Size = New System.Drawing.Size(480, 384)
         Me.tpSoftware.TabIndex = 1
         Me.tpSoftware.Text = "Software"
         Me.tpSoftware.UseVisualStyleBackColor = True
@@ -309,7 +315,7 @@ Partial Class frmSettings
         Me.tpProfiles.Location = New System.Drawing.Point(4, 25)
         Me.tpProfiles.Name = "tpProfiles"
         Me.tpProfiles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpProfiles.Size = New System.Drawing.Size(480, 296)
+        Me.tpProfiles.Size = New System.Drawing.Size(480, 384)
         Me.tpProfiles.TabIndex = 0
         Me.tpProfiles.Text = "Datapack Profiles"
         Me.tpProfiles.UseVisualStyleBackColor = True
@@ -323,10 +329,28 @@ Partial Class frmSettings
         Me.tpSchemes.Controls.Add(Me.cbSelectDefaultScheme)
         Me.tpSchemes.Location = New System.Drawing.Point(4, 25)
         Me.tpSchemes.Name = "tpSchemes"
-        Me.tpSchemes.Size = New System.Drawing.Size(480, 296)
+        Me.tpSchemes.Size = New System.Drawing.Size(480, 384)
         Me.tpSchemes.TabIndex = 3
         Me.tpSchemes.Text = "Schemes"
         Me.tpSchemes.UseVisualStyleBackColor = True
+        '
+        'btnRestoreDefaultSchemes
+        '
+        Me.btnRestoreDefaultSchemes.Location = New System.Drawing.Point(16, 227)
+        Me.btnRestoreDefaultSchemes.Name = "btnRestoreDefaultSchemes"
+        Me.btnRestoreDefaultSchemes.Size = New System.Drawing.Size(301, 23)
+        Me.btnRestoreDefaultSchemes.TabIndex = 17
+        Me.btnRestoreDefaultSchemes.Text = "Restore Default Schemes"
+        Me.btnRestoreDefaultSchemes.UseVisualStyleBackColor = True
+        '
+        'lblRestoreDefaultSchemes
+        '
+        Me.lblRestoreDefaultSchemes.AutoSize = True
+        Me.lblRestoreDefaultSchemes.Location = New System.Drawing.Point(13, 166)
+        Me.lblRestoreDefaultSchemes.Name = "lblRestoreDefaultSchemes"
+        Me.lblRestoreDefaultSchemes.Size = New System.Drawing.Size(454, 48)
+        Me.lblRestoreDefaultSchemes.TabIndex = 9
+        Me.lblRestoreDefaultSchemes.Text = resources.GetString("lblRestoreDefaultSchemes.Text")
         '
         'cbxDefaultScheme
         '
@@ -396,7 +420,7 @@ Partial Class frmSettings
         '
         'SettingsFilePreset
         '
-        Me.SettingsFilePreset.Location = New System.Drawing.Point(21, 469)
+        Me.SettingsFilePreset.Location = New System.Drawing.Point(17, 662)
         Me.SettingsFilePreset.Name = "SettingsFilePreset"
         Me.SettingsFilePreset.Size = New System.Drawing.Size(237, 133)
         Me.SettingsFilePreset.TabIndex = 8
@@ -410,30 +434,41 @@ Partial Class frmSettings
         '
         Me.fbdExportSettings.Description = "Select the folder in which you want to save the exported settings file."
         '
-        'lblRestoreDefaultSchemes
+        'lblResetSoftware
         '
-        Me.lblRestoreDefaultSchemes.AutoSize = True
-        Me.lblRestoreDefaultSchemes.Location = New System.Drawing.Point(13, 166)
-        Me.lblRestoreDefaultSchemes.Name = "lblRestoreDefaultSchemes"
-        Me.lblRestoreDefaultSchemes.Size = New System.Drawing.Size(454, 48)
-        Me.lblRestoreDefaultSchemes.TabIndex = 9
-        Me.lblRestoreDefaultSchemes.Text = resources.GetString("lblRestoreDefaultSchemes.Text")
+        Me.lblResetSoftware.AutoSize = True
+        Me.lblResetSoftware.Location = New System.Drawing.Point(12, 298)
+        Me.lblResetSoftware.Name = "lblResetSoftware"
+        Me.lblResetSoftware.Size = New System.Drawing.Size(443, 48)
+        Me.lblResetSoftware.TabIndex = 18
+        Me.lblResetSoftware.Text = resources.GetString("lblResetSoftware.Text")
         '
-        'btnRestoreDefaultSchemes
+        'btnResetSoftware
         '
-        Me.btnRestoreDefaultSchemes.Location = New System.Drawing.Point(16, 227)
-        Me.btnRestoreDefaultSchemes.Name = "btnRestoreDefaultSchemes"
-        Me.btnRestoreDefaultSchemes.Size = New System.Drawing.Size(301, 23)
-        Me.btnRestoreDefaultSchemes.TabIndex = 17
-        Me.btnRestoreDefaultSchemes.Text = "Restore Default Schemes"
-        Me.btnRestoreDefaultSchemes.UseVisualStyleBackColor = True
+        Me.btnResetSoftware.Location = New System.Drawing.Point(9, 353)
+        Me.btnResetSoftware.Name = "btnResetSoftware"
+        Me.btnResetSoftware.Size = New System.Drawing.Size(228, 23)
+        Me.btnResetSoftware.TabIndex = 19
+        Me.btnResetSoftware.Text = "Reset software"
+        Me.btnResetSoftware.UseVisualStyleBackColor = True
+        '
+        'lblResetWarning
+        '
+        Me.lblResetWarning.AutoSize = True
+        Me.lblResetWarning.ForeColor = System.Drawing.Color.OrangeRed
+        Me.lblResetWarning.Location = New System.Drawing.Point(243, 356)
+        Me.lblResetWarning.Name = "lblResetWarning"
+        Me.lblResetWarning.Size = New System.Drawing.Size(162, 16)
+        Me.lblResetWarning.TabIndex = 20
+        Me.lblResetWarning.Text = "Warning: Use with caution!"
+        Me.lblResetWarning.Visible = False
         '
         'frmSettings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(523, 422)
+        Me.ClientSize = New System.Drawing.Size(523, 505)
         Me.Controls.Add(Me.SettingsFilePreset)
         Me.Controls.Add(Me.tcSettings)
         Me.Controls.Add(Me.btnSaveSettings)
@@ -497,4 +532,7 @@ Partial Class frmSettings
     Friend WithEvents fbdExportSettings As FolderBrowserDialog
     Friend WithEvents btnRestoreDefaultSchemes As Button
     Friend WithEvents lblRestoreDefaultSchemes As Label
+    Friend WithEvents btnResetSoftware As Button
+    Friend WithEvents lblResetSoftware As Label
+    Friend WithEvents lblResetWarning As Label
 End Class

@@ -117,6 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblResetSoftware.Text" xml:space="preserve">
+    <value>If you encounter any critical issues or just want to clean up the software, it's 
+sometimes a good idea to reset the entire software. Please note that this
+deletes all profiles, schemes, user settings etc.</value>
+  </data>
   <data name="lblTempFiles.Text" xml:space="preserve">
     <value>The software stores some data in temporary text files to make some 
 processes easier. These files should only use up a few kilobytes of space.

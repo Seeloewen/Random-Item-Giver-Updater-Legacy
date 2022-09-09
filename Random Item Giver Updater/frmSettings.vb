@@ -216,6 +216,9 @@ Public Class frmSettings
                 My.Settings.SelectDefaultScheme = False
             End If
         End If
+
+        'Hide reset warning
+        lblResetWarning.Hide()
     End Sub
 
     Sub GetProfileFiles(Path As String)
@@ -327,5 +330,25 @@ Public Class frmSettings
     Private Sub btnRestoreDefaultSchemes_Click(sender As Object, e As EventArgs) Handles btnRestoreDefaultSchemes.Click
         frmMain.AddDefaultSchemes()
         MsgBox("Default Schemes were successfully restored! You may need to restart the application to see them.", MsgBoxStyle.Information, "Restored Default Schemes")
+    End Sub
+
+    Private Sub btnResetSoftware_MouseEnter(sender As Object, e As EventArgs) Handles btnResetSoftware.MouseEnter
+        lblResetWarning.Show()
+    End Sub
+
+    Private Sub btnResetSoftware_MouseLeave(sender As Object, e As EventArgs) Handles btnResetSoftware.MouseLeave
+        lblResetWarning.Hide()
+    End Sub
+
+    Private Sub btnResetSoftware_Click(sender As Object, e As EventArgs) Handles btnResetSoftware.Click
+        Select Case MsgBox("Warning: Resetting the software deletes all user settings, profiles, schemes and other files saved by the application. This does NOT uninstall the software, only delete its user preferences. Only continue if you know what you are doing. Are you sure you want to continue?", MsgBoxStyle.YesNo, "Reset software")
+            Case Windows.Forms.DialogResult.Yes
+                My.Computer.FileSystem.DeleteDirectory(frmMain.AppData + "/Random Item Giver Updater/", FileIO.DeleteDirectoryOption.DeleteAllContents)
+                My.Settings.Reset()
+                MsgBox("All profiles, schemes, user settings and other application files have been deleted. The software will now close.", MsgBoxStyle.Information, "Cancelled")
+                frmMain.Close()
+            Case Windows.Forms.DialogResult.No
+                MsgBox("Cancelled. No changes have been made.", MsgBoxStyle.Information, "Cancelled")
+        End Select
     End Sub
 End Class
