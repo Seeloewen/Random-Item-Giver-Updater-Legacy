@@ -96,6 +96,8 @@ Partial Class frmMain
         Me.lblAddingItems = New System.Windows.Forms.Label()
         Me.cbxDefaultProfile = New System.Windows.Forms.ComboBox()
         Me.settings = New System.Windows.Forms.RichTextBox()
+        Me.rtbItemsRandomSame119 = New System.Windows.Forms.RichTextBox()
+        Me.rtbItemsRandomSame116 = New System.Windows.Forms.RichTextBox()
         Me.gbDatapack.SuspendLayout()
         Me.gbItem.SuspendLayout()
         Me.gbItemID.SuspendLayout()
@@ -595,7 +597,7 @@ Partial Class frmMain
         Me.msMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.msMain.Location = New System.Drawing.Point(0, 0)
         Me.msMain.Name = "msMain"
-        Me.msMain.Size = New System.Drawing.Size(667, 24)
+        Me.msMain.Size = New System.Drawing.Size(669, 24)
         Me.msMain.TabIndex = 65
         Me.msMain.Text = "msMain"
         '
@@ -696,7 +698,7 @@ Partial Class frmMain
         'Quotationmark
         '
         Me.Quotationmark.AutoSize = True
-        Me.Quotationmark.Location = New System.Drawing.Point(869, 219)
+        Me.Quotationmark.Location = New System.Drawing.Point(891, 271)
         Me.Quotationmark.Name = "Quotationmark"
         Me.Quotationmark.Size = New System.Drawing.Size(12, 13)
         Me.Quotationmark.TabIndex = 82
@@ -704,7 +706,7 @@ Partial Class frmMain
         '
         'rtbCodeEnd
         '
-        Me.rtbCodeEnd.Location = New System.Drawing.Point(901, 217)
+        Me.rtbCodeEnd.Location = New System.Drawing.Point(872, 217)
         Me.rtbCodeEnd.Name = "rtbCodeEnd"
         Me.rtbCodeEnd.Size = New System.Drawing.Size(49, 45)
         Me.rtbCodeEnd.TabIndex = 81
@@ -812,12 +814,30 @@ Partial Class frmMain
         Me.settings.TabIndex = 88
         Me.settings.Text = ""
         '
+        'rtbItemsRandomSame119
+        '
+        Me.rtbItemsRandomSame119.Location = New System.Drawing.Point(927, 217)
+        Me.rtbItemsRandomSame119.Name = "rtbItemsRandomSame119"
+        Me.rtbItemsRandomSame119.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItemsRandomSame119.TabIndex = 89
+        Me.rtbItemsRandomSame119.Text = resources.GetString("rtbItemsRandomSame119.Text")
+        '
+        'rtbItemsRandomSame116
+        '
+        Me.rtbItemsRandomSame116.Location = New System.Drawing.Point(927, 268)
+        Me.rtbItemsRandomSame116.Name = "rtbItemsRandomSame116"
+        Me.rtbItemsRandomSame116.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItemsRandomSame116.TabIndex = 90
+        Me.rtbItemsRandomSame116.Text = resources.GetString("rtbItemsRandomSame116.Text")
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(667, 608)
+        Me.ClientSize = New System.Drawing.Size(669, 608)
+        Me.Controls.Add(Me.rtbItemsRandomSame116)
+        Me.Controls.Add(Me.rtbItemsRandomSame119)
         Me.Controls.Add(Me.settings)
         Me.Controls.Add(Me.btnAddItem)
         Me.Controls.Add(Me.cbxDefaultProfile)
@@ -929,4 +949,6 @@ Partial Class frmMain
     Friend WithEvents cbxDefaultProfile As ComboBox
     Friend WithEvents btnDeleteSelectedScheme As Button
     Friend WithEvents settings As RichTextBox
+    Friend WithEvents rtbItemsRandomSame119 As RichTextBox
+    Friend WithEvents rtbItemsRandomSame116 As RichTextBox
 End Class

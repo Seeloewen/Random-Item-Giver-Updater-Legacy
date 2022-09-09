@@ -69,6 +69,8 @@ Public Class frmMain
     Dim Items10 As String()
     Dim Items32 As String()
     Dim Items64 As String()
+    Dim ItemsRandomSame116 As String()
+    Dim ItemsRandomSame119 As String()
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Computer.FileSystem.DirectoryExists(AppData + "/Random Item Giver Updater/") = False Then
@@ -103,7 +105,6 @@ Public Class frmMain
         End If
 
         qm = Quotationmark.Text
-        cbxVersion.SelectedItem = "Version 1.19"
 
         CodeEnd = rtbCodeEnd.Lines
         Items2 = rtbItems2.Lines
@@ -112,6 +113,8 @@ Public Class frmMain
         Items10 = rtbItems10.Lines
         Items32 = rtbItems32.Lines
         Items64 = rtbItems64.Lines
+        ItemsRandomSame116 = rtbItemsRandomSame116.Lines
+        ItemsRandomSame119 = rtbItemsRandomSame119.Lines
 
         If My.Settings.UseAdvancedViewByDefault = True Then
             EnableAdvancedView()
@@ -968,6 +971,94 @@ Public Class frmMain
                     AddItem(Item, "64", "1.16", "tipped_arrows")
                 End If
 
+                'Add item to loot table for random amount of same items
+                If NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "main")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "main_without_creative-only")
+                End If
+                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "special_vxx")
+                End If
+                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "special_vvx")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "special_xvx")
+                End If
+                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "special_xvv")
+                End If
+                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "special_xxv")
+                End If
+                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "special_vxv")
+                End If
+                If SuspiciousStew And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "suspicious_stews")
+                End If
+                If EnchantedBook And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "enchanted_books")
+                End If
+                If Potion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "potions")
+                End If
+                If SplashPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "splash_potions")
+                End If
+                If LingeringPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "lingering_potions")
+                End If
+                If TippedArrow And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.16", "tipped_arrows")
+                End If
+
+                'Add item to loot table for random amount of different items
+                If NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "main")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "main_without_creative-only")
+                End If
+                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "special_vxx")
+                End If
+                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "special_vvx")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "special_xvx")
+                End If
+                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "special_xvv")
+                End If
+                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "special_xxv")
+                End If
+                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "special_vxv")
+                End If
+                If SuspiciousStew And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "suspicious_stews")
+                End If
+                If EnchantedBook And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "enchanted_books")
+                End If
+                If Potion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "potions")
+                End If
+                If SplashPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "splash_potions")
+                End If
+                If LingeringPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "lingering_potions")
+                End If
+                If TippedArrow And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.16", "tipped_arrows")
+                End If
+
             ElseIf DatapackVersion = "Version 1.17" Then
 
                 If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
@@ -1653,6 +1744,100 @@ Public Class frmMain
                 If GoatHorn And ItemAddMode = "Normal" Then
                     AddItem(Item, "64", "1.19", "goat_horns")
                 End If
+
+                'Add item to loot tables for random amount of same items
+                If NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "main")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "main_without_creative-only")
+                End If
+                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "special_vxx")
+                End If
+                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "special_vvx")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "special_xvx")
+                End If
+                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "special_xvv")
+                End If
+                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "special_xxv")
+                End If
+                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "special_vxv")
+                End If
+                If SuspiciousStew And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "suspicious_stews")
+                End If
+                If EnchantedBook And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "enchanted_books")
+                End If
+                If Potion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "potions")
+                End If
+                If SplashPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "splash_potions")
+                End If
+                If LingeringPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "lingering_potions")
+                End If
+                If TippedArrow And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "tipped_arrows")
+                End If
+                If GoatHorn And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-1", "1.19", "goat_horns")
+                End If
+
+                'Add item to loot tables for random amount of different items
+                If NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "main")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "main_without_creative-only")
+                End If
+                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "special_vxx")
+                End If
+                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "special_vvx")
+                End If
+                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "special_xvx")
+                End If
+                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "special_xvv")
+                End If
+                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "special_xxv")
+                End If
+                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "special_vxv")
+                End If
+                If SuspiciousStew And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "suspicious_stews")
+                End If
+                If EnchantedBook And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "enchanted_books")
+                End If
+                If Potion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "potions")
+                End If
+                If SplashPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "splash_potions")
+                End If
+                If LingeringPotion And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "lingering_potions")
+                End If
+                If TippedArrow And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "tipped_arrows")
+                End If
+                If GoatHorn And ItemAddMode = "Normal" Then
+                    AddItem(Item, "-2", "1.19", "goat_horns")
+                End If
             End If
             Workerprogress = Workerprogress + ProgressStep
             bgwAddItems.ReportProgress(Workerprogress)
@@ -1744,6 +1929,12 @@ Public Class frmMain
             If Item_Amount = 1 Then
                 ItemAmountPath = "1item\"
                 WriteToLog("Item amount detected as 1, using default path for 1 item. ", "Info")
+            ElseIf Item_Amount = "-1" Then
+                ItemAmountPath = "randomamountsameitem\"
+                WriteToLog("Item amount detected as random amount of same item, using default path for random amount of same item. ", "Info")
+            ElseIf Item_Amount = "-2" Then
+                ItemAmountPath = "randomamountdifitems\"
+                WriteToLog("Item amount detected as random amount of different items, using default path for random amount of different items. ", "Info")
             ElseIf Item_Amount > 1 Then
                 ItemAmountPath = Item_Amount.ToString + "sameitems\"
                 WriteToLog("Item amount detected as bigger than 1, using path for multiple items.", "Info")
@@ -1912,6 +2103,71 @@ Public Class frmMain
                                 My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\64sameitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(Items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
                             End If
 
+                        ElseIf Item_Amount = "-1" And Version = "1.16" Then
+                            LineRemoveLoop = 8
+
+                            While LineRemoveLoop > 0
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json")
+                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                FileStreamEditFile.Close()
+
+                                LineRemoveLoop = LineRemoveLoop - 1
+                            End While
+
+                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(ItemsRandomSame116) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(ItemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            ElseIf Loot_Table = "goat_horns" And Version = "1.19" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(ItemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            End If
+
+                        ElseIf Item_Amount = "-1" And Version = "1.19" Then
+                            LineRemoveLoop = 8
+
+                            While LineRemoveLoop > 0
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json")
+                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                FileStreamEditFile.Close()
+
+                                LineRemoveLoop = LineRemoveLoop - 1
+                            End While
+
+                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(ItemsRandomSame119) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(ItemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            ElseIf Loot_Table = "goat_horns" And Version = "1.19" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + ReturnArrayAsString(ItemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            End If
+
+                        ElseIf Item_Amount = "-2" And (Version = "1.16" OrElse Version = "1.19") Then
+                            LineRemoveLoop = 8
+
+                            While LineRemoveLoop > 0
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + Loot_Table + ".json")
+                                Dim FileStreamEditFile As New FileStream(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + Loot_Table + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                EditFileLastLineLength = EditFileLines.Last.Length.ToString
+
+                                FileStreamEditFile.SetLength(FileStreamEditFile.Length - EditFileLastLineLength)
+                                FileStreamEditFile.Close()
+
+                                LineRemoveLoop = LineRemoveLoop - 1
+                            End While
+
+                            If Loot_Table = "main" OrElse Loot_Table = "main_without_creative-only" OrElse Loot_Table = "special_xvv" OrElse Loot_Table = "special_xvx" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_xxv" OrElse Loot_Table = "Special_xvv" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vvx" OrElse Loot_Table = "special_vxv" OrElse Loot_Table = "special_vxx" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            ElseIf Loot_Table = "suspicious_stews" OrElse Loot_Table = "enchanted_books" OrElse Loot_Table = "potions" OrElse Loot_Table = "splash_potions" OrElse Loot_Table = "lingering_potions" OrElse Loot_Table = "tipped_arrows" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            ElseIf Loot_Table = "goat_horns" And Version = "1.19" Then
+                                My.Computer.FileSystem.WriteAllText(EditFilePath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + Loot_Table + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + FullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + NBTtag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(CodeEnd), True)
+                            End If
                         End If
 
                     ElseIf Version = "1.17" Then
