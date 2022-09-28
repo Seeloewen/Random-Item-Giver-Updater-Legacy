@@ -120,9 +120,9 @@ Partial Class frmDuplicateFinder
         Me.lblDuplicatesAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDuplicatesAmount.Location = New System.Drawing.Point(210, 494)
         Me.lblDuplicatesAmount.Name = "lblDuplicatesAmount"
-        Me.lblDuplicatesAmount.Size = New System.Drawing.Size(171, 16)
+        Me.lblDuplicatesAmount.Size = New System.Drawing.Size(174, 16)
         Me.lblDuplicatesAmount.TabIndex = 11
-        Me.lblDuplicatesAmount.Text = "Found {0} duplicates totally."
+        Me.lblDuplicatesAmount.Text = "Found {0} duplicates in total."
         Me.lblDuplicatesAmount.Visible = False
         '
         'bgwSearchForDuplicates
@@ -180,18 +180,18 @@ Partial Class frmDuplicateFinder
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(572, 523)
-        Me.Controls.Add(Me.pbProgress)
         Me.Controls.Add(Me.lblChecking)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.Quotationmark)
-        Me.Controls.Add(Me.lblDuplicatesAmount)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.tbDatapackPath)
         Me.Controls.Add(Me.btnCheck)
         Me.Controls.Add(Me.lvDuplicates)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lblHeader)
+        Me.Controls.Add(Me.pbProgress)
+        Me.Controls.Add(Me.lblDuplicatesAmount)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False

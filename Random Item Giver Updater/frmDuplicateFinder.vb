@@ -374,7 +374,7 @@ Public Class frmDuplicateFinder
 
     Private Sub bgwSearchForDuplicates_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwSearchForDuplicates.RunWorkerCompleted
         If DuplicateFinderResult = "success" Then
-            lblDuplicatesAmount.Text = "Found " + lvDuplicates.Items.Count.ToString + " duplicates totally."
+            lblDuplicatesAmount.Text = "Found " + lvDuplicates.Items.Count.ToString + " duplicates in total."
             frmMain.WriteToLog("Checking for duplicates completed. Found " + lvDuplicates.Items.Count.ToString + " duplicates totally.", "Info")
             pbProgress.Value = 100
             MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list behind this message." + vbNewLine + "If the list is empty then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
