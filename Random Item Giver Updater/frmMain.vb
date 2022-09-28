@@ -6,7 +6,7 @@ Public Class frmMain
     'General variables for the software
     Public qm As String
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData)
-    Public VersionLog As String = "0.3.1-a (10.09.2022)"
+    Public VersionLog As String = "0.3.2-a (28.09.2022)"
     Public SettingsVersion As Double = 1
     Dim SettingsArray As String()
     Dim LoadedSettingsVersion As Double
