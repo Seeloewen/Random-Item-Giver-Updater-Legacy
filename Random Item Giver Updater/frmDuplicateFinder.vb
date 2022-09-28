@@ -63,6 +63,10 @@ Public Class frmDuplicateFinder
                 PathAmount = "32sameitems/"
             ElseIf ItemAmount = 64 Then
                 PathAmount = "64sameitems/"
+            ElseIf ItemAmount = -1 Then
+                PathAmount = "randomamountsameitem/"
+            ElseIf ItemAmount = -2 Then
+                PathAmount = "randomamountdifitems/"
             End If
         End If
 
@@ -73,6 +77,18 @@ Public Class frmDuplicateFinder
         For x As Integer = 0 To WithDuplicates.Length - 1
             If WithDuplicates(x).Contains("" + QuM + "type" + QuM + ": " + QuM + "minecraft:item" + QuM + ",") Then
                 WithDuplicates(x) = WithDuplicates(x).Replace("" + QuM + "type" + QuM + ": " + QuM + "minecraft:item" + QuM + ",", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "rolls" + QuM + ": {") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "rolls" + QuM + ": {", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "min" + QuM + ": 1,") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "min" + QuM + ": 1,", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "max" + QuM + ": 64") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "max" + QuM + ": 64", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "name" + QuM + ": " + QuM + "out" + QuM) Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "name" + QuM + ": " + QuM + "out" + QuM, "")
             End If
             If WithDuplicates(x).Contains("" + QuM + "entries" + QuM + ": [") Then
                 WithDuplicates(x) = WithDuplicates(x).Replace("" + QuM + "entries" + QuM + ": [", "")
@@ -110,11 +126,23 @@ Public Class frmDuplicateFinder
             If WithDuplicates(x).Contains("" + QuM + "count" + QuM + ": 5") Then
                 WithDuplicates(x) = WithDuplicates(x).Replace("" + QuM + "count" + QuM + ": 5", "")
             End If
+            If WithDuplicates(x).Contains(QuM + "count" + QuM + ": {") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "count" + QuM + ": {", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "type" + QuM + ": " + QuM + "minecraft:score" + QuM + ",") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "type" + QuM + ": " + QuM + "minecraft:score" + QuM + ",", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "target" + QuM + ": {") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "target" + QuM + ": {", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "type" + QuM + ": " + QuM + "minecraft:fixed" + QuM + ",") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "type" + QuM + ": " + QuM + "minecraft:fixed" + QuM + ",", "")
+            End If
+            If WithDuplicates(x).Contains(QuM + "score" + QuM + ": " + QuM + "RandomAmountSameItemsGen" + QuM) Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(QuM + "score" + QuM + ": " + QuM + "RandomAmountSameItemsGen" + QuM, "")
+            End If
             If WithDuplicates(x).Contains("minecraft:") Then
                 WithDuplicates(x) = WithDuplicates(x).Replace("minecraft:", "")
-            End If
-            If WithDuplicates(x).Contains(" ") Then
-                WithDuplicates(x) = WithDuplicates(x).Replace(" ", "")
             End If
             If WithDuplicates(x).Contains("{") Then
                 WithDuplicates(x) = WithDuplicates(x).Replace("{", "")
@@ -127,6 +155,9 @@ Public Class frmDuplicateFinder
             End If
             If WithDuplicates(x).Contains("]") Then
                 WithDuplicates(x) = WithDuplicates(x).Replace("]", "")
+            End If
+            If WithDuplicates(x).Contains(" ") Then
+                WithDuplicates(x) = WithDuplicates(x).Replace(" ", "")
             End If
         Next
 
@@ -212,7 +243,12 @@ Public Class frmDuplicateFinder
 
     Private Sub bgwSearchForDuplicates_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwSearchForDuplicates.DoWork
         If DatapackVersion = "1.19" Or DatapackVersion = "1.18" Or DatapackVersion = "1.16" Then
-            DuplicateFinderProgress = 1.78
+            If DatapackVersion = "1.18" Then
+                DuplicateFinderProgress = 1.78
+            ElseIf DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
+                DuplicateFinderProgress = 1.38
+            End If
+
             Try
                 '1 item
                 CheckLootTable(1, "main")
@@ -283,6 +319,29 @@ Public Class frmDuplicateFinder
                 CheckLootTable(64, "special_xvv")
                 CheckLootTable(64, "special_xvx")
                 CheckLootTable(64, "special_xxv")
+
+                If DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
+                    'Random amount of same items
+                    CheckLootTable(-1, "main")
+                    CheckLootTable(-1, "main_without_creative-only")
+                    CheckLootTable(-1, "special_vvx")
+                    CheckLootTable(-1, "special_vxv")
+                    CheckLootTable(-1, "special_vxx")
+                    CheckLootTable(-1, "special_xvv")
+                    CheckLootTable(-1, "special_xvx")
+                    CheckLootTable(-1, "special_xxv")
+
+                    'Random amount of different items
+                    CheckLootTable(-2, "main")
+                    CheckLootTable(-2, "main_without_creative-only")
+                    CheckLootTable(-2, "special_vvx")
+                    CheckLootTable(-2, "special_vxv")
+                    CheckLootTable(-2, "special_vxx")
+                    CheckLootTable(-2, "special_xvv")
+                    CheckLootTable(-2, "special_xvx")
+                    CheckLootTable(-2, "special_xxv")
+                End If
+
             Catch ex As Exception
                 MsgBox("Error: " + ex.Message, MsgBoxStyle.Critical, "Error")
                 DuplicateFinderResult = "failed"
@@ -317,6 +376,7 @@ Public Class frmDuplicateFinder
         If DuplicateFinderResult = "success" Then
             lblDuplicatesAmount.Text = "Found " + lvDuplicates.Items.Count.ToString + " duplicates totally."
             frmMain.WriteToLog("Checking for duplicates completed. Found " + lvDuplicates.Items.Count.ToString + " duplicates totally.", "Info")
+            pbProgress.Value = 100
             MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list behind this message." + vbNewLine + "If the list is empty then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
         Else
             lblDuplicatesAmount.Text = "Searching for duplicates failed."
