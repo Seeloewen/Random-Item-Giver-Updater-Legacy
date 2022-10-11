@@ -20,6 +20,7 @@ Public Class frmMain
     Public SchemeDirectory As String = AppData + "\Random Item Giver Updater\Schemes\"
     Dim SchemeList As String()
     Dim LoadFromScheme As String
+    Dim SchemeContent As String()
 
     'All variables that play a key role in updating the datapack
     Dim EditFileLastLineLength As String
@@ -141,7 +142,7 @@ Public Class frmMain
             If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
                 If My.Computer.FileSystem.FileExists(ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
                     cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
-                    frmLoadProfileFrom.LoadProfile(cbxDefaultProfile.SelectedItem, False)
+                    frmLoadProfileFrom.InitializeLoadingProfile(cbxDefaultProfile.SelectedItem, False)
                     WriteToLog("Loaded default profile " + cbxDefaultProfile.SelectedItem, "Info")
                 Else
                     frmSettings.Show()
@@ -247,172 +248,39 @@ Public Class frmMain
         End Try
     End Sub
 
-    Public Sub LoadScheme(Scheme, ShowMessage)
-        If String.IsNullOrEmpty(Scheme) = False Then
-            LoadFromScheme = SchemeDirectory + Scheme + ".txt"
-            settings.Text = My.Computer.FileSystem.ReadAllText(LoadFromScheme)
-
-            'Same Prefix Checkbox
-            SamePrefix = Convert.ToBoolean(settings.Lines(0))
-            If SamePrefix = True Then
-                cbSamePrefix.Checked = True
-            Else
-                cbSamePrefix.Checked = False
-            End If
-
-            'Same Prefix Textbox
-            tbSamePrefix.Text = settings.Lines(1)
-
-            'Custom NBT Checkbox
-            CustomNBT = Convert.ToBoolean(settings.Lines(2))
-            If CustomNBT = True Then
-                cbCustomNBT.Checked = True
-            Else
-                cbCustomNBT.Checked = False
-            End If
-
-            'Custom NBT Textbox
-            tbCustomNBT.Text = settings.Lines(3)
-
-            'Normal Item Checkbox
-            NormalItem = Convert.ToBoolean(settings.Lines(4))
-            If NormalItem = True Then
-                cbNormalItem.Checked = True
-            Else
-                cbNormalItem.Checked = False
-            End If
-
-            'Suspicious Stew Checkbox
-            SuspiciousStew = Convert.ToBoolean(settings.Lines(5))
-            If SuspiciousStew = True Then
-                cbSuspiciousStew.Checked = True
-            Else
-                cbSuspiciousStew.Checked = False
-            End If
-
-            'Enchanted Book Checkbox
-            EnchantedBook = Convert.ToBoolean(settings.Lines(6))
-            If EnchantedBook = True Then
-                cbEnchantedBook.Checked = True
-            Else
-                cbEnchantedBook.Checked = False
-            End If
-
-            'Potion Book Checkbox
-            Potion = Convert.ToBoolean(settings.Lines(7))
-            If Potion = True Then
-                cbPotion.Checked = True
-            Else
-                cbPotion.Checked = False
-            End If
-
-            'Splash Potion Checkbox
-            SplashPotion = Convert.ToBoolean(settings.Lines(8))
-            If SplashPotion = True Then
-                cbSplashPotion.Checked = True
-            Else
-                cbSplashPotion.Checked = False
-            End If
-
-            'Lingering Potion Checkbox
-            LingeringPotion = Convert.ToBoolean(settings.Lines(9))
-            If LingeringPotion = True Then
-                cbLingeringPotion.Checked = True
-            Else
-                cbLingeringPotion.Checked = False
-            End If
-
-            'Tipped Arrow Checkbox
-            TippedArrow = Convert.ToBoolean(settings.Lines(10))
-            If TippedArrow = True Then
-                cbTippedArrow.Checked = True
-            Else
-                cbTippedArrow.Checked = False
-            End If
-
-            'Goat Horn Checkbox
-            GoatHorn = Convert.ToBoolean(settings.Lines(11))
-            If GoatHorn = True Then
-                cbGoatHorn.Checked = True
-            Else
-                cbGoatHorn.Checked = False
-            End If
-
-            'Creative-Only Checkbox
-            CreativeOnly = Convert.ToBoolean(settings.Lines(12))
-            If CreativeOnly = True Then
-                cbCreativeOnly.Checked = True
-
-                'Spawn Egg Radiobutton
-                SpawnEgg = Convert.ToBoolean(settings.Lines(13))
-                If SpawnEgg = True Then
-                    rbtnSpawnEgg.Checked = True
-                Else
-                    rbtnSpawnEgg.Checked = False
-                End If
-
-                'Command Block Radiobutton
-                CommandBlock = Convert.ToBoolean(settings.Lines(14))
-                If CommandBlock = True Then
-                    rbtnCommandBlock.Checked = True
-                Else
-                    rbtnCommandBlock.Checked = False
-                End If
-
-                'Other Creative-Only Item Radiobutton
-                OtherCreativeOnlyItem = Convert.ToBoolean(settings.Lines(15))
-                If OtherCreativeOnlyItem = True Then
-                    rbtnOtherItem.Checked = True
-                Else
-                    rbtnOtherItem.Checked = False
-                End If
-            Else
-                cbCreativeOnly.Checked = False
-            End If
-
-            If ShowMessage Then
-                MsgBox("Loaded scheme " + Scheme + ".", MsgBoxStyle.Information, "Loaded scheme")
-            End If
-
-            WriteToLog("Loaded scheme " + Scheme + ".", "Info")
-        Else
-            MsgBox("Error: No scheme selected. Please select a scheme to load from.", MsgBoxStyle.Critical, "Error")
-        End If
-    End Sub
-
     Public Sub AddDefaultSchemes()
         'Normal Item
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Normal Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Normal Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Suspicious Stew
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Suspicious Stew" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Suspicious Stew" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Enchanted Book
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Enchanted Book" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Enchanted Book" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Potion
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Splash Potion
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Splash Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Splash Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Lingering Potion
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Lingering Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Lingering Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Tipped Arrow
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Tipped Arrow" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Tipped Arrow" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Goat Horn
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Goat Horn" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Goat Horn" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Spawn Egg
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Spawn Egg" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Spawn Egg" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Command Block
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Command Block" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Command Block" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False", False)
 
         'Other Creative-Only Item
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Other Creative-Only Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
+        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Other Creative-Only Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
 
         WriteToLog("Restored default schemes.", "Info")
     End Sub
@@ -2579,27 +2447,330 @@ Public Class frmMain
     End Sub
 
     Private Sub cbxScheme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxScheme.SelectedIndexChanged
-        Try
-            LoadScheme(cbxScheme.SelectedItem, False)
-        Catch ex As Exception
-            Select Case MsgBox("Error when loading scheme. It might be corrupted or outdated. Do you want to delete it?" + vbNewLine + "If you choose 'no', you will be asked again next time you load the scheme.", MessageBoxButtons.YesNo)
+        'Starts the whole loading process of the scheme
+        InitializeLoadingScheme(cbxScheme.SelectedItem, False)
+    End Sub
+
+    Public Sub InitializeLoadingScheme(Scheme As String, ShowMessage As Boolean)
+        'Checks if a scheme is selected. It then reads the content of the scheme file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
+        'It then starts to convert and load the scheme, see the the method below.
+        If String.IsNullOrEmpty(Scheme) = False Then
+            LoadFromScheme = SchemeDirectory + Scheme + ".txt"
+            SchemeContent = File.ReadAllLines(LoadFromScheme)
+            ReDim Preserve SchemeContent(16)
+            CheckAndConvertScheme(Scheme, ShowMessage)
+        Else
+            MsgBox("Error: No scheme selected. Please select a scheme to load from.", MsgBoxStyle.Critical, "Error")
+        End If
+    End Sub
+
+    Public Sub CheckAndConvertScheme(Scheme As String, ShowMessage As Boolean)
+        'This checks if the scheme file that was loaded has enough lines, too few lines would mean that settings are missing, meaning the file is either too old or corrupted.
+        'It will check for each required line if it is empty (required lines = the length of a healthy, normal scheme file). Make sure that the line amount it checks matches the amount of settings that are being saved.
+        'If a line is empty, it will fill that line with a placeholder in the array so the profile can get loaded without errors. After loading the scheme, it gets automatically saved so the corrupted/old settings file gets fixed.
+        'If no required line is empty and the file is fine, it will just load the scheme like normal.
+        If (String.IsNullOrEmpty(SchemeContent(0)) OrElse String.IsNullOrEmpty(SchemeContent(1)) OrElse String.IsNullOrEmpty(SchemeContent(2)) OrElse String.IsNullOrEmpty(SchemeContent(3)) OrElse String.IsNullOrEmpty(SchemeContent(4)) OrElse String.IsNullOrEmpty(SchemeContent(5)) OrElse String.IsNullOrEmpty(SchemeContent(6)) OrElse String.IsNullOrEmpty(SchemeContent(7)) OrElse String.IsNullOrEmpty(SchemeContent(8)) OrElse String.IsNullOrEmpty(SchemeContent(9)) OrElse String.IsNullOrEmpty(SchemeContent(10)) OrElse String.IsNullOrEmpty(SchemeContent(11)) OrElse String.IsNullOrEmpty(SchemeContent(12)) OrElse String.IsNullOrEmpty(SchemeContent(13)) OrElse String.IsNullOrEmpty(SchemeContent(14)) OrElse String.IsNullOrEmpty(SchemeContent(15))) Then
+            Select Case MsgBox("You are trying to load a scheme from an older version or a corrupted scheme. You need to update it in order to load it. You usually won't lose any settings. Do you want to continue?", MsgBoxStyle.YesNo, "Load old or corrupted scheme")
                 Case Windows.Forms.DialogResult.Yes
-                    My.Computer.FileSystem.DeleteFile(SchemeDirectory + cbxScheme.SelectedItem + ".txt")
-                    cbxScheme.Items.Remove(cbxScheme.SelectedItem)
-                    MsgBox("Successfully deleted the corrupted scheme.", MsgBoxStyle.Information, "Deleted scheme")
-                    WriteToLog("Deleted corrupted scheme", "Warning")
+                    If String.IsNullOrEmpty(SchemeContent(0)) Then
+                        SchemeContent(0) = True
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(1)) Then
+                        SchemeContent(1) = "minecraft"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(2)) Then
+                        SchemeContent(2) = False
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(3)) Then
+                        SchemeContent(3) = "None"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(4)) Then
+                        SchemeContent(4) = "True"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(5)) Then
+                        SchemeContent(5) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(6)) Then
+                        SchemeContent(6) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(7)) Then
+                        SchemeContent(7) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(8)) Then
+                        SchemeContent(8) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(9)) Then
+                        SchemeContent(9) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(10)) Then
+                        SchemeContent(10) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(11)) Then
+                        SchemeContent(11) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(12)) Then
+                        SchemeContent(12) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(13)) Then
+                        SchemeContent(13) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(14)) Then
+                        SchemeContent(14) = "False"
+                    End If
+                    If String.IsNullOrEmpty(SchemeContent(15)) Then
+                        SchemeContent(15) = "False"
+                    End If
+                    LoadScheme(Scheme, False)
+                    UpdateScheme(Scheme)
+                    MsgBox("Loaded and updated scheme. It should now work correctly!", MsgBoxStyle.Information, "Loaded and updated scheme")
+                    WriteToLog("Loaded and updated scheme " + Scheme, "Info")
+                Case Windows.Forms.DialogResult.No
+                    MsgBox("Cancelled loading scheme.", MsgBoxStyle.Exclamation, "Warning")
             End Select
-        End Try
+        Else
+            LoadScheme(Scheme, ShowMessage)
+            WriteToLog("Loaded scheme " + Scheme, "Info")
+        End If
+    End Sub
+
+    Public Sub LoadScheme(Scheme As String, ShowMessage As Boolean)
+        'Same Prefix Checkbox
+        SamePrefix = Convert.ToBoolean(SchemeContent(0))
+        If SamePrefix = True Then
+            cbSamePrefix.Checked = True
+        Else
+            cbSamePrefix.Checked = False
+        End If
+
+        'Same Prefix Textbox
+        If String.IsNullOrEmpty(tbSamePrefix.Text) Then
+            tbSamePrefix.Text = "None"
+        Else
+            tbSamePrefix.Text = SchemeContent(1)
+        End If
+
+        'Custom NBT Checkbox
+        CustomNBT = Convert.ToBoolean(SchemeContent(2))
+        If CustomNBT = True Then
+            cbCustomNBT.Checked = True
+        Else
+            cbCustomNBT.Checked = False
+        End If
+
+        'Custom NBT Textbox
+        If String.IsNullOrEmpty(tbCustomNBT.Text) Then
+            tbCustomNBT.Text = "None"
+        Else
+            tbCustomNBT.Text = SchemeContent(3)
+        End If
+
+        'Normal Item Checkbox
+        NormalItem = Convert.ToBoolean(SchemeContent(4))
+        If NormalItem = True Then
+            cbNormalItem.Checked = True
+        Else
+            cbNormalItem.Checked = False
+        End If
+
+        'Suspicious Stew Checkbox
+        SuspiciousStew = Convert.ToBoolean(SchemeContent(5))
+        If SuspiciousStew = True Then
+            cbSuspiciousStew.Checked = True
+        Else
+            cbSuspiciousStew.Checked = False
+        End If
+
+        'Enchanted Book Checkbox
+        EnchantedBook = Convert.ToBoolean(SchemeContent(6))
+        If EnchantedBook = True Then
+            cbEnchantedBook.Checked = True
+        Else
+            cbEnchantedBook.Checked = False
+        End If
+
+        'Potion Book Checkbox
+        Potion = Convert.ToBoolean(SchemeContent(7))
+        If Potion = True Then
+            cbPotion.Checked = True
+        Else
+            cbPotion.Checked = False
+        End If
+
+        'Splash Potion Checkbox
+        SplashPotion = Convert.ToBoolean(SchemeContent(8))
+        If SplashPotion = True Then
+            cbSplashPotion.Checked = True
+        Else
+            cbSplashPotion.Checked = False
+        End If
+
+        'Lingering Potion Checkbox
+        LingeringPotion = Convert.ToBoolean(SchemeContent(9))
+        If LingeringPotion = True Then
+            cbLingeringPotion.Checked = True
+        Else
+            cbLingeringPotion.Checked = False
+        End If
+
+        'Tipped Arrow Checkbox
+        TippedArrow = Convert.ToBoolean(SchemeContent(10))
+        If TippedArrow = True Then
+            cbTippedArrow.Checked = True
+        Else
+            cbTippedArrow.Checked = False
+        End If
+
+        'Goat Horn Checkbox
+        GoatHorn = Convert.ToBoolean(SchemeContent(11))
+        If GoatHorn = True Then
+            cbGoatHorn.Checked = True
+        Else
+            cbGoatHorn.Checked = False
+        End If
+
+        'Creative-Only Checkbox
+        CreativeOnly = Convert.ToBoolean(SchemeContent(12))
+        If CreativeOnly = True Then
+            cbCreativeOnly.Checked = True
+
+            'Spawn Egg Radiobutton
+            SpawnEgg = Convert.ToBoolean(SchemeContent(13))
+            If SpawnEgg = True Then
+                rbtnSpawnEgg.Checked = True
+            Else
+                rbtnSpawnEgg.Checked = False
+            End If
+
+            'Command Block Radiobutton
+            CommandBlock = Convert.ToBoolean(SchemeContent(14))
+            If CommandBlock = True Then
+                rbtnCommandBlock.Checked = True
+            Else
+                rbtnCommandBlock.Checked = False
+            End If
+
+            'Other Creative-Only Item Radiobutton
+            OtherCreativeOnlyItem = Convert.ToBoolean(SchemeContent(15))
+            If OtherCreativeOnlyItem = True Then
+                rbtnOtherItem.Checked = True
+            Else
+                rbtnOtherItem.Checked = False
+            End If
+        Else
+            cbCreativeOnly.Checked = False
+        End If
+
+        'If ShowMessage is enabled, it will show a messagebox when loading completes.
+        If ShowMessage Then
+            MsgBox("Loaded scheme " + Scheme + ".", MsgBoxStyle.Information, "Loaded profile")
+        End If
+    End Sub
+
+    Public Sub UpdateScheme(SchemeName)
+
+        'Save currently selected settings into Variables
+        If rbtnSpawnEgg.Checked = True Then
+            SpawnEgg = True
+        Else
+            SpawnEgg = False
+        End If
+        If rbtnCommandBlock.Checked = True Then
+            CommandBlock = True
+        Else
+            SpawnEgg = False
+        End If
+        If rbtnOtherItem.Checked = True Then
+            OtherCreativeOnlyItem = True
+        Else
+            OtherCreativeOnlyItem = False
+        End If
+        If cbSamePrefix.Checked Then
+            SamePrefix = True
+        Else
+            SamePrefix = False
+        End If
+        If cbCustomNBT.Checked = True Then
+            CustomNBT = True
+        Else
+            CustomNBT = False
+        End If
+        If cbNormalItem.Checked = True Then
+            NormalItem = True
+        Else
+            NormalItem = False
+        End If
+        If cbSuspiciousStew.Checked = True Then
+            SuspiciousStew = True
+        Else
+            SuspiciousStew = False
+        End If
+        If cbEnchantedBook.Checked = True Then
+            EnchantedBook = True
+        Else
+            EnchantedBook = False
+        End If
+        If cbPotion.Checked = True Then
+            Potion = True
+        Else
+            Potion = False
+        End If
+        If cbSplashPotion.Checked = True Then
+            SplashPotion = True
+        Else
+            SplashPotion = False
+        End If
+        If cbLingeringPotion.Checked = True Then
+            LingeringPotion = True
+        Else
+            LingeringPotion = False
+        End If
+        If cbTippedArrow.Checked = True Then
+            TippedArrow = True
+        Else
+            TippedArrow = False
+        End If
+        If cbGoatHorn.Checked = True Then
+            GoatHorn = True
+        Else
+            GoatHorn = False
+        End If
+        If cbCreativeOnly.Checked = True Then
+            CreativeOnly = True
+        Else
+            CreativeOnly = False
+        End If
+        If String.IsNullOrEmpty(tbSamePrefix.Text) Then
+            SamePrefixString = "minecraft"
+        Else
+            SamePrefixString = tbSamePrefix.Text
+        End If
+        If String.IsNullOrEmpty(tbCustomNBT.Text) Then
+            CustomNBTString = "None"
+        Else
+            CustomNBTString = tbCustomNBT.Text
+        End If
+
+        'Update the selected scheme. This will save and overwrite the selected scheme without showing any warning or message. Used if a profile is old or corrupted.
+        If String.IsNullOrEmpty(SchemeName) = False Then
+            If My.Computer.FileSystem.DirectoryExists(SchemeDirectory) Then
+                My.Computer.FileSystem.WriteAllText(SchemeDirectory + SchemeName + ".txt", SamePrefix.ToString + vbNewLine + SamePrefixString + vbNewLine + CustomNBT.ToString + vbNewLine + CustomNBTString + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine, False)
+            Else
+                MsgBox("Error: Couldn't update scheme. Scheme directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
+            End If
+        Else
+            MsgBox("Error: Couldn't update scheme as the name is empty.", MsgBoxStyle.Critical, "Error")
+        End If
     End Sub
 
     Private Sub btnDeleteSelectedScheme_Click(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.Click
-        If String.IsNullOrEmpty(cbxScheme.SelectedItem) = False Then
+        'Delete the currently selected scheme if it exists
+        If My.Computer.FileSystem.FileExists(SchemeDirectory + cbxScheme.SelectedItem + ".txt") Then
             My.Computer.FileSystem.DeleteFile(SchemeDirectory + cbxScheme.SelectedItem + ".txt")
             MsgBox("Scheme was deleted.", MsgBoxStyle.Information, "Deleted")
             WriteToLog("Deleted scheme " + cbxScheme.SelectedItem, "Info")
             cbxScheme.Items.Remove(cbxScheme.SelectedItem)
         Else
-            MsgBox("Error: Scheme directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
+            MsgBox("Error: Scheme does not exist.", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 

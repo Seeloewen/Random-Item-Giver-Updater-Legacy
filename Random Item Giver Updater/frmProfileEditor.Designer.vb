@@ -159,6 +159,10 @@ Partial Class frmProfileEditor
         Me.settings.TabIndex = 18
         Me.settings.Text = ""
         '
+        'fbdProfileEditor
+        '
+        Me.fbdProfileEditor.Description = "Select a datapack folder..."
+        '
         'frmProfileEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

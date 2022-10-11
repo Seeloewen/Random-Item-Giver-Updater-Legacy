@@ -95,7 +95,6 @@ Partial Class frmMain
         Me.bgwAddItems = New System.ComponentModel.BackgroundWorker()
         Me.lblAddingItems = New System.Windows.Forms.Label()
         Me.cbxDefaultProfile = New System.Windows.Forms.ComboBox()
-        Me.settings = New System.Windows.Forms.RichTextBox()
         Me.rtbItemsRandomSame119 = New System.Windows.Forms.RichTextBox()
         Me.rtbItemsRandomSame116 = New System.Windows.Forms.RichTextBox()
         Me.gbDatapack.SuspendLayout()
@@ -806,14 +805,6 @@ Partial Class frmMain
         Me.cbxDefaultProfile.Size = New System.Drawing.Size(121, 21)
         Me.cbxDefaultProfile.TabIndex = 87
         '
-        'settings
-        '
-        Me.settings.Location = New System.Drawing.Point(16, 668)
-        Me.settings.Name = "settings"
-        Me.settings.Size = New System.Drawing.Size(51, 53)
-        Me.settings.TabIndex = 88
-        Me.settings.Text = ""
-        '
         'rtbItemsRandomSame119
         '
         Me.rtbItemsRandomSame119.Location = New System.Drawing.Point(927, 217)
@@ -838,7 +829,6 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(669, 608)
         Me.Controls.Add(Me.rtbItemsRandomSame116)
         Me.Controls.Add(Me.rtbItemsRandomSame119)
-        Me.Controls.Add(Me.settings)
         Me.Controls.Add(Me.btnAddItem)
         Me.Controls.Add(Me.cbxDefaultProfile)
         Me.Controls.Add(Me.lblAddingItems)
@@ -948,7 +938,6 @@ Partial Class frmMain
     Friend WithEvents cbEnableAdvancedView As CheckBox
     Friend WithEvents cbxDefaultProfile As ComboBox
     Friend WithEvents btnDeleteSelectedScheme As Button
-    Friend WithEvents settings As RichTextBox
     Friend WithEvents rtbItemsRandomSame119 As RichTextBox
     Friend WithEvents rtbItemsRandomSame116 As RichTextBox
 End Class

@@ -40,4 +40,29 @@
     Private Sub frmSaveProfileAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tbSaveProfileAs.Clear()
     End Sub
+
+    Public Sub UpdateProfile(ProfileName)
+        'Save profile settings into variables. If no text is given, a placeholder will be inserted
+        If String.IsNullOrEmpty(frmMain.tbDatapackPath.Text) Then
+            DatapackPath = frmMain.tbDatapackPath.Text = "None"
+        Else
+            DatapackPath = frmMain.tbDatapackPath.Text = frmMain.tbDatapackPath.Text
+        End If
+        If String.IsNullOrEmpty(frmMain.cbxVersion.SelectedItem) Then
+            DatapackVersion = frmMain.cbxVersion.Text = "None"
+        Else
+            DatapackVersion = frmMain.cbxVersion.SelectedItem
+        End If
+
+        'Update the selected profile. This will save and overwrite the selected profile without showing any warning or message. Used if a profile is old or corrupted.
+        If String.IsNullOrEmpty(ProfileName) = False Then
+            If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
+                My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
+            Else
+                MsgBox("Error: Couldn't update profile. Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
+            End If
+        Else
+            MsgBox("Error: Couldn't update profile as the name is empty.", MsgBoxStyle.Critical, "Error")
+        End If
+    End Sub
 End Class
