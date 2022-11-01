@@ -2196,8 +2196,8 @@ Public Class frmMain
         frmChangelog.Show()
     End Sub
 
-    Private Sub SoftwareHelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SoftwareHelpToolStripMenuItem.Click
-        MsgBox("This feature is not available yet." + vbNewLine + "Its expected release will be in Version 0.4.0.", MsgBoxStyle.Exclamation, "Not available yet")
+    Private Sub HelpDocumentaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpDocumentaryToolStripMenuItem.Click
+        frmHelp.Show()
     End Sub
 
     Private Sub OutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputToolStripMenuItem.Click

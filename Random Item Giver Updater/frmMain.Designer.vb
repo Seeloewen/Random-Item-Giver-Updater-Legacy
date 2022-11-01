@@ -77,7 +77,7 @@ Partial Class frmMain
         Me.FindDuplicatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportItemListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SoftwareHelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpDocumentaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -662,32 +662,32 @@ Partial Class frmMain
         '
         'HelpToolStripMenuItem
         '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SoftwareHelpToolStripMenuItem, Me.ToolStripSeparator1, Me.ChangelogToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HelpDocumentaryToolStripMenuItem, Me.ToolStripSeparator1, Me.ChangelogToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
-        'SoftwareHelpToolStripMenuItem
+        'HelpDocumentaryToolStripMenuItem
         '
-        Me.SoftwareHelpToolStripMenuItem.Name = "SoftwareHelpToolStripMenuItem"
-        Me.SoftwareHelpToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
-        Me.SoftwareHelpToolStripMenuItem.Text = "Software help"
+        Me.HelpDocumentaryToolStripMenuItem.Name = "HelpDocumentaryToolStripMenuItem"
+        Me.HelpDocumentaryToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HelpDocumentaryToolStripMenuItem.Text = "Help Documentary"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(143, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'ChangelogToolStripMenuItem
         '
         Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ChangelogToolStripMenuItem.Text = "Changelog"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'fbdMainFolderPath
@@ -900,7 +900,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents CloseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SoftwareHelpToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HelpDocumentaryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ChangelogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
