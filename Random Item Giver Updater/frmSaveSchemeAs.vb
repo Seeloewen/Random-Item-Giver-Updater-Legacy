@@ -113,7 +113,7 @@
             If String.IsNullOrEmpty(NameSource) = False Then
                 If My.Computer.FileSystem.DirectoryExists(frmMain.SchemeDirectory) Then
                     If My.Computer.FileSystem.FileExists(frmMain.SchemeDirectory + NameSource + ".txt") Then
-                        Select Case MessageBox.Show("A scheme with this name already exists. Do you want to overwrite it?", "Scheme already exists", MessageBoxButtons.YesNo)
+                        Select Case MsgBox("A scheme with this name already exists. Do you want to overwrite it?", vbQuestion + vbYesNo, "Scheme already exists")
                             Case Windows.Forms.DialogResult.Yes
                                 My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + SamePrefixString + vbNewLine + CustomNBT.ToString + vbNewLine + CustomNBTString + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine, False)
                                 frmMain.cbxScheme.Items.Clear()

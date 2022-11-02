@@ -51,7 +51,7 @@
 
             'Write text to text box in frmMain
             If String.IsNullOrEmpty(frmMain.rtbItem.Text) = False Then
-                Select Case MsgBox("Do you want to overwrite the text, that is already entered in the main window?" + vbNewLine + vbNewLine + "Click 'yes' to overwrite, click 'no' to append, click 'cancel' to not add the text at all.", MsgBoxStyle.YesNoCancel, "Overwrite existing text")
+                Select Case MsgBox("Do you want to overwrite the text, that is already entered in the main window?" + vbNewLine + vbNewLine + "Click 'yes' to overwrite, click 'no' to append, click 'cancel' to not add the text at all.", vbQuestion + vbYesNoCancel, "Overwrite existing text")
                     Case Windows.Forms.DialogResult.Yes
                         frmMain.rtbItem.Text = rtbItems.Text
                         MsgBox("Items were successfully imported and existing text was overwritten!" + vbNewLine + "You can see them in the main window." + vbNewLine + vbNewLine + "Make sure to unselect 'Use the same prefix for all items' if you imported a list that contains prefixes!", MsgBoxStyle.Information, "Import completed")

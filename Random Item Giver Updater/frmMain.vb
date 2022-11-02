@@ -2093,7 +2093,7 @@ Public Class frmMain
 
             Else
                 WriteToLog("Detected duplicate When adding item.", "Info")
-                Select Case MessageBox.Show("The item you are trying To add (" + FullItemName + ") already exists In the datapack." + vbNewLine + "Are you sure you want To add it again? This will result In duplicates.", vbExclamation + vbYesNo, "Warning")
+                Select Case MsgBox("The item you are trying To add (" + FullItemName + ") already exists In the datapack." + vbNewLine + "Are you sure you want To add it again? This will result In duplicates.", vbExclamation + vbYesNo, "Warning")
                     Case Windows.Forms.DialogResult.Yes
                         WriteToLog("Ignoring warning, adding duplicate.", "Info")
                         IgnoreDuplicates = True
