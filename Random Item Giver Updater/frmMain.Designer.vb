@@ -670,29 +670,30 @@ Partial Class frmMain
         'HelpDocumentaryToolStripMenuItem
         '
         Me.HelpDocumentaryToolStripMenuItem.Name = "HelpDocumentaryToolStripMenuItem"
-        Me.HelpDocumentaryToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.HelpDocumentaryToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.HelpDocumentaryToolStripMenuItem.Text = "Help Documentary"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(171, 6)
         '
         'ChangelogToolStripMenuItem
         '
         Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.ChangelogToolStripMenuItem.Text = "Changelog"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'fbdMainFolderPath
         '
         Me.fbdMainFolderPath.Description = "Select the datapack which you want to edit."
+        Me.fbdMainFolderPath.RootFolder = System.Environment.SpecialFolder.MyComputer
         '
         'Quotationmark
         '

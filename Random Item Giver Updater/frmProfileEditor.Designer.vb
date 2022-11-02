@@ -162,6 +162,7 @@ Partial Class frmProfileEditor
         'fbdProfileEditor
         '
         Me.fbdProfileEditor.Description = "Select a datapack folder..."
+        Me.fbdProfileEditor.RootFolder = System.Environment.SpecialFolder.MyComputer
         '
         'frmProfileEditor
         '

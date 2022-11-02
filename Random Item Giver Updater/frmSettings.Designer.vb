@@ -36,6 +36,9 @@ Partial Class frmSettings
         Me.cbUseAdvancedViewByDefault = New System.Windows.Forms.CheckBox()
         Me.lblAdvancedViewByDefault = New System.Windows.Forms.Label()
         Me.tpSoftware = New System.Windows.Forms.TabPage()
+        Me.lblResetWarning = New System.Windows.Forms.Label()
+        Me.btnResetSoftware = New System.Windows.Forms.Button()
+        Me.lblResetSoftware = New System.Windows.Forms.Label()
         Me.btnExportSettings = New System.Windows.Forms.Button()
         Me.btnImportSettings = New System.Windows.Forms.Button()
         Me.lblImportExportSettings = New System.Windows.Forms.Label()
@@ -58,9 +61,6 @@ Partial Class frmSettings
         Me.SettingsFilePreset = New System.Windows.Forms.RichTextBox()
         Me.ofdImportSettings = New System.Windows.Forms.OpenFileDialog()
         Me.fbdExportSettings = New System.Windows.Forms.FolderBrowserDialog()
-        Me.lblResetSoftware = New System.Windows.Forms.Label()
-        Me.btnResetSoftware = New System.Windows.Forms.Button()
-        Me.lblResetWarning = New System.Windows.Forms.Label()
         Me.tcSettings.SuspendLayout()
         Me.tpGeneral.SuspendLayout()
         Me.tpSoftware.SuspendLayout()
@@ -171,7 +171,7 @@ Partial Class frmSettings
         Me.tpGeneral.Controls.Add(Me.lblAdvancedViewByDefault)
         Me.tpGeneral.Location = New System.Drawing.Point(4, 25)
         Me.tpGeneral.Name = "tpGeneral"
-        Me.tpGeneral.Size = New System.Drawing.Size(480, 296)
+        Me.tpGeneral.Size = New System.Drawing.Size(480, 384)
         Me.tpGeneral.TabIndex = 4
         Me.tpGeneral.Text = "General"
         Me.tpGeneral.UseVisualStyleBackColor = True
@@ -220,6 +220,35 @@ Partial Class frmSettings
         Me.tpSoftware.TabIndex = 1
         Me.tpSoftware.Text = "Software"
         Me.tpSoftware.UseVisualStyleBackColor = True
+        '
+        'lblResetWarning
+        '
+        Me.lblResetWarning.AutoSize = True
+        Me.lblResetWarning.ForeColor = System.Drawing.Color.OrangeRed
+        Me.lblResetWarning.Location = New System.Drawing.Point(243, 356)
+        Me.lblResetWarning.Name = "lblResetWarning"
+        Me.lblResetWarning.Size = New System.Drawing.Size(162, 16)
+        Me.lblResetWarning.TabIndex = 20
+        Me.lblResetWarning.Text = "Warning: Use with caution!"
+        Me.lblResetWarning.Visible = False
+        '
+        'btnResetSoftware
+        '
+        Me.btnResetSoftware.Location = New System.Drawing.Point(9, 353)
+        Me.btnResetSoftware.Name = "btnResetSoftware"
+        Me.btnResetSoftware.Size = New System.Drawing.Size(228, 23)
+        Me.btnResetSoftware.TabIndex = 19
+        Me.btnResetSoftware.Text = "Reset software"
+        Me.btnResetSoftware.UseVisualStyleBackColor = True
+        '
+        'lblResetSoftware
+        '
+        Me.lblResetSoftware.AutoSize = True
+        Me.lblResetSoftware.Location = New System.Drawing.Point(12, 298)
+        Me.lblResetSoftware.Name = "lblResetSoftware"
+        Me.lblResetSoftware.Size = New System.Drawing.Size(443, 48)
+        Me.lblResetSoftware.TabIndex = 18
+        Me.lblResetSoftware.Text = resources.GetString("lblResetSoftware.Text")
         '
         'btnExportSettings
         '
@@ -391,7 +420,7 @@ Partial Class frmSettings
         Me.tpListImporter.Controls.Add(Me.lblDefaultSettingsItemImporter)
         Me.tpListImporter.Location = New System.Drawing.Point(4, 25)
         Me.tpListImporter.Name = "tpListImporter"
-        Me.tpListImporter.Size = New System.Drawing.Size(480, 296)
+        Me.tpListImporter.Size = New System.Drawing.Size(480, 384)
         Me.tpListImporter.TabIndex = 2
         Me.tpListImporter.Text = "Item List Importer"
         Me.tpListImporter.UseVisualStyleBackColor = True
@@ -433,35 +462,7 @@ Partial Class frmSettings
         'fbdExportSettings
         '
         Me.fbdExportSettings.Description = "Select the folder in which you want to save the exported settings file."
-        '
-        'lblResetSoftware
-        '
-        Me.lblResetSoftware.AutoSize = True
-        Me.lblResetSoftware.Location = New System.Drawing.Point(12, 298)
-        Me.lblResetSoftware.Name = "lblResetSoftware"
-        Me.lblResetSoftware.Size = New System.Drawing.Size(443, 48)
-        Me.lblResetSoftware.TabIndex = 18
-        Me.lblResetSoftware.Text = resources.GetString("lblResetSoftware.Text")
-        '
-        'btnResetSoftware
-        '
-        Me.btnResetSoftware.Location = New System.Drawing.Point(9, 353)
-        Me.btnResetSoftware.Name = "btnResetSoftware"
-        Me.btnResetSoftware.Size = New System.Drawing.Size(228, 23)
-        Me.btnResetSoftware.TabIndex = 19
-        Me.btnResetSoftware.Text = "Reset software"
-        Me.btnResetSoftware.UseVisualStyleBackColor = True
-        '
-        'lblResetWarning
-        '
-        Me.lblResetWarning.AutoSize = True
-        Me.lblResetWarning.ForeColor = System.Drawing.Color.OrangeRed
-        Me.lblResetWarning.Location = New System.Drawing.Point(243, 356)
-        Me.lblResetWarning.Name = "lblResetWarning"
-        Me.lblResetWarning.Size = New System.Drawing.Size(162, 16)
-        Me.lblResetWarning.TabIndex = 20
-        Me.lblResetWarning.Text = "Warning: Use with caution!"
-        Me.lblResetWarning.Visible = False
+        Me.fbdExportSettings.RootFolder = System.Environment.SpecialFolder.MyComputer
         '
         'frmSettings
         '

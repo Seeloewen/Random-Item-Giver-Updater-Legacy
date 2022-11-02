@@ -113,6 +113,7 @@ Partial Class frmDuplicateFinder
         'fbdMainFolderPath
         '
         Me.fbdMainFolderPath.Description = "Select the datapack which you want to check."
+        Me.fbdMainFolderPath.RootFolder = System.Environment.SpecialFolder.MyComputer
         '
         'lblDuplicatesAmount
         '
