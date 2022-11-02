@@ -11,6 +11,7 @@ Public Class frmMain
     Dim SettingsArray As String()
     Dim LoadedSettingsVersion As Double
     Dim FirstLoadCompleted As Boolean = False
+    Dim ActionRunning As Boolean = False
 
     'Profile variables
     Public ProfileDirectory As String = AppData + "\Random Item Giver Updater\Profiles\"
@@ -320,7 +321,7 @@ Public Class frmMain
     Private Sub bgwAddItems_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAddItems.DoWork
         If My.Computer.FileSystem.DirectoryExists(DatapackPath) Then
             If ItemsList.Count > 99 And AddItemsFast = False Then
-                Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Add Items Fast' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue?", MessageBoxButtons.YesNo, "Warning")
+                Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Add Items Fast' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue?", vbExclamation + vbYesNo, "Warning")
                     Case Windows.Forms.DialogResult.Yes
                         WriteToLog("Adding 100+ items with normal method, this may take a while!", "Warning")
 
@@ -377,7 +378,7 @@ Public Class frmMain
 
             If LoadedSettingsVersion < SettingsVersion Then
 
-                Select Case MsgBox("Your settings from a previous version were found." + vbNewLine + "Do you want to try to import them?" + vbNewLine + " This will overwrite your current settings.", MessageBoxButtons.YesNo, "Found older settings")
+                Select Case MsgBox("Your settings from a previous version were found." + vbNewLine + "Do you want to try to import them?" + vbNewLine + " This will overwrite your current settings.", vbQuestion + vbYesNo, "Found older settings")
                     Case Windows.Forms.DialogResult.Yes
                         WriteToLog("Importing settings from older version. Please note that due to version differences not everything might be imported.", "Warning")
                         LoadSettings()
@@ -392,7 +393,7 @@ Public Class frmMain
 
             ElseIf LoadedSettingsVersion > SettingsVersion Then
 
-                Select Case MsgBox("The settings file that was detected belongs to a newer version of the Random Item Giver Updater." + vbNewLine + "Loading it can cause issues. Do you still want to load it?", MessageBoxButtons.YesNo, "Found newer settings")
+                Select Case MsgBox("The settings file that was detected belongs to a newer version of the Random Item Giver Updater." + vbNewLine + "Loading it can cause issues. Do you still want to load it?", vbQuestion + vbYesNo, "Found newer settings")
                     Case Windows.Forms.DialogResult.Yes
                         WriteToLog("Importing settings from newer version. Please note that due to version differences this can issues.", "Warning")
                         LoadSettings()
@@ -452,7 +453,7 @@ Public Class frmMain
             MsgBox("Could not load settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
             WriteToLog("Could not load settings: " + ex.Message, "Error")
 
-            Select Case MsgBox("An error occured while loading your settings. " + vbNewLine + "Do you want to reset your settings? This probably fixes the problem.", MsgBoxStyle.YesNo, "Error")
+            Select Case MsgBox("An error occured while loading your settings. " + vbNewLine + "Do you want to reset your settings? This probably fixes the problem.", vbCritical + vbYesNo, "Error")
                 Case Windows.Forms.DialogResult.Yes
                     My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
                     frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
@@ -2092,7 +2093,7 @@ Public Class frmMain
 
             Else
                 WriteToLog("Detected duplicate When adding item.", "Info")
-                Select Case MessageBox.Show("The item you are trying To add (" + FullItemName + ") already exists In the datapack." + vbNewLine + "Are you sure you want To add it again? This will result In duplicates.", "Warning", MessageBoxButtons.YesNo)
+                Select Case MessageBox.Show("The item you are trying To add (" + FullItemName + ") already exists In the datapack." + vbNewLine + "Are you sure you want To add it again? This will result In duplicates.", vbExclamation + vbYesNo, "Warning")
                     Case Windows.Forms.DialogResult.Yes
                         WriteToLog("Ignoring warning, adding duplicate.", "Info")
                         IgnoreDuplicates = True
@@ -2470,7 +2471,7 @@ Public Class frmMain
         'If a line is empty, it will fill that line with a placeholder in the array so the profile can get loaded without errors. After loading the scheme, it gets automatically saved so the corrupted/old settings file gets fixed.
         'If no required line is empty and the file is fine, it will just load the scheme like normal.
         If (String.IsNullOrEmpty(SchemeContent(0)) OrElse String.IsNullOrEmpty(SchemeContent(1)) OrElse String.IsNullOrEmpty(SchemeContent(2)) OrElse String.IsNullOrEmpty(SchemeContent(3)) OrElse String.IsNullOrEmpty(SchemeContent(4)) OrElse String.IsNullOrEmpty(SchemeContent(5)) OrElse String.IsNullOrEmpty(SchemeContent(6)) OrElse String.IsNullOrEmpty(SchemeContent(7)) OrElse String.IsNullOrEmpty(SchemeContent(8)) OrElse String.IsNullOrEmpty(SchemeContent(9)) OrElse String.IsNullOrEmpty(SchemeContent(10)) OrElse String.IsNullOrEmpty(SchemeContent(11)) OrElse String.IsNullOrEmpty(SchemeContent(12)) OrElse String.IsNullOrEmpty(SchemeContent(13)) OrElse String.IsNullOrEmpty(SchemeContent(14)) OrElse String.IsNullOrEmpty(SchemeContent(15))) Then
-            Select Case MsgBox("You are trying to load a scheme from an older version or a corrupted scheme. You need to update it in order to load it. You usually won't lose any settings. Do you want to continue?", MsgBoxStyle.YesNo, "Load old or corrupted scheme")
+            Select Case MsgBox("You are trying to load a scheme from an older version or a corrupted scheme. You need to update it in order to load it. You usually won't lose any settings. Do you want to continue?", vbQuestion + vbYesNo, "Load old or corrupted scheme")
                 Case Windows.Forms.DialogResult.Yes
                     If String.IsNullOrEmpty(SchemeContent(0)) Then
                         SchemeContent(0) = True
@@ -2780,5 +2781,13 @@ Public Class frmMain
 
     Private Sub btnOverwriteSelectedScheme_Click(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.Click
         frmSaveSchemeAs.SaveScheme(cbxScheme.SelectedIndex, True)
+    End Sub
+
+    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If bgwAddItems.IsBusy Then
+            If MsgBox("There is an action still in progress. " + vbNewLine + "Are you sure you want to exit? This will stop the currently running action.", vbQuestion + vbYesNo, "Exit application") <> DialogResult.Yes Then
+                e.Cancel = True
+            End If
+        End If
     End Sub
 End Class

@@ -102,7 +102,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub btnQuitWithoutSaving_Click(sender As Object, e As EventArgs) Handles btnQuitWithoutSaving.Click
-        Select Case MsgBox("Are you sure you want to quit without saving your settings?", MsgBoxStyle.YesNo, "Quit without saving")
+        Select Case MsgBox("Are you sure you want to quit without saving your settings?", vbQuestion + vbYesNo, "Quit without saving")
             Case Windows.Forms.DialogResult.Yes
                 Close()
         End Select
@@ -341,7 +341,7 @@ Public Class frmSettings
     End Sub
 
     Private Sub btnResetSoftware_Click(sender As Object, e As EventArgs) Handles btnResetSoftware.Click
-        Select Case MsgBox("Warning: Resetting the software deletes all user settings, profiles, schemes and other files saved by the application. This does NOT uninstall the software, only delete its user preferences. Only continue if you know what you are doing. Are you sure you want to continue?", MsgBoxStyle.YesNo, "Reset software")
+        Select Case MsgBox("Warning: Resetting the software deletes all user settings, profiles, schemes and other files saved by the application. This does NOT uninstall the software, only delete its user preferences. Only continue if you know what you are doing. Are you sure you want to continue?", vbExclamation + vbYesNo, "Reset software")
             Case Windows.Forms.DialogResult.Yes
                 My.Computer.FileSystem.DeleteDirectory(frmMain.AppData + "/Random Item Giver Updater/", FileIO.DeleteDirectoryOption.DeleteAllContents)
                 My.Settings.Reset()

@@ -10,7 +10,7 @@
         If String.IsNullOrEmpty(tbSaveProfileAs.Text) = False Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
                 If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + tbSaveProfileAs.Text + ".txt") Then
-                    Select Case MessageBox.Show("A profile with this name already exists. Do you want to overwrite it?", "Profile already exists", MessageBoxButtons.YesNo)
+                    Select Case MessageBox.Show("A profile with this name already exists. Do you want to overwrite it?", vbQuestion + vbYesNo, "Profile already exists")
                         Case Windows.Forms.DialogResult.Yes
                             My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + tbSaveProfileAs.Text + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
                             MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
