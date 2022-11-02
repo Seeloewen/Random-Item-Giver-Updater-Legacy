@@ -28,26 +28,27 @@ Partial Class frmItemImporter
         Me.btnBrowse = New System.Windows.Forms.Button()
         Me.btnImport = New System.Windows.Forms.Button()
         Me.ofdImportFromFile = New System.Windows.Forms.OpenFileDialog()
-        Me.rtbItems = New System.Windows.Forms.RichTextBox()
         Me.cbDontImportVanilla = New System.Windows.Forms.CheckBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.llbl = New System.Windows.Forms.LinkLabel()
+        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.llblCopyCommand = New System.Windows.Forms.LinkLabel()
+        Me.btnShowPreview = New System.Windows.Forms.Button()
+        Me.rtbItems = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
         'lblImportDesc
         '
         Me.lblImportDesc.AutoSize = True
         Me.lblImportDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblImportDesc.Location = New System.Drawing.Point(17, 54)
+        Me.lblImportDesc.Location = New System.Drawing.Point(17, 49)
         Me.lblImportDesc.Name = "lblImportDesc"
-        Me.lblImportDesc.Size = New System.Drawing.Size(542, 64)
+        Me.lblImportDesc.Size = New System.Drawing.Size(557, 112)
         Me.lblImportDesc.TabIndex = 0
         Me.lblImportDesc.Text = resources.GetString("lblImportDesc.Text")
         '
         'tbImportFromFile
         '
         Me.tbImportFromFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbImportFromFile.Location = New System.Drawing.Point(20, 132)
+        Me.tbImportFromFile.Location = New System.Drawing.Point(20, 193)
         Me.tbImportFromFile.Name = "tbImportFromFile"
         Me.tbImportFromFile.Size = New System.Drawing.Size(434, 22)
         Me.tbImportFromFile.TabIndex = 1
@@ -55,7 +56,7 @@ Partial Class frmItemImporter
         'btnBrowse
         '
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(460, 131)
+        Me.btnBrowse.Location = New System.Drawing.Point(460, 192)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(122, 23)
         Me.btnBrowse.TabIndex = 2
@@ -65,9 +66,9 @@ Partial Class frmItemImporter
         'btnImport
         '
         Me.btnImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImport.Location = New System.Drawing.Point(230, 201)
+        Me.btnImport.Location = New System.Drawing.Point(460, 236)
         Me.btnImport.Name = "btnImport"
-        Me.btnImport.Size = New System.Drawing.Size(127, 27)
+        Me.btnImport.Size = New System.Drawing.Size(122, 27)
         Me.btnImport.TabIndex = 3
         Me.btnImport.Text = "Import item list"
         Me.btnImport.UseVisualStyleBackColor = True
@@ -76,56 +77,67 @@ Partial Class frmItemImporter
         '
         Me.ofdImportFromFile.Title = "Select a text file..."
         '
-        'rtbItems
-        '
-        Me.rtbItems.Location = New System.Drawing.Point(68, 314)
-        Me.rtbItems.Name = "rtbItems"
-        Me.rtbItems.Size = New System.Drawing.Size(346, 158)
-        Me.rtbItems.TabIndex = 5
-        Me.rtbItems.Text = ""
-        '
         'cbDontImportVanilla
         '
         Me.cbDontImportVanilla.AutoSize = True
         Me.cbDontImportVanilla.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbDontImportVanilla.Location = New System.Drawing.Point(20, 164)
+        Me.cbDontImportVanilla.Location = New System.Drawing.Point(20, 238)
         Me.cbDontImportVanilla.Name = "cbDontImportVanilla"
-        Me.cbDontImportVanilla.Size = New System.Drawing.Size(480, 22)
+        Me.cbDontImportVanilla.Size = New System.Drawing.Size(192, 22)
         Me.cbDontImportVanilla.TabIndex = 6
-        Me.cbDontImportVanilla.Text = "Don't import vanilla items (Recommended when using the TellMe file)"
+        Me.cbDontImportVanilla.Text = "Don't import vanilla items"
         Me.cbDontImportVanilla.UseVisualStyleBackColor = True
         '
-        'Label1
+        'lblHeader
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(15, 13)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(194, 25)
-        Me.Label1.TabIndex = 7
-        Me.Label1.Text = "Item List Importer"
+        Me.lblHeader.AutoSize = True
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Location = New System.Drawing.Point(15, 13)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(194, 25)
+        Me.lblHeader.TabIndex = 7
+        Me.lblHeader.Text = "Item List Importer"
         '
-        'llbl
+        'llblCopyCommand
         '
-        Me.llbl.AutoSize = True
-        Me.llbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llbl.Location = New System.Drawing.Point(470, 102)
-        Me.llbl.Name = "llbl"
-        Me.llbl.Size = New System.Drawing.Size(102, 16)
-        Me.llbl.TabIndex = 8
-        Me.llbl.TabStop = True
-        Me.llbl.Text = "Copy command"
+        Me.llblCopyCommand.AutoSize = True
+        Me.llblCopyCommand.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.llblCopyCommand.Location = New System.Drawing.Point(422, 145)
+        Me.llblCopyCommand.Name = "llblCopyCommand"
+        Me.llblCopyCommand.Size = New System.Drawing.Size(102, 16)
+        Me.llblCopyCommand.TabIndex = 8
+        Me.llblCopyCommand.TabStop = True
+        Me.llblCopyCommand.Text = "Copy command"
+        '
+        'btnShowPreview
+        '
+        Me.btnShowPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnShowPreview.Location = New System.Drawing.Point(332, 235)
+        Me.btnShowPreview.Name = "btnShowPreview"
+        Me.btnShowPreview.Size = New System.Drawing.Size(122, 28)
+        Me.btnShowPreview.TabIndex = 9
+        Me.btnShowPreview.Text = "Show Preview"
+        Me.btnShowPreview.UseVisualStyleBackColor = True
+        '
+        'rtbItems
+        '
+        Me.rtbItems.Location = New System.Drawing.Point(243, 344)
+        Me.rtbItems.Name = "rtbItems"
+        Me.rtbItems.Size = New System.Drawing.Size(100, 96)
+        Me.rtbItems.TabIndex = 10
+        Me.rtbItems.Text = ""
         '
         'frmItemImporter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(594, 240)
-        Me.Controls.Add(Me.llbl)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.cbDontImportVanilla)
+        Me.ClientSize = New System.Drawing.Size(598, 276)
         Me.Controls.Add(Me.rtbItems)
+        Me.Controls.Add(Me.btnShowPreview)
+        Me.Controls.Add(Me.llblCopyCommand)
+        Me.Controls.Add(Me.lblHeader)
+        Me.Controls.Add(Me.cbDontImportVanilla)
         Me.Controls.Add(Me.btnImport)
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.tbImportFromFile)
@@ -147,8 +159,9 @@ Partial Class frmItemImporter
     Friend WithEvents btnBrowse As Button
     Friend WithEvents btnImport As Button
     Friend WithEvents ofdImportFromFile As OpenFileDialog
-    Friend WithEvents rtbItems As RichTextBox
     Friend WithEvents cbDontImportVanilla As CheckBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents llbl As LinkLabel
+    Friend WithEvents lblHeader As Label
+    Friend WithEvents llblCopyCommand As LinkLabel
+    Friend WithEvents btnShowPreview As Button
+    Friend WithEvents rtbItems As RichTextBox
 End Class

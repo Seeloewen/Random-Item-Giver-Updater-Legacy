@@ -117,19 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblImportDesc.Text" xml:space="preserve">
-    <value>Select a file that contains a list of items. Make sure the file is consistant, which means that it's
-either only items with or without prefix and not a mix of both.
-It generally accepts all text files, while .txt or .csv is recommended.
-
-It's recommended to use some kind of mod to generate a list of items.
-Forge Forge 1.17+ , the "TellMe" Mod is a good option. A list of items with their prefixes can be
-generated using '/tellme dump to-file csv items-registry-name-only'.
-</value>
-  </data>
-  <metadata name="ofdImportFromFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
