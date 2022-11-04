@@ -25,10 +25,6 @@
         MsgBox(MsgFastWay, MsgBoxStyle.Question, "What is the 'fast way'?")
     End Sub
 
-    Private Sub llblRIG117Note_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblRIG117Note.LinkClicked
-        MsgBox("The 1.17 version of the Random Item Giver contains some duplicates by default. This is because the version is outdated and it was never fixed.", MsgBoxStyle.Exclamation, "Note about Random Item Giver 1.17")
-    End Sub
-
     Private Sub llblTellMe_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblTellMe.LinkClicked
         Process.Start("https://www.curseforge.com/minecraft/mc-mods/tellme")
     End Sub

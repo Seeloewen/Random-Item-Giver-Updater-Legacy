@@ -58,7 +58,6 @@ Partial Class frmHelp
         Me.lblDescriptionAddingItemsAdvanced = New System.Windows.Forms.Label()
         Me.pbAddingItemsAdvanced = New System.Windows.Forms.PictureBox()
         Me.tpDuplicateFinder = New System.Windows.Forms.TabPage()
-        Me.llblRIG117Note = New System.Windows.Forms.LinkLabel()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -69,14 +68,14 @@ Partial Class frmHelp
         Me.lblLastEditedProfilesAndSchemes = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.tpOther = New System.Windows.Forms.TabPage()
+        Me.lblLastEditedOther = New System.Windows.Forms.Label()
+        Me.llblTellMe = New System.Windows.Forms.LinkLabel()
+        Me.llblOtherDiscord = New System.Windows.Forms.LinkLabel()
+        Me.llblDatapackGithub = New System.Windows.Forms.LinkLabel()
+        Me.llblDatapackPMC = New System.Windows.Forms.LinkLabel()
+        Me.llblSoftwareGithub = New System.Windows.Forms.LinkLabel()
         Me.lblOther = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
-        Me.llblSoftwareGithub = New System.Windows.Forms.LinkLabel()
-        Me.llblDatapackPMC = New System.Windows.Forms.LinkLabel()
-        Me.llblDatapackGithub = New System.Windows.Forms.LinkLabel()
-        Me.llblOtherDiscord = New System.Windows.Forms.LinkLabel()
-        Me.llblTellMe = New System.Windows.Forms.LinkLabel()
-        Me.lblLastEditedOther = New System.Windows.Forms.Label()
         Me.tcHelp.SuspendLayout()
         Me.tpIntroduction.SuspendLayout()
         Me.tpSimpleOverview.SuspendLayout()
@@ -482,7 +481,6 @@ Partial Class frmHelp
         '
         'tpDuplicateFinder
         '
-        Me.tpDuplicateFinder.Controls.Add(Me.llblRIG117Note)
         Me.tpDuplicateFinder.Controls.Add(Me.Label5)
         Me.tpDuplicateFinder.Controls.Add(Me.Label4)
         Me.tpDuplicateFinder.Controls.Add(Me.Label3)
@@ -495,16 +493,6 @@ Partial Class frmHelp
         Me.tpDuplicateFinder.TabIndex = 3
         Me.tpDuplicateFinder.Text = "Duplicate Finder"
         Me.tpDuplicateFinder.UseVisualStyleBackColor = True
-        '
-        'llblRIG117Note
-        '
-        Me.llblRIG117Note.AutoSize = True
-        Me.llblRIG117Note.Location = New System.Drawing.Point(18, 798)
-        Me.llblRIG117Note.Name = "llblRIG117Note"
-        Me.llblRIG117Note.Size = New System.Drawing.Size(218, 16)
-        Me.llblRIG117Note.TabIndex = 24
-        Me.llblRIG117Note.TabStop = True
-        Me.llblRIG117Note.Text = "Note about Random Item Giver 1.17"
         '
         'Label5
         '
@@ -614,6 +602,65 @@ Partial Class frmHelp
         Me.tpOther.Text = "Other"
         Me.tpOther.UseVisualStyleBackColor = True
         '
+        'lblLastEditedOther
+        '
+        Me.lblLastEditedOther.AutoSize = True
+        Me.lblLastEditedOther.Location = New System.Drawing.Point(637, 798)
+        Me.lblLastEditedOther.Name = "lblLastEditedOther"
+        Me.lblLastEditedOther.Size = New System.Drawing.Size(141, 16)
+        Me.lblLastEditedOther.TabIndex = 24
+        Me.lblLastEditedOther.Text = "Last edited: 01.11.2022"
+        '
+        'llblTellMe
+        '
+        Me.llblTellMe.AutoSize = True
+        Me.llblTellMe.Location = New System.Drawing.Point(15, 798)
+        Me.llblTellMe.Name = "llblTellMe"
+        Me.llblTellMe.Size = New System.Drawing.Size(171, 16)
+        Me.llblTellMe.TabIndex = 5
+        Me.llblTellMe.TabStop = True
+        Me.llblTellMe.Text = "TellMe Mod on CurseForge"
+        '
+        'llblOtherDiscord
+        '
+        Me.llblOtherDiscord.AutoSize = True
+        Me.llblOtherDiscord.Location = New System.Drawing.Point(12, 394)
+        Me.llblOtherDiscord.Name = "llblOtherDiscord"
+        Me.llblOtherDiscord.Size = New System.Drawing.Size(250, 16)
+        Me.llblOtherDiscord.TabIndex = 4
+        Me.llblOtherDiscord.TabStop = True
+        Me.llblOtherDiscord.Text = "Join the Louis9 Datapack Discord Server"
+        '
+        'llblDatapackGithub
+        '
+        Me.llblDatapackGithub.AutoSize = True
+        Me.llblDatapackGithub.Location = New System.Drawing.Point(12, 262)
+        Me.llblDatapackGithub.Name = "llblDatapackGithub"
+        Me.llblDatapackGithub.Size = New System.Drawing.Size(181, 16)
+        Me.llblDatapackGithub.TabIndex = 3
+        Me.llblDatapackGithub.TabStop = True
+        Me.llblDatapackGithub.Text = "Random Item Giver on Github"
+        '
+        'llblDatapackPMC
+        '
+        Me.llblDatapackPMC.AutoSize = True
+        Me.llblDatapackPMC.Location = New System.Drawing.Point(12, 236)
+        Me.llblDatapackPMC.Name = "llblDatapackPMC"
+        Me.llblDatapackPMC.Size = New System.Drawing.Size(238, 16)
+        Me.llblDatapackPMC.TabIndex = 2
+        Me.llblDatapackPMC.TabStop = True
+        Me.llblDatapackPMC.Text = "Random Item Giver on Planet Minecraft"
+        '
+        'llblSoftwareGithub
+        '
+        Me.llblSoftwareGithub.AutoSize = True
+        Me.llblSoftwareGithub.Location = New System.Drawing.Point(12, 184)
+        Me.llblSoftwareGithub.Name = "llblSoftwareGithub"
+        Me.llblSoftwareGithub.Size = New System.Drawing.Size(233, 16)
+        Me.llblSoftwareGithub.TabIndex = 1
+        Me.llblSoftwareGithub.TabStop = True
+        Me.llblSoftwareGithub.Text = "Random Item Giver Updater on Github"
+        '
         'lblOther
         '
         Me.lblOther.AutoSize = True
@@ -632,65 +679,6 @@ Partial Class frmHelp
         Me.lblHeader.Size = New System.Drawing.Size(183, 24)
         Me.lblHeader.TabIndex = 1
         Me.lblHeader.Text = "Help Documentary"
-        '
-        'llblSoftwareGithub
-        '
-        Me.llblSoftwareGithub.AutoSize = True
-        Me.llblSoftwareGithub.Location = New System.Drawing.Point(12, 184)
-        Me.llblSoftwareGithub.Name = "llblSoftwareGithub"
-        Me.llblSoftwareGithub.Size = New System.Drawing.Size(233, 16)
-        Me.llblSoftwareGithub.TabIndex = 1
-        Me.llblSoftwareGithub.TabStop = True
-        Me.llblSoftwareGithub.Text = "Random Item Giver Updater on Github"
-        '
-        'llblDatapackPMC
-        '
-        Me.llblDatapackPMC.AutoSize = True
-        Me.llblDatapackPMC.Location = New System.Drawing.Point(12, 236)
-        Me.llblDatapackPMC.Name = "llblDatapackPMC"
-        Me.llblDatapackPMC.Size = New System.Drawing.Size(238, 16)
-        Me.llblDatapackPMC.TabIndex = 2
-        Me.llblDatapackPMC.TabStop = True
-        Me.llblDatapackPMC.Text = "Random Item Giver on Planet Minecraft"
-        '
-        'llblDatapackGithub
-        '
-        Me.llblDatapackGithub.AutoSize = True
-        Me.llblDatapackGithub.Location = New System.Drawing.Point(12, 262)
-        Me.llblDatapackGithub.Name = "llblDatapackGithub"
-        Me.llblDatapackGithub.Size = New System.Drawing.Size(181, 16)
-        Me.llblDatapackGithub.TabIndex = 3
-        Me.llblDatapackGithub.TabStop = True
-        Me.llblDatapackGithub.Text = "Random Item Giver on Github"
-        '
-        'llblOtherDiscord
-        '
-        Me.llblOtherDiscord.AutoSize = True
-        Me.llblOtherDiscord.Location = New System.Drawing.Point(12, 394)
-        Me.llblOtherDiscord.Name = "llblOtherDiscord"
-        Me.llblOtherDiscord.Size = New System.Drawing.Size(250, 16)
-        Me.llblOtherDiscord.TabIndex = 4
-        Me.llblOtherDiscord.TabStop = True
-        Me.llblOtherDiscord.Text = "Join the Louis9 Datapack Discord Server"
-        '
-        'llblTellMe
-        '
-        Me.llblTellMe.AutoSize = True
-        Me.llblTellMe.Location = New System.Drawing.Point(15, 798)
-        Me.llblTellMe.Name = "llblTellMe"
-        Me.llblTellMe.Size = New System.Drawing.Size(171, 16)
-        Me.llblTellMe.TabIndex = 5
-        Me.llblTellMe.TabStop = True
-        Me.llblTellMe.Text = "TellMe Mod on CurseForge"
-        '
-        'lblLastEditedOther
-        '
-        Me.lblLastEditedOther.AutoSize = True
-        Me.lblLastEditedOther.Location = New System.Drawing.Point(637, 798)
-        Me.lblLastEditedOther.Name = "lblLastEditedOther"
-        Me.lblLastEditedOther.Size = New System.Drawing.Size(141, 16)
-        Me.lblLastEditedOther.TabIndex = 24
-        Me.lblLastEditedOther.Text = "Last edited: 01.11.2022"
         '
         'frmHelp
         '
@@ -773,7 +761,6 @@ Partial Class frmHelp
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents llblRIG117Note As LinkLabel
     Friend WithEvents Label6 As Label
     Friend WithEvents lblLastEditedProfilesAndSchemes As Label
     Friend WithEvents lblOther As Label
