@@ -348,3 +348,28 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Additional files
+/.vs/Random-Item-Giver-Updater/FileContentIndex/cc0a61f2-2bc2-40d4-9bac-9f01322a6dfb.vsidx
+/.vs/Random-Item-Giver-Updater/v17/.suo
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/Random Item Giver Updater/.vs/Random Item Giver Updater/FileContentIndex/merges/a3e73e6c-f915-47ac-9116-d455bd3e3eff.vsidx
+/Random Item Giver Updater/.vs/Random Item Giver Updater/v17/.suo
+/Random Item Giver Updater/bin/x64/Release/Random Item Giver Updater.exe
+/Random Item Giver Updater/bin/x64/Release/Random Item Giver Updater.exe.config
+/Random Item Giver Updater/bin/x64/Release/Random Item Giver Updater.pdb
+/Random Item Giver Updater/bin/x64/Release/Random Item Giver Updater.xml
+/Random Item Giver Updater/obj/Release/Random Item Giver Updater.vbproj.AssemblyReference.cache
+/Random Item Giver Updater/obj/x64/Release/TempPE/My Project.Resources.Designer.vb.dll
+/Random Item Giver Updater/obj/x64/Release/DesignTimeResolveAssemblyReferences.cache
+/Random Item Giver Updater/obj/x64/Release/DesignTimeResolveAssemblyReferencesInput.cache
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.exe
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.pdb
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.vbproj.AssemblyReference.cache
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.vbproj.CoreCompileInputs.cache
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.vbproj.FileListAbsolute.txt
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.vbproj.GenerateResource.cache
+/Random Item Giver Updater/obj/x64/Release/Random Item Giver Updater.xml
+/Random Item Giver Updater/obj/x64/Release/Random_Item_Giver_Updater.frmItemImporter.resources
+/Random Item Giver Updater/App.config
