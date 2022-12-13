@@ -3,10 +3,15 @@
     Dim DatapackPath As String
     Dim DatapackVersion As String
 
+    '-- Event handlers --
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        'Get datapack path and version from selected settings in main window
         DatapackPath = frmMain.tbDatapackPath.Text
         DatapackVersion = frmMain.cbxVersion.Text
 
+        'Saves the profile. It checks if the profile already exists or not. If it exists, it will show a warning, otherwise it will not.
+        'It will then create a text file with the name set in ProfileName and write the content of the variable to the file.
+        'It will show an error if ProfileName is empty or ProfileDirectory doesn't exist.
         If String.IsNullOrEmpty(tbSaveProfileAs.Text) = False Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
                 If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + tbSaveProfileAs.Text + ".txt") Then
@@ -34,12 +39,16 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        'Close window
         Close()
     End Sub
 
     Private Sub frmSaveProfileAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Clear existing text in name textbox
         tbSaveProfileAs.Clear()
     End Sub
+
+    ' -- Custom methods --
 
     Public Sub UpdateProfile(ProfileName)
         'Save profile settings into variables. If no text is given, a placeholder will be inserted

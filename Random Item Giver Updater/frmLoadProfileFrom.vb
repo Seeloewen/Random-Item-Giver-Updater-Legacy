@@ -11,6 +11,8 @@ Public Class frmLoadProfileFrom
     Dim DatapackPath As String
     Dim DatapackVersion As String
 
+    '-- Event handlers --
+
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Checks if the profile directory exists. If yes, it clears the combobox to avoid duplicates and it starts getting all available profiles, see method below
         If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
@@ -21,37 +23,27 @@ Public Class frmLoadProfileFrom
         End If
     End Sub
 
-    Sub GetFiles(Path As String)
-        'Gets all the profile files from the directory and puts their name into the combobox
-        If Path.Trim().Length = 0 Then
-            Return
-        End If
-
-        ProfileList = Directory.GetFileSystemEntries(Path)
-
-        Try
-            For Each Profile As String In ProfileList
-                If Directory.Exists(Profile) Then
-                    GetFiles(Profile)
-                Else
-                    Profile = Profile.Replace(Path, "")
-                    Profile = Profile.Replace(".txt", "")
-                    cbxProfiles.Items.Add(Profile)
-                End If
-            Next
-        Catch ex As Exception
-            MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
-            frmMain.WriteToLog("Error when loading profiles for 'Load Profile from': " + ex.Message, "Error")
-        End Try
-    End Sub
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        'Close window
         Close()
     End Sub
 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         'Starts the whole loading process
         InitializeLoadingProfile(cbxProfiles.SelectedItem, True)
+    End Sub
+
+    '-- Custom methods --
+
+    Public Sub LoadProfile(Profile As String, ShowMessage As Boolean)
+        'Load settings from profile
+        frmMain.tbDatapackPath.Text = ProfileContent(0)
+        frmMain.cbxVersion.Text = ProfileContent(1)
+
+        'If ShowMessage is enabled, it will show a messagebox when loading completes.
+        If ShowMessage Then
+            MsgBox("Loaded profile " + Profile + ".", MsgBoxStyle.Information, "Loaded profile")
+        End If
     End Sub
 
     Public Sub InitializeLoadingProfile(Profile As String, ShowMessage As Boolean)
@@ -95,14 +87,28 @@ Public Class frmLoadProfileFrom
         End If
     End Sub
 
-    Public Sub LoadProfile(Profile As String, ShowMessage As Boolean)
-        'Load settings from profile
-        frmMain.tbDatapackPath.Text = ProfileContent(0)
-        frmMain.cbxVersion.Text = ProfileContent(1)
-
-        'If ShowMessage is enabled, it will show a messagebox when loading completes.
-        If ShowMessage Then
-            MsgBox("Loaded profile " + Profile + ".", MsgBoxStyle.Information, "Loaded profile")
+    Sub GetFiles(Path As String)
+        'Gets all the profile files from the directory and puts their name into the combobox
+        If Path.Trim().Length = 0 Then
+            Return
         End If
+
+        ProfileList = Directory.GetFileSystemEntries(Path)
+
+        Try
+            For Each Profile As String In ProfileList
+                If Directory.Exists(Profile) Then
+                    GetFiles(Profile)
+                Else
+                    Profile = Profile.Replace(Path, "")
+                    Profile = Profile.Replace(".txt", "")
+                    cbxProfiles.Items.Add(Profile)
+                End If
+            Next
+        Catch ex As Exception
+            MsgBox("Error: Could not load profiles. Please try again." + vbNewLine + "Exception: " + ex.Message)
+            frmMain.WriteToLog("Error when loading profiles for 'Load Profile from': " + ex.Message, "Error")
+        End Try
     End Sub
+
 End Class

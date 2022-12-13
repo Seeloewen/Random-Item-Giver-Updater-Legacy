@@ -17,9 +17,24 @@
     Dim CustomNBTString As String
     Dim SamePrefixString As String
 
+    ' -- Event handlers --
+
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        'Same scheme
         SaveScheme(tbSaveSchemeAs.Text, False)
     End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        'Close window
+        Close()
+    End Sub
+
+    Private Sub frmSaveSchemeAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Clear existing text in the scheme name textbox
+        tbSaveSchemeAs.Clear()
+    End Sub
+
+    ' -- Custom methods --
 
     Public Sub SaveScheme(NameSource As String, Overwrite As Boolean)
         'Save currently selected settings into Variables
@@ -156,7 +171,7 @@
         End If
     End Sub
 
-    Public Sub UpdateProfile(SchemeName)
+    Public Sub UpdateScheme(SchemeName)
         'Save currently selected settings into Variables
         If frmMain.rbtnSpawnEgg.Checked = True Then
             SpawnEgg = True
@@ -249,13 +264,5 @@
         Else
             MsgBox("Error: Couldn't update scheme as the name is empty.", MsgBoxStyle.Critical, "Error")
         End If
-    End Sub
-
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Close()
-    End Sub
-
-    Private Sub frmSaveSchemeAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        tbSaveSchemeAs.Clear()
     End Sub
 End Class

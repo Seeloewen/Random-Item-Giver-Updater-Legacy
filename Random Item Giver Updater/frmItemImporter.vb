@@ -1,22 +1,22 @@
 ﻿Public Class frmItemImporter
 
+    ' -- Event handlers --
+
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+        'Open file browser for selecting file
         ofdImportFromFile.ShowDialog()
         tbImportFromFile.Text = ofdImportFromFile.FileName
     End Sub
 
-    Private Function AppendTextToRichtextbox(TextToAppend As String, Richtextboxtext As String) As String
-        Return String.Join(Environment.NewLine, Richtextboxtext.
-                       Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries).
-                       Select(Function(s) s & TextToAppend))
-    End Function
-
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
         If My.Computer.FileSystem.FileExists(tbImportFromFile.Text) Then
+            'Begin import process by changing the controls
             btnImport.Text = "Importing..."
             btnImport.Enabled = False
-            frmMain.WriteToLog("Importing item list from " + tbImportFromFile.Text, "Info")
             rtbItems.Clear()
+            frmMain.WriteToLog("Importing item list from " + tbImportFromFile.Text, "Info")
+
+            'Read item list from file
             rtbItems.Text = My.Computer.FileSystem.ReadAllText(tbImportFromFile.Text)
 
             'Remove text if file was generated using TellMe Mod
@@ -36,6 +36,7 @@
                 Next
             End If
 
+            'Remove quotation mark
             If rtbItems.Text.Contains(frmMain.qm) Then
                 rtbItems.Text = rtbItems.Text.Replace(frmMain.qm, "")
             End If
@@ -49,7 +50,7 @@
             Next
             rtbItems.Lines = WithoutEmptyLines.ToArray
 
-            'Write text to text box in frmMain
+            'Write text to text box in frmMain. If there is already text in frmMain it will ask whether it should overwrite the existing text.
             If String.IsNullOrEmpty(frmMain.rtbItem.Text) = False Then
                 Select Case MsgBox("Do you want to overwrite the text, that is already entered in the main window?" + vbNewLine + vbNewLine + "Click 'yes' to overwrite, click 'no' to append, click 'cancel' to not add the text at all.", vbQuestion + vbYesNoCancel, "Overwrite existing text")
                     Case Windows.Forms.DialogResult.Yes
@@ -72,24 +73,28 @@
                 Close()
             End If
 
+            'Reset controls to default state
             btnImport.Text = "Import Item List"
             btnImport.Enabled = True
         ElseIf String.IsNullOrEmpty(tbImportFromFile.Text) Then
-            MsgBox("Please select a file in the format .txt or .csv!", MsgBoxStyle.Critical, "Error")
+            MsgBox("Please select a valid file!", MsgBoxStyle.Critical, "Error")
         Else
             MsgBox("The selected file does not exist!", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
-    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblCopyCommand.LinkClicked
+    Private Sub llblCopyCommand_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblCopyCommand.LinkClicked
+        'Copy command to clipboard
         Clipboard.SetText("/tellme dump to-file csv items-registry-name-only")
         MsgBox("Copied the command to the clipboard!" + vbNewLine + "Paste it ingame with CTRL + V", MsgBoxStyle.Information, "Copied command")
         frmMain.WriteToLog("Copied command for Item List Importer to clipboard.", "Info")
     End Sub
 
     Private Sub frmItemImporter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Clear out any existing text on first load
         tbImportFromFile.Clear()
 
+        'Load settings
         If My.Settings.DontImportVanillaItemsByDefault = True Then
             cbDontImportVanilla.Checked = True
         Else
@@ -98,10 +103,21 @@
     End Sub
 
     Private Sub btnShowPreview_Click(sender As Object, e As EventArgs) Handles btnShowPreview.Click
+
+        'Show preview of item list
         If My.Computer.FileSystem.FileExists(tbImportFromFile.Text) Then
             frmItemListPreview.ShowDialog()
         Else
             MsgBox("Please select a valid file to preview!", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
+
+    ' -- Custom methods --
+
+    Private Function AppendTextToRichtextbox(TextToAppend As String, Richtextboxtext As String) As String
+        'Append text to Richtextbox... honestly unsure how this works.
+        Return String.Join(Environment.NewLine, Richtextboxtext.
+                       Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries).
+                       Select(Function(s) s & TextToAppend))
+    End Function
 End Class

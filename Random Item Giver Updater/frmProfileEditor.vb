@@ -11,6 +11,8 @@ Public Class frmProfileEditor
     Dim DatapackPath As String
     Dim DatapackVersion As String
 
+    '-- Event handlers --
+
     Private Sub frmProfileEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Remove any content that may still be loaded
         cbxProfile.Items.Clear()
@@ -27,6 +29,7 @@ Public Class frmProfileEditor
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        'Close window
         Close()
     End Sub
 
@@ -46,6 +49,19 @@ Public Class frmProfileEditor
         'Begin loading the selected profile
         InitializeLoadingProfile(cbxProfile.SelectedItem, False)
     End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        'Begin overwriting and saving the selected profile
+        SaveProfile(cbxProfile.SelectedItem)
+    End Sub
+
+    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+        'Select datapack path
+        fbdProfileEditor.ShowDialog()
+        tbDatapackPath.Text = fbdProfileEditor.SelectedPath
+    End Sub
+
+    ' -- Custom methods --
 
     Public Sub InitializeLoadingProfile(Profile As String, ShowMessage As Boolean)
         'Checks if a profile is selected. It then reads the content of the profile file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
@@ -120,11 +136,6 @@ Public Class frmProfileEditor
         End Try
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        'Begin overwriting and saving the selected profile
-        SaveProfile(cbxProfile.SelectedItem)
-    End Sub
-
     Private Sub SaveProfile(ProfileName)
         'Save profile settings into variables. If no text is given, a placeholder will be inserted
         If String.IsNullOrEmpty(tbDatapackPath.Text) Then
@@ -150,10 +161,5 @@ Public Class frmProfileEditor
         Else
             MsgBox("Error: Couldn't save profile as the name is empty.", MsgBoxStyle.Critical, "Error")
         End If
-    End Sub
-
-    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
-        fbdProfileEditor.ShowDialog()
-        tbDatapackPath.Text = fbdProfileEditor.SelectedPath
     End Sub
 End Class
