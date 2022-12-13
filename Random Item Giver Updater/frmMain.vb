@@ -6,7 +6,7 @@ Public Class frmMain
     'General variables for the software
     Public qm As String 'Quotation mark
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public VersionLog As String = "0.3.2-a (28.09.2022)" 'Version that gets displayed in the log
+    Public VersionLog As String = "0.4.0-b (13.12.2022)" 'Version that gets displayed in the log
     Public SettingsVersion As Double = 1 'Current version of the settings file that the app is using
     Dim SettingsArray As String() 'Array which the settings will be loaded in
     Dim LoadedSettingsVersion As Double 'Version of the settings file that gets loaded
@@ -83,7 +83,7 @@ Public Class frmMain
 
         'Post initial log text
         WriteToLog("Random Item Giver Updater " + VersionLog, "Info")
-        WriteToLog("You are running an alpha build, may be unstable!", "Warning")
+        WriteToLog("You are running a beta build, issues may occur!", "Warning")
 
         'If software gets started for the first time, add default schemes and create file that indicates that the software was started once already.
         If My.Computer.FileSystem.FileExists(AppData + "\Random Item Giver Updater\FirstStartCompleted") = False Then
@@ -108,7 +108,7 @@ Public Class frmMain
 
         'Hide Alpha Warning if setting is enabled
         If My.Settings.HideAlphaWarning = False Then
-            MsgBox("Warning: You are running an early alpha build of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs and incomplete features." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Use this early alpha build at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
+            MsgBox("Warning: You are running a beta version of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs or other issues." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Things normally shouldn't break, though use this software at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         End If
 
         'Define several variables (I know I could probably do this way easier but... yeah)

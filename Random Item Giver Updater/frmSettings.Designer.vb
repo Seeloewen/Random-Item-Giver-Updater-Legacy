@@ -42,7 +42,7 @@ Partial Class frmSettings
         Me.btnExportSettings = New System.Windows.Forms.Button()
         Me.btnImportSettings = New System.Windows.Forms.Button()
         Me.lblImportExportSettings = New System.Windows.Forms.Label()
-        Me.cbHideAlphaWarning = New System.Windows.Forms.CheckBox()
+        Me.cbHideBetaWarning = New System.Windows.Forms.CheckBox()
         Me.lblAlphaWarning = New System.Windows.Forms.Label()
         Me.lblLogging = New System.Windows.Forms.Label()
         Me.cbDisableLogging = New System.Windows.Forms.CheckBox()
@@ -205,7 +205,7 @@ Partial Class frmSettings
         Me.tpSoftware.Controls.Add(Me.btnExportSettings)
         Me.tpSoftware.Controls.Add(Me.btnImportSettings)
         Me.tpSoftware.Controls.Add(Me.lblImportExportSettings)
-        Me.tpSoftware.Controls.Add(Me.cbHideAlphaWarning)
+        Me.tpSoftware.Controls.Add(Me.cbHideBetaWarning)
         Me.tpSoftware.Controls.Add(Me.lblAlphaWarning)
         Me.tpSoftware.Controls.Add(Me.lblLogging)
         Me.tpSoftware.Controls.Add(Me.cbDisableLogging)
@@ -277,15 +277,15 @@ Partial Class frmSettings
         Me.lblImportExportSettings.TabIndex = 15
         Me.lblImportExportSettings.Text = "You can import and export settings files."
         '
-        'cbHideAlphaWarning
+        'cbHideBetaWarning
         '
-        Me.cbHideAlphaWarning.AutoSize = True
-        Me.cbHideAlphaWarning.Location = New System.Drawing.Point(12, 202)
-        Me.cbHideAlphaWarning.Name = "cbHideAlphaWarning"
-        Me.cbHideAlphaWarning.Size = New System.Drawing.Size(188, 20)
-        Me.cbHideAlphaWarning.TabIndex = 14
-        Me.cbHideAlphaWarning.Text = "Hide alpha version warning"
-        Me.cbHideAlphaWarning.UseVisualStyleBackColor = True
+        Me.cbHideBetaWarning.AutoSize = True
+        Me.cbHideBetaWarning.Location = New System.Drawing.Point(12, 202)
+        Me.cbHideBetaWarning.Name = "cbHideBetaWarning"
+        Me.cbHideBetaWarning.Size = New System.Drawing.Size(181, 20)
+        Me.cbHideBetaWarning.TabIndex = 14
+        Me.cbHideBetaWarning.Text = "Hide beta version warning"
+        Me.cbHideBetaWarning.UseVisualStyleBackColor = True
         '
         'lblAlphaWarning
         '
@@ -516,7 +516,7 @@ Partial Class frmSettings
     Friend WithEvents cbDisableLogging As CheckBox
     Friend WithEvents cbDontImportVanillaItemsByDefault As CheckBox
     Friend WithEvents lblDefaultSettingsItemImporter As Label
-    Friend WithEvents cbHideAlphaWarning As CheckBox
+    Friend WithEvents cbHideBetaWarning As CheckBox
     Friend WithEvents lblAlphaWarning As Label
     Friend WithEvents tpSchemes As TabPage
     Friend WithEvents cbxDefaultScheme As ComboBox

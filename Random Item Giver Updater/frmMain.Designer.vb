@@ -109,9 +109,9 @@ Partial Class frmMain
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHeader.Location = New System.Drawing.Point(12, 33)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(340, 24)
+        Me.lblHeader.Size = New System.Drawing.Size(327, 24)
         Me.lblHeader.TabIndex = 56
-        Me.lblHeader.Text = "Random Item Giver Updater ALPHA"
+        Me.lblHeader.Text = "Random Item Giver Updater BETA"
         '
         'gbDatapack
         '
@@ -854,7 +854,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater ALPHA 0.3.2"
+        Me.Text = "Random Item Giver Updater BETA 0.4.0"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)

@@ -156,9 +156,9 @@ Public Class frmSettings
         End If
 
         If My.Settings.HideAlphaWarning = True Then
-            cbHideAlphaWarning.Checked = True
+            cbHideBetaWarning.Checked = True
         Else
-            cbHideAlphaWarning.Checked = False
+            cbHideBetaWarning.Checked = False
         End If
 
         If My.Settings.LoadDefaultProfile = True Then
@@ -321,7 +321,7 @@ Public Class frmSettings
             SettingsArray(7) = "DisableLogging=" + My.Settings.DisableLogging.ToString
             frmMain.WriteToLog("Saved setting " + SettingsArray(7), "Info")
 
-            If cbHideAlphaWarning.Checked Then
+            If cbHideBetaWarning.Checked Then
                 My.Settings.HideAlphaWarning = True
             Else
                 My.Settings.HideAlphaWarning = False
