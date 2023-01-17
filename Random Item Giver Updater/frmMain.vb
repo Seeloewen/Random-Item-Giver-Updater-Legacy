@@ -7,11 +7,12 @@ Public Class frmMain
     Public qm As String 'Quotation mark
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
     Public VersionLog As String = "0.4.0-b (13.12.2022)" 'Version that gets displayed in the log
-    Public SettingsVersion As Double = 1 'Current version of the settings file that the app is using
+    Public SettingsVersion As Double = 2 'Current version of the settings file that the app is using
     Dim SettingsArray As String() 'Array which the settings will be loaded in
     Dim LoadedSettingsVersion As Double 'Version of the settings file that gets loaded
     Dim FirstLoadCompleted As Boolean = False 'Whether application is loaded or not. Used for the datapack version detection.
     Dim ActionRunning As Boolean = False 'Whether an action is running or not
+    Dim SettingsFile As String = AppData + "\Random Item Giver Updater\settings.txt" 'Location of the settings file
 
     'Profile variables
     Public ProfileDirectory As String = AppData + "\Random Item Giver Updater\Profiles\" 'Directory where the profiles are located
@@ -76,8 +77,8 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Create directory in appdata if it doesnt exist already
-        If My.Computer.FileSystem.DirectoryExists(AppData + "/Random Item Giver Updater/") = False Then
-            My.Computer.FileSystem.CreateDirectory(AppData + "/Random Item Giver Updater/")
+        If My.Computer.FileSystem.DirectoryExists(AppData + "\Random Item Giver Updater\") = False Then
+            My.Computer.FileSystem.CreateDirectory(AppData + "\Random Item Giver Updater\")
             WriteToLog("Created the 'Random Item Giver Updater' directory in the Appdata folder for application files.", "Info")
         End If
 
@@ -101,12 +102,12 @@ Public Class frmMain
         'Disable log if setting is enabled
         If My.Settings.DisableLogging = True Then
             frmOutput.rtbLog.Clear()
-            If My.Computer.FileSystem.FileExists(AppData + "/Random Item Giver Updater/DebugLogTemp") Then
-                My.Computer.FileSystem.DeleteFile(AppData + "/Random Item Giver Updater/DebugLogTemp")
+            If My.Computer.FileSystem.FileExists(AppData + "\Random Item Giver Updater\DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
             End If
         End If
 
-        'Hide Alpha Warning if setting is enabled
+        'Hide Beta Warning if setting is enabled
         If My.Settings.HideAlphaWarning = False Then
             MsgBox("Warning: You are running a beta version of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs or other issues." + vbNewLine + vbNewLine + "Please give as much feedback as possible so the software can be improved!" + vbNewLine + vbNewLine + "Things normally shouldn't break, though use this software at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         End If
@@ -234,8 +235,8 @@ Public Class frmMain
 
     Private Sub rtbLog_TextChanged(sender As Object, e As EventArgs) Handles rtbLog.TextChanged
         'Updadte log file and log in output window
-        rtbLog.SaveFile(AppData + "/Random Item Giver Updater/DebugLogTemp")
-        frmOutput.rtbLog.LoadFile(AppData + "/Random Item Giver Updater/DebugLogTemp")
+        rtbLog.SaveFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
+        frmOutput.rtbLog.LoadFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
     End Sub
 
     Private Sub btnBrowseDatapackPath_Click(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.Click
@@ -1321,62 +1322,183 @@ Public Class frmMain
     End Function
 
     Private Sub InitializeLoadingSettings()
-        If My.Computer.FileSystem.FileExists(AppData + "/Random Item Giver Updater/settings.txt") Then
-            'Load settings and determine version
-            SettingsArray = File.ReadAllLines(AppData + "/Random Item Giver Updater/settings.txt")
-            LoadedSettingsVersion = SettingsArray(1).Replace("Version=", "")
-            WriteToLog("Found settings version " + LoadedSettingsVersion.ToString, "Info")
+        If My.Computer.FileSystem.FileExists(SettingsFile) Then
+            Try
+                'Try to load settings and determine version
+                SettingsArray = File.ReadAllLines(SettingsFile)
+                LoadedSettingsVersion = SettingsArray(1).Replace("Version=", "")
+                WriteToLog("Found settings version " + LoadedSettingsVersion.ToString, "Info")
 
-            'Check if settings version is outdated or newer (or just right)
-            If LoadedSettingsVersion < SettingsVersion Then
-
-                'Load settings from older version. You can either select to import the settings into the new version or overwrite them.
-                Select Case MsgBox("Your settings from a previous version were found." + vbNewLine + "Do you want to try to import them?" + vbNewLine + " This will overwrite your current settings.", vbQuestion + vbYesNo, "Found older settings")
-                    Case Windows.Forms.DialogResult.Yes
-                        WriteToLog("Importing settings from older version. Please note that due to version differences not everything might be imported.", "Warning")
-                        LoadSettings()
-                        MsgBox("Finished Importing settings. Please note that not everything might have been imported due to the settings file being an older version.", MsgBoxStyle.Information, "Import older settings")
-                        WriteToLog("Finished importing settings from older version.", "Info")
-                    Case Windows.Forms.DialogResult.No
-                        WriteToLog("Ignored settings from previous version. Creating new file, current one will be renamed to settings.old", "Info")
-                        My.Computer.FileSystem.RenameFile(AppData + "/Random Item Giver Updater/settings.txt", "settings.old")
-                        My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-                        frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
-                End Select
-
-            ElseIf LoadedSettingsVersion > SettingsVersion Then
-
-                'Load settings from newer version. You can either select to import the settings into the new version or overwrite them.
-                Select Case MsgBox("The settings file that was detected belongs to a newer version of the Random Item Giver Updater." + vbNewLine + "Loading it can cause issues. Do you still want to load it?", vbQuestion + vbYesNo, "Found newer settings")
-                    Case Windows.Forms.DialogResult.Yes
-                        WriteToLog("Importing settings from newer version. Please note that due to version differences this can issues.", "Warning")
-                        LoadSettings()
-                        MsgBox("Finished Importing settings. Please note that not everything might work correctly.", MsgBoxStyle.Information, "Imported newer settings")
-                        WriteToLog("Finished importing settings from newer version.", "Info")
-                    Case Windows.Forms.DialogResult.No
-                        WriteToLog("Ignored settings from newer version. Creating new file, current one will be renamed to settings.old", "Info")
-                        My.Computer.FileSystem.RenameFile(AppData + "/Random Item Giver Updater/settings.txt", "settings.old")
-                        My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-                        frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
-                End Select
-
-            Else
-
-                'Just load settings
-                WriteToLog("Loading settings...", "Info")
-                LoadSettings()
-
-            End If
+                'Resize array so all settings can fit in it (Array size = Amount of lines that the settings file should have)
+                ReDim Preserve SettingsArray(20)
+                ConvertSettings(SettingsFile)
+            Catch ex As Exception
+                MsgBox("Error when loading settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
+                WriteToLog("Error when loading settings: " + ex.Message, "Error")
+            End Try
 
         Else
             'Show error and create new settings file if none exists
             WriteToLog("Could not find settings file. Creating a new one (Version " + SettingsVersion.ToString + ").", "Warning")
-            My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-            frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+            My.Computer.FileSystem.WriteAllText(SettingsFile, "", False)
+            frmSettings.SaveSettings(SettingsFile)
         End If
     End Sub
 
-    Private Sub LoadSettings()
+    Public Sub ConvertSettings(File As String)
+        'This checks if the settings file that was loaded has enough lines, too few lines would mean that settings are missing, meaning the file is either too old or corrupted.
+        'It will check for each required line if it is empty (required lines = the length of a healthy, normal profile file). Make sure that the line amount it checks matches the amount of settings that are being saved.
+        'If a line is empty, it will fill that line with a placeholder in the array so the settings can get loaded without errors. After loading the settings, it gets automatically saved so the corrupted/old settings file gets fixed.
+        'If no required line is empty and the file is fine, it will just load the profile like normal.
+        If SettingsFaulty() = True Then
+            Select Case MsgBox("You are trying to load settings from an older/newer version or your settings are corrupted. You need to fix them in order to load them. You usually won't lose any settings. Do you want to continue?", vbQuestion + vbYesNo, "Load old or corrupted profile")
+                Case Windows.Forms.DialogResult.Yes
+                    WriteToLog("Converting settings to newer version...", "Info")
+                    'Change version to the newest one to avoid further detections
+                    SettingsArray(1) = frmSettings.SettingsFilePreset.Lines(1)
+                    'Check every line. If the line doesnt match any of the possible options, enter the default value
+                    If (SettingsArray(0) = "#Random Item Giver Settings File") = False Then
+                        SettingsArray(0) = frmSettings.SettingsFilePreset.Lines(0)
+                    End If
+                    If (SettingsArray(2) = "/") = False Then
+                        SettingsArray(2) = frmSettings.SettingsFilePreset.Lines(2)
+                    End If
+                    If (SettingsArray(3) = "#General") = False Then
+                        SettingsArray(3) = frmSettings.SettingsFilePreset.Lines(3)
+                    End If
+                    If ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdancedViewByDefault=False")) = False Then
+                        SettingsArray(4) = frmSettings.SettingsFilePreset.Lines(4)
+                    End If
+                    If (SettingsArray(5) = "/") = False Then
+                        SettingsArray(5) = frmSettings.SettingsFilePreset.Lines(5)
+                    End If
+                    If (SettingsArray(6) = "#Software") = False Then
+                        SettingsArray(6) = frmSettings.SettingsFilePreset.Lines(6)
+                    End If
+                    If ((SettingsArray(7) = "DisableLogging=True" = False And SettingsArray(7) = "DisableLogging=False" = False)) Then
+                        SettingsArray(7) = frmSettings.SettingsFilePreset.Lines(7)
+                    End If
+                    If ((SettingsArray(8) = "HideAlphaWarning=True" = False And SettingsArray(8) = "HideAlphaWarning=False" = False)) Then
+                        SettingsArray(8) = frmSettings.SettingsFilePreset.Lines(8)
+                    End If
+                    If (SettingsArray(9) = "/") = False Then
+                        SettingsArray(9) = frmSettings.SettingsFilePreset.Lines(9)
+                    End If
+                    If (SettingsArray(10) = "#Datapack Profiles") = False Then
+                        SettingsArray(10) = frmSettings.SettingsFilePreset.Lines(10)
+                    End If
+                    If ((SettingsArray(11) = "LoadDefaultProfile=True" = False And SettingsArray(11) = "LoadDefaultProfile=False" = False)) Then
+                        SettingsArray(11) = frmSettings.SettingsFilePreset.Lines(11)
+                    End If
+                    If String.IsNullOrEmpty(SettingsArray(12)) Then
+                        SettingsArray(12) = frmSettings.SettingsFilePreset.Lines(12)
+                    End If
+                    If (SettingsArray(13) = "/") = False Then
+                        SettingsArray(13) = frmSettings.SettingsFilePreset.Lines(13)
+                    End If
+                    If (SettingsArray(14) = "#Schemes") = False Then
+                        SettingsArray(14) = frmSettings.SettingsFilePreset.Lines(14)
+                    End If
+                    If (SettingsArray(15) = "SelectDefaultScheme=True" = False And SettingsArray(15) = "SelectDefaultScheme=False" = False) Then
+                        SettingsArray(15) = frmSettings.SettingsFilePreset.Lines(15)
+                    End If
+                    If String.IsNullOrEmpty(SettingsArray(16)) Then
+                        SettingsArray(16) = frmSettings.SettingsFilePreset.Lines(16)
+                    End If
+                    If (SettingsArray(17) = "/") = False Then
+                        SettingsArray(17) = frmSettings.SettingsFilePreset.Lines(17)
+                    End If
+                    If (SettingsArray(18) = "#Item List Importer") = False Then
+                        SettingsArray(18) = frmSettings.SettingsFilePreset.Lines(18)
+                    End If
+                    If ((SettingsArray(19) = "DontImportVanillaItemsByDefault=True") = False And (SettingsArray(19) = "DontImportVanillaItemsByDefault=False") = False) Then
+                        SettingsArray(19) = frmSettings.SettingsFilePreset.Lines(19)
+                    End If
+                    System.IO.File.WriteAllLines(SettingsFile, SettingsArray)
+                    LoadSettings()
+                    MsgBox("Loaded and converted settings. They should now work correctly!", MsgBoxStyle.Information, "Loaded and updated profile")
+                    WriteToLog("Loaded and converted settings.", "Info")
+                Case Windows.Forms.DialogResult.No
+                    WriteToLog("Ignored settings from newer version. Creating new file, current one will be renamed to settings.old", "Info")
+                    My.Computer.FileSystem.RenameFile(SettingsFile, "settings.old")
+                    My.Computer.FileSystem.WriteAllText(SettingsFile, "", False)
+                    frmSettings.ResetSettings(SettingsFile)
+                    LoadSettings()
+            End Select
+        Else
+            LoadSettings()
+        End If
+    End Sub
+
+    Public Function SettingsFaulty() As Boolean
+        If (SettingsArray(0) = "#Random Item Giver Settings File") = False Then
+            MsgBox("1")
+            Return True
+        ElseIf (SettingsArray(1) = "Version=" + SettingsVersion.ToString) = False Then
+            MsgBox("2")
+            Return True
+        ElseIf (SettingsArray(2) = "/") = False Then
+            MsgBox("3")
+            Return True
+        ElseIf (SettingsArray(3) = "#General") = False Then
+            MsgBox("4")
+            Return True
+        ElseIf ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdvancedViewByDefault=False")) = False Then
+            MsgBox("5")
+            Return True
+        ElseIf (SettingsArray(5) = "/") = False Then
+            MsgBox("6")
+            Return True
+        ElseIf (SettingsArray(6) = "#Software") = False Then
+            MsgBox("7")
+            Return True
+        ElseIf ((SettingsArray(7) = "DisableLogging=True" = False And SettingsArray(7) = "DisableLogging=False" = False)) Then
+            MsgBox("8")
+            Return True
+        ElseIf ((SettingsArray(8) = "HideAlphaWarning=True" = False And SettingsArray(8) = "HideAlphaWarning=False" = False)) Then
+            MsgBox("9")
+            Return True
+        ElseIf (SettingsArray(9) = "/") = False Then
+            MsgBox("10")
+            Return True
+        ElseIf (SettingsArray(10) = "#Datapack Profiles") = False Then
+            MsgBox("11")
+            Return True
+        ElseIf ((SettingsArray(11) = "LoadDefaultProfile=True" = False And SettingsArray(11) = "LoadDefaultProfile=False" = False)) Then
+            MsgBox("12")
+            Return True
+        ElseIf String.IsNullOrEmpty(SettingsArray(12)) Then
+            MsgBox("13")
+            Return True
+        ElseIf (SettingsArray(13) = "/") = False Then
+            MsgBox("14")
+            Return True
+        ElseIf (SettingsArray(14) = "#Schemes") = False Then
+            MsgBox("15")
+            Return True
+        ElseIf ((SettingsArray(15) = "SelectDefaultScheme=True" = False And SettingsArray(15) = "SelectDefaultScheme=False" = False)) Then
+            MsgBox("16")
+            Return True
+        ElseIf String.IsNullOrEmpty(SettingsArray(16)) Then
+            MsgBox("17")
+            Return True
+        ElseIf (SettingsArray(17) = "/") = False Then
+            MsgBox("18")
+            Return True
+        ElseIf (SettingsArray(18) = "#Item List Importer") = False Then
+            MsgBox("19")
+            Return True
+        ElseIf ((SettingsArray(19) = "DontImportVanillaItemsByDefault=True" = False And SettingsArray(19) = "DontImportVanillaItemsByDefault=False" = False)) Then
+            MsgBox("20")
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Sub LoadSettings()
+        WriteToLog("Loading settings...", "Info")
+
         Try
 
             'Load general settings
@@ -1412,8 +1534,8 @@ Public Class frmMain
             'If loading settings failed, show an option to reset settings
             Select Case MsgBox("An error occured while loading your settings. " + vbNewLine + "Do you want to reset your settings? This probably fixes the problem.", vbCritical + vbYesNo, "Error")
                 Case Windows.Forms.DialogResult.Yes
-                    My.Computer.FileSystem.WriteAllText(AppData + "/Random Item Giver Updater/settings.txt", "", False)
-                    frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                    My.Computer.FileSystem.WriteAllText(SettingsFile, "", False)
+                    frmSettings.SaveSettings(SettingsFile)
                     MsgBox("Successfully reset your settings!" + vbNewLine + "Please restart the application for changes to take affect.", MsgBoxStyle.Information, "Reset settings")
                     WriteToLog("Successfully reset settings!", "Info")
                     Close()

@@ -235,10 +235,10 @@ Public Class frmSettings
 
     ' -- Custom methods --
 
-    Private Sub ResetSettings()
+    Public Sub ResetSettings(Path)
         'Reset settings to default and write to file.
         SettingsArray = SettingsFilePreset.Lines
-        File.WriteAllLines(frmMain.AppData + "/Random Item Giver Updater/settings.txt", SettingsArray)
+        File.WriteAllLines(Path, SettingsArray)
     End Sub
 
     Sub GetProfileFiles(Path As String)
@@ -293,7 +293,7 @@ Public Class frmSettings
         'Save the settings into the settings array
         Try
             frmMain.WriteToLog("Saving settings...", "Info")
-            ResetSettings()
+            ResetSettings(SettingsFile)
 
             'Load settings into array
             SettingsArray = File.ReadAllLines(SettingsFile)

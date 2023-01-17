@@ -141,23 +141,23 @@ remove the default schemes. You can edit the schemes in the main window.</value>
   </data>
   <data name="SettingsFilePreset.Text" xml:space="preserve">
     <value>#Random Item Giver Settings File
-Version=1
-
+Version=2
+/
 #General
 UseAdvancedViewByDefault=False
-
+/
 #Software
 DisableLogging=False
 HideAlphaWarning=False
-
+/
 #Datapack Profiles
 LoadDefaultProfile=False
 DefaultProfile=
-
+/
 #Schemes
 SelectDefaultScheme=True
 DefaultScheme=Normal Item
-
+/
 #Item List Importer
 DontImportVanillaItemsByDefault=True</value>
   </data>
