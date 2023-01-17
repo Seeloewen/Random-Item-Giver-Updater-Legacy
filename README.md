@@ -5,7 +5,7 @@ The Software has a very simple UI and lots of help elements and explainations in
 
 There is also a neat settings menu which lets you choose many preferences for the software and even edit profiles and schemes for adding items!
 
-The software is still work in progress but it already has several useful features.
+The software is still in development but its basic functionality is there and works great.
 
 ## Adding items to datapack
 The software allows you to easily add items to datapack. It supports all available versions of the datapack and new versions are added as fast as possible.
