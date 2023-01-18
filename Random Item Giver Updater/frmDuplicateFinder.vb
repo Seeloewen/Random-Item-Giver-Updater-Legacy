@@ -74,11 +74,9 @@ Public Class frmDuplicateFinder
             Dim ParseVersion As String = Replace(VersionString, "    " + QuM + "pack_format" + QuM + ": ", "")
             Dim Version As String = Replace(ParseVersion, ",", "")
 
-            If Version = "10" Then
+            If Version = "11" OrElse Version = "10" Then
                 DatapackVersion = "1.19"
-            ElseIf Version = "9" Then
-                DatapackVersion = "1.18"
-            ElseIf Version = "8" Then
+            ElseIf Version = "9" OrElse Version = "8" Then
                 DatapackVersion = "1.18"
             ElseIf Version = "7" Then
                 DatapackVersion = "1.17"
