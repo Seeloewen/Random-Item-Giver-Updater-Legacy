@@ -118,8 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.4.0 (13.12.2022)
-+ Added help menu
+    <value>Version 0.4.1 (18.01.2023)
++ Added support for 1.19.4 (snapshots)
++ Added update news window
+* Improved loading of old/corrupted settings files
+
+Version 0.4.0 (13.12.2022)
++ Added help window
 * Reworked Item List Importer
 * Improved loading and saving of schemes/profiles
 * Improved code overall
