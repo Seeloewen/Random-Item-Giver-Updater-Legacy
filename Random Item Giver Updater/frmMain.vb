@@ -7,6 +7,7 @@ Public Class frmMain
     Public qm As String 'Quotation mark
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
     Public VersionLog As String = "0.4.0-b (13.12.2022)" 'Version that gets displayed in the log
+    Public RawVersion As String = "0.4.0-b"
     Public SettingsVersion As Double = 2 'Current version of the settings file that the app is using
     Dim SettingsArray As String() 'Array which the settings will be loaded in
     Dim LoadedSettingsVersion As Double 'Version of the settings file that gets loaded
@@ -132,6 +133,8 @@ Public Class frmMain
             DisableAdvancedView()
             cbEnableAdvancedView.Checked = False
         End If
+
+        CheckForFirstStart()
     End Sub
 
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
@@ -579,6 +582,14 @@ Public Class frmMain
     End Sub
 
     '-- Custom methods --
+
+    Private Sub CheckForFirstStart()
+        'Check if application was already started once using this version. If not, show update news
+        If My.Computer.FileSystem.FileExists(AppData + "\Random Item Giver Updater\FirstStart_" + RawVersion) = False Then
+            My.Computer.FileSystem.WriteAllText(AppData + "\Random Item Giver Updater\FirstStart_" + RawVersion, "", False)
+            frmUpdateNews.ShowDialog()
+        End If
+    End Sub
 
     Public Sub InitializeLoadingScheme(Scheme As String, ShowMessage As Boolean)
         'Checks if a scheme is selected. It then reads the content of the scheme file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
@@ -1432,64 +1443,44 @@ Public Class frmMain
 
     Public Function SettingsFaulty() As Boolean
         If (SettingsArray(0) = "#Random Item Giver Settings File") = False Then
-            MsgBox("1")
             Return True
         ElseIf (SettingsArray(1) = "Version=" + SettingsVersion.ToString) = False Then
-            MsgBox("2")
             Return True
         ElseIf (SettingsArray(2) = "/") = False Then
-            MsgBox("3")
             Return True
         ElseIf (SettingsArray(3) = "#General") = False Then
-            MsgBox("4")
             Return True
         ElseIf ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdvancedViewByDefault=False")) = False Then
-            MsgBox("5")
             Return True
         ElseIf (SettingsArray(5) = "/") = False Then
-            MsgBox("6")
             Return True
         ElseIf (SettingsArray(6) = "#Software") = False Then
-            MsgBox("7")
             Return True
         ElseIf ((SettingsArray(7) = "DisableLogging=True" = False And SettingsArray(7) = "DisableLogging=False" = False)) Then
-            MsgBox("8")
             Return True
         ElseIf ((SettingsArray(8) = "HideAlphaWarning=True" = False And SettingsArray(8) = "HideAlphaWarning=False" = False)) Then
-            MsgBox("9")
             Return True
         ElseIf (SettingsArray(9) = "/") = False Then
-            MsgBox("10")
             Return True
         ElseIf (SettingsArray(10) = "#Datapack Profiles") = False Then
-            MsgBox("11")
             Return True
         ElseIf ((SettingsArray(11) = "LoadDefaultProfile=True" = False And SettingsArray(11) = "LoadDefaultProfile=False" = False)) Then
-            MsgBox("12")
             Return True
         ElseIf String.IsNullOrEmpty(SettingsArray(12)) Then
-            MsgBox("13")
             Return True
         ElseIf (SettingsArray(13) = "/") = False Then
-            MsgBox("14")
             Return True
         ElseIf (SettingsArray(14) = "#Schemes") = False Then
-            MsgBox("15")
             Return True
         ElseIf ((SettingsArray(15) = "SelectDefaultScheme=True" = False And SettingsArray(15) = "SelectDefaultScheme=False" = False)) Then
-            MsgBox("16")
             Return True
         ElseIf String.IsNullOrEmpty(SettingsArray(16)) Then
-            MsgBox("17")
             Return True
         ElseIf (SettingsArray(17) = "/") = False Then
-            MsgBox("18")
             Return True
         ElseIf (SettingsArray(18) = "#Item List Importer") = False Then
-            MsgBox("19")
             Return True
         ElseIf ((SettingsArray(19) = "DontImportVanillaItemsByDefault=True" = False And SettingsArray(19) = "DontImportVanillaItemsByDefault=False" = False)) Then
-            MsgBox("20")
             Return True
         Else
             Return False
