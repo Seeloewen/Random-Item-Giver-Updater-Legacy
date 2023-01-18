@@ -88,7 +88,7 @@ Public Class frmProfileEditor
                         ProfileContent(0) = "None"
                     End If
                     If String.IsNullOrEmpty(ProfileContent(1)) Then
-                        ProfileContent(1) = "Version 1.19"
+                        ProfileContent(1) = "Version 1.19.4"
                     End If
                     LoadProfile(Profile, False)
                     SaveProfile(Profile)

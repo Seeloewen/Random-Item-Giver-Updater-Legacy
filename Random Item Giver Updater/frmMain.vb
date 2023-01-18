@@ -6,8 +6,8 @@ Public Class frmMain
     'General variables for the software
     Public qm As String 'Quotation mark
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public VersionLog As String = "0.4.0-b (13.12.2022)" 'Version that gets displayed in the log
-    Public RawVersion As String = "0.4.0-b"
+    Public VersionLog As String = "0.4.1-b (18.01.2023)" 'Version that gets displayed in the log
+    Public RawVersion As String = "0.4.1-b"
     Public SettingsVersion As Double = 2 'Current version of the settings file that the app is using
     Dim SettingsArray As String() 'Array which the settings will be loaded in
     Dim LoadedSettingsVersion As Double 'Version of the settings file that gets loaded
@@ -916,36 +916,40 @@ Public Class frmMain
                 Dim Version As String = Replace(ParseVersion, ",", "")
 
                 Try
-                    If Convert.ToInt32(Version) > 10 Then
+                    If Convert.ToInt32(Version) > 11 Then
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version"
-                        MsgBox("A datapack has been detected but the Version number is greater than 10." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
+                        MsgBox("A datapack has been detected but the Version number is greater than 11." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
                         WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
-                        cbxVersion.SelectedItem = "Version 1.19"
+                        cbxVersion.SelectedItem = "Version 1.19.4"
+                    ElseIf Version = "11" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.19.4."
+                        WriteToLog("Detected datapack version 1.19.4.", "Info")
+                        cbxVersion.SelectedItem = "Version 1.19.4"
                     ElseIf Version = "10" Then
-                        lblDatapackDetection.Text = "Detected datapack as version 1.19"
-                        WriteToLog("Detected datapack version 1.19.", "Info")
-                        cbxVersion.SelectedItem = "Version 1.19"
+                        lblDatapackDetection.Text = "Detected datapack as version 1.19 - 1.19.3."
+                        WriteToLog("Detected datapack version 1.19 - 1.19.3.", "Info")
+                        cbxVersion.SelectedItem = "Version 1.19 - 1.19.3"
                     ElseIf Version = "9" Then
-                        lblDatapackDetection.Text = "Detected datapack as version 1.18"
-                        WriteToLog("Detected datapack version 1.18.", "Info")
-                        cbxVersion.SelectedItem = "Version 1.18"
+                        lblDatapackDetection.Text = "Detected datapack as version 1.18.2."
+                        WriteToLog("Detected datapack version 1.18.2.", "Info")
+                        cbxVersion.SelectedItem = "Version 1.18 - 1.18.2"
                     ElseIf Version = "8" Then
-                        lblDatapackDetection.Text = "Detected datapack as version 1.18. Please note that your version of 1.18 is outdated."
-                        WriteToLog("Detected datapack version 1.18.", "Info")
-                        cbxVersion.SelectedItem = "Version 1.18"
+                        lblDatapackDetection.Text = "Detected datapack as version 1.18 - 1.18.1. Please note that your version of 1.18 is outdated."
+                        WriteToLog("Detected datapack version 1.18 - 1.18.1.", "Info")
+                        cbxVersion.SelectedItem = "Version 1.18 - 1.18.2"
                     ElseIf Version = "7" Then
-                        lblDatapackDetection.Text = "Detected datapack as version 1.17"
-                        WriteToLog("Detected datapack version 1.17.", "Info")
-                        cbxVersion.SelectedItem = "Version 1.17"
+                        lblDatapackDetection.Text = "Detected datapack as version 1.17 - 1.17.1."
+                        WriteToLog("Detected datapack version 1.17 - 1.17.1.", "Info")
+                        cbxVersion.SelectedItem = "Version 1.17 - 1.17.1"
                     ElseIf Version = "6" Then
-                        lblDatapackDetection.Text = "Detected datapack as version 1.16"
-                        WriteToLog("Detected datapack version 1.16.", "Info")
-                        cbxVersion.SelectedItem = "Version 1.16"
+                        lblDatapackDetection.Text = "Detected datapack as version 1.16.2 - 1.16.5."
+                        WriteToLog("Detected datapack version 1.16.2 - 1.16.5.", "Info")
+                        cbxVersion.SelectedItem = "Version 1.16.2 - 1.16.5"
                     ElseIf Convert.ToInt32(Version) < 6 Then
                         lblDatapackDetection.Text = "Detected datapack, but version is most likely unsupported"
                         MsgBox("A datapack has been detected but the version number is smaller than 6." + vbNewLine + "This means that the datapack version is older than 1.15 which the Random Item Giver does not support." + vbNewLine + "The oldest available version has been selected but will most likely not work.", MsgBoxStyle.Exclamation, "Warning")
                         WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
-                        cbxVersion.SelectedItem = "Version 1.16"
+                        cbxVersion.SelectedItem = "Version 1.16.2 - 1.16.5"
                     Else
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                         WriteToLog("Detected datapack, couldn't determine version.", "Error")
@@ -954,7 +958,7 @@ Public Class frmMain
                     MsgBox("Error when selecting datapack: " + ex.Message, MsgBoxStyle.Critical, "Error")
                     lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                     WriteToLog("Detected datapack, couldn't determine version.", "Error")
-                    cbxVersion.SelectedItem = "Version 1.19"
+                    cbxVersion.SelectedItem = "Version 1.19.4"
                 End Try
             Else
                 lblDatapackDetection.Text = "Folder found, but could not detect datapack."
@@ -1612,7 +1616,7 @@ Public Class frmMain
 
         If String.IsNullOrEmpty(Item) = False Then
 
-            If DatapackVersion = "Version 1.16" Then
+            If DatapackVersion = "Version 1.16.2 - 1.16.5" Then
 
                 'Add item to loot tables for 1 item
                 If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
@@ -2010,7 +2014,7 @@ Public Class frmMain
                     AddItem(Item, "-2", "1.16", "tipped_arrows")
                 End If
 
-            ElseIf DatapackVersion = "Version 1.17" Then
+            ElseIf DatapackVersion = "Version 1.17 - 1.17.1" Then
 
                 If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
                     AddItem(Item, "1", "1.17", "main")
@@ -2055,7 +2059,7 @@ Public Class frmMain
                     AddItem(Item, "1", "1.17", "tipped_arrows")
                 End If
 
-            ElseIf DatapackVersion = "Version 1.18" Then
+            ElseIf DatapackVersion = "Version 1.18 - 1.18.2" Then
 
                 'Add item to loot tables for 1 item
                 If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
@@ -2365,7 +2369,7 @@ Public Class frmMain
                     AddItem(Item, "64", "1.18", "tipped_arrows")
                 End If
 
-            ElseIf DatapackVersion = "Version 1.19" Then
+            ElseIf DatapackVersion = "Version 1.19 - 1.19.3" OrElse DatapackVersion = "Version 1.19.4" Then
 
                 'Add item to loot tables for 1 item
                 If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then

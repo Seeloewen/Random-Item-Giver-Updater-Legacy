@@ -166,7 +166,7 @@ Partial Class frmMain
         Me.cbxVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxVersion.FormattingEnabled = True
-        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.16", "Version 1.17", "Version 1.18", "Version 1.19"})
+        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.16.2 - 1.16.5", "Version 1.17 - 1.17.1", "Version 1.18 - 1.18.2", "Version 1.19 - 1.19.3", "Version 1.19.4"})
         Me.cbxVersion.Location = New System.Drawing.Point(79, 94)
         Me.cbxVersion.Name = "cbxVersion"
         Me.cbxVersion.Size = New System.Drawing.Size(241, 24)
@@ -854,7 +854,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater BETA 0.4.0"
+        Me.Text = "Random Item Giver Updater BETA 0.4.1"
         Me.gbDatapack.ResumeLayout(False)
         Me.gbDatapack.PerformLayout()
         Me.gbItem.ResumeLayout(False)

@@ -128,6 +128,7 @@ Partial Class frmProfileEditor
         Me.cbxDatapackVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxDatapackVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxDatapackVersion.FormattingEnabled = True
+        Me.cbxDatapackVersion.Items.AddRange(New Object() {"DON'T EDIT, COMBOBOX IN MAIN WILL BE MIRRORED TO THIS ONE."})
         Me.cbxDatapackVersion.Location = New System.Drawing.Point(18, 100)
         Me.cbxDatapackVersion.Name = "cbxDatapackVersion"
         Me.cbxDatapackVersion.Size = New System.Drawing.Size(235, 24)
