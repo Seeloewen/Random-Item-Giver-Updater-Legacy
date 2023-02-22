@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Environment
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar
 
 Public Class frmMain
 
@@ -8,12 +9,14 @@ Public Class frmMain
     Public AppData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
     Public VersionLog As String = "0.4.1-b (18.01.2023)" 'Version that gets displayed in the log
     Public RawVersion As String = "0.4.1-b"
-    Public SettingsVersion As Double = 2 'Current version of the settings file that the app is using
+    Public SettingsVersion As Double = 3 'Current version of the settings file that the app is using
     Dim SettingsArray As String() 'Array which the settings will be loaded in
     Dim LoadedSettingsVersion As Double 'Version of the settings file that gets loaded
     Dim FirstLoadCompleted As Boolean = False 'Whether application is loaded or not. Used for the datapack version detection.
     Dim ActionRunning As Boolean = False 'Whether an action is running or not
     Dim SettingsFile As String = AppData + "\Random Item Giver Updater\settings.txt" 'Location of the settings file
+    Public LogDirectory As String = AppData + "\Random Item Giver Updater\Logs\"
+    Dim LogFileName As String
 
     'Profile variables
     Public ProfileDirectory As String = AppData + "\Random Item Giver Updater\Profiles\" 'Directory where the profiles are located
@@ -41,6 +44,7 @@ Public Class frmMain
     Dim ProgressStep As Double 'Step size that the progressbar makes
     Dim Workerprogress As Double 'Progress of the BackGroundWorker that adds the items
     Dim AddItemResult As String 'Result of adding the items (Whether it failed or succeeded)
+    Dim TotalItemAmount As Integer 'Total amount of items that are being added
 
     'Variables that also exist as UI elements, needed for threading
     Dim NormalItem As Boolean
@@ -74,9 +78,17 @@ Public Class frmMain
     Dim ItemsRandomSame116 As String()
     Dim ItemsRandomSame119 As String()
 
+
     '-- Event handlers --
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Add click event of frmMain to every control in frmMain
+        For Each ctrl As Control In Me.Controls
+            If Not ctrl.Equals(btnHamburger) Then
+                AddHandler ctrl.Click, AddressOf frmMain_MouseClick
+            End If
+        Next
+
         'Create directory in appdata if it doesnt exist already
         If My.Computer.FileSystem.DirectoryExists(AppData + "\Random Item Giver Updater\") = False Then
             My.Computer.FileSystem.CreateDirectory(AppData + "\Random Item Giver Updater\")
@@ -99,6 +111,7 @@ Public Class frmMain
         'Initialize User Settings and Preferences
         InitializeLoadingSettings()
         InitializeProfilesAndSchemes()
+        LoadDarkmode()
 
         'Disable log if setting is enabled
         If My.Settings.DisableLogging = True Then
@@ -125,15 +138,16 @@ Public Class frmMain
         ItemsRandomSame116 = rtbItemsRandomSame116.Lines
         ItemsRandomSame119 = rtbItemsRandomSame119.Lines
 
-        'Toggle Advanced View based on User setting
-        'If My.Settings.UseAdvancedViewByDefault = True Then
-        'EnableAdvancedView()
-        'cbEnableAdvancedView.Checked = True
-        ' Else
-        'DisableAdvancedView()
-        'cbEnableAdvancedView.Checked = False
-        'End If
+        'Load advanced view setting
+        If My.Settings.UseAdvancedViewByDefault = True Then
+            EnableAdvancedView()
+            cbEnableAdvancedView.Checked = True
+        Else
+            DisableAdvancedView()
+            cbEnableAdvancedView.Checked = False
+        End If
 
+        'Check whether this is the first start of the app
         CheckForFirstStart()
     End Sub
 
@@ -167,7 +181,8 @@ Public Class frmMain
         btnBrowseDatapackPath.Enabled = False
         tbDatapackPath.Enabled = False
 
-        'Start the backgroundworker that adds the items
+        'Set total amount of items and start the backgroundworker that adds the items
+        TotalItemAmount = rtbItem.Lines.Count
         bgwAddItems.RunWorkerAsync()
     End Sub
 
@@ -242,42 +257,23 @@ Public Class frmMain
         frmOutput.rtbLog.LoadFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
     End Sub
 
+    Private Sub btnHamburger_Click(sender As Object, e As EventArgs) Handles btnHamburger.Click
+        'Show menu with different options
+        If cmsHamburgerButton.Visible = True Then
+            cmsHamburgerButton.Hide()
+        Else
+            cmsHamburgerButton.Show(btnHamburger, 0, btnHamburger.Top + 40)
+        End If
+    End Sub
+
     Private Sub btnBrowseDatapackPath_Click(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.Click
         'Show folder browser dialog to select datapack path
         fbdMainFolderPath.ShowDialog()
         tbDatapackPath.Text = fbdMainFolderPath.SelectedPath
     End Sub
 
-    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-        frmAbout.Show()
-    End Sub
 
-    Private Sub ChangelogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangelogToolStripMenuItem.Click
-        'Open Changelog window
-        frmChangelog.Show()
-    End Sub
-
-    Private Sub HelpDocumentaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpDocumentaryToolStripMenuItem.Click
-        'Open Help window
-        frmHelp.Show()
-    End Sub
-
-    Private Sub OutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputToolStripMenuItem.Click
-        'Open log window
-        frmOutput.Show()
-    End Sub
-
-    Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
-        'Open settings window
-        frmSettings.ShowDialog()
-    End Sub
-
-    Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
-        'Close the main window, resulting in the application to exit
-        Close()
-    End Sub
-
-    Private Sub OpenDatapackFolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDatapackFolderToolStripMenuItem.Click
+    Private Sub OpenDatapackFolderToolStripMenuItem_Click(sender As Object, e As EventArgs)
         'Check if the currently selected datapack directory exists, and if so, open it in explorer
         If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
             Process.Start("explorer.exe", tbDatapackPath.Text)
@@ -290,11 +286,11 @@ Public Class frmMain
         'Toggle the custom prefix setting
         If cbSamePrefix.Checked Then
             tbSamePrefix.Enabled = True
-            lblID.Text = "Items (ID)"
+            gbItemID.Text = "Items (ID)"
             SamePrefix = True
         Else
             tbSamePrefix.Enabled = False
-            lblID.Text = "Items (Prefix:ID)"
+            gbItemID.Text = "Items (Prefix:ID)"
             SamePrefix = False
         End If
     End Sub
@@ -325,19 +321,9 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub btnShowOutput_Click(sender As Object, e As EventArgs) Handles btnShowOutput.Click
+    Private Sub btnShowOutput_Click(sender As Object, e As EventArgs)
         'Open log window
         frmOutput.Show()
-    End Sub
-
-    Private Sub FindDuplicatesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FindDuplicatesToolStripMenuItem.Click
-        'Open duplicate finder window
-        frmDuplicateFinder.Show()
-    End Sub
-
-    Private Sub ImportItemListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportItemListToolStripMenuItem.Click
-        'Open Item List Importer window
-        frmItemImporter.ShowDialog()
     End Sub
 
     Private Sub cbAddItemsFast_CheckedChanged(sender As Object, e As EventArgs) Handles cbAddItemsFast.CheckedChanged
@@ -390,6 +376,16 @@ Public Class frmMain
     Private Sub rtbItem_TextChanged(sender As Object, e As EventArgs) Handles rtbItem.TextChanged
         'Pass text onto the variable
         ItemsList = rtbItem.Lines
+
+        'Check the amount of items (lines) and change recommendation of checkbox for fast item adding
+        If rtbItem.Lines.Count > 99 Then
+            cbAddItemsFast.Text = "Enable Fast Item Adding (Recommended)"
+        ElseIf rtbItems10.Lines.Count < 99 Then
+            cbAddItemsFast.Text = "Enable Fast Item Adding (Not recommended)"
+        End If
+
+        'Display amount of items in the total items label
+        lblItemsTotal.Text = "Total amount of items: " + rtbItem.Lines.Count.ToString
     End Sub
 
     Private Sub tbSamePrefix_TextChanged(sender As Object, e As EventArgs) Handles tbSamePrefix.TextChanged
@@ -579,9 +575,78 @@ Public Class frmMain
                 e.Cancel = True
             End If
         End If
+
+        'Save log file if auto save is enabled
+        If My.Settings.AutoSaveLogs = True Then
+            LogFileName = "Random_Item_Giver_Updater_Log_" + DateTime.Now + "_Ver_" + VersionLog
+            LogFileName = LogFileName.Replace(":", "-")
+            LogFileName = LogFileName.Replace(".", "-")
+            LogFileName = LogFileName.Replace(" ", "_")
+            LogFileName = LogFileName.Replace("(", "")
+            LogFileName = LogFileName.Replace(")", "")
+            LogFileName = LogDirectory + LogFileName + ".txt"
+            frmOutput.SaveLog(LogFileName, False)
+        End If
+    End Sub
+
+
+    Private Sub EinstellungenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EinstellungenToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show settings window
+        frmSettings.Show()
+    End Sub
+
+    Private Sub OutputToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles OutputToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show output window
+        frmOutput.Show()
+    End Sub
+
+    Private Sub DToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show help documentary window
+        frmHelp.Show()
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show about dialog
+        frmAbout.ShowDialog()
+    End Sub
+
+    Private Sub DuplicateFinderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicateFinderToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show duplicate finder
+        frmDuplicateFinder.Show()
+    End Sub
+
+    Private Sub ItemListImporterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ItemListImporterToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show item list importer
+        frmItemListImporter.ShowDialog()
     End Sub
 
     '-- Custom methods --
+
+    Private Sub LoadDarkmode()
+        If My.Settings.Design = "Dark" Then
+            BackColor = Color.FromArgb(50, 50, 50)
+            lblHeader.ForeColor = Color.White
+            lblItemsTotal.ForeColor = Color.White
+        End If
+    End Sub
 
     Private Sub CheckForFirstStart()
         'Check if application was already started once using this version. If not, show update news
@@ -979,7 +1044,7 @@ Public Class frmMain
 
             'Set custom NTB tag and prefix
             If CustomNBT = True Then
-                NBTtag = CustomNBTString
+                NBTtag = CustomNBTString.Replace(qm, "\" + qm) 'Fix quotiation marks in NBT tags
                 WriteToLog("Adding NBT tag: " + NBTtag, "Info")
             Else
                 NBTtag = "NONE"
@@ -1367,7 +1432,7 @@ Public Class frmMain
                 WriteToLog("Found settings version " + LoadedSettingsVersion.ToString, "Info")
 
                 'Resize array so all settings can fit in it (Array size = Amount of lines that the settings file should have)
-                ReDim Preserve SettingsArray(20)
+                ReDim Preserve SettingsArray(22)
                 ConvertSettings(SettingsFile)
             Catch ex As Exception
                 MsgBox("Error when loading settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
@@ -1379,6 +1444,11 @@ Public Class frmMain
             WriteToLog("Could not find settings file. Creating a new one (Version " + SettingsVersion.ToString + ").", "Warning")
             My.Computer.FileSystem.WriteAllText(SettingsFile, "", False)
             frmSettings.SaveSettings(SettingsFile)
+        End If
+
+        'Check if log directory exists and create it if not
+        If My.Computer.FileSystem.DirectoryExists(LogDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(LogDirectory)
         End If
     End Sub
 
@@ -1400,56 +1470,62 @@ Public Class frmMain
                     If (SettingsArray(2) = "/") = False Then
                         SettingsArray(2) = frmSettings.SettingsFilePreset.Lines(2)
                     End If
-                    If (SettingsArray(3) = "#General") = False Then
+                    If (SettingsArray(3) = "#General1") = False Then
                         SettingsArray(3) = frmSettings.SettingsFilePreset.Lines(3)
                     End If
                     If ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdancedViewByDefault=False")) = False Then
                         SettingsArray(4) = frmSettings.SettingsFilePreset.Lines(4)
                     End If
-                    If (SettingsArray(5) = "/") = False Then
+                    If ((SettingsArray(5) = "AutoSaveLogs=True" = False And SettingsArray(4) = "AutoSaveLogs=False")) = False Then
                         SettingsArray(5) = frmSettings.SettingsFilePreset.Lines(5)
                     End If
-                    If (SettingsArray(6) = "#Software") = False Then
+                    If ((SettingsArray(5) = "Design=Light" = False And SettingsArray(4) = "Design=Dark")) = False Then
                         SettingsArray(6) = frmSettings.SettingsFilePreset.Lines(6)
                     End If
-                    If ((SettingsArray(7) = "DisableLogging=True" = False And SettingsArray(7) = "DisableLogging=False" = False)) Then
+                    If (SettingsArray(7) = "/") = False Then
                         SettingsArray(7) = frmSettings.SettingsFilePreset.Lines(7)
                     End If
-                    If ((SettingsArray(8) = "HideAlphaWarning=True" = False And SettingsArray(8) = "HideAlphaWarning=False" = False)) Then
+                    If (SettingsArray(8) = "#General2") = False Then
                         SettingsArray(8) = frmSettings.SettingsFilePreset.Lines(8)
                     End If
-                    If (SettingsArray(9) = "/") = False Then
+                    If ((SettingsArray(9) = "DisableLogging=True" = False And SettingsArray(9) = "DisableLogging=False" = False)) Then
                         SettingsArray(9) = frmSettings.SettingsFilePreset.Lines(9)
                     End If
-                    If (SettingsArray(10) = "#Datapack Profiles") = False Then
+                    If ((SettingsArray(10) = "HideAlphaWarning=True" = False And SettingsArray(10) = "HideAlphaWarning=False" = False)) Then
                         SettingsArray(10) = frmSettings.SettingsFilePreset.Lines(10)
                     End If
-                    If ((SettingsArray(11) = "LoadDefaultProfile=True" = False And SettingsArray(11) = "LoadDefaultProfile=False" = False)) Then
+                    If (SettingsArray(11) = "/") = False Then
                         SettingsArray(11) = frmSettings.SettingsFilePreset.Lines(11)
                     End If
-                    If String.IsNullOrEmpty(SettingsArray(12)) Then
+                    If (SettingsArray(12) = "#Datapack Profiles") = False Then
                         SettingsArray(12) = frmSettings.SettingsFilePreset.Lines(12)
                     End If
-                    If (SettingsArray(13) = "/") = False Then
+                    If ((SettingsArray(13) = "LoadDefaultProfile=True" = False And SettingsArray(13) = "LoadDefaultProfile=False" = False)) Then
                         SettingsArray(13) = frmSettings.SettingsFilePreset.Lines(13)
                     End If
-                    If (SettingsArray(14) = "#Schemes") = False Then
+                    If String.IsNullOrEmpty(SettingsArray(14)) Then
                         SettingsArray(14) = frmSettings.SettingsFilePreset.Lines(14)
                     End If
-                    If (SettingsArray(15) = "SelectDefaultScheme=True" = False And SettingsArray(15) = "SelectDefaultScheme=False" = False) Then
+                    If (SettingsArray(15) = "/") = False Then
                         SettingsArray(15) = frmSettings.SettingsFilePreset.Lines(15)
                     End If
-                    If String.IsNullOrEmpty(SettingsArray(16)) Then
+                    If (SettingsArray(16) = "#Schemes") = False Then
                         SettingsArray(16) = frmSettings.SettingsFilePreset.Lines(16)
                     End If
-                    If (SettingsArray(17) = "/") = False Then
+                    If (SettingsArray(17) = "SelectDefaultScheme=True" = False And SettingsArray(17) = "SelectDefaultScheme=False" = False) Then
                         SettingsArray(17) = frmSettings.SettingsFilePreset.Lines(17)
                     End If
-                    If (SettingsArray(18) = "#Item List Importer") = False Then
+                    If String.IsNullOrEmpty(SettingsArray(16)) Then
                         SettingsArray(18) = frmSettings.SettingsFilePreset.Lines(18)
                     End If
-                    If ((SettingsArray(19) = "DontImportVanillaItemsByDefault=True") = False And (SettingsArray(19) = "DontImportVanillaItemsByDefault=False") = False) Then
+                    If (SettingsArray(19) = "/") = False Then
                         SettingsArray(19) = frmSettings.SettingsFilePreset.Lines(19)
+                    End If
+                    If (SettingsArray(20) = "#Item List Importer") = False Then
+                        SettingsArray(20) = frmSettings.SettingsFilePreset.Lines(20)
+                    End If
+                    If ((SettingsArray(21) = "DontImportVanillaItemsByDefault=True") = False And (SettingsArray(21) = "DontImportVanillaItemsByDefault=False") = False) Then
+                        SettingsArray(21) = frmSettings.SettingsFilePreset.Lines(21)
                     End If
                     System.IO.File.WriteAllLines(SettingsFile, SettingsArray)
                     LoadSettings()
@@ -1474,39 +1550,43 @@ Public Class frmMain
             Return True
         ElseIf (SettingsArray(2) = "/") = False Then
             Return True
-        ElseIf (SettingsArray(3) = "#General") = False Then
+        ElseIf (SettingsArray(3) = "#General1") = False Then
             Return True
-        ElseIf ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdvancedViewByDefault=False")) = False Then
+        ElseIf ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdvancedViewByDefault=False" = False)) Then
             Return True
-        ElseIf (SettingsArray(5) = "/") = False Then
+        ElseIf ((SettingsArray(5) = "AutoSaveLogs=True" = False And SettingsArray(5) = "AutoSaveLogs=False" = False)) Then
             Return True
-        ElseIf (SettingsArray(6) = "#Software") = False Then
+        ElseIf ((SettingsArray(6) = "Design=Light" = False And SettingsArray(6) = "Design=Dark" = False)) Then
             Return True
-        ElseIf ((SettingsArray(7) = "DisableLogging=True" = False And SettingsArray(7) = "DisableLogging=False" = False)) Then
+        ElseIf (SettingsArray(7) = "/") = False Then
             Return True
-        ElseIf ((SettingsArray(8) = "HideAlphaWarning=True" = False And SettingsArray(8) = "HideAlphaWarning=False" = False)) Then
+        ElseIf (SettingsArray(8) = "#General2") = False Then
             Return True
-        ElseIf (SettingsArray(9) = "/") = False Then
+        ElseIf ((SettingsArray(9) = "DisableLogging=True" = False And SettingsArray(9) = "DisableLogging=False" = False)) Then
             Return True
-        ElseIf (SettingsArray(10) = "#Datapack Profiles") = False Then
+        ElseIf ((SettingsArray(10) = "HideAlphaWarning=True" = False And SettingsArray(10) = "HideAlphaWarning=False" = False)) Then
             Return True
-        ElseIf ((SettingsArray(11) = "LoadDefaultProfile=True" = False And SettingsArray(11) = "LoadDefaultProfile=False" = False)) Then
+        ElseIf (SettingsArray(11) = "/") = False Then
             Return True
-        ElseIf String.IsNullOrEmpty(SettingsArray(12)) Then
+        ElseIf (SettingsArray(12) = "#Datapack Profiles") = False Then
             Return True
-        ElseIf (SettingsArray(13) = "/") = False Then
+        ElseIf ((SettingsArray(13) = "LoadDefaultProfile=True" = False And SettingsArray(13) = "LoadDefaultProfile=False" = False)) Then
             Return True
-        ElseIf (SettingsArray(14) = "#Schemes") = False Then
+        ElseIf String.IsNullOrEmpty(SettingsArray(14)) Then
             Return True
-        ElseIf ((SettingsArray(15) = "SelectDefaultScheme=True" = False And SettingsArray(15) = "SelectDefaultScheme=False" = False)) Then
+        ElseIf (SettingsArray(15) = "/") = False Then
             Return True
-        ElseIf String.IsNullOrEmpty(SettingsArray(16)) Then
+        ElseIf (SettingsArray(16) = "#Schemes") = False Then
             Return True
-        ElseIf (SettingsArray(17) = "/") = False Then
+        ElseIf ((SettingsArray(17) = "SelectDefaultScheme=True" = False And SettingsArray(17) = "SelectDefaultScheme=False" = False)) Then
             Return True
-        ElseIf (SettingsArray(18) = "#Item List Importer") = False Then
+        ElseIf String.IsNullOrEmpty(SettingsArray(18)) Then
             Return True
-        ElseIf ((SettingsArray(19) = "DontImportVanillaItemsByDefault=True" = False And SettingsArray(19) = "DontImportVanillaItemsByDefault=False" = False)) Then
+        ElseIf (SettingsArray(19) = "/") = False Then
+            Return True
+        ElseIf (SettingsArray(20) = "#Item List Importer") = False Then
+            Return True
+        ElseIf ((SettingsArray(21) = "DontImportVanillaItemsByDefault=True" = False And SettingsArray(21) = "DontImportVanillaItemsByDefault=False" = False)) Then
             Return True
         Else
             Return False
@@ -1518,30 +1598,35 @@ Public Class frmMain
 
         Try
 
-            'Load general settings
+            'Load general 1 settings
             My.Settings.UseAdvancedViewByDefault = Convert.ToBoolean(SettingsArray(4).Replace("UseAdvancedViewByDefault=", ""))
             WriteToLog("Loaded setting " + SettingsArray(4), "Info")
-            'Load software settings
-            My.Settings.DisableLogging = Convert.ToBoolean(SettingsArray(7).Replace("DisableLogging=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(7), "Info")
-            My.Settings.HideAlphaWarning = Convert.ToBoolean(SettingsArray(8).Replace("HideAlphaWarning=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(8), "Info")
+            My.Settings.AutoSaveLogs = Convert.ToBoolean(SettingsArray(5).Replace("AutoSaveLogs=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(5), "Info")
+            My.Settings.Design = SettingsArray(6).Replace("Design=", "")
+            WriteToLog("Loaded setting " + SettingsArray(6), "Info")
+
+            'Load general 2 settings
+            My.Settings.DisableLogging = Convert.ToBoolean(SettingsArray(9).Replace("DisableLogging=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(9), "Info")
+            My.Settings.HideAlphaWarning = Convert.ToBoolean(SettingsArray(10).Replace("HideAlphaWarning=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(10), "Info")
 
             'Load datapack profiles settings
-            My.Settings.LoadDefaultProfile = Convert.ToBoolean(SettingsArray(11).Replace("LoadDefaultProfile=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(11), "Info")
-            My.Settings.DefaultProfile = SettingsArray(12).Replace("DefaultProfile=", "")
-            WriteToLog("Loaded setting " + SettingsArray(12), "Info")
+            My.Settings.LoadDefaultProfile = Convert.ToBoolean(SettingsArray(13).Replace("LoadDefaultProfile=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(13), "Info")
+            My.Settings.DefaultProfile = SettingsArray(14).Replace("DefaultProfile=", "")
+            WriteToLog("Loaded setting " + SettingsArray(14), "Info")
 
             'Load scheme settings
-            My.Settings.SelectDefaultScheme = Convert.ToBoolean(SettingsArray(15).Replace("SelectDefaultScheme=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(15), "Info")
-            My.Settings.DefaultScheme = SettingsArray(16).Replace("DefaultScheme=", "")
-            WriteToLog("Loaded setting " + SettingsArray(16), "Info")
+            My.Settings.SelectDefaultScheme = Convert.ToBoolean(SettingsArray(17).Replace("SelectDefaultScheme=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(17), "Info")
+            My.Settings.DefaultScheme = SettingsArray(18).Replace("DefaultScheme=", "")
+            WriteToLog("Loaded setting " + SettingsArray(18), "Info")
 
             'Load Item List Importer Settings
-            My.Settings.DontImportVanillaItemsByDefault = Convert.ToBoolean(SettingsArray(19).Replace("DontImportVanillaItemsByDefault=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(19), "Info")
+            My.Settings.DontImportVanillaItemsByDefault = Convert.ToBoolean(SettingsArray(21).Replace("DontImportVanillaItemsByDefault=", ""))
+            WriteToLog("Loaded setting " + SettingsArray(21), "Info")
 
         Catch ex As Exception
 
@@ -1576,14 +1661,14 @@ Public Class frmMain
         btnOverwriteSelectedScheme.Show()
         btnSaveAsNewScheme.Show()
         btnDeleteSelectedScheme.Show()
+        cbAddItemsFast.Show()
 
-        'Change dimensions of window and groupboxes to make space for the new options
-        gbItemID.Width = 242
-        gbItemID.Height = 83
-        gbItem.Width = 638
-        gbItem.Height = 351
-        Width = 683
-        Height = 647
+        cbEnableAdvancedView.Top = 677
+        cbEnableAdvancedView.Left = 42
+        Width = 735
+        Height = 847
+        gbItemID.Height = 140
+        gbItemID.Width = 259
 
         WriteToLog("Enabled advanced view.", "Info")
     End Sub
@@ -1603,14 +1688,14 @@ Public Class frmMain
         btnOverwriteSelectedScheme.Hide()
         btnSaveAsNewScheme.Hide()
         btnDeleteSelectedScheme.Hide()
+        cbAddItemsFast.Hide()
 
-        'Change dimensions of window and groupboxes to remove unnessecary space
-        gbItemID.Width = 395
-        gbItemID.Height = 83
-        gbItem.Width = 638
-        gbItem.Height = 293
-        Width = 683
-        Height = 583
+        cbEnableAdvancedView.Top = 532
+        cbEnableAdvancedView.Left = 320
+        Width = 735
+        Height = 732
+        gbItemID.Height = 140
+        gbItemID.Width = 429
 
         WriteToLog("Disabled advanced view.", "Info")
     End Sub
@@ -2817,10 +2902,12 @@ Public Class frmMain
                 End If
             End If
 
-            'Update and report workerprogress
+            'Update And report workerprogress
             Workerprogress = Workerprogress + ProgressStep
             bgwAddItems.ReportProgress(Workerprogress)
             Invoke(Sub() tbSmallOutput.Text = Output)
+            TotalItemAmount = TotalItemAmount - 1
+            Invoke(Sub() lblItemsTotal.Text = "Adding items... (" + TotalItemAmount.ToString + " items remaining)")
         Else
             MsgBox("Please enter a text in the ID textbox!", MsgBoxStyle.Critical, "Error")
         End If
@@ -3037,5 +3124,161 @@ Public Class frmMain
         My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Other Creative-Only Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
 
         WriteToLog("Restored default schemes.", "Info")
+    End Sub
+
+    '-- Button events --
+
+    Private Sub btnHamburger_MouseDown(sender As Object, e As MouseEventArgs) Handles btnHamburger.MouseDown
+        If My.Settings.Design = "Light" Then
+            btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonClick
+        ElseIf My.Settings.Design = "Dark" Then
+            btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonDarkClick
+        End If
+    End Sub
+
+    Private Sub btnHamburger_MouseEnter(sender As Object, e As EventArgs) Handles btnHamburger.MouseEnter
+        If My.Settings.Design = "Light" Then
+            btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonHover
+        ElseIf My.Settings.Design = "Dark" Then
+            btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonDarkHover
+        End If
+    End Sub
+
+    Private Sub btnHamburger_MouseLeave(sender As Object, e As EventArgs) Handles btnHamburger.MouseLeave
+        If cmsHamburgerButton.Visible = False Then
+            If My.Settings.Design = "Light" Then
+                btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+            ElseIf My.Settings.Design = "Dark" Then
+                btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+            End If
+        End If
+    End Sub
+
+    Private Sub btnHamburger_MouseUp(sender As Object, e As MouseEventArgs) Handles btnHamburger.MouseUp
+        If cmsHamburgerButton.Visible = False Then
+            If My.Settings.Design = "Light" Then
+                btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+            ElseIf My.Settings.Design = "Dark" Then
+                btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+            End If
+        End If
+    End Sub
+
+    Private Sub frmMain_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+    End Sub
+
+    Private Sub btnAddItem_MouseDown(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseDown
+        btnAddItem.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+
+    Private Sub btnAddItem_MouseEnter(sender As Object, e As EventArgs) Handles btnAddItem.MouseEnter
+        btnAddItem.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnAddItem_MouseLeave(sender As Object, e As EventArgs) Handles btnAddItem.MouseLeave
+        btnAddItem.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnAddItem_MouseUp(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseUp
+        btnAddItem.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSaveAsNewScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseDown
+        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnSaveAsNewScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseEnter
+        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnSaveAsNewScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseLeave
+        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSaveAsNewScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseUp
+        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnOverwriteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseDown
+        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnOverwriteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseEnter
+        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnOverwriteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseLeave
+        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnOverwriteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseUp
+        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnDeleteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseDown
+        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnDeleteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseEnter
+        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnDeleteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseLeave
+        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnDeleteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseUp
+        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnBrowseDatapackPath_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseDown
+        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnBrowseDatapackPath_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseEnter
+        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnBrowseDatapackPath_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseLeave
+        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnBrowseDatapackPath_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseUp
+        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnLoadProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseDown
+        btnLoadProfile.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnLoadProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseEnter
+        btnLoadProfile.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnLoadProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseLeave
+        btnLoadProfile.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnLoadProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseUp
+        btnLoadProfile.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSaveProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseDown
+        btnSaveProfile.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnSaveProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseEnter
+        btnSaveProfile.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnSaveProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseLeave
+        btnSaveProfile.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSaveProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseUp
+        btnSaveProfile.BackgroundImage = My.Resources.imgButton
     End Sub
 End Class
