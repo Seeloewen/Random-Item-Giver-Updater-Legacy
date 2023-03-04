@@ -1,6 +1,5 @@
 ﻿Imports System.IO
 Imports System.Environment
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar
 
 Public Class frmMain
 
@@ -82,6 +81,7 @@ Public Class frmMain
     '-- Event handlers --
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'Add click event of frmMain to every control in frmMain
         For Each ctrl As Control In Me.Controls
             If Not ctrl.Equals(btnHamburger) Then
@@ -193,8 +193,6 @@ Public Class frmMain
             If ItemsList.Count > 99 And AddItemsFast = False Then
                 Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Add Items Fast' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue?", vbExclamation + vbYesNo, "Warning")
                     Case Windows.Forms.DialogResult.Yes
-                        WriteToLog("Adding 100+ items with normal method, this may take a while!", "Warning")
-
                         'Sets ItemAddMode. This should be redundant in this case, despite of this I will still leave it there to be save
                         If AddItemsFast = True Then
                             ItemAddMode = "Fast"
@@ -206,7 +204,7 @@ Public Class frmMain
                         IgnoreDuplicates = False
                         DuplicateDetected = False
 
-                        WriteToLog("Preparing to add multiple items.", "Info")
+                        WriteToLog("Adding " + TotalItemAmount.ToString + " items...", "Info")
 
                         'Calculate ProgressStep
                         ProgressStep = 100 / ItemsList.Count
@@ -216,8 +214,6 @@ Public Class frmMain
 
                         'Set result after items where added.
                         AddItemResult = "success"
-                    Case Windows.Forms.DialogResult.No
-                        WriteToLog("Cancelled adding 100+ items.", "Info")
                 End Select
             Else
                 'Sets ItemAddMode
@@ -234,13 +230,13 @@ Public Class frmMain
                 'Start the corresponding method for adding items depending on the amount. Will also calculate ProgressStep and post result afterwards.
                 If ItemsList.Length = 1 Then
                     Item = ItemsList(0)
-                    WriteToLog("Preparing to add a single item.", "Info")
+                    WriteToLog("Adding " + TotalItemAmount.ToString + " items...", "Info")
                     ProgressStep = 100 / ItemsList.Count
                     CallAddItem()
                     AddItemResult = "success"
                 ElseIf ItemsList.Length = 0 Then
                 Else
-                    WriteToLog("Preparing to add multiple items.", "Info")
+                    WriteToLog("Adding " + TotalItemAmount.ToString + " items...", "Info")
                     ProgressStep = 100 / ItemsList.Count
                     AddMultipleItems()
                     AddItemResult = "success"
@@ -270,16 +266,6 @@ Public Class frmMain
         'Show folder browser dialog to select datapack path
         fbdMainFolderPath.ShowDialog()
         tbDatapackPath.Text = fbdMainFolderPath.SelectedPath
-    End Sub
-
-
-    Private Sub OpenDatapackFolderToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        'Check if the currently selected datapack directory exists, and if so, open it in explorer
-        If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
-            Process.Start("explorer.exe", tbDatapackPath.Text)
-        Else
-            MsgBox("Cannot open datapack folder, please select a valid path.", MsgBoxStyle.Critical, "Error")
-        End If
     End Sub
 
     Private Sub cbCustomPrefix_CheckedChanged(sender As Object, e As EventArgs) Handles cbSamePrefix.CheckedChanged
@@ -505,10 +491,12 @@ Public Class frmMain
         'If result is "success" show messagebox. This variable would've been changed if an error occured.
         If AddItemResult = "success" Then
             MsgBox("Successfully added " + rtbItem.Lines.Count.ToString + " item(s)!", MsgBoxStyle.Information, "Added items")
+            WriteToLog("Successfully added  " + rtbItem.Lines.Count.ToString + " items", "Info")
         End If
 
-        'Show 'Add item to datapack' button which also hides the progress bar
+        'Show 'Add item to datapack' button which also hides the progress bar and show total amount of items in richtextbox again
         btnAddItem.Show()
+        lblItemsTotal.Text = "Total amount of items: " + rtbItem.Lines.Count.ToString
     End Sub
 
     Private Sub bgwAddItems_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bgwAddItems.ProgressChanged
@@ -598,7 +586,7 @@ Public Class frmMain
         frmSettings.Show()
     End Sub
 
-    Private Sub OutputToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles OutputToolStripMenuItem.Click
+    Private Sub OutputToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OutputToolStripMenuItem.Click
         'Reset hamburger button to default state
         btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
 
@@ -606,7 +594,7 @@ Public Class frmMain
         frmOutput.Show()
     End Sub
 
-    Private Sub DToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DToolStripMenuItem.Click
+    Private Sub DToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DocumentaryToolStripMenuItem.Click
         'Reset hamburger button to default state
         btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
 
@@ -614,12 +602,20 @@ Public Class frmMain
         frmHelp.Show()
     End Sub
 
-    Private Sub AboutToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
         'Reset hamburger button to default state
         btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
 
         'Show about dialog
         frmAbout.ShowDialog()
+    End Sub
+
+    Private Sub ChangelogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChangelogToolStripMenuItem.Click
+        'Reset hamburger button to default state
+        btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
+
+        'Show changelog dialog
+        frmChangelog.ShowDialog()
     End Sub
 
     Private Sub DuplicateFinderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DuplicateFinderToolStripMenuItem.Click
@@ -645,6 +641,9 @@ Public Class frmMain
             BackColor = Color.FromArgb(50, 50, 50)
             lblHeader.ForeColor = Color.White
             lblItemsTotal.ForeColor = Color.White
+            cmsHamburgerButton.BackColor = Color.DimGray
+            cmsHamburgerButton.ForeColor = Color.White
+            DuplicateFinderToolStripMenuItem.BackColor = Color.DimGray
         End If
     End Sub
 
@@ -1039,27 +1038,19 @@ Public Class frmMain
 
         'If no duplicate has been detected or duplicates are simply ignored
         If DuplicateDetected = False Or IgnoreDuplicates = True Then
-            WriteToLog("-- Adding item --", "Info")
+            'Empty the exception
             ExceptionAddItem = ""
 
             'Set custom NTB tag and prefix
             If CustomNBT = True Then
                 NBTtag = CustomNBTString.Replace(qm, "\" + qm) 'Fix quotiation marks in NBT tags
-                WriteToLog("Adding NBT tag: " + NBTtag, "Info")
             Else
                 NBTtag = "NONE"
-                WriteToLog("No NBT tag selected.", "Info")
-            End If
-
-            If SamePrefix = True Then
-                Prefix = SamePrefixString
-                WriteToLog("Using the same prefix for all items: " + Prefix, "Info")
-            Else
-                WriteToLog("Not using the same prefix for all items, will read prefix from item list.", "Info")
             End If
 
             'Determine the full item name based on the item ID
             If SamePrefix = True Then
+                Prefix = SamePrefixString
                 FullItemName = Prefix + ":" + Item_ID
             Else
                 FullItemName = Item_ID
@@ -1068,16 +1059,12 @@ Public Class frmMain
             'Define ItemAmountPath depending on Item_Amount
             If Item_Amount = 1 Then
                 ItemAmountPath = "1item\"
-                WriteToLog("Item amount detected as 1, using default path for 1 item. ", "Info")
             ElseIf Item_Amount = "-1" Then
                 ItemAmountPath = "randomamountsameitem\"
-                WriteToLog("Item amount detected as random amount of same item, using default path for random amount of same item. ", "Info")
             ElseIf Item_Amount = "-2" Then
                 ItemAmountPath = "randomamountdifitems\"
-                WriteToLog("Item amount detected as random amount of different items, using default path for random amount of different items. ", "Info")
             ElseIf Item_Amount > 1 Then
                 ItemAmountPath = Item_Amount.ToString + "sameitems\"
-                WriteToLog("Item amount detected as bigger than 1, using path for multiple items.", "Info")
             End If
 
 
@@ -1085,6 +1072,7 @@ Public Class frmMain
             If My.Computer.FileSystem.FileExists(DatapackPath + "\data\randomitemgiver\loot_tables\" + ItemAmountPath + Loot_Table + ".json") Then
                 FileTemp = My.Computer.FileSystem.ReadAllText(DatapackPath + "\data\randomitemgiver\loot_tables\" + ItemAmountPath + Loot_Table + ".json")
             End If
+
             'If the item you want to add does not exist or duplicates are ignored add items depending on version and loot table
             If FileTemp.Contains(qm + FullItemName + qm) = False Or IgnoreDuplicates = True Then
                 Try
@@ -1379,22 +1367,17 @@ Public Class frmMain
                 'If not exception was found show completion message, otherwise show exception
                 If String.IsNullOrEmpty(ExceptionAddItem) Then
                     Output = "Succesfully added " + FullItemName + " to selected loot tables in Version " + Version + " (NBT: " + NBTtag + ")"
-                    WriteToLog("Added item " + FullItemName + " to loot table " + Loot_Table + " with amount " + Item_Amount.ToString, "Info")
                 Else
                     Output = "Error: " + ExceptionAddItem
-                    WriteToLog("Error when adding item: " + ExceptionAddItem, "Error")
                 End If
 
             Else
                 'If duplicate exists show option to either ignore it or cancel 
-                WriteToLog("Detected duplicate When adding item.", "Info")
                 Select Case MsgBox("The item you are trying To add (" + FullItemName + ") already exists In the datapack." + vbNewLine + "Are you sure you want To add it again? This will result In duplicates.", vbExclamation + vbYesNo, "Warning")
                     Case Windows.Forms.DialogResult.Yes
-                        WriteToLog("Ignoring warning, adding duplicate.", "Info")
                         IgnoreDuplicates = True
                         AddItem(Item_ID, Item_Amount, Version, Loot_Table)
                     Case Windows.Forms.DialogResult.No
-                        WriteToLog("Not adding duplicate, cancelling.", "Info")
                         IgnoreDuplicates = False
                         DuplicateDetected = True
                         Output = "Cancelled adding " + FullItemName + " To " + Loot_Table + " In Version " + Version + " (NBT: " + NBTtag + ")"
@@ -1661,10 +1644,11 @@ Public Class frmMain
         btnOverwriteSelectedScheme.Show()
         btnSaveAsNewScheme.Show()
         btnDeleteSelectedScheme.Show()
-        cbAddItemsFast.Show()
 
         cbEnableAdvancedView.Top = 677
         cbEnableAdvancedView.Left = 42
+        cbAddItemsFast.Top = 651
+        cbAddItemsFast.Left = 42
         Width = 735
         Height = 847
         gbItemID.Height = 140
@@ -1688,9 +1672,10 @@ Public Class frmMain
         btnOverwriteSelectedScheme.Hide()
         btnSaveAsNewScheme.Hide()
         btnDeleteSelectedScheme.Hide()
-        cbAddItemsFast.Hide()
 
-        cbEnableAdvancedView.Top = 532
+        cbAddItemsFast.Top = 532
+        cbAddItemsFast.Left = 320
+        cbEnableAdvancedView.Top = 560
         cbEnableAdvancedView.Left = 320
         Width = 735
         Height = 732
@@ -3126,7 +3111,7 @@ Public Class frmMain
         WriteToLog("Restored default schemes.", "Info")
     End Sub
 
-    '-- Button events --
+    '-- Button animations --
 
     Private Sub btnHamburger_MouseDown(sender As Object, e As MouseEventArgs) Handles btnHamburger.MouseDown
         If My.Settings.Design = "Light" Then
@@ -3280,5 +3265,27 @@ Public Class frmMain
 
     Private Sub btnSaveProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseUp
         btnSaveProfile.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub ToolsToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.MouseEnter
+        If My.Settings.Design = "Dark" Then
+            'Get the sub menu
+            Dim subMenu As ToolStripDropDownMenu = DirectCast(sender, ToolStripMenuItem).DropDown
+
+            'Set background and foreground color
+            subMenu.BackColor = Color.DimGray
+            subMenu.ForeColor = Color.White
+        End If
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.MouseEnter
+        If My.Settings.Design = "Dark" Then
+            'Get the sub menu
+            Dim subMenu As ToolStripDropDownMenu = DirectCast(sender, ToolStripMenuItem).DropDown
+
+            'Set background and foreground color
+            subMenu.BackColor = Color.DimGray
+            subMenu.ForeColor = Color.White
+        End If
     End Sub
 End Class

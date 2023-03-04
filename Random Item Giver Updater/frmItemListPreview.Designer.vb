@@ -24,8 +24,8 @@ Partial Class frmItemListPreview
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmItemListPreview))
         Me.gbItemList = New System.Windows.Forms.GroupBox()
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.rtbItems = New System.Windows.Forms.RichTextBox()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.gbItemList.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,16 +40,6 @@ Partial Class frmItemListPreview
         Me.gbItemList.TabStop = False
         Me.gbItemList.Text = "Item list"
         '
-        'btnOK
-        '
-        Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOK.Location = New System.Drawing.Point(227, 411)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(132, 23)
-        Me.btnOK.TabIndex = 1
-        Me.btnOK.Text = "OK"
-        Me.btnOK.UseVisualStyleBackColor = True
-        '
         'rtbItems
         '
         Me.rtbItems.BackColor = System.Drawing.Color.White
@@ -61,12 +51,29 @@ Partial Class frmItemListPreview
         Me.rtbItems.TabIndex = 0
         Me.rtbItems.Text = ""
         '
+        'btnOK
+        '
+        Me.btnOK.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnOK.FlatAppearance.BorderSize = 0
+        Me.btnOK.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOK.ForeColor = System.Drawing.Color.White
+        Me.btnOK.Location = New System.Drawing.Point(227, 411)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(132, 28)
+        Me.btnOK.TabIndex = 1
+        Me.btnOK.Text = "OK"
+        Me.btnOK.UseVisualStyleBackColor = True
+        '
         'frmItemListPreview
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(591, 446)
+        Me.ClientSize = New System.Drawing.Size(591, 451)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.gbItemList)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle

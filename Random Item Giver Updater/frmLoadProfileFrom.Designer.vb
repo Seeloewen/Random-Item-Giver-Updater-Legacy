@@ -25,13 +25,20 @@ Partial Class frmLoadProfileFrom
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLoadProfileFrom))
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnLoad = New System.Windows.Forms.Button()
-        Me.cbxProfiles = New System.Windows.Forms.ComboBox()
         Me.lblLoadProfileFrom = New System.Windows.Forms.Label()
+        Me.cbxProfiles = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'btnCancel
         '
+        Me.btnCancel.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.Location = New System.Drawing.Point(253, 69)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(109, 23)
@@ -41,22 +48,20 @@ Partial Class frmLoadProfileFrom
         '
         'btnLoad
         '
+        Me.btnLoad.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnLoad.FlatAppearance.BorderSize = 0
+        Me.btnLoad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnLoad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLoad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLoad.ForeColor = System.Drawing.Color.White
         Me.btnLoad.Location = New System.Drawing.Point(138, 69)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(109, 23)
         Me.btnLoad.TabIndex = 7
         Me.btnLoad.Text = "Load"
         Me.btnLoad.UseVisualStyleBackColor = True
-        '
-        'cbxProfiles
-        '
-        Me.cbxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxProfiles.FormattingEnabled = True
-        Me.cbxProfiles.Location = New System.Drawing.Point(15, 31)
-        Me.cbxProfiles.Name = "cbxProfiles"
-        Me.cbxProfiles.Size = New System.Drawing.Size(347, 21)
-        Me.cbxProfiles.TabIndex = 6
         '
         'lblLoadProfileFrom
         '
@@ -68,15 +73,28 @@ Partial Class frmLoadProfileFrom
         Me.lblLoadProfileFrom.TabIndex = 5
         Me.lblLoadProfileFrom.Text = "Load profile from..."
         '
+        'cbxProfiles
+        '
+        Me.cbxProfiles.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.cbxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxProfiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.cbxProfiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxProfiles.FormattingEnabled = True
+        Me.cbxProfiles.Items.AddRange(New Object() {"Light", "Dark"})
+        Me.cbxProfiles.Location = New System.Drawing.Point(15, 33)
+        Me.cbxProfiles.Name = "cbxProfiles"
+        Me.cbxProfiles.Size = New System.Drawing.Size(347, 24)
+        Me.cbxProfiles.TabIndex = 21
+        '
         'frmLoadProfileFrom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(374, 103)
+        Me.Controls.Add(Me.cbxProfiles)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLoad)
-        Me.Controls.Add(Me.cbxProfiles)
         Me.Controls.Add(Me.lblLoadProfileFrom)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -92,6 +110,6 @@ Partial Class frmLoadProfileFrom
 
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnLoad As Button
-    Friend WithEvents cbxProfiles As ComboBox
     Friend WithEvents lblLoadProfileFrom As Label
+    Friend WithEvents cbxProfiles As ComboBox
 End Class

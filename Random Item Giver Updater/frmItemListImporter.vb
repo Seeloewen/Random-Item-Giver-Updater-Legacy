@@ -1,4 +1,4 @@
-﻿Public Class frmItemImporter
+﻿Public Class frmItemListImporter
 
     ' -- Event handlers --
 
@@ -100,6 +100,17 @@
         Else
             cbDontImportVanilla.Checked = False
         End If
+
+        'Load dark mode
+        If My.Settings.Design = "Dark" Then
+            BackColor = Color.FromArgb(50, 50, 50)
+            lblHeader.ForeColor = Color.White
+            lblImportDesc.ForeColor = Color.White
+            llblCopyCommand.LinkColor = Color.LightBlue
+            tbImportFromFile.BackColor = Color.DimGray
+            cbDontImportVanilla.ForeColor = Color.White
+            tbImportFromFile.ForeColor = Color.White
+        End If
     End Sub
 
     Private Sub btnShowPreview_Click(sender As Object, e As EventArgs) Handles btnShowPreview.Click
@@ -120,4 +131,54 @@
                        Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries).
                        Select(Function(s) s & TextToAppend))
     End Function
+
+    '-- Button animations --
+
+    Private Sub btnBrowse_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseDown
+        btnBrowse.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnBrowse_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowse.MouseEnter
+        btnBrowse.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnBrowse_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowse.MouseLeave
+        btnBrowse.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnBrowse_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseUp
+        btnBrowse.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnImport_MouseDown(sender As Object, e As MouseEventArgs) Handles btnImport.MouseDown
+        btnImport.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnImport_MouseEnter(sender As Object, e As EventArgs) Handles btnImport.MouseEnter
+        btnImport.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnImport_MouseLeave(sender As Object, e As EventArgs) Handles btnImport.MouseLeave
+        btnImport.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnImport_MouseUp(sender As Object, e As MouseEventArgs) Handles btnImport.MouseUp
+        btnImport.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnShowPreview_MouseDown(sender As Object, e As MouseEventArgs) Handles btnShowPreview.MouseDown
+        btnShowPreview.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnShowPreview_MouseEnter(sender As Object, e As EventArgs) Handles btnShowPreview.MouseEnter
+        btnShowPreview.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnShowPreview_MouseLeave(sender As Object, e As EventArgs) Handles btnShowPreview.MouseLeave
+        btnShowPreview.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnShowPreview_MouseUp(sender As Object, e As MouseEventArgs) Handles btnShowPreview.MouseUp
+        btnShowPreview.BackgroundImage = My.Resources.imgButton
+    End Sub
 End Class

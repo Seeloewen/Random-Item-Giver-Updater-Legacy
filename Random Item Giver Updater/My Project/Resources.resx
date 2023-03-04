@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,115 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="imgHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHamburgerButtonDarkClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHamburgerButtonDarkClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgAddingItemsBasic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgAddingItemsBasic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgSettingsNavigationBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgSettingsNavigationBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNav" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNav.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgAddingItemsBasicDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgAddingItemsBasicDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHamburgerButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHamburgerButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHelpNavigationBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHelpNavigationBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNavHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHamburgerButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHamburgerButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNavDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgAddingItemsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgAddingItemsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNavClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgSettingsNavigationBarDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgSettingsNavigationBarDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgDuplicateFinder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgDuplicateFinder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgBackgroundItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBackgroundItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgAddingItemsAdvancedDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgAddingItemsAdvancedDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHamburgerButtonDarkHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHamburgerButtonDarkHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgAbout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgAbout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHelpNavigationBarDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHelpNavigationBarDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNavDarkClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavDarkClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgItemListImporter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgItemListImporter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgBackgroundPath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBackgroundPath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgUpdate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgUpdate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgHamburgerButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHamburgerButtonClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgOutput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNavDarkHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavDarkHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgDuplicateFinderHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgDuplicateFinderHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgDuplicateFinderDarkHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgDuplicateFinderDarkHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

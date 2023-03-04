@@ -21,6 +21,14 @@ Public Class frmLoadProfileFrom
         Else
             MsgBox("Error: Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
         End If
+
+        'Load dark mode
+        If My.Settings.Design = "Dark" Then
+            BackColor = Color.FromArgb(50, 50, 50)
+            lblLoadProfileFrom.ForeColor = Color.White
+            cbxProfiles.BackColor = Color.DimGray
+            cbxProfiles.ForeColor = Color.White
+        End If
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -111,4 +119,37 @@ Public Class frmLoadProfileFrom
         End Try
     End Sub
 
+    '-- Button animations --
+
+    Private Sub btnLoad_MouseDown(sender As Object, e As MouseEventArgs) Handles btnLoad.MouseDown
+        btnLoad.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnLoad_MouseEnter(sender As Object, e As EventArgs) Handles btnLoad.MouseEnter
+        btnLoad.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnLoad_MouseLeave(sender As Object, e As EventArgs) Handles btnLoad.MouseLeave
+        btnLoad.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnLoad_MouseUp(sender As Object, e As MouseEventArgs) Handles btnLoad.MouseUp
+        btnLoad.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCancel_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseDown
+        btnCancel.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnCancel_MouseEnter(sender As Object, e As EventArgs) Handles btnCancel.MouseEnter
+        btnCancel.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnCancel_MouseLeave(sender As Object, e As EventArgs) Handles btnCancel.MouseLeave
+        btnCancel.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCancel_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseUp
+        btnCancel.BackgroundImage = My.Resources.imgButton
+    End Sub
 End Class

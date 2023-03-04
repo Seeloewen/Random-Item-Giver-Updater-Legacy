@@ -31,7 +31,14 @@ Partial Class frmSaveProfileAs
         '
         'btnCancel
         '
+        Me.btnCancel.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.Color.White
         Me.btnCancel.Location = New System.Drawing.Point(249, 67)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(109, 23)
@@ -41,7 +48,14 @@ Partial Class frmSaveProfileAs
         '
         'btnSave
         '
+        Me.btnSave.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Location = New System.Drawing.Point(134, 67)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(109, 23)
@@ -51,9 +65,12 @@ Partial Class frmSaveProfileAs
         '
         'tbSaveProfileAs
         '
+        Me.tbSaveProfileAs.BackColor = System.Drawing.Color.Gainsboro
+        Me.tbSaveProfileAs.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.tbSaveProfileAs.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbSaveProfileAs.Location = New System.Drawing.Point(20, 36)
         Me.tbSaveProfileAs.Name = "tbSaveProfileAs"
-        Me.tbSaveProfileAs.Size = New System.Drawing.Size(338, 20)
+        Me.tbSaveProfileAs.Size = New System.Drawing.Size(338, 19)
         Me.tbSaveProfileAs.TabIndex = 5
         '
         'lblSaveProfileAs

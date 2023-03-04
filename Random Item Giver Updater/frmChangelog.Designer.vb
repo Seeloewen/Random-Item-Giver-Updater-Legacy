@@ -23,22 +23,22 @@ Partial Class frmChangelog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChangelog))
-        Me.lblChangelog = New System.Windows.Forms.Label()
+        Me.lblHeader = New System.Windows.Forms.Label()
         Me.rtbChangelog = New System.Windows.Forms.RichTextBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.gbChangelog = New System.Windows.Forms.GroupBox()
         Me.gbChangelog.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblChangelog
+        'lblHeader
         '
-        Me.lblChangelog.AutoSize = True
-        Me.lblChangelog.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblChangelog.Location = New System.Drawing.Point(12, 12)
-        Me.lblChangelog.Name = "lblChangelog"
-        Me.lblChangelog.Size = New System.Drawing.Size(103, 24)
-        Me.lblChangelog.TabIndex = 0
-        Me.lblChangelog.Text = "Changelog"
+        Me.lblHeader.AutoSize = True
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.Location = New System.Drawing.Point(12, 12)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(112, 24)
+        Me.lblHeader.TabIndex = 0
+        Me.lblHeader.Text = "Changelog"
         '
         'rtbChangelog
         '
@@ -54,6 +54,13 @@ Partial Class frmChangelog
         '
         'btnOK
         '
+        Me.btnOK.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnOK.FlatAppearance.BorderSize = 0
+        Me.btnOK.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnOK.ForeColor = System.Drawing.Color.White
         Me.btnOK.Location = New System.Drawing.Point(167, 399)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(133, 24)
@@ -78,7 +85,7 @@ Partial Class frmChangelog
         Me.ClientSize = New System.Drawing.Size(469, 434)
         Me.Controls.Add(Me.gbChangelog)
         Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.lblChangelog)
+        Me.Controls.Add(Me.lblHeader)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -92,7 +99,7 @@ Partial Class frmChangelog
 
     End Sub
 
-    Friend WithEvents lblChangelog As Label
+    Friend WithEvents lblHeader As Label
     Friend WithEvents rtbChangelog As RichTextBox
     Friend WithEvents btnOK As Button
     Friend WithEvents gbChangelog As GroupBox

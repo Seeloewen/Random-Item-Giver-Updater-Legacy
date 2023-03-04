@@ -13,7 +13,7 @@ Public Class frmItemListPreview
         rtbItems.Clear()
 
         'Load full text from file specified in frmItemImporter
-        rtbItems.Text = My.Computer.FileSystem.ReadAllText(frmItemImporter.tbImportFromFile.Text)
+        rtbItems.Text = My.Computer.FileSystem.ReadAllText(frmItemListImporter.tbImportFromFile.Text)
 
         'Remove text if file was generated using TellMe Mod
         If rtbItems.Text.Contains("Registry name") Then
@@ -36,6 +36,14 @@ Public Class frmItemListPreview
             End If
         Next
         rtbItems.Lines = WithoutEmptyLines.ToArray
+
+        'Load dark mode
+        If My.Settings.Design = "Dark" Then
+            BackColor = Color.FromArgb(50, 50, 50)
+            gbItemList.ForeColor = Color.White
+            rtbItems.BackColor = Color.FromArgb(50, 50, 50)
+            rtbItems.ForeColor = Color.White
+        End If
     End Sub
 
     '-- Custom methods --
@@ -46,4 +54,22 @@ Public Class frmItemListPreview
                        Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries).
                        Select(Function(s) s & TextToAppend))
     End Function
+
+    '-- Button animations --
+
+    Private Sub btnOK_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOK.MouseDown
+        btnOK.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnOK_MouseEnter(sender As Object, e As EventArgs) Handles btnOK.MouseEnter
+        btnOK.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnOK_MouseLeave(sender As Object, e As EventArgs) Handles btnOK.MouseLeave
+        btnOK.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnOK_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOK.MouseUp
+        btnOK.BackgroundImage = My.Resources.imgButton
+    End Sub
 End Class

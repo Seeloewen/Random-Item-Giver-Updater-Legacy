@@ -118,7 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.4.1 (18.01.2023)
+    <value>Version 0.5.0 (04.03.2023)
++ Added painting loot table
++ Added new design
+* Main window now shows remaining amount when adding items
+* Fixed NBT option not working for normal items
+* Fixed duplicate items not being added correctly
+* Fixed old settings files not being saved correctly
+* You can no longer check loot tables for versions that don't support them
+
+Version 0.4.1 (18.01.2023)
 + Added support for 1.19.4 (snapshots)
 + Added update news window
 * Improved loading of old/corrupted settings files

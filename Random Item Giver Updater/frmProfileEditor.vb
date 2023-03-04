@@ -26,6 +26,22 @@ Public Class frmProfileEditor
 
         'Start getting names of all profiles
         GetFiles(frmMain.ProfileDirectory)
+
+        'Load dark mode
+        If My.Settings.Design = "Dark" Then
+            lblHeader.ForeColor = Color.White
+            BackColor = Color.FromArgb(50, 50, 50)
+            lblChooseProfile.ForeColor = Color.White
+            cbxDatapackVersion.BackColor = Color.DimGray
+            cbxDatapackVersion.ForeColor = Color.White
+            gbEditProfile.ForeColor = Color.White
+            lblDatapackPath.ForeColor = Color.White
+            tbDatapackPath.ForeColor = Color.White
+            tbDatapackPath.BackColor = Color.DimGray
+            lblDatapackPath.ForeColor = Color.White
+            cbxProfile.ForeColor = Color.White
+            cbxProfile.BackColor = Color.DimGray
+        End If
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
@@ -45,7 +61,7 @@ Public Class frmProfileEditor
         End If
     End Sub
 
-    Private Sub cbxProfile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxProfile.SelectedIndexChanged
+    Private Sub cbxProfile_SelectedIndexChanged(sender As Object, e As EventArgs)
         'Begin loading the selected profile
         InitializeLoadingProfile(cbxProfile.SelectedItem, False)
     End Sub
@@ -161,5 +177,71 @@ Public Class frmProfileEditor
         Else
             MsgBox("Error: Couldn't save profile as the name is empty.", MsgBoxStyle.Critical, "Error")
         End If
+    End Sub
+
+    '-- Button animations --
+
+    Private Sub btnBrowse_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseDown
+        btnBrowse.BackgroundImage = My.Resources.imgbuttonclick
+    End Sub
+
+    Private Sub btnBrowse_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowse.MouseEnter
+        btnBrowse.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnBrowse_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowse.MouseLeave
+        btnBrowse.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnBrowse_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseUp
+        btnBrowse.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnClose_MouseDown(sender As Object, e As MouseEventArgs) Handles btnClose.MouseDown
+        btnClose.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnClose_MouseEnter(sender As Object, e As EventArgs) Handles btnClose.MouseEnter
+        btnClose.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnClose_MouseLeave(sender As Object, e As EventArgs) Handles btnClose.MouseLeave
+        btnClose.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnClose_MouseUp(sender As Object, e As MouseEventArgs) Handles btnClose.MouseUp
+        btnClose.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnDelete_MouseDown(sender As Object, e As MouseEventArgs) Handles btnDelete.MouseDown
+        btnDelete.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnDelete_MouseEnter(sender As Object, e As EventArgs) Handles btnDelete.MouseEnter
+        btnDelete.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnDelete_MouseLeave(sender As Object, e As EventArgs) Handles btnDelete.MouseLeave
+        btnDelete.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnDelete_MouseUp(sender As Object, e As MouseEventArgs) Handles btnDelete.MouseUp
+        btnDelete.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSave_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSave.MouseDown
+        btnSave.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnSave_MouseEnter(sender As Object, e As EventArgs) Handles btnSave.MouseEnter
+        btnSave.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSave.MouseLeave
+        btnSave.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
+        btnSave.BackgroundImage = My.Resources.imgButton
     End Sub
 End Class

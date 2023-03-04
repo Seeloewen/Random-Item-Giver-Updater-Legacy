@@ -97,6 +97,19 @@ Public Class frmDuplicateFinder
     Private Sub frmDuplicateFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Setup Quotation Mark
         QuM = Quotationmark.Text
+
+        'Load dark mode
+        If My.Settings.Design = "Dark" Then
+            BackColor = Color.FromArgb(50, 50, 50)
+            lblHeader.ForeColor = Color.White
+            lblDescription.ForeColor = Color.White
+            tbDatapackPath.BackColor = Color.DimGray
+            tbDatapackPath.ForeColor = Color.White
+            lvDuplicates.BackColor = Color.FromArgb(50, 50, 50)
+            lvDuplicates.ForeColor = Color.White
+            lblChecking.ForeColor = Color.White
+            lblDuplicatesAmount.ForeColor = Color.White
+        End If
     End Sub
 
     Private Sub bgwSearchForDuplicates_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwSearchForDuplicates.RunWorkerCompleted
@@ -421,5 +434,39 @@ Public Class frmDuplicateFinder
         BackGroundWorkerProgress = BackGroundWorkerProgress + DuplicateFinderProgress
         bgwSearchForDuplicates.ReportProgress(BackGroundWorkerProgress)
         frmMain.WriteToLog("Completed checking " + LootTable, "Info")
+    End Sub
+
+    '-- Button animations --
+
+    Private Sub btnBrowse_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseDown
+        btnBrowse.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnBrowse_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowse.MouseEnter
+        btnBrowse.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnBrowse_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowse.MouseLeave
+        btnBrowse.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnBrowse_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseUp
+        btnBrowse.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCheck_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCheck.MouseDown
+        btnCheck.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnCheck_MouseEnter(sender As Object, e As EventArgs) Handles btnCheck.MouseEnter
+        btnCheck.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnCheck_MouseLeave(sender As Object, e As EventArgs) Handles btnCheck.MouseLeave
+        btnCheck.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCheck_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCheck.MouseUp
+        btnCheck.BackgroundImage = My.Resources.imgButton
     End Sub
 End Class

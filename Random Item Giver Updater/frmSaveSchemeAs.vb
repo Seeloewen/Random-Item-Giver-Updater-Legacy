@@ -32,6 +32,14 @@
     Private Sub frmSaveSchemeAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Clear existing text in the scheme name textbox
         tbSaveSchemeAs.Clear()
+
+        'Load dark mode
+        If My.Settings.Design = "Dark" Then
+            lblSaveSchemeAs.ForeColor = Color.White
+            tbSaveSchemeAs.ForeColor = Color.White
+            tbSaveSchemeAs.BackColor = Color.DimGray
+            BackColor = Color.FromArgb(50, 50, 50)
+        End If
     End Sub
 
     ' -- Custom methods --
@@ -264,5 +272,39 @@
         Else
             MsgBox("Error: Couldn't update scheme as the name is empty.", MsgBoxStyle.Critical, "Error")
         End If
+    End Sub
+
+    '-- Button animations --
+
+    Private Sub btnSave_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSave.MouseDown
+        btnSave.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnSave_MouseEnter(sender As Object, e As EventArgs) Handles btnSave.MouseEnter
+        btnSave.BackgroundImage = My.Resources.imgButtonHover
+    End Sub
+
+    Private Sub btnSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSave.MouseLeave
+        btnSave.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
+        btnSave.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCancel_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseDown
+        btnCancel.BackgroundImage = My.Resources.imgButtonClick
+    End Sub
+
+    Private Sub btnCancel_MouseEnter(sender As Object, e As EventArgs) Handles btnCancel.MouseEnter
+        btnCancel.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCancel_MouseLeave(sender As Object, e As EventArgs) Handles btnCancel.MouseLeave
+        btnCancel.BackgroundImage = My.Resources.imgButton
+    End Sub
+
+    Private Sub btnCancel_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseUp
+        btnCancel.BackgroundImage = My.Resources.imgButton
     End Sub
 End Class

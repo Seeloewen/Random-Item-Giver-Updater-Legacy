@@ -24,13 +24,11 @@ Partial Class frmDuplicateFinder
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDuplicateFinder))
         Me.lblHeader = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblDescription = New System.Windows.Forms.Label()
         Me.lvDuplicates = New System.Windows.Forms.ListView()
         Me.chItem = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cbLootTable = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.btnCheck = New System.Windows.Forms.Button()
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.fbdMainFolderPath = New System.Windows.Forms.FolderBrowserDialog()
         Me.lblDuplicatesAmount = New System.Windows.Forms.Label()
         Me.bgwSearchForDuplicates = New System.ComponentModel.BackgroundWorker()
@@ -39,6 +37,8 @@ Partial Class frmDuplicateFinder
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.lblChecking = New System.Windows.Forms.Label()
         Me.pbProgress = New System.Windows.Forms.ProgressBar()
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.btnCheck = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblHeader
@@ -51,15 +51,15 @@ Partial Class frmDuplicateFinder
         Me.lblHeader.TabIndex = 0
         Me.lblHeader.Text = "Duplicate Finder"
         '
-        'Label2
+        'lblDescription
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(20, 49)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(469, 32)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "This tool can be used to check if items appear in the loot table more than once." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Select the datapack you want to check:"
+        Me.lblDescription.AutoSize = True
+        Me.lblDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDescription.Location = New System.Drawing.Point(20, 49)
+        Me.lblDescription.Name = "lblDescription"
+        Me.lblDescription.Size = New System.Drawing.Size(469, 32)
+        Me.lblDescription.TabIndex = 1
+        Me.lblDescription.Text = "This tool can be used to check if items appear in the loot table more than once." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Select the datapack you want to check:"
         '
         'lvDuplicates
         '
@@ -82,33 +82,15 @@ Partial Class frmDuplicateFinder
         Me.cbLootTable.Text = "Loot Table"
         Me.cbLootTable.Width = 266
         '
-        'btnCheck
-        '
-        Me.btnCheck.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCheck.Location = New System.Drawing.Point(213, 126)
-        Me.btnCheck.Name = "btnCheck"
-        Me.btnCheck.Size = New System.Drawing.Size(142, 27)
-        Me.btnCheck.TabIndex = 3
-        Me.btnCheck.Text = "Check"
-        Me.btnCheck.UseVisualStyleBackColor = True
-        '
         'tbDatapackPath
         '
+        Me.tbDatapackPath.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.tbDatapackPath.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.tbDatapackPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbDatapackPath.Location = New System.Drawing.Point(23, 92)
+        Me.tbDatapackPath.Location = New System.Drawing.Point(23, 93)
         Me.tbDatapackPath.Name = "tbDatapackPath"
-        Me.tbDatapackPath.Size = New System.Drawing.Size(404, 26)
+        Me.tbDatapackPath.Size = New System.Drawing.Size(404, 19)
         Me.tbDatapackPath.TabIndex = 4
-        '
-        'btnBrowse
-        '
-        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(433, 91)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(117, 27)
-        Me.btnBrowse.TabIndex = 7
-        Me.btnBrowse.Text = "Browse"
-        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'fbdMainFolderPath
         '
@@ -175,6 +157,40 @@ Partial Class frmDuplicateFinder
         Me.pbProgress.TabIndex = 16
         Me.pbProgress.Visible = False
         '
+        'btnBrowse
+        '
+        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnBrowse.FlatAppearance.BorderSize = 0
+        Me.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse.ForeColor = System.Drawing.Color.White
+        Me.btnBrowse.Location = New System.Drawing.Point(433, 91)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(117, 23)
+        Me.btnBrowse.TabIndex = 7
+        Me.btnBrowse.Text = "Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
+        '
+        'btnCheck
+        '
+        Me.btnCheck.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnCheck.FlatAppearance.BorderSize = 0
+        Me.btnCheck.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnCheck.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCheck.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCheck.ForeColor = System.Drawing.Color.White
+        Me.btnCheck.Location = New System.Drawing.Point(213, 126)
+        Me.btnCheck.Name = "btnCheck"
+        Me.btnCheck.Size = New System.Drawing.Size(142, 27)
+        Me.btnCheck.TabIndex = 3
+        Me.btnCheck.Text = "Check"
+        Me.btnCheck.UseVisualStyleBackColor = True
+        '
         'frmDuplicateFinder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -189,7 +205,7 @@ Partial Class frmDuplicateFinder
         Me.Controls.Add(Me.tbDatapackPath)
         Me.Controls.Add(Me.btnCheck)
         Me.Controls.Add(Me.lvDuplicates)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.pbProgress)
         Me.Controls.Add(Me.lblDuplicatesAmount)
@@ -206,7 +222,7 @@ Partial Class frmDuplicateFinder
     End Sub
 
     Friend WithEvents lblHeader As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblDescription As Label
     Friend WithEvents lvDuplicates As ListView
     Friend WithEvents chItem As ColumnHeader
     Friend WithEvents cbLootTable As ColumnHeader

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmItemImporter
+Partial Class frmItemListImporter
     Inherits System.Windows.Forms.Form
 
     'Das Formular überschreibt den Löschvorgang, um die Komponentenliste zu bereinigen.
@@ -22,7 +22,7 @@ Partial Class frmItemImporter
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmItemImporter))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmItemListImporter))
         Me.lblImportDesc = New System.Windows.Forms.Label()
         Me.tbImportFromFile = New System.Windows.Forms.TextBox()
         Me.btnBrowse = New System.Windows.Forms.Button()
@@ -38,6 +38,7 @@ Partial Class frmItemImporter
         'lblImportDesc
         '
         Me.lblImportDesc.AutoSize = True
+        Me.lblImportDesc.BackColor = System.Drawing.Color.Transparent
         Me.lblImportDesc.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblImportDesc.Location = New System.Drawing.Point(17, 49)
         Me.lblImportDesc.Name = "lblImportDesc"
@@ -47,16 +48,25 @@ Partial Class frmItemImporter
         '
         'tbImportFromFile
         '
-        Me.tbImportFromFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbImportFromFile.Location = New System.Drawing.Point(20, 193)
+        Me.tbImportFromFile.BackColor = System.Drawing.Color.Gainsboro
+        Me.tbImportFromFile.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.tbImportFromFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbImportFromFile.Location = New System.Drawing.Point(20, 192)
         Me.tbImportFromFile.Name = "tbImportFromFile"
-        Me.tbImportFromFile.Size = New System.Drawing.Size(434, 22)
+        Me.tbImportFromFile.Size = New System.Drawing.Size(434, 19)
         Me.tbImportFromFile.TabIndex = 1
         '
         'btnBrowse
         '
+        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnBrowse.FlatAppearance.BorderSize = 0
+        Me.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.Location = New System.Drawing.Point(460, 192)
+        Me.btnBrowse.ForeColor = System.Drawing.Color.White
+        Me.btnBrowse.Location = New System.Drawing.Point(460, 190)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(122, 23)
         Me.btnBrowse.TabIndex = 2
@@ -65,13 +75,21 @@ Partial Class frmItemImporter
         '
         'btnImport
         '
+        Me.btnImport.BackColor = System.Drawing.Color.Transparent
+        Me.btnImport.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnImport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnImport.FlatAppearance.BorderSize = 0
+        Me.btnImport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImport.ForeColor = System.Drawing.Color.White
         Me.btnImport.Location = New System.Drawing.Point(460, 236)
         Me.btnImport.Name = "btnImport"
         Me.btnImport.Size = New System.Drawing.Size(122, 27)
         Me.btnImport.TabIndex = 3
         Me.btnImport.Text = "Import item list"
-        Me.btnImport.UseVisualStyleBackColor = True
+        Me.btnImport.UseVisualStyleBackColor = False
         '
         'ofdImportFromFile
         '
@@ -111,7 +129,14 @@ Partial Class frmItemImporter
         '
         'btnShowPreview
         '
+        Me.btnShowPreview.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnShowPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnShowPreview.FlatAppearance.BorderSize = 0
+        Me.btnShowPreview.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnShowPreview.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnShowPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnShowPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnShowPreview.ForeColor = System.Drawing.Color.White
         Me.btnShowPreview.Location = New System.Drawing.Point(332, 235)
         Me.btnShowPreview.Name = "btnShowPreview"
         Me.btnShowPreview.Size = New System.Drawing.Size(122, 28)
@@ -127,7 +152,7 @@ Partial Class frmItemImporter
         Me.rtbItems.TabIndex = 10
         Me.rtbItems.Text = ""
         '
-        'frmItemImporter
+        'frmItemListImporter
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -146,7 +171,7 @@ Partial Class frmItemImporter
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "frmItemImporter"
+        Me.Name = "frmItemListImporter"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Item List Importer"
         Me.ResumeLayout(False)
