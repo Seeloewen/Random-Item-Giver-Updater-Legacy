@@ -14,6 +14,7 @@
     Dim SpawnEgg As Boolean
     Dim CommandBlock As Boolean
     Dim OtherCreativeOnlyItem As Boolean
+    Dim Painting As Boolean
     Dim CustomNBTString As String
     Dim SamePrefixString As String
 
@@ -138,7 +139,7 @@
                     If My.Computer.FileSystem.FileExists(frmMain.SchemeDirectory + NameSource + ".txt") Then
                         Select Case MsgBox("A scheme with this name already exists. Do you want to overwrite it?", vbQuestion + vbYesNo, "Scheme already exists")
                             Case Windows.Forms.DialogResult.Yes
-                                My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + SamePrefixString + vbNewLine + CustomNBT.ToString + vbNewLine + CustomNBTString + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine, False)
+                                My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + SamePrefixString + vbNewLine + CustomNBT.ToString + vbNewLine + CustomNBTString + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine + Painting.ToString + vbNewLine, False)
                                 frmMain.cbxScheme.Items.Clear()
                                 frmMain.GetSchemeFiles(frmMain.SchemeDirectory)
                                 MsgBox("Scheme was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
@@ -148,7 +149,7 @@
                                 MsgBox("Scheme was not overwritten. Please select a different scheme name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
                         End Select
                     Else
-                        My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + CustomNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine, False)
+                        My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + CustomNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine + Painting.ToString + vbNewLine, False)
                         frmMain.cbxScheme.Items.Clear()
                         frmMain.GetSchemeFiles(frmMain.SchemeDirectory)
                         MsgBox("Scheme was saved.", MsgBoxStyle.Information, "Saved")
@@ -164,7 +165,7 @@
         Else
             If String.IsNullOrEmpty(NameSource) = False Then
                 If My.Computer.FileSystem.DirectoryExists(frmMain.SchemeDirectory) Then
-                    My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + CustomNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine, False)
+                    My.Computer.FileSystem.WriteAllText(frmMain.SchemeDirectory + NameSource + ".txt", SamePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + CustomNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + NormalItem.ToString + vbNewLine + SuspiciousStew.ToString + vbNewLine + EnchantedBook.ToString + vbNewLine + Potion.ToString + vbNewLine + SplashPotion.ToString + vbNewLine + LingeringPotion.ToString + vbNewLine + TippedArrow.ToString + vbNewLine + GoatHorn.ToString + vbNewLine + CreativeOnly.ToString + vbNewLine + SpawnEgg.ToString + vbNewLine + CommandBlock.ToString + vbNewLine + OtherCreativeOnlyItem.ToString + vbNewLine + Painting.ToString + vbNewLine, False)
                     frmMain.cbxScheme.Items.Clear()
                     frmMain.GetSchemeFiles(frmMain.SchemeDirectory)
                     MsgBox("Scheme was overwritten and saved.", MsgBoxStyle.Information, "Saved")
@@ -260,6 +261,11 @@
             CustomNBTString = "None"
         Else
             CustomNBTString = frmMain.tbCustomNBT.Text
+        End If
+        If frmMain.cbPainting.Checked = True Then
+            Painting = True
+        Else
+            Painting = False
         End If
 
         'Update the selected scheme. This will save and overwrite the selected scheme without showing any warning or message. Used if a scheme is old or corrupted.

@@ -97,6 +97,7 @@ Partial Class frmMain
         Me.pbAddItem = New System.Windows.Forms.PictureBox()
         Me.DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cbPainting = New System.Windows.Forms.CheckBox()
         Me.gbItemID.SuspendLayout()
         Me.cmsHamburgerButton.SuspendLayout()
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -672,7 +673,7 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicateFinderToolStripMenuItem, Me.ItemListImporterToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         '
         'DuplicateFinderToolStripMenuItem
@@ -695,14 +696,14 @@ Partial Class frmMain
         Me.cmsHamburgerButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EinstellungenToolStripMenuItem, Me.OutputToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.cmsHamburgerButton.Name = "cmsHamburgerButton"
         Me.cmsHamburgerButton.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.cmsHamburgerButton.Size = New System.Drawing.Size(181, 130)
+        Me.cmsHamburgerButton.Size = New System.Drawing.Size(134, 108)
         '
         'EinstellungenToolStripMenuItem
         '
         Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgSettings
         Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.EinstellungenToolStripMenuItem.Text = "Settings"
         '
         'OutputToolStripMenuItem
@@ -710,7 +711,7 @@ Partial Class frmMain
         Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgOutput
         Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.OutputToolStripMenuItem.Text = "Output"
         '
         'HelpToolStripMenuItem
@@ -718,7 +719,7 @@ Partial Class frmMain
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DocumentaryToolStripMenuItem, Me.ChangelogToolStripMenuItem, Me.AboutToolStripMenuItem1})
         Me.HelpToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
         'DocumentaryToolStripMenuItem
@@ -939,12 +940,26 @@ Partial Class frmMain
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.AboutToolStripMenuItem.Text = "About"
         '
+        'cbPainting
+        '
+        Me.cbPainting.AutoSize = True
+        Me.cbPainting.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbPainting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPainting.ForeColor = System.Drawing.Color.White
+        Me.cbPainting.Location = New System.Drawing.Point(326, 591)
+        Me.cbPainting.Name = "cbPainting"
+        Me.cbPainting.Size = New System.Drawing.Size(74, 20)
+        Me.cbPainting.TabIndex = 99
+        Me.cbPainting.Text = "Painting"
+        Me.cbPainting.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(719, 808)
+        Me.Controls.Add(Me.cbPainting)
         Me.Controls.Add(Me.btnAddItem)
         Me.Controls.Add(Me.pbLine)
         Me.Controls.Add(Me.pbHeader)
@@ -1094,4 +1109,5 @@ Partial Class frmMain
     Friend WithEvents DocumentaryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ChangelogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents cbPainting As CheckBox
 End Class
