@@ -43,32 +43,32 @@ Public Class frmLoadProfileFrom
 
     '-- Custom methods --
 
-    Public Sub LoadProfile(Profile As String, ShowMessage As Boolean)
+    Public Sub LoadProfile(profile As String, showMessage As Boolean)
         'Load settings from profile
         frmMain.tbDatapackPath.Text = ProfileContent(0)
         frmMain.cbxVersion.Text = ProfileContent(1)
 
         'If ShowMessage is enabled, it will show a messagebox when loading completes.
-        If ShowMessage Then
-            MsgBox("Loaded profile " + Profile + ".", MsgBoxStyle.Information, "Loaded profile")
+        If showMessage Then
+            MsgBox("Loaded profile " + profile + ".", MsgBoxStyle.Information, "Loaded profile")
         End If
     End Sub
 
-    Public Sub InitializeLoadingProfile(Profile As String, ShowMessage As Boolean)
+    Public Sub InitializeLoadingProfile(profile As String, showMessage As Boolean)
         'Checks if a profile is selected. It then reads the content of the profile file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
         'It then starts to convert and load the profile, see the the method below.
-        If String.IsNullOrEmpty(Profile) = False Then
-            LoadFromProfile = frmMain.ProfileDirectory + Profile + ".txt"
+        If String.IsNullOrEmpty(profile) = False Then
+            LoadFromProfile = frmMain.profileDirectory + profile + ".txt"
             ProfileContent = File.ReadAllLines(LoadFromProfile)
             ReDim Preserve ProfileContent(2)
-            CheckAndConvertProfile(Profile, ShowMessage)
+            CheckAndConvertProfile(profile, showMessage)
             Close()
         Else
             MsgBox("Error: No profile selected. Please select a profile to load from.", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
-    Public Sub CheckAndConvertProfile(Profile As String, ShowMessage As Boolean)
+    Public Sub CheckAndConvertProfile(profile As String, showMessage As Boolean)
         'This checks if the profile file that was loaded has enough lines, too few lines would mean that settings are missing, meaning the file is either too old or corrupted.
         'It will check for each required line if it is empty (required lines = the length of a healthy, normal profile file). Make sure that the line amount it checks matches the amount of settings that are being saved.
         'If a line is empty, it will fill that line with a placeholder in the array so the profile can get loaded without errors. After loading the profile, it gets automatically saved so the corrupted/old settings file gets fixed.
@@ -82,33 +82,33 @@ Public Class frmLoadProfileFrom
                     If String.IsNullOrEmpty(ProfileContent(1)) Then
                         ProfileContent(1) = "Version 1.19.4"
                     End If
-                    LoadProfile(Profile, False)
-                    frmSaveProfileAs.UpdateProfile(Profile)
+                    LoadProfile(profile, False)
+                    frmSaveProfileAs.UpdateProfile(profile)
                     MsgBox("Loaded and updated profile. It should now work correctly!", MsgBoxStyle.Information, "Loaded and updated profile")
-                    frmMain.WriteToLog("Loaded and updated profile " + Profile, "Info")
+                    frmMain.WriteToLog("Loaded and updated profile " + profile, "Info")
                 Case Windows.Forms.DialogResult.No
                     MsgBox("Cancelled loading profile.", MsgBoxStyle.Exclamation, "Warning")
             End Select
         Else
-            LoadProfile(Profile, ShowMessage)
-            frmMain.WriteToLog("Loaded profile " + Profile, "Info")
+            LoadProfile(profile, showMessage)
+            frmMain.WriteToLog("Loaded profile " + profile, "Info")
         End If
     End Sub
 
-    Sub GetFiles(Path As String)
+    Sub GetFiles(path As String)
         'Gets all the profile files from the directory and puts their name into the combobox
-        If Path.Trim().Length = 0 Then
+        If path.Trim().Length = 0 Then
             Return
         End If
 
-        ProfileList = Directory.GetFileSystemEntries(Path)
+        ProfileList = Directory.GetFileSystemEntries(path)
 
         Try
             For Each Profile As String In ProfileList
                 If Directory.Exists(Profile) Then
                     GetFiles(Profile)
                 Else
-                    Profile = Profile.Replace(Path, "")
+                    Profile = Profile.Replace(path, "")
                     Profile = Profile.Replace(".txt", "")
                     cbxProfiles.Items.Add(Profile)
                 End If

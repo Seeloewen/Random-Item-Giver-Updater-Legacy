@@ -48,11 +48,11 @@ Public Class frmItemListPreview
 
     '-- Custom methods --
 
-    Private Function AppendTextToRichtextbox(TextToAppend As String, Richtextboxtext As String) As String
+    Private Function AppendTextToRichtextbox(textToAppend As String, richtextboxtext As String) As String
         'Append text to Richtextbox... honestly unsure how this works.
-        Return String.Join(Environment.NewLine, Richtextboxtext.
+        Return String.Join(Environment.NewLine, richtextboxtext.
                        Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries).
-                       Select(Function(s) s & TextToAppend))
+                       Select(Function(s) s & textToAppend))
     End Function
 
     '-- Button animations --

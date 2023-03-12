@@ -42,7 +42,7 @@
             End If
 
             'Remove empty lines
-            Dim WithoutEmptyLines As New List(Of String)
+            Dim withoutEmptyLines As New List(Of String)
             For Each s As String In rtbItems.Lines
                 If Not s.Trim.Equals(String.Empty) Then
                     WithoutEmptyLines.Add(s)
@@ -125,11 +125,11 @@
 
     ' -- Custom methods --
 
-    Private Function AppendTextToRichtextbox(TextToAppend As String, Richtextboxtext As String) As String
+    Private Function AppendTextToRichtextbox(textToAppend As String, richtextboxtext As String) As String
         'Append text to Richtextbox... honestly unsure how this works.
-        Return String.Join(Environment.NewLine, Richtextboxtext.
+        Return String.Join(Environment.NewLine, richtextboxtext.
                        Split(Environment.NewLine.ToArray(), StringSplitOptions.RemoveEmptyEntries).
-                       Select(Function(s) s & TextToAppend))
+                       Select(Function(s) s & textToAppend))
     End Function
 
     '-- Button animations --

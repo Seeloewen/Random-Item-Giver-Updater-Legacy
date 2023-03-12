@@ -2,9 +2,9 @@
 
 Public Class frmSettings
 
-    Dim SettingsArray As String()
-    Dim ProfileList As String()
-    Dim SchemeList As String()
+    Dim settingsArray As String()
+    Dim profileList As String()
+    Dim schemeList As String()
 
     Dim selectedPage As Integer = 1
 
@@ -452,26 +452,26 @@ Public Class frmSettings
 
     ' -- Custom methods --
 
-    Public Sub ResetSettings(Path)
+    Public Sub ResetSettings(path)
         'Reset settings to default and write to file.
-        SettingsArray = SettingsFilePreset.Lines
-        File.WriteAllLines(Path, SettingsArray)
+        settingsArray = SettingsFilePreset.Lines
+        File.WriteAllLines(path, settingsArray)
     End Sub
 
-    Sub GetProfileFiles(Path As String)
+    Sub GetProfileFiles(path As String)
         'Gets all the profile files from the directory and puts their name into the combobox
-        If Path.Trim().Length = 0 Then
+        If path.Trim().Length = 0 Then
             Return
         End If
 
-        ProfileList = Directory.GetFileSystemEntries(Path)
+        profileList = Directory.GetFileSystemEntries(path)
 
         Try
-            For Each Profile As String In ProfileList
+            For Each Profile As String In profileList
                 If Directory.Exists(Profile) Then
                     GetProfileFiles(Profile)
                 Else
-                    Profile = Profile.Replace(Path, "")
+                    Profile = Profile.Replace(path, "")
                     Profile = Profile.Replace(".txt", "")
                     cbxDefaultProfile.Items.Add(Profile)
                 End If
@@ -482,20 +482,20 @@ Public Class frmSettings
         End Try
     End Sub
 
-    Sub GetSchemeFiles(Path As String)
+    Sub GetSchemeFiles(path As String)
         'Gets all the scheme files from the directory and puts their name into the combobox
-        If Path.Trim().Length = 0 Then
+        If path.Trim().Length = 0 Then
             Return
         End If
 
-        SchemeList = Directory.GetFileSystemEntries(Path)
+        schemeList = Directory.GetFileSystemEntries(path)
 
         Try
-            For Each Scheme As String In SchemeList
+            For Each Scheme As String In schemeList
                 If Directory.Exists(Scheme) Then
                     GetSchemeFiles(Scheme)
                 Else
-                    Scheme = Scheme.Replace(Path, "")
+                    Scheme = Scheme.Replace(path, "")
                     Scheme = Scheme.Replace(".txt", "")
                     cbxDefaultScheme.Items.Add(Scheme)
                 End If
@@ -506,18 +506,18 @@ Public Class frmSettings
         End Try
     End Sub
 
-    Public Sub SaveSettings(SettingsFile As String)
+    Public Sub SaveSettings(settingsFile As String)
         'Save the settings into the settings array
         Try
             frmMain.WriteToLog("Saving settings...", "Info")
-            ResetSettings(SettingsFile)
+            ResetSettings(settingsFile)
 
             'Load settings into array
-            SettingsArray = File.ReadAllLines(SettingsFile)
+            settingsArray = File.ReadAllLines(settingsFile)
 
             'Set current version number in settings file
-            SettingsArray(1) = "Version=" + frmMain.SettingsVersion.ToString
-            frmMain.WriteToLog("Set new version number to " + frmMain.SettingsVersion.ToString, "Info")
+            settingsArray(1) = "Version=" + frmMain.settingsVersion.ToString
+            frmMain.WriteToLog("Set new version number to " + frmMain.settingsVersion.ToString, "Info")
 
             'Save general 1 settings
             If cbUseAdvancedViewByDefault.Checked Then
@@ -525,20 +525,20 @@ Public Class frmSettings
             Else
                 My.Settings.UseAdvancedViewByDefault = False
             End If
-            SettingsArray(4) = "UseAdvancedViewByDefault=" + My.Settings.UseAdvancedViewByDefault.ToString
-            frmMain.WriteToLog("Saved setting " + SettingsArray(4), "Info")
+            settingsArray(4) = "UseAdvancedViewByDefault=" + My.Settings.UseAdvancedViewByDefault.ToString
+            frmMain.WriteToLog("Saved setting " + settingsArray(4), "Info")
             If cbAutoSaveLogs.Checked Then
                 My.Settings.AutoSaveLogs = True
             Else
                 My.Settings.AutoSaveLogs = False
             End If
-            SettingsArray(5) = "AutoSaveLogs=" + My.Settings.AutoSaveLogs.ToString
+            settingsArray(5) = "AutoSaveLogs=" + My.Settings.AutoSaveLogs.ToString
             If cbxDesign.SelectedIndex = 0 Then
                 My.Settings.Design = "Light"
             ElseIf cbxDesign.SelectedIndex = 1 Then
                 My.Settings.Design = "Dark"
             End If
-            SettingsArray(6) = "Design=" + My.Settings.Design
+            settingsArray(6) = "Design=" + My.Settings.Design
 
             'Save general 2 Settings
             If cbDisableLogging.Checked Then
@@ -547,16 +547,16 @@ Public Class frmSettings
                 My.Settings.DisableLogging = False
                 frmOutput.rtbLog.Clear()
             End If
-            SettingsArray(9) = "DisableLogging=" + My.Settings.DisableLogging.ToString
-            frmMain.WriteToLog("Saved setting " + SettingsArray(9), "Info")
+            settingsArray(9) = "DisableLogging=" + My.Settings.DisableLogging.ToString
+            frmMain.WriteToLog("Saved setting " + settingsArray(9), "Info")
 
             If cbHideBetaWarning.Checked Then
                 My.Settings.HideAlphaWarning = True
             Else
                 My.Settings.HideAlphaWarning = False
             End If
-            SettingsArray(10) = "HideAlphaWarning=" + My.Settings.HideAlphaWarning.ToString
-            frmMain.WriteToLog("Saved setting " + SettingsArray(10), "Info")
+            settingsArray(10) = "HideAlphaWarning=" + My.Settings.HideAlphaWarning.ToString
+            frmMain.WriteToLog("Saved setting " + settingsArray(10), "Info")
 
             'Save datapack profiles settings
             If cbLoadDefaultProfile.Checked Then
@@ -565,10 +565,10 @@ Public Class frmSettings
             Else
                 My.Settings.LoadDefaultProfile = False
             End If
-            SettingsArray(13) = "LoadDefaultProfile=" + My.Settings.LoadDefaultProfile.ToString
-            frmMain.WriteToLog("Saved setting " + SettingsArray(13), "Info")
-            SettingsArray(14) = "DefaultProfile=" + My.Settings.DefaultProfile
-            frmMain.WriteToLog("Saved setting " + SettingsArray(14), "Info")
+            settingsArray(13) = "LoadDefaultProfile=" + My.Settings.LoadDefaultProfile.ToString
+            frmMain.WriteToLog("Saved setting " + settingsArray(13), "Info")
+            settingsArray(14) = "DefaultProfile=" + My.Settings.DefaultProfile
+            frmMain.WriteToLog("Saved setting " + settingsArray(14), "Info")
 
             'Save scheme settings
             If cbSelectDefaultScheme.Checked Then
@@ -580,10 +580,10 @@ Public Class frmSettings
             If String.IsNullOrEmpty(My.Settings.DefaultScheme) Then
                 My.Settings.DefaultScheme = "Normal Item"
             End If
-            SettingsArray(17) = "SelectDefaultScheme=" + My.Settings.SelectDefaultScheme.ToString
-            frmMain.WriteToLog("Saved setting " + SettingsArray(17), "Info")
-            SettingsArray(18) = "DefaultScheme=" + My.Settings.DefaultScheme
-            frmMain.WriteToLog("Saved setting " + SettingsArray(18), "Info")
+            settingsArray(17) = "SelectDefaultScheme=" + My.Settings.SelectDefaultScheme.ToString
+            frmMain.WriteToLog("Saved setting " + settingsArray(17), "Info")
+            settingsArray(18) = "DefaultScheme=" + My.Settings.DefaultScheme
+            frmMain.WriteToLog("Saved setting " + settingsArray(18), "Info")
 
             'Save Item List Importer Settings
             If cbDontImportVanillaItemsByDefault.Checked Then
@@ -591,11 +591,11 @@ Public Class frmSettings
             Else
                 My.Settings.DontImportVanillaItemsByDefault = False
             End If
-            SettingsArray(21) = "DontImportVanillaItemsByDefault=" + My.Settings.DontImportVanillaItemsByDefault.ToString
-            frmMain.WriteToLog("Saved setting " + SettingsArray(21), "Info")
+            settingsArray(21) = "DontImportVanillaItemsByDefault=" + My.Settings.DontImportVanillaItemsByDefault.ToString
+            frmMain.WriteToLog("Saved setting " + settingsArray(21), "Info")
 
             'Write settings array to file
-            File.WriteAllLines(frmMain.AppData + "/Random Item Giver Updater/settings.txt", SettingsArray)
+            File.WriteAllLines(frmMain.appData + "/Random Item Giver Updater/settings.txt", settingsArray)
         Catch ex As Exception
             MsgBox("Could not save settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
             frmMain.WriteToLog("Could not save settings: " + ex.Message, "Error")

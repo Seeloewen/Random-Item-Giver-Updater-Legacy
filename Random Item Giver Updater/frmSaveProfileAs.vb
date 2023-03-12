@@ -58,7 +58,7 @@
 
     ' -- Custom methods --
 
-    Public Sub UpdateProfile(ProfileName)
+    Public Sub UpdateProfile(profileName)
         'Save profile settings into variables. If no text is given, a placeholder will be inserted
         If String.IsNullOrEmpty(frmMain.tbDatapackPath.Text) Then
             DatapackPath = frmMain.tbDatapackPath.Text = "None"
@@ -72,9 +72,9 @@
         End If
 
         'Update the selected profile. This will save and overwrite the selected profile without showing any warning or message. Used if a profile is old or corrupted.
-        If String.IsNullOrEmpty(ProfileName) = False Then
-            If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) Then
-                My.Computer.FileSystem.WriteAllText(frmMain.ProfileDirectory + ProfileName + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
+        If String.IsNullOrEmpty(profileName) = False Then
+            If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
+                My.Computer.FileSystem.WriteAllText(frmMain.profileDirectory + profileName + ".txt", DatapackPath + vbNewLine + DatapackVersion, False)
             Else
                 MsgBox("Error: Couldn't update profile. Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
             End If

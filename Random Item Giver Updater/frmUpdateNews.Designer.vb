@@ -40,7 +40,7 @@ Partial Class frmUpdateNews
         '
         Me.lblHeader.AutoSize = True
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeader.Location = New System.Drawing.Point(59, 12)
+        Me.lblHeader.Location = New System.Drawing.Point(59, 14)
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(307, 25)
         Me.lblHeader.TabIndex = 0
@@ -100,10 +100,10 @@ Partial Class frmUpdateNews
         Me.lblNewsDesc2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsDesc2.Location = New System.Drawing.Point(17, 159)
         Me.lblNewsDesc2.Name = "lblNewsDesc2"
-        Me.lblNewsDesc2.Size = New System.Drawing.Size(441, 32)
+        Me.lblNewsDesc2.Size = New System.Drawing.Size(448, 32)
         Me.lblNewsDesc2.TabIndex = 6
-        Me.lblNewsDesc2.Text = "Newer version of the Random Item Giver contain a new painting loot table," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "which " &
-    "is now also supported."
+        Me.lblNewsDesc2.Text = "Newer versions of the Random Item Giver contain a new painting loot table," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "which" &
+    " is now also supported."
         '
         'lblNewsHeader2
         '

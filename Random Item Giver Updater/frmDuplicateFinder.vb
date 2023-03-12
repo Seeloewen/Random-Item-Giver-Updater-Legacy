@@ -273,34 +273,34 @@ Public Class frmDuplicateFinder
         End If
     End Sub
 
-    Private Sub CheckLootTable(ItemAmount As Integer, LootTable As String) 'Check a single loot table for duplicates
+    Private Sub CheckLootTable(itemAmount As Integer, lootTable As String) 'Check a single loot table for duplicates
         'Setup variables depending on the datapack version and Item Amount
         If DatapackVersion = "1.17" Then
             PathAmount = ""
         Else
-            If ItemAmount = 1 Then
+            If itemAmount = 1 Then
                 PathAmount = "1item/"
-            ElseIf ItemAmount = 2 Then
+            ElseIf itemAmount = 2 Then
                 PathAmount = "2sameitems/"
-            ElseIf ItemAmount = 3 Then
+            ElseIf itemAmount = 3 Then
                 PathAmount = "3sameitems/"
-            ElseIf ItemAmount = 5 Then
+            ElseIf itemAmount = 5 Then
                 PathAmount = "5sameitems/"
-            ElseIf ItemAmount = 10 Then
+            ElseIf itemAmount = 10 Then
                 PathAmount = "10sameitems/"
-            ElseIf ItemAmount = 32 Then
+            ElseIf itemAmount = 32 Then
                 PathAmount = "32sameitems/"
-            ElseIf ItemAmount = 64 Then
+            ElseIf itemAmount = 64 Then
                 PathAmount = "64sameitems/"
-            ElseIf ItemAmount = -1 Then
+            ElseIf itemAmount = -1 Then
                 PathAmount = "randomamountsameitem/"
-            ElseIf ItemAmount = -2 Then
+            ElseIf itemAmount = -2 Then
                 PathAmount = "randomamountdifitems/"
             End If
         End If
 
         'Load text from file into Array
-        WithDuplicates = File.ReadAllLines(DatapackPath + PathAmount + LootTable + ".json")
+        WithDuplicates = File.ReadAllLines(DatapackPath + PathAmount + lootTable + ".json")
 
         'Remove unnessecary characters from WithDuplicates
         For x As Integer = 0 To WithDuplicates.Length - 1
@@ -417,14 +417,14 @@ Public Class frmDuplicateFinder
         Next
 
         'Log duplicates into listview
-        Dim NumLinesOnlyDups As Integer = DuplicatesOnly.Length
-        Dim DoLoopNum As Integer
+        Dim numLinesOnlyDups As Integer = DuplicatesOnly.Length
+        Dim doLoopNum As Integer
         Dim str(1) As String
         Dim itm As ListViewItem
 
         While DoLoopNum < NumLinesOnlyDups
             str(0) = DuplicatesOnly(DoLoopNum)
-            str(1) = PathAmount + LootTable
+            str(1) = PathAmount + lootTable
             itm = New ListViewItem(str)
             Invoke(Sub() lvDuplicates.Items.Add(itm))
             DoLoopNum = DoLoopNum + 1
@@ -433,7 +433,7 @@ Public Class frmDuplicateFinder
         'Report aand log that the process has finished
         BackGroundWorkerProgress = BackGroundWorkerProgress + DuplicateFinderProgress
         bgwSearchForDuplicates.ReportProgress(BackGroundWorkerProgress)
-        frmMain.WriteToLog("Completed checking " + LootTable, "Info")
+        frmMain.WriteToLog("Completed checking " + lootTable, "Info")
     End Sub
 
     '-- Button animations --
