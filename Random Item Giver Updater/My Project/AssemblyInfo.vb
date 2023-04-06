@@ -1,5 +1,4 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 ' Allgemeine Informationen über eine Assembly werden über die folgenden
@@ -9,7 +8,7 @@ Imports System.Runtime.InteropServices
 ' Werte der Assemblyattribute überprüfen
 
 <Assembly: AssemblyTitle("Random Item Giver Updater")>
-<Assembly: AssemblyDescription("Simple tool to add new items to the Random Item Giver datapack with several other features")>
+<Assembly: AssemblyDescription("Simple tool to add items to the Random Item Giver datapack with several other useful features")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Random Item Giver Updater by Seeloewen")>
 <Assembly: AssemblyCopyright("")>
@@ -31,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.4.1.0")>
-<Assembly: AssemblyFileVersion("0.4.1.0")>
+<Assembly: AssemblyVersion("0.5.0.0")>
+<Assembly: AssemblyFileVersion("0.5.0.0")>

@@ -44,6 +44,17 @@
     End Sub
 
     Private Sub frmSaveProfileAs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Set appearance of buttons depending on selected design
+        For Each ctrl As Control In Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
         'Clear existing text in name textbox
         tbSaveProfileAs.Clear()
 
@@ -86,34 +97,74 @@
     '-- Button animations --
 
     Private Sub btnSave_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSave.MouseDown
-        btnSave.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnSave.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnSave.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnSave_MouseEnter(sender As Object, e As EventArgs) Handles btnSave.MouseEnter
-        btnSave.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnSave.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnSave.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSave.MouseLeave
-        btnSave.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSave.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSave.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
-        btnSave.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSave.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSave.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnCancel_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseDown
-        btnCancel.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnCancel.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnCancel.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnCancel_MouseEnter(sender As Object, e As EventArgs) Handles btnCancel.MouseEnter
-        btnCancel.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnCancel.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnCancel.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnCancel_MouseLeave(sender As Object, e As EventArgs) Handles btnCancel.MouseLeave
-        btnCancel.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnCancel.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnCancel.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnCancel_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseUp
-        btnCancel.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnCancel.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnCancel.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 End Class

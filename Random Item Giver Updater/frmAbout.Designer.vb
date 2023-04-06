@@ -23,31 +23,14 @@ Partial Class frmAbout
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAbout))
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.lblBuild = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.gbLicense = New System.Windows.Forms.GroupBox()
         Me.rtbLicense = New System.Windows.Forms.RichTextBox()
         Me.llblGithub = New System.Windows.Forms.LinkLabel()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.gbLicense.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnOK
-        '
-        Me.btnOK.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
-        Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnOK.FlatAppearance.BorderSize = 0
-        Me.btnOK.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOK.ForeColor = System.Drawing.Color.White
-        Me.btnOK.Location = New System.Drawing.Point(108, 341)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(148, 26)
-        Me.btnOK.TabIndex = 5
-        Me.btnOK.Text = "OK"
-        Me.btnOK.UseVisualStyleBackColor = True
         '
         'lblBuild
         '
@@ -57,7 +40,7 @@ Partial Class frmAbout
         Me.lblBuild.Name = "lblBuild"
         Me.lblBuild.Size = New System.Drawing.Size(210, 40)
         Me.lblBuild.TabIndex = 4
-        Me.lblBuild.Text = "Version 0.5.0-b (04.03.2023)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)"
+        Me.lblBuild.Text = "Version 0.5.0-b (12.03.2023)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)"
         Me.lblBuild.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblHeader
@@ -102,6 +85,23 @@ Partial Class frmAbout
         Me.llblGithub.TabIndex = 7
         Me.llblGithub.TabStop = True
         Me.llblGithub.Text = "Random Item Giver Updater - Github"
+        '
+        'btnOK
+        '
+        Me.btnOK.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
+        Me.btnOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnOK.FlatAppearance.BorderSize = 0
+        Me.btnOK.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnOK.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnOK.ForeColor = System.Drawing.Color.Black
+        Me.btnOK.Location = New System.Drawing.Point(108, 341)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(148, 26)
+        Me.btnOK.TabIndex = 5
+        Me.btnOK.Text = "OK"
+        Me.btnOK.UseVisualStyleBackColor = True
         '
         'frmAbout
         '

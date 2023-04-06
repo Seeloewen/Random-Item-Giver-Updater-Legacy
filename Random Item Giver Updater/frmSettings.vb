@@ -275,6 +275,69 @@ Public Class frmSettings
     End Sub
 
     Private Sub frmSettings_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Set appearance of buttons depending on selected design
+        For Each ctrl As Control In Controls.OfType(Of Button)
+            If (Not ctrl.Equals(btnNavGeneral1)) And (Not ctrl.Equals(btnNavGeneral2)) And (Not ctrl.Equals(btnNavDatapackProfiles)) And (Not ctrl.Equals(btnNavSchemes)) And (Not ctrl.Equals(btnNavItemListImporter)) Then
+                If My.Settings.Design = "Dark" Then
+                    ctrl.ForeColor = Color.White
+                    ctrl.BackgroundImage = My.Resources.imgButton
+                ElseIf My.Settings.Design = "Light" Then
+                    ctrl.ForeColor = Color.Black
+                    ctrl.BackgroundImage = My.Resources.imgButtonLight
+                End If
+            End If
+        Next
+
+        For Each ctrl As Control In gbGeneral1.Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
+        For Each ctrl As Control In gbGeneral2.Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
+        For Each ctrl As Control In gbSchemes.Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
+        For Each ctrl As Control In gbItemListImporter.Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
+        For Each ctrl As Control In gbDatapackProfiles.Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
         'Load settings
         If My.Settings.UseAdvancedViewByDefault = True Then
             cbUseAdvancedViewByDefault.Checked = True
@@ -325,17 +388,17 @@ Public Class frmSettings
         End If
 
         'Load profiles
-        If My.Computer.FileSystem.DirectoryExists(frmMain.ProfileDirectory) = False Then
-            My.Computer.FileSystem.CreateDirectory(frmMain.ProfileDirectory)
+        If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(frmMain.profileDirectory)
         End If
 
         cbxDefaultProfile.Items.Clear()
-        GetProfileFiles(frmMain.ProfileDirectory)
+        GetProfileFiles(frmMain.profileDirectory)
 
         If My.Settings.LoadDefaultProfile = True Then
             cbLoadDefaultProfile.Checked = True
             If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
-                If My.Computer.FileSystem.FileExists(frmMain.ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
+                If My.Computer.FileSystem.FileExists(frmMain.profileDirectory + My.Settings.DefaultProfile + ".txt") Then
                     cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
                 Else
                     MsgBox("Error: Default profile no longer exists. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
@@ -350,17 +413,17 @@ Public Class frmSettings
         End If
 
         'Load Schemes
-        If My.Computer.FileSystem.DirectoryExists(frmMain.SchemeDirectory) = False Then
-            My.Computer.FileSystem.CreateDirectory(frmMain.SchemeDirectory)
+        If My.Computer.FileSystem.DirectoryExists(frmMain.schemeDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(frmMain.schemeDirectory)
         End If
 
         cbxDefaultScheme.Items.Clear()
-        GetSchemeFiles(frmMain.SchemeDirectory)
+        GetSchemeFiles(frmMain.schemeDirectory)
 
         If My.Settings.SelectDefaultScheme = True Then
             cbSelectDefaultScheme.Checked = True
             If String.IsNullOrEmpty(My.Settings.DefaultScheme) = False Then
-                If My.Computer.FileSystem.FileExists(frmMain.SchemeDirectory + My.Settings.DefaultScheme + ".txt") Then
+                If My.Computer.FileSystem.FileExists(frmMain.schemeDirectory + My.Settings.DefaultScheme + ".txt") Then
                     cbxDefaultScheme.SelectedItem = My.Settings.DefaultScheme
                 Else
                     MsgBox("Error: Default scheme no longer exists. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
@@ -795,162 +858,362 @@ Public Class frmSettings
     End Sub
 
     Private Sub btnSaveSettings_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveSettings.MouseDown
-        btnSaveSettings.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnSaveSettings_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveSettings.MouseEnter
-        btnSaveSettings.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnSaveSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveSettings.MouseLeave
-        btnSaveSettings.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnSaveSettings_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveSettings.MouseUp
-        btnSaveSettings.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveSettings.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseDown(sender As Object, e As MouseEventArgs) Handles btnQuitWithoutSaving.MouseDown
-        btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseEnter(sender As Object, e As EventArgs) Handles btnQuitWithoutSaving.MouseEnter
-        btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseLeave(sender As Object, e As EventArgs) Handles btnQuitWithoutSaving.MouseLeave
-        btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseUp(sender As Object, e As MouseEventArgs) Handles btnQuitWithoutSaving.MouseUp
-        btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOpenLogDirectory.MouseDown
-        btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseEnter(sender As Object, e As EventArgs) Handles btnOpenLogDirectory.MouseEnter
-        btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseLeave(sender As Object, e As EventArgs) Handles btnOpenLogDirectory.MouseLeave
-        btnOpenLogDirectory.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOpenLogDirectory.MouseUp
-        btnOpenLogDirectory.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnClearTempFiles_MouseDown(sender As Object, e As MouseEventArgs) Handles btnClearTempFiles.MouseDown
-        btnClearTempFiles.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnClearTempFiles_MouseEnter(sender As Object, e As EventArgs) Handles btnClearTempFiles.MouseEnter
-        btnClearTempFiles.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnClearTempFiles_MouseLeave(sender As Object, e As EventArgs) Handles btnClearTempFiles.MouseLeave
-        btnClearTempFiles.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnClearTempFiles_MouseUp(sender As Object, e As MouseEventArgs) Handles btnClearTempFiles.MouseUp
-        btnClearTempFiles.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnClearTempFiles.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnViewTempDir_MouseDown(sender As Object, e As MouseEventArgs) Handles btnViewTempDir.MouseDown
-        btnViewTempDir.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnViewTempDir_MouseEnter(sender As Object, e As EventArgs) Handles btnViewTempDir.MouseEnter
-        btnViewTempDir.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnViewTempDir_MouseLeave(sender As Object, e As EventArgs) Handles btnViewTempDir.MouseLeave
-        btnViewTempDir.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnViewTempDir_MouseUp(sender As Object, e As MouseEventArgs) Handles btnViewTempDir.MouseUp
-        btnViewTempDir.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnViewTempDir.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnImportSettings_MouseDown(sender As Object, e As MouseEventArgs) Handles btnImportSettings.MouseDown
-        btnImportSettings.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnImportSettings_MouseEnter(sender As Object, e As EventArgs) Handles btnImportSettings.MouseEnter
-        btnImportSettings.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnImportSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnImportSettings.MouseLeave
-        btnImportSettings.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnImportSettings_MouseUp(sender As Object, e As MouseEventArgs) Handles btnImportSettings.MouseUp
-        btnImportSettings.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnImportSettings.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnExportSettings_MouseDown(sender As Object, e As MouseEventArgs) Handles btnExportSettings.MouseDown
-        btnExportSettings.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnExportSettings_MouseEnter(sender As Object, e As EventArgs) Handles btnExportSettings.MouseEnter
-        btnExportSettings.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnExportSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnExportSettings.MouseLeave
-        btnExportSettings.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnExportSettings_MouseUp(sender As Object, e As MouseEventArgs) Handles btnExportSettings.MouseUp
-        btnExportSettings.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnExportSettings.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnResetSoftware_MouseDown(sender As Object, e As MouseEventArgs) Handles btnResetSoftware.MouseDown
-        btnResetSoftware.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnResetSoftware_MouseEnter_1(sender As Object, e As EventArgs) Handles btnResetSoftware.MouseEnter
-        btnResetSoftware.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnResetSoftware_MouseLeave_1(sender As Object, e As EventArgs) Handles btnResetSoftware.MouseLeave
-        btnResetSoftware.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnResetSoftware_MouseUp(sender As Object, e As MouseEventArgs) Handles btnResetSoftware.MouseUp
-        btnResetSoftware.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnResetSoftware.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOpenProfileEditor.MouseDown
-        btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseEnter(sender As Object, e As EventArgs) Handles btnOpenProfileEditor.MouseEnter
-        btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseLeave(sender As Object, e As EventArgs) Handles btnOpenProfileEditor.MouseLeave
-        btnOpenProfileEditor.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOpenProfileEditor.MouseUp
-        btnOpenProfileEditor.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseDown(sender As Object, e As MouseEventArgs) Handles btnRestoreDefaultSchemes.MouseDown
-        btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseEnter(sender As Object, e As EventArgs) Handles btnRestoreDefaultSchemes.MouseEnter
-        btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseLeave(sender As Object, e As EventArgs) Handles btnRestoreDefaultSchemes.MouseLeave
-        btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseUp(sender As Object, e As MouseEventArgs) Handles btnRestoreDefaultSchemes.MouseUp
-        btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 End Class

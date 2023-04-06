@@ -58,14 +58,14 @@ Partial Class frmItemListImporter
         '
         'btnBrowse
         '
-        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnBrowse.FlatAppearance.BorderSize = 0
         Me.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.ForeColor = System.Drawing.Color.White
+        Me.btnBrowse.ForeColor = System.Drawing.Color.Black
         Me.btnBrowse.Location = New System.Drawing.Point(460, 190)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(122, 23)
@@ -76,14 +76,14 @@ Partial Class frmItemListImporter
         'btnImport
         '
         Me.btnImport.BackColor = System.Drawing.Color.Transparent
-        Me.btnImport.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnImport.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnImport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnImport.FlatAppearance.BorderSize = 0
         Me.btnImport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImport.ForeColor = System.Drawing.Color.White
+        Me.btnImport.ForeColor = System.Drawing.Color.Black
         Me.btnImport.Location = New System.Drawing.Point(460, 236)
         Me.btnImport.Name = "btnImport"
         Me.btnImport.Size = New System.Drawing.Size(122, 27)
@@ -129,14 +129,14 @@ Partial Class frmItemListImporter
         '
         'btnShowPreview
         '
-        Me.btnShowPreview.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnShowPreview.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnShowPreview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnShowPreview.FlatAppearance.BorderSize = 0
         Me.btnShowPreview.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnShowPreview.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnShowPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnShowPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowPreview.ForeColor = System.Drawing.Color.White
+        Me.btnShowPreview.ForeColor = System.Drawing.Color.Black
         Me.btnShowPreview.Location = New System.Drawing.Point(332, 235)
         Me.btnShowPreview.Name = "btnShowPreview"
         Me.btnShowPreview.Size = New System.Drawing.Size(122, 28)

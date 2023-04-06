@@ -1,13 +1,13 @@
-﻿Imports System.IO
-Imports System.Environment
+﻿Imports System.Environment
+Imports System.IO
 
 Public Class frmMain
 
     'General variables for the software
     Public qm As String 'Quotation mark
     Public appData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public versionLog As String = "0.4.1-b (18.01.2023)" 'Version that gets displayed in the log
-    Public rawVersion As String = "0.4.1-b"
+    Public versionLog As String = "0.5.0-b (12.03.2023)" 'Version that gets displayed in the log
+    Public rawVersion As String = "0.5.0-b"
     Public settingsVersion As Double = 3 'Current version of the settings file that the app is using
     Dim settingsArray As String() 'Array which the settings will be loaded in
     Dim loadedSettingsVersion As Double 'Version of the settings file that gets loaded
@@ -84,9 +84,22 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'Add click event of frmMain to every control in frmMain
-        For Each ctrl As Control In Me.Controls
+        For Each ctrl As Control In Controls
             If Not ctrl.Equals(btnHamburger) Then
                 AddHandler ctrl.Click, AddressOf frmMain_MouseClick
+            End If
+        Next
+
+        'Set appearance of buttons depending on selected design
+        For Each ctrl As Control In Controls.OfType(Of Button)
+            If Not ctrl.Equals(btnHamburger) Then
+                If My.Settings.Design = "Dark" Then
+                    ctrl.ForeColor = Color.White
+                    ctrl.BackgroundImage = My.Resources.imgButton
+                ElseIf My.Settings.Design = "Light" Then
+                    ctrl.ForeColor = Color.Black
+                    ctrl.BackgroundImage = My.Resources.imgButtonLight
+                End If
             End If
         Next
 
@@ -153,98 +166,99 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
-        'Reset previous progress
-        pbAddingItemsProgress.Value = 0
-        Workerprogress = 0
-        AddItemResult = "NONE"
+        'Check if datapack path exists
+        If My.Computer.FileSystem.DirectoryExists(datapackPath) Then
+            'Reset previous progress
+            pbAddingItemsProgress.Value = 0
+            workerProgress = 0
+            addItemResult = "NONE"
 
-        'Disable input so settings can't be changed while items are being added
-        btnAddItem.Hide()
-        cbCreativeOnly.Enabled = False
-        rbtnCommandBlock.Enabled = False
-        rbtnSpawnEgg.Enabled = False
-        rbtnOtherItem.Enabled = False
-        cbNormalItem.Enabled = False
-        cbSuspiciousStew.Enabled = False
-        cbEnchantedBook.Enabled = False
-        cbPotion.Enabled = False
-        cbSplashPotion.Enabled = False
-        cbLingeringPotion.Enabled = False
-        cbTippedArrow.Enabled = False
-        cbGoatHorn.Enabled = False
-        rtbItem.Enabled = False
-        cbSamePrefix.Enabled = False
-        tbSamePrefix.Enabled = False
-        cbCustomNBT.Enabled = False
-        tbCustomNBT.Enabled = False
-        cbAddItemsFast.Enabled = False
-        cbxVersion.Enabled = False
-        btnBrowseDatapackPath.Enabled = False
-        tbDatapackPath.Enabled = False
+            'Disable input so settings can't be changed while items are being added
+            btnAddItem.Hide()
+            cbCreativeOnly.Enabled = False
+            rbtnCommandBlock.Enabled = False
+            rbtnSpawnEgg.Enabled = False
+            rbtnOtherItem.Enabled = False
+            cbNormalItem.Enabled = False
+            cbSuspiciousStew.Enabled = False
+            cbEnchantedBook.Enabled = False
+            cbPotion.Enabled = False
+            cbSplashPotion.Enabled = False
+            cbLingeringPotion.Enabled = False
+            cbTippedArrow.Enabled = False
+            cbGoatHorn.Enabled = False
+            rtbItem.Enabled = False
+            cbSamePrefix.Enabled = False
+            tbSamePrefix.Enabled = False
+            cbCustomNBT.Enabled = False
+            tbCustomNBT.Enabled = False
+            cbAddItemsFast.Enabled = False
+            cbxVersion.Enabled = False
+            btnBrowseDatapackPath.Enabled = False
+            tbDatapackPath.Enabled = False
+            cbPainting.Enabled = False
 
-        'Set total amount of items and start the backgroundworker that adds the items
-        TotalItemAmount = rtbItem.Lines.Count
-        bgwAddItems.RunWorkerAsync()
+            'Set total amount of items and start the backgroundworker that adds the items
+            totalItemAmount = rtbItem.Lines.Count
+            bgwAddItems.RunWorkerAsync()
+        Else
+            MsgBox("Please enter a datapack path!", MsgBoxStyle.Critical, "Error")
+        End If
     End Sub
 
     Private Sub bgwAddItems_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAddItems.DoWork
-        'Begin adding items. Checks if datapack directory exists.
-        If My.Computer.FileSystem.DirectoryExists(DatapackPath) Then
-            'Checks if there are more than 99 Items being added while AddItemsFast is disabled and will show a warning if thats the case
-            If ItemsList.Count > 99 And AddItemsFast = False Then
-                Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Add Items Fast' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue?", vbExclamation + vbYesNo, "Warning")
-                    Case Windows.Forms.DialogResult.Yes
-                        'Sets ItemAddMode. This should be redundant in this case, despite of this I will still leave it there to be save
-                        If AddItemsFast = True Then
-                            ItemAddMode = "Fast"
-                        Else
-                            ItemAddMode = "Normal"
-                        End If
+        'Checks if there are more than 99 Items being added while AddItemsFast is disabled and will show a warning if thats the case
+        If itemsList.Count > 99 And addItemsFast = False Then
+            Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Add Items Fast' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue?", vbExclamation + vbYesNo, "Warning")
+                Case Windows.Forms.DialogResult.Yes
+                    'Sets ItemAddMode. This should be redundant in this case, despite of this I will still leave it there to be save
+                    If addItemsFast = True Then
+                        itemAddMode = "Fast"
+                    Else
+                        itemAddMode = "Normal"
+                    End If
 
-                        'Resets variables used to detect duplicates
-                        IgnoreDuplicates = False
-                        DuplicateDetected = False
+                    'Resets variables used to detect duplicates
+                    ignoreDuplicates = False
+                    duplicateDetected = False
 
-                        WriteToLog("Adding " + TotalItemAmount.ToString + " items...", "Info")
+                    WriteToLog("Adding " + totalItemAmount.ToString + " items...", "Info")
 
-                        'Calculate ProgressStep
-                        ProgressStep = 100 / ItemsList.Count
+                    'Calculate ProgressStep
+                    progressStep = 100 / itemsList.Count
 
-                        'Start adding the items
-                        AddMultipleItems()
-
-                        'Set result after items where added.
-                        AddItemResult = "success"
-                End Select
-            Else
-                'Sets ItemAddMode
-                If AddItemsFast Then
-                    ItemAddMode = "Fast"
-                Else
-                    ItemAddMode = "Normal"
-                End If
-
-                'Resets variables used to detect duplicates
-                IgnoreDuplicates = False
-                DuplicateDetected = False
-
-                'Start the corresponding method for adding items depending on the amount. Will also calculate ProgressStep and post result afterwards.
-                If ItemsList.Length = 1 Then
-                    Item = ItemsList(0)
-                    WriteToLog("Adding " + TotalItemAmount.ToString + " items...", "Info")
-                    ProgressStep = 100 / ItemsList.Count
-                    CallAddItem()
-                    AddItemResult = "success"
-                ElseIf ItemsList.Length = 0 Then
-                Else
-                    WriteToLog("Adding " + TotalItemAmount.ToString + " items...", "Info")
-                    ProgressStep = 100 / ItemsList.Count
+                    'Start adding the items
                     AddMultipleItems()
-                    AddItemResult = "success"
-                End If
-            End If
+
+                    'Set result after items where added.
+                    addItemResult = "success"
+            End Select
         Else
-            MsgBox("Please enter a datapack path!", MsgBoxStyle.Critical, "Error")
+            'Sets ItemAddMode
+            If addItemsFast Then
+                itemAddMode = "Fast"
+            Else
+                itemAddMode = "Normal"
+            End If
+
+            'Resets variables used to detect duplicates
+            ignoreDuplicates = False
+            duplicateDetected = False
+
+            'Start the corresponding method for adding items depending on the amount. Will also calculate ProgressStep and post result afterwards.
+            If itemsList.Length = 1 Then
+                item = itemsList(0)
+                WriteToLog("Adding " + totalItemAmount.ToString + " items...", "Info")
+                progressStep = 100 / itemsList.Count
+                CallAddItem()
+                addItemResult = "success"
+            ElseIf itemsList.Length = 0 Then
+            Else
+                WriteToLog("Adding " + totalItemAmount.ToString + " items...", "Info")
+                progressStep = 100 / itemsList.Count
+                AddMultipleItems()
+                addItemResult = "success"
+            End If
         End If
     End Sub
 
@@ -501,7 +515,6 @@ Public Class frmMain
         cbSplashPotion.Enabled = True
         cbLingeringPotion.Enabled = True
         cbTippedArrow.Enabled = True
-        cbGoatHorn.Enabled = True
         rtbItem.Enabled = True
         cbSamePrefix.Enabled = True
         tbSamePrefix.Enabled = True
@@ -511,6 +524,12 @@ Public Class frmMain
         cbxVersion.Enabled = True
         btnBrowseDatapackPath.Enabled = True
         tbDatapackPath.Enabled = True
+        If cbxVersion.SelectedItem = "Version 1.19.4" Then
+            cbPainting.Enabled = True
+            cbGoatHorn.Enabled = True
+        ElseIf cbxVersion.SelectedItem = "Version 1.19 - 1.19.3" Then
+            cbGoatHorn.Enabled = True
+        End If
 
         'If result is "success" show messagebox. This variable would've been changed if an error occured.
         If AddItemResult = "success" Then
@@ -1109,8 +1128,8 @@ Public Class frmMain
 
 
             'Check if item you want to add already exists
-            If My.Computer.FileSystem.FileExists(datapackPath + "\data\randomitemgiver\lootTables\" + itemAmountPath + lootTable + ".json") Then
-                fileTemp = My.Computer.FileSystem.ReadAllText(datapackPath + "\data\randomitemgiver\lootTables\" + itemAmountPath + lootTable + ".json")
+            If My.Computer.FileSystem.FileExists(datapackPath + "\data\randomitemgiver\loot_tables\" + itemAmountPath + lootTable + ".json") Then
+                fileTemp = My.Computer.FileSystem.ReadAllText(datapackPath + "\data\randomitemgiver\loot_tables\" + itemAmountPath + lootTable + ".json")
             End If
 
             'If the item you want to add does not exist or duplicates are ignored add items depending on version and loot table
@@ -1122,8 +1141,8 @@ Public Class frmMain
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\1item\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\1item\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\1item\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\1item\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1133,21 +1152,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\1item\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = 2 Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\2sameitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\2sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\2sameitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\2sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1157,21 +1176,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\2sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items2) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = 3 Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\3sameitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\3sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\3sameitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\3sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1181,21 +1200,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\3sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items3) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = 5 Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\5sameitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\5sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\5sameitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\5sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1205,21 +1224,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\5sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items5) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = 10 Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\10sameitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\10sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\10sameitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\10sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1229,21 +1248,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\10sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items10) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = 32 Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\32sameitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\32sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\32sameitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\32sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1253,21 +1272,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\32sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items32) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = 64 Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\64sameitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\64sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\64sameitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\64sameitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1277,21 +1296,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\64sameitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(items64) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = "-1" And version = "1.16" Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1301,21 +1320,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame116) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = "-1" And version = "1.19" Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1325,21 +1344,21 @@ Public Class frmMain
                             End While
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + vbNewLine + "          ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountsameitem\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + ReturnArrayAsString(itemsRandomSame119) + "," + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
 
                         ElseIf itemAmount = "-2" And (version = "1.16" OrElse version = "1.19") Then
                             lineRemoveLoop = 8
 
                             While lineRemoveLoop > 0
-                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\randomamountdifitems\" + lootTable + ".json")
-                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\randomamountdifitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                                Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + lootTable + ".json")
+                                Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                                 editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                                 FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1348,13 +1367,13 @@ Public Class frmMain
                                 lineRemoveLoop = lineRemoveLoop - 1
                             End While
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             ElseIf lootTable = "goat_horns" OrElse lootTable = "paintings" And version = "1.19" Then
-                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                                My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\randomamountdifitems\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                             End If
                         End If
 
@@ -1380,8 +1399,8 @@ Public Class frmMain
                         lineRemoveLoop = 8
 
                         While lineRemoveLoop > 0
-                            Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\lootTables\" + lootTable + ".json")
-                            Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\lootTables\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
+                            Dim EditFileLines() As String = IO.File.ReadAllLines(datapackPath + "\data\randomitemgiver\loot_tables\" + lootTable + ".json")
+                            Dim FileStreamEditFile As New FileStream(datapackPath + "\data\randomitemgiver\loot_tables\" + lootTable + ".json", FileMode.Open, FileAccess.ReadWrite)
                             editFileLastLineLength = EditFileLines.Last.Length.ToString
 
                             FileStreamEditFile.SetLength(FileStreamEditFile.Length - editFileLastLineLength)
@@ -1391,11 +1410,11 @@ Public Class frmMain
                         End While
 
                         If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                            My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                            My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + vbNewLine + ReturnArrayAsString(codeEnd), True)
                         ElseIf (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True Then
-                            My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                            My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                         ElseIf lootTable = "suspicious_stew" OrElse lootTable = "enchanted_books" OrElse lootTable = "potion" OrElse lootTable = "splash_potion" OrElse lootTable = "lingering_potion" OrElse lootTable = "tipped_arrow" Then
-                            My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\lootTables\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
+                            My.Computer.FileSystem.WriteAllText(datapackPath + "\data\randomitemgiver\loot_tables\" + lootTable + ".json", vbNewLine + "        }," + vbNewLine + "        {" + vbNewLine + "          " + qm + "type" + qm + ": " + qm + "minecraft:item" + qm + "," + vbNewLine + "          " + qm + "name" + qm + ": " + qm + fullItemName + qm + "," + vbNewLine + "                    " + qm + "functions" + qm + ": [" + vbNewLine + "                        {" + vbNewLine + "                            " + qm + "function" + qm + ": " + qm + "set_nbt" + qm + "," + vbNewLine + "                            " + qm + "tag" + qm + ": " + qm + nbtTag + qm + vbNewLine + "                        }" + vbNewLine + "                    ]" + vbNewLine + ReturnArrayAsString(codeEnd), True)
                         End If
 
                     End If
@@ -3227,116 +3246,256 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddItem_MouseDown(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseDown
-        btnAddItem.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
 
     Private Sub btnAddItem_MouseEnter(sender As Object, e As EventArgs) Handles btnAddItem.MouseEnter
-        btnAddItem.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnAddItem_MouseLeave(sender As Object, e As EventArgs) Handles btnAddItem.MouseLeave
-        btnAddItem.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnAddItem_MouseUp(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseUp
-        btnAddItem.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnAddItem.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseDown
-        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseEnter
-        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseLeave
-        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseUp
-        btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseDown
-        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseEnter
-        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseLeave
-        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseUp
-        btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseDown
-        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseEnter
-        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseLeave
-        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseUp
-        btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseDown
-        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseEnter
-        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseLeave
-        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseUp
-        btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnLoadProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseDown
-        btnLoadProfile.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnLoadProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseEnter
-        btnLoadProfile.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnLoadProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseLeave
-        btnLoadProfile.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnLoadProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseUp
-        btnLoadProfile.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnLoadProfile.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnSaveProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseDown
-        btnSaveProfile.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnSaveProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseEnter
-        btnSaveProfile.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnSaveProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseLeave
-        btnSaveProfile.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnSaveProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseUp
-        btnSaveProfile.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnSaveProfile.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub ToolsToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.MouseEnter

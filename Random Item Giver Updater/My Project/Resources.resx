@@ -133,35 +133,41 @@
   <data name="imgSettingsNavigationBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgSettingsNavigationBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgButtonSettingsNav" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonSettingsNav.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgButtonSettingsNavHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonSettingsNavDarkHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNavDarkHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgAddingItemsBasicDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgAddingItemsBasicDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgBackgroundItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBackgroundItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgDuplicateFinderHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgDuplicateFinderHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgBackgroundPath" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgBackgroundPath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgHamburgerButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgHamburgerButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="imgHelpNavigationBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgHelpNavigationBar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgButtonSettingsNavHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonSettingsNavHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgAddingItemsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgAddingItemsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgHamburgerButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgHamburgerButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgButtonSettingsNavDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgButtonSettingsNavDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="imgAddingItemsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgAddingItemsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgButtonSettingsNavClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgButtonSettingsNavClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,11 +181,14 @@
   <data name="imgIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgBackgroundItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgBackgroundItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgButtonSettingsNav" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonSettingsNav.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgAddingItemsAdvancedDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgAddingItemsAdvancedDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgDuplicateFinderDarkHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgDuplicateFinderDarkHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgHamburgerButtonDarkHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgHamburgerButtonDarkHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -187,20 +196,17 @@
   <data name="imgAbout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgAbout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgHelpNavigationBarDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgHelpNavigationBarDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="imgButtonSettingsNavDarkClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgButtonSettingsNavDarkClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgItemListImporter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgItemListImporter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgBackgroundPath" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgBackgroundPath.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgHelpNavigationBarDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHelpNavigationBarDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgButtonClick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonClick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgUpdate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgUpdate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,16 +217,19 @@
   <data name="imgOutput" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgOutput.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgButtonSettingsNavDarkHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgButtonSettingsNavDarkHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgHamburgerButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgHamburgerButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="imgButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imgButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgDuplicateFinderHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgDuplicateFinderHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgButtonClickLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonClickLight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imgDuplicateFinderDarkHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imgDuplicateFinderDarkHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imgButtonHoverLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonHoverLight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imgButtonLight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imgButtonLight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

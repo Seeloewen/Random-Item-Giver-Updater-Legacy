@@ -248,6 +248,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <None Include="Resources\imgButtonLight.png" />
+    <None Include="Resources\imgButtonHoverLight.png" />
+    <None Include="Resources\imgButtonClickLight.png" />
     <None Include="Resources\imgDuplicateFinderDarkHelp.png" />
     <None Include="Resources\imgDuplicateFinderHelp.png" />
     <None Include="Resources\imgAddingItemsBasicDark.png" />

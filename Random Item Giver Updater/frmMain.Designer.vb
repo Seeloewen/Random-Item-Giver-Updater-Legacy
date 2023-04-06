@@ -747,14 +747,14 @@ Partial Class frmMain
         '
         Me.btnAddItem.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAddItem.BackColor = System.Drawing.Color.Transparent
-        Me.btnAddItem.BackgroundImage = CType(resources.GetObject("btnAddItem.BackgroundImage"), System.Drawing.Image)
+        Me.btnAddItem.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnAddItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnAddItem.FlatAppearance.BorderSize = 0
         Me.btnAddItem.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnAddItem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddItem.ForeColor = System.Drawing.Color.White
+        Me.btnAddItem.ForeColor = System.Drawing.Color.Black
         Me.btnAddItem.Location = New System.Drawing.Point(345, 759)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(344, 37)
@@ -799,14 +799,14 @@ Partial Class frmMain
         'btnDeleteSelectedScheme
         '
         Me.btnDeleteSelectedScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnDeleteSelectedScheme.BackgroundImage = CType(resources.GetObject("btnDeleteSelectedScheme.BackgroundImage"), System.Drawing.Image)
+        Me.btnDeleteSelectedScheme.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnDeleteSelectedScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnDeleteSelectedScheme.FlatAppearance.BorderSize = 0
         Me.btnDeleteSelectedScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnDeleteSelectedScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnDeleteSelectedScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteSelectedScheme.ForeColor = System.Drawing.Color.White
+        Me.btnDeleteSelectedScheme.ForeColor = System.Drawing.Color.Black
         Me.btnDeleteSelectedScheme.Location = New System.Drawing.Point(490, 658)
         Me.btnDeleteSelectedScheme.Name = "btnDeleteSelectedScheme"
         Me.btnDeleteSelectedScheme.Size = New System.Drawing.Size(179, 32)
@@ -817,14 +817,14 @@ Partial Class frmMain
         'btnLoadProfile
         '
         Me.btnLoadProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnLoadProfile.BackgroundImage = CType(resources.GetObject("btnLoadProfile.BackgroundImage"), System.Drawing.Image)
+        Me.btnLoadProfile.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnLoadProfile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnLoadProfile.FlatAppearance.BorderSize = 0
         Me.btnLoadProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnLoadProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnLoadProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLoadProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoadProfile.ForeColor = System.Drawing.Color.White
+        Me.btnLoadProfile.ForeColor = System.Drawing.Color.Black
         Me.btnLoadProfile.Location = New System.Drawing.Point(386, 226)
         Me.btnLoadProfile.Name = "btnLoadProfile"
         Me.btnLoadProfile.Size = New System.Drawing.Size(129, 24)
@@ -835,14 +835,14 @@ Partial Class frmMain
         'btnOverwriteSelectedScheme
         '
         Me.btnOverwriteSelectedScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnOverwriteSelectedScheme.BackgroundImage = CType(resources.GetObject("btnOverwriteSelectedScheme.BackgroundImage"), System.Drawing.Image)
+        Me.btnOverwriteSelectedScheme.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnOverwriteSelectedScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOverwriteSelectedScheme.FlatAppearance.BorderSize = 0
         Me.btnOverwriteSelectedScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnOverwriteSelectedScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnOverwriteSelectedScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOverwriteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOverwriteSelectedScheme.ForeColor = System.Drawing.Color.White
+        Me.btnOverwriteSelectedScheme.ForeColor = System.Drawing.Color.Black
         Me.btnOverwriteSelectedScheme.Location = New System.Drawing.Point(490, 620)
         Me.btnOverwriteSelectedScheme.Name = "btnOverwriteSelectedScheme"
         Me.btnOverwriteSelectedScheme.Size = New System.Drawing.Size(179, 32)
@@ -853,14 +853,14 @@ Partial Class frmMain
         'btnSaveProfile
         '
         Me.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnSaveProfile.BackgroundImage = CType(resources.GetObject("btnSaveProfile.BackgroundImage"), System.Drawing.Image)
+        Me.btnSaveProfile.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnSaveProfile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSaveProfile.FlatAppearance.BorderSize = 0
         Me.btnSaveProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnSaveProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnSaveProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveProfile.ForeColor = System.Drawing.Color.White
+        Me.btnSaveProfile.ForeColor = System.Drawing.Color.Black
         Me.btnSaveProfile.Location = New System.Drawing.Point(521, 226)
         Me.btnSaveProfile.Name = "btnSaveProfile"
         Me.btnSaveProfile.Size = New System.Drawing.Size(129, 24)
@@ -871,14 +871,14 @@ Partial Class frmMain
         'btnSaveAsNewScheme
         '
         Me.btnSaveAsNewScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnSaveAsNewScheme.BackgroundImage = CType(resources.GetObject("btnSaveAsNewScheme.BackgroundImage"), System.Drawing.Image)
+        Me.btnSaveAsNewScheme.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnSaveAsNewScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSaveAsNewScheme.FlatAppearance.BorderSize = 0
         Me.btnSaveAsNewScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnSaveAsNewScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnSaveAsNewScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveAsNewScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveAsNewScheme.ForeColor = System.Drawing.Color.White
+        Me.btnSaveAsNewScheme.ForeColor = System.Drawing.Color.Black
         Me.btnSaveAsNewScheme.Location = New System.Drawing.Point(490, 582)
         Me.btnSaveAsNewScheme.Name = "btnSaveAsNewScheme"
         Me.btnSaveAsNewScheme.Size = New System.Drawing.Size(179, 32)
@@ -889,14 +889,14 @@ Partial Class frmMain
         'btnBrowseDatapackPath
         '
         Me.btnBrowseDatapackPath.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnBrowseDatapackPath.BackgroundImage = CType(resources.GetObject("btnBrowseDatapackPath.BackgroundImage"), System.Drawing.Image)
+        Me.btnBrowseDatapackPath.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnBrowseDatapackPath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnBrowseDatapackPath.FlatAppearance.BorderSize = 0
         Me.btnBrowseDatapackPath.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnBrowseDatapackPath.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
         Me.btnBrowseDatapackPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBrowseDatapackPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowseDatapackPath.ForeColor = System.Drawing.Color.White
+        Me.btnBrowseDatapackPath.ForeColor = System.Drawing.Color.Black
         Me.btnBrowseDatapackPath.Location = New System.Drawing.Point(521, 162)
         Me.btnBrowseDatapackPath.Name = "btnBrowseDatapackPath"
         Me.btnBrowseDatapackPath.Size = New System.Drawing.Size(129, 23)

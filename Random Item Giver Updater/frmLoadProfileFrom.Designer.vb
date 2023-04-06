@@ -31,14 +31,14 @@ Partial Class frmLoadProfileFrom
         '
         'btnCancel
         '
-        Me.btnCancel.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnCancel.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCancel.FlatAppearance.BorderSize = 0
         Me.btnCancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.Color.White
+        Me.btnCancel.ForeColor = System.Drawing.Color.Black
         Me.btnCancel.Location = New System.Drawing.Point(253, 69)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(109, 23)
@@ -48,14 +48,14 @@ Partial Class frmLoadProfileFrom
         '
         'btnLoad
         '
-        Me.btnLoad.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnLoad.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnLoad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnLoad.FlatAppearance.BorderSize = 0
         Me.btnLoad.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnLoad.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLoad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoad.ForeColor = System.Drawing.Color.White
+        Me.btnLoad.ForeColor = System.Drawing.Color.Black
         Me.btnLoad.Location = New System.Drawing.Point(138, 69)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(109, 23)

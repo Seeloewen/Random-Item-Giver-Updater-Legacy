@@ -91,6 +91,17 @@
     End Sub
 
     Private Sub frmItemImporter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Set appearance of buttons depending on selected design
+        For Each ctrl As Control In Controls.OfType(Of Button)
+            If My.Settings.Design = "Dark" Then
+                ctrl.ForeColor = Color.White
+                ctrl.BackgroundImage = My.Resources.imgButton
+            ElseIf My.Settings.Design = "Light" Then
+                ctrl.ForeColor = Color.Black
+                ctrl.BackgroundImage = My.Resources.imgButtonLight
+            End If
+        Next
+
         'Clear out any existing text on first load
         tbImportFromFile.Clear()
 
@@ -135,50 +146,110 @@
     '-- Button animations --
 
     Private Sub btnBrowse_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseDown
-        btnBrowse.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnBrowse_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowse.MouseEnter
-        btnBrowse.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnBrowse_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowse.MouseLeave
-        btnBrowse.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnBrowse_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseUp
-        btnBrowse.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnBrowse.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnImport_MouseDown(sender As Object, e As MouseEventArgs) Handles btnImport.MouseDown
-        btnImport.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnImport.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnImport.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnImport_MouseEnter(sender As Object, e As EventArgs) Handles btnImport.MouseEnter
-        btnImport.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnImport.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnImport.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnImport_MouseLeave(sender As Object, e As EventArgs) Handles btnImport.MouseLeave
-        btnImport.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnImport.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnImport.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnImport_MouseUp(sender As Object, e As MouseEventArgs) Handles btnImport.MouseUp
-        btnImport.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnImport.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnImport.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnShowPreview_MouseDown(sender As Object, e As MouseEventArgs) Handles btnShowPreview.MouseDown
-        btnShowPreview.BackgroundImage = My.Resources.imgButtonClick
+        If My.Settings.Design = "Dark" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf My.Settings.Design = "Light" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+
     End Sub
 
     Private Sub btnShowPreview_MouseEnter(sender As Object, e As EventArgs) Handles btnShowPreview.MouseEnter
-        btnShowPreview.BackgroundImage = My.Resources.imgButtonHover
+        If My.Settings.Design = "Dark" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf My.Settings.Design = "Light" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+
     End Sub
 
     Private Sub btnShowPreview_MouseLeave(sender As Object, e As EventArgs) Handles btnShowPreview.MouseLeave
-        btnShowPreview.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 
     Private Sub btnShowPreview_MouseUp(sender As Object, e As MouseEventArgs) Handles btnShowPreview.MouseUp
-        btnShowPreview.BackgroundImage = My.Resources.imgButton
+        If My.Settings.Design = "Dark" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButton
+        ElseIf My.Settings.Design = "Light" Then
+            btnShowPreview.BackgroundImage = My.Resources.imgButtonLight
+        End If
+
     End Sub
 End Class

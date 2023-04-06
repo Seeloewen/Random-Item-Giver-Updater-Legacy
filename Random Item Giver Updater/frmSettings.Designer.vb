@@ -91,14 +91,14 @@ Partial Class frmSettings
         '
         'btnQuitWithoutSaving
         '
-        Me.btnQuitWithoutSaving.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnQuitWithoutSaving.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnQuitWithoutSaving.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnQuitWithoutSaving.FlatAppearance.BorderSize = 0
         Me.btnQuitWithoutSaving.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnQuitWithoutSaving.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnQuitWithoutSaving.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnQuitWithoutSaving.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitWithoutSaving.ForeColor = System.Drawing.Color.White
+        Me.btnQuitWithoutSaving.ForeColor = System.Drawing.Color.Black
         Me.btnQuitWithoutSaving.Location = New System.Drawing.Point(232, 455)
         Me.btnQuitWithoutSaving.Name = "btnQuitWithoutSaving"
         Me.btnQuitWithoutSaving.Size = New System.Drawing.Size(250, 34)
@@ -108,14 +108,14 @@ Partial Class frmSettings
         '
         'btnSaveSettings
         '
-        Me.btnSaveSettings.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnSaveSettings.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnSaveSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSaveSettings.FlatAppearance.BorderSize = 0
         Me.btnSaveSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnSaveSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnSaveSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveSettings.ForeColor = System.Drawing.Color.White
+        Me.btnSaveSettings.ForeColor = System.Drawing.Color.Black
         Me.btnSaveSettings.Location = New System.Drawing.Point(488, 455)
         Me.btnSaveSettings.Name = "btnSaveSettings"
         Me.btnSaveSettings.Size = New System.Drawing.Size(244, 34)
@@ -154,14 +154,14 @@ Partial Class frmSettings
         '
         'btnResetSoftware
         '
-        Me.btnResetSoftware.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnResetSoftware.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnResetSoftware.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnResetSoftware.FlatAppearance.BorderSize = 0
         Me.btnResetSoftware.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnResetSoftware.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnResetSoftware.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResetSoftware.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnResetSoftware.ForeColor = System.Drawing.Color.White
+        Me.btnResetSoftware.ForeColor = System.Drawing.Color.Black
         Me.btnResetSoftware.Location = New System.Drawing.Point(10, 359)
         Me.btnResetSoftware.Name = "btnResetSoftware"
         Me.btnResetSoftware.Size = New System.Drawing.Size(228, 23)
@@ -181,14 +181,14 @@ Partial Class frmSettings
         '
         'btnExportSettings
         '
-        Me.btnExportSettings.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnExportSettings.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnExportSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnExportSettings.FlatAppearance.BorderSize = 0
         Me.btnExportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnExportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnExportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportSettings.ForeColor = System.Drawing.Color.White
+        Me.btnExportSettings.ForeColor = System.Drawing.Color.Black
         Me.btnExportSettings.Location = New System.Drawing.Point(244, 264)
         Me.btnExportSettings.Name = "btnExportSettings"
         Me.btnExportSettings.Size = New System.Drawing.Size(228, 23)
@@ -198,14 +198,14 @@ Partial Class frmSettings
         '
         'btnImportSettings
         '
-        Me.btnImportSettings.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnImportSettings.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnImportSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnImportSettings.FlatAppearance.BorderSize = 0
         Me.btnImportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnImportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnImportSettings.ForeColor = System.Drawing.Color.White
+        Me.btnImportSettings.ForeColor = System.Drawing.Color.Black
         Me.btnImportSettings.Location = New System.Drawing.Point(10, 264)
         Me.btnImportSettings.Name = "btnImportSettings"
         Me.btnImportSettings.Size = New System.Drawing.Size(228, 23)
@@ -267,14 +267,14 @@ Partial Class frmSettings
         '
         'btnViewTempDir
         '
-        Me.btnViewTempDir.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnViewTempDir.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnViewTempDir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnViewTempDir.FlatAppearance.BorderSize = 0
         Me.btnViewTempDir.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnViewTempDir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnViewTempDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnViewTempDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnViewTempDir.ForeColor = System.Drawing.Color.White
+        Me.btnViewTempDir.ForeColor = System.Drawing.Color.Black
         Me.btnViewTempDir.Location = New System.Drawing.Point(244, 89)
         Me.btnViewTempDir.Name = "btnViewTempDir"
         Me.btnViewTempDir.Size = New System.Drawing.Size(228, 23)
@@ -294,14 +294,14 @@ Partial Class frmSettings
         '
         'btnClearTempFiles
         '
-        Me.btnClearTempFiles.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnClearTempFiles.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnClearTempFiles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnClearTempFiles.FlatAppearance.BorderSize = 0
         Me.btnClearTempFiles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnClearTempFiles.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnClearTempFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearTempFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClearTempFiles.ForeColor = System.Drawing.Color.White
+        Me.btnClearTempFiles.ForeColor = System.Drawing.Color.Black
         Me.btnClearTempFiles.Location = New System.Drawing.Point(10, 89)
         Me.btnClearTempFiles.Name = "btnClearTempFiles"
         Me.btnClearTempFiles.Size = New System.Drawing.Size(228, 23)
@@ -352,14 +352,14 @@ Partial Class frmSettings
         '
         'btnOpenLogDirectory
         '
-        Me.btnOpenLogDirectory.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnOpenLogDirectory.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnOpenLogDirectory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOpenLogDirectory.FlatAppearance.BorderSize = 0
         Me.btnOpenLogDirectory.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnOpenLogDirectory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnOpenLogDirectory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOpenLogDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOpenLogDirectory.ForeColor = System.Drawing.Color.White
+        Me.btnOpenLogDirectory.ForeColor = System.Drawing.Color.Black
         Me.btnOpenLogDirectory.Location = New System.Drawing.Point(254, 167)
         Me.btnOpenLogDirectory.Name = "btnOpenLogDirectory"
         Me.btnOpenLogDirectory.Size = New System.Drawing.Size(196, 25)
@@ -466,14 +466,14 @@ Partial Class frmSettings
         '
         'btnRestoreDefaultSchemes
         '
-        Me.btnRestoreDefaultSchemes.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnRestoreDefaultSchemes.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnRestoreDefaultSchemes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnRestoreDefaultSchemes.FlatAppearance.BorderSize = 0
         Me.btnRestoreDefaultSchemes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnRestoreDefaultSchemes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnRestoreDefaultSchemes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRestoreDefaultSchemes.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRestoreDefaultSchemes.ForeColor = System.Drawing.Color.White
+        Me.btnRestoreDefaultSchemes.ForeColor = System.Drawing.Color.Black
         Me.btnRestoreDefaultSchemes.Location = New System.Drawing.Point(9, 236)
         Me.btnRestoreDefaultSchemes.Name = "btnRestoreDefaultSchemes"
         Me.btnRestoreDefaultSchemes.Size = New System.Drawing.Size(301, 23)
@@ -600,14 +600,14 @@ Partial Class frmSettings
         '
         'btnOpenProfileEditor
         '
-        Me.btnOpenProfileEditor.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnOpenProfileEditor.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnOpenProfileEditor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOpenProfileEditor.FlatAppearance.BorderSize = 0
         Me.btnOpenProfileEditor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnOpenProfileEditor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnOpenProfileEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOpenProfileEditor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnOpenProfileEditor.ForeColor = System.Drawing.Color.White
+        Me.btnOpenProfileEditor.ForeColor = System.Drawing.Color.Black
         Me.btnOpenProfileEditor.Location = New System.Drawing.Point(9, 56)
         Me.btnOpenProfileEditor.Name = "btnOpenProfileEditor"
         Me.btnOpenProfileEditor.Size = New System.Drawing.Size(185, 25)
@@ -710,7 +710,7 @@ Partial Class frmSettings
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(744, 500)
+        Me.ClientSize = New System.Drawing.Size(744, 501)
         Me.Controls.Add(Me.gbDatapackProfiles)
         Me.Controls.Add(Me.gbItemListImporter)
         Me.Controls.Add(Me.gbSchemes)

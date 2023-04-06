@@ -159,14 +159,14 @@ Partial Class frmDuplicateFinder
         '
         'btnBrowse
         '
-        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnBrowse.FlatAppearance.BorderSize = 0
         Me.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.ForeColor = System.Drawing.Color.White
+        Me.btnBrowse.ForeColor = System.Drawing.Color.Black
         Me.btnBrowse.Location = New System.Drawing.Point(433, 91)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(117, 23)
@@ -176,14 +176,14 @@ Partial Class frmDuplicateFinder
         '
         'btnCheck
         '
-        Me.btnCheck.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButton
+        Me.btnCheck.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnCheck.FlatAppearance.BorderSize = 0
         Me.btnCheck.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
         Me.btnCheck.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCheck.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCheck.ForeColor = System.Drawing.Color.White
+        Me.btnCheck.ForeColor = System.Drawing.Color.Black
         Me.btnCheck.Location = New System.Drawing.Point(213, 126)
         Me.btnCheck.Name = "btnCheck"
         Me.btnCheck.Size = New System.Drawing.Size(142, 27)
