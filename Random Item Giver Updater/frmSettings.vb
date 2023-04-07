@@ -39,7 +39,7 @@ Public Class frmSettings
         End Select
     End Sub
 
-    Private Sub cbSelectDefaultScheme_CheckedChanged(sender As Object, e As EventArgs) Handles cbLoadDefaultProfile.CheckedChanged
+    Private Sub cbSelectDefaultScheme_CheckedChanged(sender As Object, e As EventArgs) Handles cbSelectDefaultScheme.CheckedChanged
         'Toggle Default Scheme option
         If cbSelectDefaultScheme.Checked Then
             cbxDefaultScheme.Enabled = True
