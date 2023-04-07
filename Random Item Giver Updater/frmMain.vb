@@ -14,8 +14,8 @@ Public Class frmMain
     Dim firstLoadCompleted As Boolean = False 'Whether application is loaded or not. Used for the datapack version detection.
     Dim actionRunning As Boolean = False 'Whether an action is running or not
     Dim settingsFile As String = appData + "\Random Item Giver Updater\settings.txt" 'Location of the settings file
-    Public logDirectory As String = appData + "\Random Item Giver Updater\Logs\"
-    Dim logFileName As String
+    Public logDirectory As String = appData + "\Random Item Giver Updater\Logs\" 'Directory where the log files are saved
+    Dim logFileName As String 'File name of the log file
 
     'Profile variables
     Public profileDirectory As String = appData + "\Random Item Giver Updater\Profiles\" 'Directory where the profiles are located
@@ -44,6 +44,7 @@ Public Class frmMain
     Dim workerProgress As Double 'Progress of the BackGroundWorker that adds the items
     Dim addItemResult As String 'Result of adding the items (Whether it failed or succeeded)
     Dim totalItemAmount As Integer 'Total amount of items that are being added
+    Dim totalDuplicatesIgnored As Integer 'Total amount of duplicates that were ignored during the item adding process
 
     'Variables that also exist as UI elements, needed for threading
     Dim normalItem As Boolean
@@ -182,7 +183,8 @@ Public Class frmMain
             'Reset previous progress
             pbAddingItemsProgress.Value = 0
             workerProgress = 0
-            addItemResult = "NONE"
+            totalDuplicatesIgnored = 0
+            addItemResult = "success"
 
             'Disable input so settings can't be changed while items are being added
             btnAddItem.Hide()
@@ -240,9 +242,6 @@ Public Class frmMain
 
                     'Start adding the items
                     AddMultipleItems()
-
-                    'Set result after items where added.
-                    addItemResult = "success"
             End Select
         Else
             'Sets ItemAddMode
@@ -262,13 +261,11 @@ Public Class frmMain
                 WriteToLog("Adding " + totalItemAmount.ToString + " items...", "Info")
                 progressStep = 100 / itemsList.Count
                 CallAddItem()
-                addItemResult = "success"
             ElseIf itemsList.Length = 0 Then
             Else
                 WriteToLog("Adding " + totalItemAmount.ToString + " items...", "Info")
                 progressStep = 100 / itemsList.Count
                 AddMultipleItems()
-                addItemResult = "success"
             End If
         End If
     End Sub
@@ -535,7 +532,7 @@ Public Class frmMain
         cbxVersion.Enabled = True
         btnBrowseDatapackPath.Enabled = True
         tbDatapackPath.Enabled = True
-        If cbxVersion.SelectedItem = "Version 1.19.4" Then
+        If cbxVersion.SelectedItem = "Version 1.19.4" OrElse cbxVersion.SelectedItem = "Version 1.20" Then
             cbPainting.Enabled = True
             cbGoatHorn.Enabled = True
         ElseIf cbxVersion.SelectedItem = "Version 1.19 - 1.19.3" Then
@@ -543,9 +540,13 @@ Public Class frmMain
         End If
 
         'If result is "success" show messagebox. This variable would've been changed if an error occured.
-        If AddItemResult = "success" Then
-            MsgBox("Successfully added " + rtbItem.Lines.Count.ToString + " item(s)!", MsgBoxStyle.Information, "Added items")
-            WriteToLog("Successfully added  " + rtbItem.Lines.Count.ToString + " items", "Info")
+        If rtbItem.Lines.Count > totalDuplicatesIgnored Then
+            If addItemResult = "success" Then
+                MsgBox("Successfully added " + (rtbItem.Lines.Count - totalDuplicatesIgnored).ToString + " item(s)!", MsgBoxStyle.Information, "Added items")
+                WriteToLog("Successfully added  " + (rtbItem.Lines.Count - totalDuplicatesIgnored).ToString + " items", "Info")
+            ElseIf addItemResult = "error" Then
+                MsgBox("Failed to add items.", MsgBoxStyle.Critical, "Error")
+            End If
         End If
 
         'Show 'Add item to datapack' button which also hides the progress bar and show total amount of items in richtextbox again
@@ -1498,6 +1499,7 @@ Public Class frmMain
 
                 Catch Exception As Exception
                     exceptionAddItem = Exception.Message
+                    addItemResult = "error"
                 End Try
 
                 'If not exception was found show completion message, otherwise show exception
@@ -1506,6 +1508,7 @@ Public Class frmMain
                 Else
                     output = "Error: " + exceptionAddItem
                 End If
+                exceptionAddItem = ""
 
             Else
                 'If duplicate exists show option to either ignore it or cancel 
@@ -1517,6 +1520,7 @@ Public Class frmMain
                         ignoreDuplicates = False
                         duplicateDetected = True
                         output = "Cancelled adding " + fullItemName + " To " + lootTable + " In Version " + version + " (NBT: " + nbtTag + ")"
+                        totalDuplicatesIgnored = totalDuplicatesIgnored + 1
                 End Select
             End If
         End If
