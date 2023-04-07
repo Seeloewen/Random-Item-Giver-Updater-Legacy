@@ -74,15 +74,9 @@ Partial Class frmMain
         Me.lblBoxSelectDatapackHeader = New System.Windows.Forms.Label()
         Me.lblBoxAddItemHeader = New System.Windows.Forms.Label()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsHamburgerButton = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cbPainting = New System.Windows.Forms.CheckBox()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.pbLine = New System.Windows.Forms.PictureBox()
         Me.pbHeader = New System.Windows.Forms.PictureBox()
@@ -95,9 +89,15 @@ Partial Class frmMain
         Me.btnBrowseDatapackPath = New System.Windows.Forms.Button()
         Me.pbSelectDatapack = New System.Windows.Forms.PictureBox()
         Me.pbAddItem = New System.Windows.Forms.PictureBox()
+        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cbPainting = New System.Windows.Forms.CheckBox()
         Me.gbItemID.SuspendLayout()
         Me.cmsHamburgerButton.SuspendLayout()
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -119,9 +119,9 @@ Partial Class frmMain
         'lblVersion
         '
         Me.lblVersion.AutoSize = True
-        Me.lblVersion.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblVersion.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblVersion.ForeColor = System.Drawing.Color.White
+        Me.lblVersion.ForeColor = System.Drawing.Color.Black
         Me.lblVersion.Location = New System.Drawing.Point(34, 229)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(64, 16)
@@ -130,11 +130,11 @@ Partial Class frmMain
         '
         'cbxVersion
         '
-        Me.cbxVersion.BackColor = System.Drawing.Color.DimGray
+        Me.cbxVersion.BackColor = System.Drawing.Color.DarkGray
         Me.cbxVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxVersion.ForeColor = System.Drawing.Color.White
+        Me.cbxVersion.ForeColor = System.Drawing.Color.Black
         Me.cbxVersion.FormattingEnabled = True
         Me.cbxVersion.Items.AddRange(New Object() {"Version 1.16.2 - 1.16.5", "Version 1.17 - 1.17.1", "Version 1.18 - 1.18.2", "Version 1.19 - 1.19.3", "Version 1.19.4"})
         Me.cbxVersion.Location = New System.Drawing.Point(101, 226)
@@ -145,9 +145,9 @@ Partial Class frmMain
         'lblDatapackDetection
         '
         Me.lblDatapackDetection.AutoSize = True
-        Me.lblDatapackDetection.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblDatapackDetection.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblDatapackDetection.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDatapackDetection.ForeColor = System.Drawing.Color.White
+        Me.lblDatapackDetection.ForeColor = System.Drawing.Color.Black
         Me.lblDatapackDetection.Location = New System.Drawing.Point(36, 195)
         Me.lblDatapackDetection.Name = "lblDatapackDetection"
         Me.lblDatapackDetection.Size = New System.Drawing.Size(156, 18)
@@ -156,21 +156,21 @@ Partial Class frmMain
         '
         'tbDatapackPath
         '
-        Me.tbDatapackPath.BackColor = System.Drawing.SystemColors.WindowFrame
-        Me.tbDatapackPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tbDatapackPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbDatapackPath.ForeColor = System.Drawing.Color.White
+        Me.tbDatapackPath.BackColor = System.Drawing.Color.DarkGray
+        Me.tbDatapackPath.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.tbDatapackPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbDatapackPath.ForeColor = System.Drawing.Color.Black
         Me.tbDatapackPath.Location = New System.Drawing.Point(37, 163)
         Me.tbDatapackPath.Name = "tbDatapackPath"
-        Me.tbDatapackPath.Size = New System.Drawing.Size(478, 22)
+        Me.tbDatapackPath.Size = New System.Drawing.Size(478, 19)
         Me.tbDatapackPath.TabIndex = 1
         '
         'lblSelectDatapack
         '
         Me.lblSelectDatapack.AutoSize = True
-        Me.lblSelectDatapack.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblSelectDatapack.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblSelectDatapack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectDatapack.ForeColor = System.Drawing.Color.White
+        Me.lblSelectDatapack.ForeColor = System.Drawing.Color.Black
         Me.lblSelectDatapack.Location = New System.Drawing.Point(36, 141)
         Me.lblSelectDatapack.Name = "lblSelectDatapack"
         Me.lblSelectDatapack.Size = New System.Drawing.Size(274, 16)
@@ -180,9 +180,9 @@ Partial Class frmMain
         'cbEnableAdvancedView
         '
         Me.cbEnableAdvancedView.AutoSize = True
-        Me.cbEnableAdvancedView.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbEnableAdvancedView.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbEnableAdvancedView.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbEnableAdvancedView.ForeColor = System.Drawing.Color.White
+        Me.cbEnableAdvancedView.ForeColor = System.Drawing.Color.Black
         Me.cbEnableAdvancedView.Location = New System.Drawing.Point(42, 677)
         Me.cbEnableAdvancedView.Name = "cbEnableAdvancedView"
         Me.cbEnableAdvancedView.Size = New System.Drawing.Size(166, 20)
@@ -192,11 +192,11 @@ Partial Class frmMain
         '
         'cbxScheme
         '
-        Me.cbxScheme.BackColor = System.Drawing.Color.DimGray
+        Me.cbxScheme.BackColor = System.Drawing.Color.DarkGray
         Me.cbxScheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbxScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxScheme.ForeColor = System.Drawing.Color.White
+        Me.cbxScheme.ForeColor = System.Drawing.Color.Black
         Me.cbxScheme.FormattingEnabled = True
         Me.cbxScheme.Location = New System.Drawing.Point(490, 342)
         Me.cbxScheme.Name = "cbxScheme"
@@ -206,9 +206,9 @@ Partial Class frmMain
         'lblScheme
         '
         Me.lblScheme.AutoSize = True
-        Me.lblScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblScheme.ForeColor = System.Drawing.Color.White
+        Me.lblScheme.ForeColor = System.Drawing.Color.Black
         Me.lblScheme.Location = New System.Drawing.Point(417, 345)
         Me.lblScheme.Name = "lblScheme"
         Me.lblScheme.Size = New System.Drawing.Size(67, 16)
@@ -218,9 +218,9 @@ Partial Class frmMain
         'cbAddItemsFast
         '
         Me.cbAddItemsFast.AutoSize = True
-        Me.cbAddItemsFast.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbAddItemsFast.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbAddItemsFast.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbAddItemsFast.ForeColor = System.Drawing.Color.White
+        Me.cbAddItemsFast.ForeColor = System.Drawing.Color.Black
         Me.cbAddItemsFast.Location = New System.Drawing.Point(42, 651)
         Me.cbAddItemsFast.Name = "cbAddItemsFast"
         Me.cbAddItemsFast.Size = New System.Drawing.Size(295, 20)
@@ -231,9 +231,9 @@ Partial Class frmMain
         'cbGoatHorn
         '
         Me.cbGoatHorn.AutoSize = True
-        Me.cbGoatHorn.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbGoatHorn.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbGoatHorn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbGoatHorn.ForeColor = System.Drawing.Color.White
+        Me.cbGoatHorn.ForeColor = System.Drawing.Color.Black
         Me.cbGoatHorn.Location = New System.Drawing.Point(326, 567)
         Me.cbGoatHorn.Name = "cbGoatHorn"
         Me.cbGoatHorn.Size = New System.Drawing.Size(87, 20)
@@ -244,11 +244,11 @@ Partial Class frmMain
         'cbNormalItem
         '
         Me.cbNormalItem.AutoSize = True
-        Me.cbNormalItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbNormalItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbNormalItem.Checked = True
         Me.cbNormalItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbNormalItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbNormalItem.ForeColor = System.Drawing.Color.White
+        Me.cbNormalItem.ForeColor = System.Drawing.Color.Black
         Me.cbNormalItem.Location = New System.Drawing.Point(326, 385)
         Me.cbNormalItem.Name = "cbNormalItem"
         Me.cbNormalItem.Size = New System.Drawing.Size(98, 20)
@@ -259,7 +259,7 @@ Partial Class frmMain
         'tbSmallOutput
         '
         Me.tbSmallOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.tbSmallOutput.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.tbSmallOutput.BackColor = System.Drawing.Color.DarkGray
         Me.tbSmallOutput.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.tbSmallOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbSmallOutput.ForeColor = System.Drawing.Color.White
@@ -274,9 +274,9 @@ Partial Class frmMain
         '
         Me.lblOutput.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblOutput.AutoSize = True
-        Me.lblOutput.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblOutput.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOutput.ForeColor = System.Drawing.Color.White
+        Me.lblOutput.ForeColor = System.Drawing.Color.Black
         Me.lblOutput.Location = New System.Drawing.Point(40, 712)
         Me.lblOutput.Name = "lblOutput"
         Me.lblOutput.Size = New System.Drawing.Size(55, 16)
@@ -285,25 +285,25 @@ Partial Class frmMain
         '
         'tbSamePrefix
         '
-        Me.tbSamePrefix.BackColor = System.Drawing.SystemColors.WindowFrame
-        Me.tbSamePrefix.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tbSamePrefix.BackColor = System.Drawing.Color.DarkGray
+        Me.tbSamePrefix.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.tbSamePrefix.Enabled = False
-        Me.tbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbSamePrefix.ForeColor = System.Drawing.Color.White
+        Me.tbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbSamePrefix.ForeColor = System.Drawing.Color.Black
         Me.tbSamePrefix.Location = New System.Drawing.Point(42, 612)
         Me.tbSamePrefix.Name = "tbSamePrefix"
-        Me.tbSamePrefix.Size = New System.Drawing.Size(258, 22)
+        Me.tbSamePrefix.Size = New System.Drawing.Size(258, 19)
         Me.tbSamePrefix.TabIndex = 75
         Me.tbSamePrefix.Text = "minecraft"
         '
         'cbSamePrefix
         '
         Me.cbSamePrefix.AutoSize = True
-        Me.cbSamePrefix.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbSamePrefix.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbSamePrefix.Checked = True
         Me.cbSamePrefix.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSamePrefix.ForeColor = System.Drawing.Color.White
+        Me.cbSamePrefix.ForeColor = System.Drawing.Color.Black
         Me.cbSamePrefix.Location = New System.Drawing.Point(42, 586)
         Me.cbSamePrefix.Name = "cbSamePrefix"
         Me.cbSamePrefix.Size = New System.Drawing.Size(214, 20)
@@ -314,10 +314,10 @@ Partial Class frmMain
         'rbtnCommandBlock
         '
         Me.rbtnCommandBlock.AutoSize = True
-        Me.rbtnCommandBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.rbtnCommandBlock.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.rbtnCommandBlock.Enabled = False
         Me.rbtnCommandBlock.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnCommandBlock.ForeColor = System.Drawing.Color.White
+        Me.rbtnCommandBlock.ForeColor = System.Drawing.Color.Black
         Me.rbtnCommandBlock.Location = New System.Drawing.Point(503, 432)
         Me.rbtnCommandBlock.Name = "rbtnCommandBlock"
         Me.rbtnCommandBlock.Size = New System.Drawing.Size(124, 20)
@@ -329,10 +329,10 @@ Partial Class frmMain
         'rbtnOtherItem
         '
         Me.rbtnOtherItem.AutoSize = True
-        Me.rbtnOtherItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.rbtnOtherItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.rbtnOtherItem.Enabled = False
         Me.rbtnOtherItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnOtherItem.ForeColor = System.Drawing.Color.White
+        Me.rbtnOtherItem.ForeColor = System.Drawing.Color.Black
         Me.rbtnOtherItem.Location = New System.Drawing.Point(503, 453)
         Me.rbtnOtherItem.Name = "rbtnOtherItem"
         Me.rbtnOtherItem.Size = New System.Drawing.Size(169, 20)
@@ -344,10 +344,10 @@ Partial Class frmMain
         'rbtnSpawnEgg
         '
         Me.rbtnSpawnEgg.AutoSize = True
-        Me.rbtnSpawnEgg.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.rbtnSpawnEgg.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.rbtnSpawnEgg.Enabled = False
         Me.rbtnSpawnEgg.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtnSpawnEgg.ForeColor = System.Drawing.Color.White
+        Me.rbtnSpawnEgg.ForeColor = System.Drawing.Color.Black
         Me.rbtnSpawnEgg.Location = New System.Drawing.Point(503, 411)
         Me.rbtnSpawnEgg.Name = "rbtnSpawnEgg"
         Me.rbtnSpawnEgg.Size = New System.Drawing.Size(94, 20)
@@ -359,9 +359,9 @@ Partial Class frmMain
         'cbSplashPotion
         '
         Me.cbSplashPotion.AutoSize = True
-        Me.cbSplashPotion.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbSplashPotion.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbSplashPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSplashPotion.ForeColor = System.Drawing.Color.White
+        Me.cbSplashPotion.ForeColor = System.Drawing.Color.Black
         Me.cbSplashPotion.Location = New System.Drawing.Point(326, 489)
         Me.cbSplashPotion.Name = "cbSplashPotion"
         Me.cbSplashPotion.Size = New System.Drawing.Size(109, 20)
@@ -372,9 +372,9 @@ Partial Class frmMain
         'cbLingeringPotion
         '
         Me.cbLingeringPotion.AutoSize = True
-        Me.cbLingeringPotion.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbLingeringPotion.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbLingeringPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbLingeringPotion.ForeColor = System.Drawing.Color.White
+        Me.cbLingeringPotion.ForeColor = System.Drawing.Color.Black
         Me.cbLingeringPotion.Location = New System.Drawing.Point(326, 463)
         Me.cbLingeringPotion.Name = "cbLingeringPotion"
         Me.cbLingeringPotion.Size = New System.Drawing.Size(122, 20)
@@ -385,9 +385,9 @@ Partial Class frmMain
         'cbTippedArrow
         '
         Me.cbTippedArrow.AutoSize = True
-        Me.cbTippedArrow.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbTippedArrow.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbTippedArrow.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbTippedArrow.ForeColor = System.Drawing.Color.White
+        Me.cbTippedArrow.ForeColor = System.Drawing.Color.Black
         Me.cbTippedArrow.Location = New System.Drawing.Point(326, 515)
         Me.cbTippedArrow.Name = "cbTippedArrow"
         Me.cbTippedArrow.Size = New System.Drawing.Size(107, 20)
@@ -398,9 +398,9 @@ Partial Class frmMain
         'cbSuspiciousStew
         '
         Me.cbSuspiciousStew.AutoSize = True
-        Me.cbSuspiciousStew.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbSuspiciousStew.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbSuspiciousStew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbSuspiciousStew.ForeColor = System.Drawing.Color.White
+        Me.cbSuspiciousStew.ForeColor = System.Drawing.Color.Black
         Me.cbSuspiciousStew.Location = New System.Drawing.Point(326, 541)
         Me.cbSuspiciousStew.Name = "cbSuspiciousStew"
         Me.cbSuspiciousStew.Size = New System.Drawing.Size(124, 20)
@@ -411,9 +411,9 @@ Partial Class frmMain
         'cbPotion
         '
         Me.cbPotion.AutoSize = True
-        Me.cbPotion.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbPotion.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbPotion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbPotion.ForeColor = System.Drawing.Color.White
+        Me.cbPotion.ForeColor = System.Drawing.Color.Black
         Me.cbPotion.Location = New System.Drawing.Point(326, 437)
         Me.cbPotion.Name = "cbPotion"
         Me.cbPotion.Size = New System.Drawing.Size(64, 20)
@@ -424,9 +424,9 @@ Partial Class frmMain
         'cbEnchantedBook
         '
         Me.cbEnchantedBook.AutoSize = True
-        Me.cbEnchantedBook.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbEnchantedBook.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbEnchantedBook.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbEnchantedBook.ForeColor = System.Drawing.Color.White
+        Me.cbEnchantedBook.ForeColor = System.Drawing.Color.Black
         Me.cbEnchantedBook.Location = New System.Drawing.Point(326, 411)
         Me.cbEnchantedBook.Name = "cbEnchantedBook"
         Me.cbEnchantedBook.Size = New System.Drawing.Size(125, 20)
@@ -437,9 +437,9 @@ Partial Class frmMain
         'cbCreativeOnly
         '
         Me.cbCreativeOnly.AutoSize = True
-        Me.cbCreativeOnly.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbCreativeOnly.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbCreativeOnly.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCreativeOnly.ForeColor = System.Drawing.Color.White
+        Me.cbCreativeOnly.ForeColor = System.Drawing.Color.Black
         Me.cbCreativeOnly.Location = New System.Drawing.Point(490, 385)
         Me.cbCreativeOnly.Name = "cbCreativeOnly"
         Me.cbCreativeOnly.Size = New System.Drawing.Size(107, 20)
@@ -450,9 +450,9 @@ Partial Class frmMain
         'lblAddNewItems
         '
         Me.lblAddNewItems.AutoSize = True
-        Me.lblAddNewItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblAddNewItems.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblAddNewItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAddNewItems.ForeColor = System.Drawing.Color.White
+        Me.lblAddNewItems.ForeColor = System.Drawing.Color.Black
         Me.lblAddNewItems.Location = New System.Drawing.Point(39, 345)
         Me.lblAddNewItems.Name = "lblAddNewItems"
         Me.lblAddNewItems.Size = New System.Drawing.Size(261, 16)
@@ -461,10 +461,10 @@ Partial Class frmMain
         '
         'gbItemID
         '
-        Me.gbItemID.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.gbItemID.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.gbItemID.Controls.Add(Me.rtbItem)
         Me.gbItemID.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gbItemID.ForeColor = System.Drawing.Color.White
+        Me.gbItemID.ForeColor = System.Drawing.Color.Black
         Me.gbItemID.Location = New System.Drawing.Point(41, 373)
         Me.gbItemID.Name = "gbItemID"
         Me.gbItemID.Size = New System.Drawing.Size(259, 140)
@@ -477,10 +477,10 @@ Partial Class frmMain
         Me.rtbItem.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.rtbItem.BackColor = System.Drawing.SystemColors.WindowFrame
+        Me.rtbItem.BackColor = System.Drawing.Color.DarkGray
         Me.rtbItem.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.rtbItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rtbItem.ForeColor = System.Drawing.Color.White
+        Me.rtbItem.ForeColor = System.Drawing.Color.Black
         Me.rtbItem.Location = New System.Drawing.Point(6, 18)
         Me.rtbItem.Name = "rtbItem"
         Me.rtbItem.Size = New System.Drawing.Size(247, 116)
@@ -490,9 +490,9 @@ Partial Class frmMain
         'cbCustomNBT
         '
         Me.cbCustomNBT.AutoSize = True
-        Me.cbCustomNBT.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.cbCustomNBT.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCustomNBT.ForeColor = System.Drawing.Color.White
+        Me.cbCustomNBT.ForeColor = System.Drawing.Color.Black
         Me.cbCustomNBT.Location = New System.Drawing.Point(42, 532)
         Me.cbCustomNBT.Name = "cbCustomNBT"
         Me.cbCustomNBT.Size = New System.Drawing.Size(82, 20)
@@ -502,14 +502,14 @@ Partial Class frmMain
         '
         'tbCustomNBT
         '
-        Me.tbCustomNBT.BackColor = System.Drawing.SystemColors.WindowFrame
-        Me.tbCustomNBT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tbCustomNBT.BackColor = System.Drawing.Color.DarkGray
+        Me.tbCustomNBT.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.tbCustomNBT.Enabled = False
-        Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbCustomNBT.ForeColor = System.Drawing.Color.White
+        Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbCustomNBT.ForeColor = System.Drawing.Color.Black
         Me.tbCustomNBT.Location = New System.Drawing.Point(42, 558)
         Me.tbCustomNBT.Name = "tbCustomNBT"
-        Me.tbCustomNBT.Size = New System.Drawing.Size(258, 22)
+        Me.tbCustomNBT.Size = New System.Drawing.Size(258, 19)
         Me.tbCustomNBT.TabIndex = 78
         '
         'fbdMainFolderPath
@@ -647,7 +647,7 @@ Partial Class frmMain
         'lblBoxSelectDatapackHeader
         '
         Me.lblBoxSelectDatapackHeader.AutoSize = True
-        Me.lblBoxSelectDatapackHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(195, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(195, Byte), Integer))
+        Me.lblBoxSelectDatapackHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
         Me.lblBoxSelectDatapackHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBoxSelectDatapackHeader.ForeColor = System.Drawing.Color.Black
         Me.lblBoxSelectDatapackHeader.Location = New System.Drawing.Point(64, 105)
@@ -659,7 +659,7 @@ Partial Class frmMain
         'lblBoxAddItemHeader
         '
         Me.lblBoxAddItemHeader.AutoSize = True
-        Me.lblBoxAddItemHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(195, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(195, Byte), Integer))
+        Me.lblBoxAddItemHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(227, Byte), Integer))
         Me.lblBoxAddItemHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBoxAddItemHeader.ForeColor = System.Drawing.Color.Black
         Me.lblBoxAddItemHeader.Location = New System.Drawing.Point(64, 304)
@@ -676,43 +676,12 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         '
-        'DuplicateFinderToolStripMenuItem
-        '
-        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
-        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgDuplicateFinder
-        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
-        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
-        '
-        'ItemListImporterToolStripMenuItem
-        '
-        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgItemListImporter
-        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
-        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
-        '
         'cmsHamburgerButton
         '
         Me.cmsHamburgerButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EinstellungenToolStripMenuItem, Me.OutputToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.cmsHamburgerButton.Name = "cmsHamburgerButton"
         Me.cmsHamburgerButton.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.cmsHamburgerButton.Size = New System.Drawing.Size(134, 108)
-        '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgSettings
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.EinstellungenToolStripMenuItem.Text = "Settings"
-        '
-        'OutputToolStripMenuItem
-        '
-        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgOutput
-        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.OutputToolStripMenuItem.Text = "Output"
         '
         'HelpToolStripMenuItem
         '
@@ -722,26 +691,18 @@ Partial Class frmMain
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.HelpToolStripMenuItem.Text = "Help"
         '
-        'DocumentaryToolStripMenuItem
+        'cbPainting
         '
-        Me.DocumentaryToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgHelp
-        Me.DocumentaryToolStripMenuItem.Name = "DocumentaryToolStripMenuItem"
-        Me.DocumentaryToolStripMenuItem.Size = New System.Drawing.Size(174, 26)
-        Me.DocumentaryToolStripMenuItem.Text = "Documentary"
-        '
-        'ChangelogToolStripMenuItem
-        '
-        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgUpdate
-        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(174, 26)
-        Me.ChangelogToolStripMenuItem.Text = "Changelog"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgAbout
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(174, 26)
-        Me.AboutToolStripMenuItem1.Text = "About"
+        Me.cbPainting.AutoSize = True
+        Me.cbPainting.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
+        Me.cbPainting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPainting.ForeColor = System.Drawing.Color.Black
+        Me.cbPainting.Location = New System.Drawing.Point(326, 591)
+        Me.cbPainting.Name = "cbPainting"
+        Me.cbPainting.Size = New System.Drawing.Size(74, 20)
+        Me.cbPainting.TabIndex = 99
+        Me.cbPainting.Text = "Painting"
+        Me.cbPainting.UseVisualStyleBackColor = False
         '
         'btnAddItem
         '
@@ -798,12 +759,12 @@ Partial Class frmMain
         '
         'btnDeleteSelectedScheme
         '
-        Me.btnDeleteSelectedScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnDeleteSelectedScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.btnDeleteSelectedScheme.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnDeleteSelectedScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnDeleteSelectedScheme.FlatAppearance.BorderSize = 0
-        Me.btnDeleteSelectedScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnDeleteSelectedScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnDeleteSelectedScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnDeleteSelectedScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
         Me.btnDeleteSelectedScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeleteSelectedScheme.ForeColor = System.Drawing.Color.Black
@@ -816,12 +777,12 @@ Partial Class frmMain
         '
         'btnLoadProfile
         '
-        Me.btnLoadProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnLoadProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.btnLoadProfile.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnLoadProfile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnLoadProfile.FlatAppearance.BorderSize = 0
-        Me.btnLoadProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnLoadProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnLoadProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnLoadProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
         Me.btnLoadProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLoadProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLoadProfile.ForeColor = System.Drawing.Color.Black
@@ -834,12 +795,12 @@ Partial Class frmMain
         '
         'btnOverwriteSelectedScheme
         '
-        Me.btnOverwriteSelectedScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnOverwriteSelectedScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.btnOverwriteSelectedScheme.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnOverwriteSelectedScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOverwriteSelectedScheme.FlatAppearance.BorderSize = 0
-        Me.btnOverwriteSelectedScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnOverwriteSelectedScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnOverwriteSelectedScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnOverwriteSelectedScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
         Me.btnOverwriteSelectedScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOverwriteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOverwriteSelectedScheme.ForeColor = System.Drawing.Color.Black
@@ -852,12 +813,12 @@ Partial Class frmMain
         '
         'btnSaveProfile
         '
-        Me.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnSaveProfile.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.btnSaveProfile.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnSaveProfile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSaveProfile.FlatAppearance.BorderSize = 0
-        Me.btnSaveProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnSaveProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnSaveProfile.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnSaveProfile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
         Me.btnSaveProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveProfile.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveProfile.ForeColor = System.Drawing.Color.Black
@@ -870,12 +831,12 @@ Partial Class frmMain
         '
         'btnSaveAsNewScheme
         '
-        Me.btnSaveAsNewScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnSaveAsNewScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.btnSaveAsNewScheme.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnSaveAsNewScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSaveAsNewScheme.FlatAppearance.BorderSize = 0
-        Me.btnSaveAsNewScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnSaveAsNewScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnSaveAsNewScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnSaveAsNewScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
         Me.btnSaveAsNewScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveAsNewScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveAsNewScheme.ForeColor = System.Drawing.Color.Black
@@ -888,12 +849,12 @@ Partial Class frmMain
         '
         'btnBrowseDatapackPath
         '
-        Me.btnBrowseDatapackPath.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnBrowseDatapackPath.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.btnBrowseDatapackPath.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgButtonLight
         Me.btnBrowseDatapackPath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnBrowseDatapackPath.FlatAppearance.BorderSize = 0
-        Me.btnBrowseDatapackPath.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnBrowseDatapackPath.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnBrowseDatapackPath.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnBrowseDatapackPath.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
         Me.btnBrowseDatapackPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBrowseDatapackPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBrowseDatapackPath.ForeColor = System.Drawing.Color.Black
@@ -906,7 +867,8 @@ Partial Class frmMain
         '
         'pbSelectDatapack
         '
-        Me.pbSelectDatapack.BackgroundImage = CType(resources.GetObject("pbSelectDatapack.BackgroundImage"), System.Drawing.Image)
+        Me.pbSelectDatapack.BackColor = System.Drawing.Color.Transparent
+        Me.pbSelectDatapack.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgBackgroundPathLight
         Me.pbSelectDatapack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pbSelectDatapack.Location = New System.Drawing.Point(12, 103)
         Me.pbSelectDatapack.Name = "pbSelectDatapack"
@@ -918,13 +880,66 @@ Partial Class frmMain
         '
         Me.pbAddItem.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pbAddItem.BackgroundImage = CType(resources.GetObject("pbAddItem.BackgroundImage"), System.Drawing.Image)
+        Me.pbAddItem.BackColor = System.Drawing.Color.Transparent
+        Me.pbAddItem.BackgroundImage = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgBackgroundItemLight
         Me.pbAddItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.pbAddItem.Location = New System.Drawing.Point(12, 303)
         Me.pbAddItem.Name = "pbAddItem"
         Me.pbAddItem.Size = New System.Drawing.Size(696, 461)
         Me.pbAddItem.TabIndex = 93
         Me.pbAddItem.TabStop = False
+        '
+        'DuplicateFinderToolStripMenuItem
+        '
+        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
+        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgDuplicateFinder
+        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
+        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
+        '
+        'ItemListImporterToolStripMenuItem
+        '
+        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgItemListImporter
+        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
+        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
+        '
+        'EinstellungenToolStripMenuItem
+        '
+        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgSettings
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.EinstellungenToolStripMenuItem.Text = "Settings"
+        '
+        'OutputToolStripMenuItem
+        '
+        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgOutput
+        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.OutputToolStripMenuItem.Text = "Output"
+        '
+        'DocumentaryToolStripMenuItem
+        '
+        Me.DocumentaryToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgHelp
+        Me.DocumentaryToolStripMenuItem.Name = "DocumentaryToolStripMenuItem"
+        Me.DocumentaryToolStripMenuItem.Size = New System.Drawing.Size(174, 26)
+        Me.DocumentaryToolStripMenuItem.Text = "Documentary"
+        '
+        'ChangelogToolStripMenuItem
+        '
+        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgUpdate
+        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(174, 26)
+        Me.ChangelogToolStripMenuItem.Text = "Changelog"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater.My.Resources.Resources.imgAbout
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(174, 26)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'DToolStripMenuItem
         '
@@ -939,19 +954,6 @@ Partial Class frmMain
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'cbPainting
-        '
-        Me.cbPainting.AutoSize = True
-        Me.cbPainting.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.cbPainting.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbPainting.ForeColor = System.Drawing.Color.White
-        Me.cbPainting.Location = New System.Drawing.Point(326, 591)
-        Me.cbPainting.Name = "cbPainting"
-        Me.cbPainting.Size = New System.Drawing.Size(74, 20)
-        Me.cbPainting.TabIndex = 99
-        Me.cbPainting.Text = "Painting"
-        Me.cbPainting.UseVisualStyleBackColor = False
         '
         'frmMain
         '
@@ -1024,7 +1026,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater BETA 0.5.0 Dev"
+        Me.Text = "Random Item Giver Updater BETA 0.5.0"
         Me.gbItemID.ResumeLayout(False)
         Me.cmsHamburgerButton.ResumeLayout(False)
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).EndInit()

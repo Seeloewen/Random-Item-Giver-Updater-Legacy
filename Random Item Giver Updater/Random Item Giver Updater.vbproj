@@ -248,6 +248,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <None Include="Resources\imgBackgroundPathLight.png" />
+    <None Include="Resources\imgBackgroundItemLight.png" />
     <None Include="Resources\imgButtonLight.png" />
     <None Include="Resources\imgButtonHoverLight.png" />
     <None Include="Resources\imgButtonClickLight.png" />

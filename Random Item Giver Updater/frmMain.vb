@@ -91,14 +91,25 @@ Public Class frmMain
         Next
 
         'Set appearance of buttons depending on selected design
-        For Each ctrl As Control In Controls.OfType(Of Button)
-            If Not ctrl.Equals(btnHamburger) Then
+        For Each btn As Button In Controls.OfType(Of Button)
+            If Not btn.Equals(btnHamburger) Then
                 If My.Settings.Design = "Dark" Then
-                    ctrl.ForeColor = Color.White
-                    ctrl.BackgroundImage = My.Resources.imgButton
+                    btn.ForeColor = Color.White
+                    btn.BackgroundImage = My.Resources.imgButton
                 ElseIf My.Settings.Design = "Light" Then
-                    ctrl.ForeColor = Color.Black
-                    ctrl.BackgroundImage = My.Resources.imgButtonLight
+                    btn.ForeColor = Color.Black
+                    btn.BackgroundImage = My.Resources.imgButtonLight
+                End If
+            End If
+            If (Not btn.Equals(btnHamburger)) And (Not btn.Equals(btnAddItem)) Then
+                If My.Settings.Design = "Light" Then
+                    btn.BackColor = Color.FromArgb(207, 207, 207)
+                    btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(207, 207, 207)
+                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(207, 207, 207)
+                ElseIf My.Settings.Design = "Dark" Then
+                    btn.BackColor = Color.FromArgb(127, 127, 127)
+                    btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(127, 127, 127)
+                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 127, 127)
                 End If
             End If
         Next
@@ -687,6 +698,72 @@ Public Class frmMain
             cmsHamburgerButton.BackColor = Color.DimGray
             cmsHamburgerButton.ForeColor = Color.White
             DuplicateFinderToolStripMenuItem.BackColor = Color.DimGray
+            pbSelectDatapack.BackgroundImage = My.Resources.imgBackgroundPath
+            lblBoxSelectDatapackHeader.BackColor = Color.FromArgb(195, 195, 195)
+            lblSelectDatapack.ForeColor = Color.White
+            lblSelectDatapack.BackColor = Color.FromArgb(127, 127, 127)
+            tbDatapackPath.ForeColor = Color.White
+            tbDatapackPath.BackColor = Color.FromArgb(100, 100, 100)
+            lblDatapackDetection.ForeColor = Color.White
+            lblDatapackDetection.BackColor = Color.FromArgb(127, 127, 127)
+            lblVersion.ForeColor = Color.White
+            lblVersion.BackColor = Color.FromArgb(127, 127, 127)
+            cbxVersion.ForeColor = Color.White
+            cbxVersion.BackColor = Color.FromArgb(105, 105, 105)
+            pbAddItem.BackgroundImage = My.Resources.imgBackgroundItem
+            lblBoxAddItemHeader.BackColor = Color.FromArgb(195, 195, 195)
+            lblAddNewItems.ForeColor = Color.White
+            lblAddNewItems.BackColor = Color.FromArgb(127, 127, 127)
+            lblScheme.ForeColor = Color.White
+            lblScheme.BackColor = Color.FromArgb(127, 127, 127)
+            cbxScheme.ForeColor = Color.White
+            cbxScheme.BackColor = Color.FromArgb(105, 105, 105)
+            gbItemID.ForeColor = Color.White
+            gbItemID.BackColor = Color.FromArgb(127, 127, 127)
+            cbCustomNBT.ForeColor = Color.White
+            cbCustomNBT.BackColor = Color.FromArgb(127, 127, 127)
+            tbCustomNBT.ForeColor = Color.White
+            tbCustomNBT.BackColor = Color.FromArgb(100, 100, 100)
+            cbSamePrefix.ForeColor = Color.White
+            cbSamePrefix.BackColor = Color.FromArgb(127, 127, 127)
+            tbSamePrefix.ForeColor = Color.White
+            tbSamePrefix.BackColor = Color.FromArgb(100, 100, 100)
+            cbEnableAdvancedView.ForeColor = Color.White
+            cbEnableAdvancedView.BackColor = Color.FromArgb(127, 127, 127)
+            cbAddItemsFast.ForeColor = Color.White
+            cbAddItemsFast.BackColor = Color.FromArgb(127, 127, 127)
+            lblOutput.ForeColor = Color.White
+            lblOutput.BackColor = Color.FromArgb(127, 127, 127)
+            rtbItem.ForeColor = Color.White
+            rtbItem.BackColor = Color.FromArgb(100, 100, 100)
+            tbSmallOutput.ForeColor = Color.White
+            tbSmallOutput.BackColor = Color.FromArgb(100, 100, 100)
+            cbNormalItem.ForeColor = Color.White
+            cbNormalItem.BackColor = Color.FromArgb(127, 127, 127)
+            cbEnchantedBook.ForeColor = Color.White
+            cbEnchantedBook.BackColor = Color.FromArgb(127, 127, 127)
+            cbPotion.ForeColor = Color.White
+            cbPotion.BackColor = Color.FromArgb(127, 127, 127)
+            cbLingeringPotion.ForeColor = Color.White
+            cbLingeringPotion.BackColor = Color.FromArgb(127, 127, 127)
+            cbSplashPotion.ForeColor = Color.White
+            cbSplashPotion.BackColor = Color.FromArgb(127, 127, 127)
+            cbTippedArrow.ForeColor = Color.White
+            cbTippedArrow.BackColor = Color.FromArgb(127, 127, 127)
+            cbSuspiciousStew.ForeColor = Color.White
+            cbSuspiciousStew.BackColor = Color.FromArgb(127, 127, 127)
+            cbGoatHorn.ForeColor = Color.White
+            cbGoatHorn.BackColor = Color.FromArgb(127, 127, 127)
+            cbPainting.ForeColor = Color.White
+            cbPainting.BackColor = Color.FromArgb(127, 127, 127)
+            cbCreativeOnly.ForeColor = Color.White
+            cbCreativeOnly.BackColor = Color.FromArgb(127, 127, 127)
+            rbtnSpawnEgg.ForeColor = Color.White
+            rbtnSpawnEgg.BackColor = Color.FromArgb(127, 127, 127)
+            rbtnCommandBlock.ForeColor = Color.White
+            rbtnCommandBlock.BackColor = Color.FromArgb(127, 127, 127)
+            rbtnOtherItem.ForeColor = Color.White
+            rbtnOtherItem.BackColor = Color.FromArgb(127, 127, 127)
         End If
     End Sub
 
