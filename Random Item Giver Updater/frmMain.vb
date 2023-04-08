@@ -358,6 +358,8 @@ Public Class frmMain
             cbCustomNBT.Enabled = False
             cbCustomNBT.Checked = False
             tbCustomNBT.Enabled = False
+            cbPainting.Enabled = False
+            cbPainting.Enabled = False
             MsgBox("This setting speeds up the process of adding items, narrowing it down to only a few seconds in most cases." + vbNewLine + "This is recommended if you need to add 100+ Items." + vbNewLine + vbNewLine + "Please note that if you enable this option, the items will only be added to the main loot table. This means that you won't be able to use the item settings in the datapack afterwards.", MsgBoxStyle.Information, "Enable Fast Item Adding")
         Else
             AddItemsFast = False
@@ -375,10 +377,29 @@ Public Class frmMain
             cbLingeringPotion.Checked = False
             cbTippedArrow.Enabled = True
             cbTippedArrow.Checked = False
-            cbGoatHorn.Enabled = True
-            cbGoatHorn.Checked = False
             cbCustomNBT.Enabled = True
             cbCustomNBT.Checked = False
+            If cbAddItemsFast.Checked = False Then
+                If datapackVersion = "Version 1.20" Then
+                    cbPainting.Enabled = True
+                    cbGoatHorn.Enabled = True
+                ElseIf datapackVersion = "Version 1.19.4" Then
+                    cbPainting.Enabled = True
+                    cbGoatHorn.Enabled = True
+                ElseIf datapackVersion = "Version 1.19 - 1.19.3" Then
+                    cbPainting.Enabled = False
+                    cbGoatHorn.Enabled = True
+                ElseIf datapackVersion = "Version 1.18 - 1.18.2" Then
+                    cbPainting.Enabled = False
+                    cbGoatHorn.Enabled = False
+                ElseIf datapackVersion = "Version 1.17 - 1.17.1" Then
+                    cbPainting.Enabled = False
+                    cbGoatHorn.Enabled = False
+                ElseIf datapackVersion = "Version 1.16.2 - 1.16.5" Then
+                    cbPainting.Enabled = False
+                    cbGoatHorn.Enabled = False
+                End If
+            End If
         End If
     End Sub
 
@@ -491,24 +512,26 @@ Public Class frmMain
         DatapackVersion = cbxVersion.SelectedItem
 
         'Toggle certain checkboxes depending on selected version
-        If datapackVersion = "Version 1.20" Then
-            cbPainting.Enabled = True
-            cbGoatHorn.Enabled = True
-        ElseIf datapackVersion = "Version 1.19.4" Then
-            cbPainting.Enabled = True
-            cbGoatHorn.Enabled = True
-        ElseIf datapackVersion = "Version 1.19 - 1.19.3" Then
-            cbPainting.Enabled = False
-            cbGoatHorn.Enabled = True
-        ElseIf datapackVersion = "Version 1.18 - 1.18.2" Then
-            cbPainting.Enabled = False
-            cbGoatHorn.Enabled = False
-        ElseIf datapackVersion = "Version 1.17 - 1.17.1" Then
-            cbPainting.Enabled = False
-            cbGoatHorn.Enabled = False
-        ElseIf datapackVersion = "Version 1.16.2 - 1.16.5" Then
-            cbPainting.Enabled = False
-            cbGoatHorn.Enabled = False
+        If cbAddItemsFast.Checked = False Then
+            If datapackVersion = "Version 1.20" Then
+                cbPainting.Enabled = True
+                cbGoatHorn.Enabled = True
+            ElseIf datapackVersion = "Version 1.19.4" Then
+                cbPainting.Enabled = True
+                cbGoatHorn.Enabled = True
+            ElseIf datapackVersion = "Version 1.19 - 1.19.3" Then
+                cbPainting.Enabled = False
+                cbGoatHorn.Enabled = True
+            ElseIf datapackVersion = "Version 1.18 - 1.18.2" Then
+                cbPainting.Enabled = False
+                cbGoatHorn.Enabled = False
+            ElseIf datapackVersion = "Version 1.17 - 1.17.1" Then
+                cbPainting.Enabled = False
+                cbGoatHorn.Enabled = False
+            ElseIf datapackVersion = "Version 1.16.2 - 1.16.5" Then
+                cbPainting.Enabled = False
+                cbGoatHorn.Enabled = False
+            End If
         End If
     End Sub
 
