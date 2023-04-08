@@ -47,7 +47,7 @@ Partial Class frmHelp
         Me.pbAddItemsBasic = New System.Windows.Forms.PictureBox()
         Me.tpAddingItemsAdvanced = New System.Windows.Forms.TabPage()
         Me.lblLastEditedAddingItemsAdvanced = New System.Windows.Forms.Label()
-        Me.SelectItemTypeAdvanced = New System.Windows.Forms.Label()
+        Me.lblSelectItemTypeAdvanced = New System.Windows.Forms.Label()
         Me.lblAddItemsToDatapackAdvanced = New System.Windows.Forms.Label()
         Me.lblSpecifyPrefixAndNBTTagAdvanced = New System.Windows.Forms.Label()
         Me.llblHowToFindItemIDAdvanced = New System.Windows.Forms.LinkLabel()
@@ -110,10 +110,10 @@ Partial Class frmHelp
         Me.tcHelp.Controls.Add(Me.tpProfilesAndSchemes)
         Me.tcHelp.Controls.Add(Me.tpOther)
         Me.tcHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tcHelp.Location = New System.Drawing.Point(-11, 3)
+        Me.tcHelp.Location = New System.Drawing.Point(-6, 6)
         Me.tcHelp.Name = "tcHelp"
         Me.tcHelp.SelectedIndex = 0
-        Me.tcHelp.Size = New System.Drawing.Size(1118, 932)
+        Me.tcHelp.Size = New System.Drawing.Size(1118, 928)
         Me.tcHelp.TabIndex = 0
         '
         'tpIntroduction
@@ -125,7 +125,7 @@ Partial Class frmHelp
         Me.tpIntroduction.Location = New System.Drawing.Point(4, 25)
         Me.tpIntroduction.Name = "tpIntroduction"
         Me.tpIntroduction.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpIntroduction.Size = New System.Drawing.Size(1110, 903)
+        Me.tpIntroduction.Size = New System.Drawing.Size(1110, 899)
         Me.tpIntroduction.TabIndex = 0
         Me.tpIntroduction.Text = "Introduction"
         '
@@ -134,7 +134,7 @@ Partial Class frmHelp
         Me.llblDiscord.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.llblDiscord.AutoSize = True
         Me.llblDiscord.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblDiscord.Location = New System.Drawing.Point(13, 862)
+        Me.llblDiscord.Location = New System.Drawing.Point(13, 858)
         Me.llblDiscord.Name = "llblDiscord"
         Me.llblDiscord.Size = New System.Drawing.Size(237, 20)
         Me.llblDiscord.TabIndex = 5
@@ -146,7 +146,7 @@ Partial Class frmHelp
         Me.lblLastEditedIntroduction.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblLastEditedIntroduction.AutoSize = True
         Me.lblLastEditedIntroduction.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLastEditedIntroduction.Location = New System.Drawing.Point(928, 870)
+        Me.lblLastEditedIntroduction.Location = New System.Drawing.Point(928, 866)
         Me.lblLastEditedIntroduction.Name = "lblLastEditedIntroduction"
         Me.lblLastEditedIntroduction.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedIntroduction.TabIndex = 4
@@ -171,7 +171,7 @@ Partial Class frmHelp
         Me.tpSimpleOverview.Controls.Add(Me.lblSimpleOverview)
         Me.tpSimpleOverview.Location = New System.Drawing.Point(4, 25)
         Me.tpSimpleOverview.Name = "tpSimpleOverview"
-        Me.tpSimpleOverview.Size = New System.Drawing.Size(1110, 903)
+        Me.tpSimpleOverview.Size = New System.Drawing.Size(1110, 899)
         Me.tpSimpleOverview.TabIndex = 4
         Me.tpSimpleOverview.Text = "Simple Overview"
         '
@@ -180,7 +180,7 @@ Partial Class frmHelp
         Me.lblLastEditedSimpleOverview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblLastEditedSimpleOverview.AutoSize = True
         Me.lblLastEditedSimpleOverview.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLastEditedSimpleOverview.Location = New System.Drawing.Point(920, 870)
+        Me.lblLastEditedSimpleOverview.Location = New System.Drawing.Point(920, 866)
         Me.lblLastEditedSimpleOverview.Name = "lblLastEditedSimpleOverview"
         Me.lblLastEditedSimpleOverview.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedSimpleOverview.TabIndex = 3
@@ -191,7 +191,7 @@ Partial Class frmHelp
         Me.llblRIGPMC.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.llblRIGPMC.AutoSize = True
         Me.llblRIGPMC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblRIGPMC.Location = New System.Drawing.Point(14, 845)
+        Me.llblRIGPMC.Location = New System.Drawing.Point(14, 841)
         Me.llblRIGPMC.Name = "llblRIGPMC"
         Me.llblRIGPMC.Size = New System.Drawing.Size(361, 20)
         Me.llblRIGPMC.TabIndex = 2
@@ -203,7 +203,7 @@ Partial Class frmHelp
         Me.llblRIGGithub.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.llblRIGGithub.AutoSize = True
         Me.llblRIGGithub.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblRIGGithub.Location = New System.Drawing.Point(14, 870)
+        Me.llblRIGGithub.Location = New System.Drawing.Point(14, 866)
         Me.llblRIGGithub.Name = "llblRIGGithub"
         Me.llblRIGGithub.Size = New System.Drawing.Size(297, 20)
         Me.llblRIGGithub.TabIndex = 1
@@ -238,7 +238,7 @@ Partial Class frmHelp
         Me.tpAddingItemsBasic.Location = New System.Drawing.Point(4, 25)
         Me.tpAddingItemsBasic.Name = "tpAddingItemsBasic"
         Me.tpAddingItemsBasic.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpAddingItemsBasic.Size = New System.Drawing.Size(1110, 903)
+        Me.tpAddingItemsBasic.Size = New System.Drawing.Size(1110, 899)
         Me.tpAddingItemsBasic.TabIndex = 1
         Me.tpAddingItemsBasic.Text = "Adding Items (Basic)"
         '
@@ -251,14 +251,14 @@ Partial Class frmHelp
         Me.lblLastEditedAddItemsBasic.Name = "lblLastEditedAddItemsBasic"
         Me.lblLastEditedAddItemsBasic.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedAddItemsBasic.TabIndex = 31
-        Me.lblLastEditedAddItemsBasic.Text = "Last edited: 25.02.2023"
+        Me.lblLastEditedAddItemsBasic.Text = "Last edited: 08.04.2023"
         '
         'lblSelectDatapackVersionBasic
         '
         Me.lblSelectDatapackVersionBasic.AutoSize = True
-        Me.lblSelectDatapackVersionBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblSelectDatapackVersionBasic.BackColor = System.Drawing.Color.DarkGray
         Me.lblSelectDatapackVersionBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectDatapackVersionBasic.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSelectDatapackVersionBasic.ForeColor = System.Drawing.Color.Blue
         Me.lblSelectDatapackVersionBasic.Location = New System.Drawing.Point(342, 203)
         Me.lblSelectDatapackVersionBasic.Name = "lblSelectDatapackVersionBasic"
         Me.lblSelectDatapackVersionBasic.Size = New System.Drawing.Size(185, 20)
@@ -268,9 +268,9 @@ Partial Class frmHelp
         'lblSelectDatapackFolderBasic
         '
         Me.lblSelectDatapackFolderBasic.AutoSize = True
-        Me.lblSelectDatapackFolderBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblSelectDatapackFolderBasic.BackColor = System.Drawing.Color.DarkGray
         Me.lblSelectDatapackFolderBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectDatapackFolderBasic.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSelectDatapackFolderBasic.ForeColor = System.Drawing.Color.Blue
         Me.lblSelectDatapackFolderBasic.Location = New System.Drawing.Point(385, 151)
         Me.lblSelectDatapackFolderBasic.Name = "lblSelectDatapackFolderBasic"
         Me.lblSelectDatapackFolderBasic.Size = New System.Drawing.Size(168, 20)
@@ -280,9 +280,9 @@ Partial Class frmHelp
         'lblSpecifyNBTTagBasic
         '
         Me.lblSpecifyNBTTagBasic.AutoSize = True
-        Me.lblSpecifyNBTTagBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblSpecifyNBTTagBasic.BackColor = System.Drawing.Color.DarkGray
         Me.lblSpecifyNBTTagBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSpecifyNBTTagBasic.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSpecifyNBTTagBasic.ForeColor = System.Drawing.Color.Blue
         Me.lblSpecifyNBTTagBasic.Location = New System.Drawing.Point(331, 479)
         Me.lblSpecifyNBTTagBasic.Name = "lblSpecifyNBTTagBasic"
         Me.lblSpecifyNBTTagBasic.Size = New System.Drawing.Size(123, 20)
@@ -292,9 +292,9 @@ Partial Class frmHelp
         'lblAddItemsToDatapackBasic
         '
         Me.lblAddItemsToDatapackBasic.AutoSize = True
-        Me.lblAddItemsToDatapackBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(68, Byte), Integer))
+        Me.lblAddItemsToDatapackBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer))
         Me.lblAddItemsToDatapackBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAddItemsToDatapackBasic.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblAddItemsToDatapackBasic.ForeColor = System.Drawing.Color.Blue
         Me.lblAddItemsToDatapackBasic.Location = New System.Drawing.Point(578, 555)
         Me.lblAddItemsToDatapackBasic.Name = "lblAddItemsToDatapackBasic"
         Me.lblAddItemsToDatapackBasic.Size = New System.Drawing.Size(222, 20)
@@ -304,9 +304,9 @@ Partial Class frmHelp
         'lblSelectItemTypeBasic
         '
         Me.lblSelectItemTypeBasic.AutoSize = True
-        Me.lblSelectItemTypeBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblSelectItemTypeBasic.BackColor = System.Drawing.Color.DarkGray
         Me.lblSelectItemTypeBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectItemTypeBasic.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSelectItemTypeBasic.ForeColor = System.Drawing.Color.Blue
         Me.lblSelectItemTypeBasic.Location = New System.Drawing.Point(685, 289)
         Me.lblSelectItemTypeBasic.Name = "lblSelectItemTypeBasic"
         Me.lblSelectItemTypeBasic.Size = New System.Drawing.Size(115, 40)
@@ -316,9 +316,9 @@ Partial Class frmHelp
         'lblSelectItemIDBasic
         '
         Me.lblSelectItemIDBasic.AutoSize = True
-        Me.lblSelectItemIDBasic.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblSelectItemIDBasic.BackColor = System.Drawing.Color.DarkGray
         Me.lblSelectItemIDBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectItemIDBasic.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSelectItemIDBasic.ForeColor = System.Drawing.Color.Blue
         Me.lblSelectItemIDBasic.Location = New System.Drawing.Point(385, 375)
         Me.lblSelectItemIDBasic.Name = "lblSelectItemIDBasic"
         Me.lblSelectItemIDBasic.Size = New System.Drawing.Size(149, 20)
@@ -340,7 +340,7 @@ Partial Class frmHelp
         Me.llblWhatIsTheFastWayBasic.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.llblWhatIsTheFastWayBasic.AutoSize = True
         Me.llblWhatIsTheFastWayBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblWhatIsTheFastWayBasic.Location = New System.Drawing.Point(192, 870)
+        Me.llblWhatIsTheFastWayBasic.Location = New System.Drawing.Point(192, 866)
         Me.llblWhatIsTheFastWayBasic.Name = "llblWhatIsTheFastWayBasic"
         Me.llblWhatIsTheFastWayBasic.Size = New System.Drawing.Size(166, 20)
         Me.llblWhatIsTheFastWayBasic.TabIndex = 21
@@ -352,7 +352,7 @@ Partial Class frmHelp
         Me.llblHowToFindTheItemIDBasic.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.llblHowToFindTheItemIDBasic.AutoSize = True
         Me.llblHowToFindTheItemIDBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblHowToFindTheItemIDBasic.Location = New System.Drawing.Point(6, 870)
+        Me.llblHowToFindTheItemIDBasic.Location = New System.Drawing.Point(6, 866)
         Me.llblHowToFindTheItemIDBasic.Name = "llblHowToFindTheItemIDBasic"
         Me.llblHowToFindTheItemIDBasic.Size = New System.Drawing.Size(180, 20)
         Me.llblHowToFindTheItemIDBasic.TabIndex = 20
@@ -374,7 +374,7 @@ Partial Class frmHelp
         '
         Me.tpAddingItemsAdvanced.BackColor = System.Drawing.Color.White
         Me.tpAddingItemsAdvanced.Controls.Add(Me.lblLastEditedAddingItemsAdvanced)
-        Me.tpAddingItemsAdvanced.Controls.Add(Me.SelectItemTypeAdvanced)
+        Me.tpAddingItemsAdvanced.Controls.Add(Me.lblSelectItemTypeAdvanced)
         Me.tpAddingItemsAdvanced.Controls.Add(Me.lblAddItemsToDatapackAdvanced)
         Me.tpAddingItemsAdvanced.Controls.Add(Me.lblSpecifyPrefixAndNBTTagAdvanced)
         Me.tpAddingItemsAdvanced.Controls.Add(Me.llblHowToFindItemIDAdvanced)
@@ -387,7 +387,7 @@ Partial Class frmHelp
         Me.tpAddingItemsAdvanced.ForeColor = System.Drawing.Color.Black
         Me.tpAddingItemsAdvanced.Location = New System.Drawing.Point(4, 25)
         Me.tpAddingItemsAdvanced.Name = "tpAddingItemsAdvanced"
-        Me.tpAddingItemsAdvanced.Size = New System.Drawing.Size(1110, 903)
+        Me.tpAddingItemsAdvanced.Size = New System.Drawing.Size(1110, 899)
         Me.tpAddingItemsAdvanced.TabIndex = 2
         Me.tpAddingItemsAdvanced.Text = "Adding Items (Advanced)"
         '
@@ -396,30 +396,30 @@ Partial Class frmHelp
         Me.lblLastEditedAddingItemsAdvanced.AutoSize = True
         Me.lblLastEditedAddingItemsAdvanced.BackColor = System.Drawing.Color.White
         Me.lblLastEditedAddingItemsAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLastEditedAddingItemsAdvanced.Location = New System.Drawing.Point(929, 882)
+        Me.lblLastEditedAddingItemsAdvanced.Location = New System.Drawing.Point(929, 874)
         Me.lblLastEditedAddingItemsAdvanced.Name = "lblLastEditedAddingItemsAdvanced"
         Me.lblLastEditedAddingItemsAdvanced.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedAddingItemsAdvanced.TabIndex = 33
-        Me.lblLastEditedAddingItemsAdvanced.Text = "Last edited: 25.02.2023"
+        Me.lblLastEditedAddingItemsAdvanced.Text = "Last edited: 08.04.2023"
         '
-        'SelectItemTypeAdvanced
+        'lblSelectItemTypeAdvanced
         '
-        Me.SelectItemTypeAdvanced.AutoSize = True
-        Me.SelectItemTypeAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.SelectItemTypeAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectItemTypeAdvanced.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.SelectItemTypeAdvanced.Location = New System.Drawing.Point(572, 357)
-        Me.SelectItemTypeAdvanced.Name = "SelectItemTypeAdvanced"
-        Me.SelectItemTypeAdvanced.Size = New System.Drawing.Size(119, 40)
-        Me.SelectItemTypeAdvanced.TabIndex = 27
-        Me.SelectItemTypeAdvanced.Text = "Select the type " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "of the items"
+        Me.lblSelectItemTypeAdvanced.AutoSize = True
+        Me.lblSelectItemTypeAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
+        Me.lblSelectItemTypeAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSelectItemTypeAdvanced.ForeColor = System.Drawing.Color.Blue
+        Me.lblSelectItemTypeAdvanced.Location = New System.Drawing.Point(572, 357)
+        Me.lblSelectItemTypeAdvanced.Name = "lblSelectItemTypeAdvanced"
+        Me.lblSelectItemTypeAdvanced.Size = New System.Drawing.Size(119, 40)
+        Me.lblSelectItemTypeAdvanced.TabIndex = 27
+        Me.lblSelectItemTypeAdvanced.Text = "Select the type " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "of the items"
         '
         'lblAddItemsToDatapackAdvanced
         '
         Me.lblAddItemsToDatapackAdvanced.AutoSize = True
-        Me.lblAddItemsToDatapackAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(68, Byte), Integer))
+        Me.lblAddItemsToDatapackAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer))
         Me.lblAddItemsToDatapackAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAddItemsToDatapackAdvanced.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblAddItemsToDatapackAdvanced.ForeColor = System.Drawing.Color.Blue
         Me.lblAddItemsToDatapackAdvanced.Location = New System.Drawing.Point(572, 585)
         Me.lblAddItemsToDatapackAdvanced.Name = "lblAddItemsToDatapackAdvanced"
         Me.lblAddItemsToDatapackAdvanced.Size = New System.Drawing.Size(222, 20)
@@ -429,9 +429,9 @@ Partial Class frmHelp
         'lblSpecifyPrefixAndNBTTagAdvanced
         '
         Me.lblSpecifyPrefixAndNBTTagAdvanced.AutoSize = True
-        Me.lblSpecifyPrefixAndNBTTagAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.lblSpecifyPrefixAndNBTTagAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSpecifyPrefixAndNBTTagAdvanced.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSpecifyPrefixAndNBTTagAdvanced.ForeColor = System.Drawing.Color.Blue
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Location = New System.Drawing.Point(287, 451)
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Name = "lblSpecifyPrefixAndNBTTagAdvanced"
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Size = New System.Drawing.Size(196, 20)
@@ -452,9 +452,9 @@ Partial Class frmHelp
         'lblEnterItemIDHereAdvanced
         '
         Me.lblEnterItemIDHereAdvanced.AutoSize = True
-        Me.lblEnterItemIDHereAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblEnterItemIDHereAdvanced.BackColor = System.Drawing.Color.DarkGray
         Me.lblEnterItemIDHereAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEnterItemIDHereAdvanced.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblEnterItemIDHereAdvanced.ForeColor = System.Drawing.Color.Blue
         Me.lblEnterItemIDHereAdvanced.Location = New System.Drawing.Point(311, 346)
         Me.lblEnterItemIDHereAdvanced.Name = "lblEnterItemIDHereAdvanced"
         Me.lblEnterItemIDHereAdvanced.Size = New System.Drawing.Size(149, 20)
@@ -464,9 +464,9 @@ Partial Class frmHelp
         'lblSelectDatapackVersionAdvanced
         '
         Me.lblSelectDatapackVersionAdvanced.AutoSize = True
-        Me.lblSelectDatapackVersionAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblSelectDatapackVersionAdvanced.BackColor = System.Drawing.Color.DarkGray
         Me.lblSelectDatapackVersionAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectDatapackVersionAdvanced.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSelectDatapackVersionAdvanced.ForeColor = System.Drawing.Color.Blue
         Me.lblSelectDatapackVersionAdvanced.Location = New System.Drawing.Point(321, 186)
         Me.lblSelectDatapackVersionAdvanced.Name = "lblSelectDatapackVersionAdvanced"
         Me.lblSelectDatapackVersionAdvanced.Size = New System.Drawing.Size(185, 20)
@@ -476,9 +476,9 @@ Partial Class frmHelp
         'lblSelectDatapackFolderAdvanced
         '
         Me.lblSelectDatapackFolderAdvanced.AutoSize = True
-        Me.lblSelectDatapackFolderAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
+        Me.lblSelectDatapackFolderAdvanced.BackColor = System.Drawing.Color.DarkGray
         Me.lblSelectDatapackFolderAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSelectDatapackFolderAdvanced.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblSelectDatapackFolderAdvanced.ForeColor = System.Drawing.Color.Blue
         Me.lblSelectDatapackFolderAdvanced.Location = New System.Drawing.Point(403, 138)
         Me.lblSelectDatapackFolderAdvanced.Name = "lblSelectDatapackFolderAdvanced"
         Me.lblSelectDatapackFolderAdvanced.Size = New System.Drawing.Size(168, 20)
@@ -530,7 +530,7 @@ Partial Class frmHelp
         Me.tpDuplicateFinder.Controls.Add(Me.lblDescriptionDuplicateFinder)
         Me.tpDuplicateFinder.Location = New System.Drawing.Point(4, 25)
         Me.tpDuplicateFinder.Name = "tpDuplicateFinder"
-        Me.tpDuplicateFinder.Size = New System.Drawing.Size(1110, 903)
+        Me.tpDuplicateFinder.Size = New System.Drawing.Size(1110, 899)
         Me.tpDuplicateFinder.TabIndex = 3
         Me.tpDuplicateFinder.Text = "Duplicate Finder"
         '
@@ -539,18 +539,18 @@ Partial Class frmHelp
         Me.lblLastEditedDuplicateFinder.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblLastEditedDuplicateFinder.AutoSize = True
         Me.lblLastEditedDuplicateFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLastEditedDuplicateFinder.Location = New System.Drawing.Point(929, 879)
+        Me.lblLastEditedDuplicateFinder.Location = New System.Drawing.Point(929, 875)
         Me.lblLastEditedDuplicateFinder.Name = "lblLastEditedDuplicateFinder"
         Me.lblLastEditedDuplicateFinder.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedDuplicateFinder.TabIndex = 29
-        Me.lblLastEditedDuplicateFinder.Text = "Last edited: 25.02.2023"
+        Me.lblLastEditedDuplicateFinder.Text = "Last edited: 08.04.2023" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'lblBeginChecking
         '
         Me.lblBeginChecking.AutoSize = True
-        Me.lblBeginChecking.BackColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(68, Byte), Integer), CType(CType(68, Byte), Integer))
+        Me.lblBeginChecking.BackColor = System.Drawing.Color.FromArgb(CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer))
         Me.lblBeginChecking.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBeginChecking.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblBeginChecking.ForeColor = System.Drawing.Color.Blue
         Me.lblBeginChecking.Location = New System.Drawing.Point(461, 149)
         Me.lblBeginChecking.Name = "lblBeginChecking"
         Me.lblBeginChecking.Size = New System.Drawing.Size(117, 20)
@@ -612,7 +612,7 @@ Partial Class frmHelp
         Me.tpProfilesAndSchemes.Location = New System.Drawing.Point(4, 25)
         Me.tpProfilesAndSchemes.Name = "tpProfilesAndSchemes"
         Me.tpProfilesAndSchemes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpProfilesAndSchemes.Size = New System.Drawing.Size(1110, 903)
+        Me.tpProfilesAndSchemes.Size = New System.Drawing.Size(1110, 899)
         Me.tpProfilesAndSchemes.TabIndex = 5
         Me.tpProfilesAndSchemes.Text = "Profiles and Schemes"
         '
@@ -740,9 +740,9 @@ Partial Class frmHelp
         'pnlHelp
         '
         Me.pnlHelp.Controls.Add(Me.tcHelp)
-        Me.pnlHelp.Location = New System.Drawing.Point(21, 48)
+        Me.pnlHelp.Location = New System.Drawing.Point(16, 42)
         Me.pnlHelp.Name = "pnlHelp"
-        Me.pnlHelp.Size = New System.Drawing.Size(1101, 927)
+        Me.pnlHelp.Size = New System.Drawing.Size(1107, 929)
         Me.pnlHelp.TabIndex = 10
         '
         'btnNavIntroduction
@@ -872,7 +872,7 @@ Partial Class frmHelp
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1146, 982)
+        Me.ClientSize = New System.Drawing.Size(1141, 982)
         Me.Controls.Add(Me.btnNavIntroduction)
         Me.Controls.Add(Me.btnNavOther)
         Me.Controls.Add(Me.btnNavProfilesAndSchemes)
@@ -959,7 +959,7 @@ Partial Class frmHelp
     Friend WithEvents btnNavOther As Button
     Friend WithEvents lblSpecifyPrefixAndNBTTagAdvanced As Label
     Friend WithEvents lblAddItemsToDatapackAdvanced As Label
-    Friend WithEvents SelectItemTypeAdvanced As Label
+    Friend WithEvents lblSelectItemTypeAdvanced As Label
     Friend WithEvents lblSelectDatapackVersionAdvanced As Label
     Friend WithEvents lblSelectDatapackFolderAdvanced As Label
     Friend WithEvents lblEnterItemIDHereAdvanced As Label

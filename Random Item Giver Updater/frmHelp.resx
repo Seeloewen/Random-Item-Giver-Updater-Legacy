@@ -117,19 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblDescriptionSchemes.Text" xml:space="preserve">
-    <value>Profiles and Schemes allow you to quickly save information so you can access it later on. It also gets saved if you restart or even reinstall the software.
-
-Profiles are used to save a datapack path and its corresponding version. The datapack path can be any valid file path, while the version needs to be selected 
-from a list. The settings menu features an option to automatically load a profile when starting the application. There you can also find the profile manager, 
-which allows you to edit profiles without loading them into the main window.
-
-Schemes on the other hand save information about specific item groups. It holds information like the item type (Potion, Enchanted Book, etc...) as well as the 
-NBT Tag and Prefix. This is useful if you're adding different kinds of items. You won't have to tick each checkbox over and over and enter the prefix 20 
-different times. You can just load the scheme! As with the Profiles, you will find an option to load a default scheme in the settings menu. Schemes don't have 
-their own editor, you will need to edit them through the main menu. There are also a handfull of default schemes which can be restored through the settings 
-menu, if necessary.</value>
-  </data>
   <data name="lblIntroduction.Text" xml:space="preserve">
     <value>Welcome to the Random Item Giver Updater Help Documentary!
 
@@ -200,6 +187,19 @@ It's pretty simple: You select the datapack, hit "Check datapack" and after load
 which loot table the originate from.
 
 After that, you will need to manually open up the loot tables and remove the duplicates. This will probably be improved in the future.</value>
+  </data>
+  <data name="lblDescriptionSchemes.Text" xml:space="preserve">
+    <value>Profiles and Schemes allow you to quickly save information so you can access it later on. It also gets saved if you restart or even reinstall the software.
+
+Profiles are used to save a datapack path and its corresponding version. The datapack path can be any valid file path, while the version needs to be selected 
+from a list. The settings menu features an option to automatically load a profile when starting the application. There you can also find the profile manager, 
+which allows you to edit profiles without loading them into the main window.
+
+Schemes on the other hand save information about specific item groups. It holds information like the item type (Potion, Enchanted Book, etc...) as well as the 
+NBT Tag and Prefix. This is useful if you're adding different kinds of items. You won't have to tick each checkbox over and over and enter the prefix 20 
+different times. You can just load the scheme! As with the Profiles, you will find an option to load a default scheme in the settings menu. Schemes don't have 
+their own editor, you will need to edit them through the main menu. There are also a handfull of default schemes which can be restored through the settings 
+menu, if necessary.</value>
   </data>
   <data name="lblOther.Text" xml:space="preserve">
     <value>The Item List Importer allows you to select a file, that contains a list of items. You can use a list that contains prefixes or no prefixes, but not a mix. 
