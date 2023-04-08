@@ -6,8 +6,8 @@ Public Class frmMain
     'General variables for the software
     Public qm As String 'Quotation mark
     Public appData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public versionLog As String = "0.5.0-b (12.03.2023)" 'Version that gets displayed in the log
-    Public rawVersion As String = "0.5.0-b"
+    Public versionLog As String = "0.5.1-b (08.04.2023)" 'Version that gets displayed in the log
+    Public rawVersion As String = "0.5.1-b"
     Public settingsVersion As Double = 3 'Current version of the settings file that the app is using
     Dim settingsArray As String() 'Array which the settings will be loaded in
     Dim loadedSettingsVersion As Double 'Version of the settings file that gets loaded
