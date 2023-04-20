@@ -74,9 +74,9 @@ Public Class frmDuplicateFinder
             Dim ParseVersion As String = Replace(VersionString, "    " + QuM + "pack_format" + QuM + ": ", "")
             Dim Version As String = Replace(ParseVersion, ",", "")
 
-            If Version = 14 OrElse Version = 13 Then
+            If Version = "14" OrElse Version = "13" Then
                 DatapackVersion = "1.20"
-            ElseIf Version = 12 OrElse Version = "11" OrElse Version = "10" Then
+            ElseIf Version = "12" OrElse Version = "11" OrElse Version = "10" Then
                 DatapackVersion = "1.19"
             ElseIf Version = "9" OrElse Version = "8" Then
                 DatapackVersion = "1.18"
@@ -88,10 +88,10 @@ Public Class frmDuplicateFinder
                 DatapackVersion = "Null"
             End If
 
-            frmMain.WriteToLog("Detected datapack as version " + DatapackVersion + " in duplicate finder", "Info")
+            frmMain.WriteToLog("Detected datapack As version " + DatapackVersion + " In duplicate finder", "Info")
         Catch ex As Exception
-            MsgBox("Error: " + ex.Message + vbNewLine + vbNewLine + "The datapack path is not detected as valid and therefor the duplicate finder might fail.", MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog("Selected datapack path in duplicate finder is invalid.", "Error")
+            MsgBox("Error " + ex.Message + vbNewLine + vbNewLine + "The datapack path Is Not detected As valid And therefor the duplicate finder might fail.", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog("Selected datapack path In duplicate finder Is invalid.", "Error")
         End Try
 
     End Sub
@@ -129,12 +129,12 @@ Public Class frmDuplicateFinder
 
         'Announce if searching for duplicates completed or failed
         If DuplicateFinderResult = "success" Then
-            lblDuplicatesAmount.Text = "Found " + lvDuplicates.Items.Count.ToString + " duplicates in total."
-            frmMain.WriteToLog("Checking for duplicates completed. Found " + lvDuplicates.Items.Count.ToString + " duplicates totally.", "Info")
+            lblDuplicatesAmount.Text = "Found " + lvDuplicates.Items.Count.ToString + " duplicates In total."
+            frmMain.WriteToLog("Checking For duplicates completed. Found " + lvDuplicates.Items.Count.ToString + " duplicates totally.", "Info")
             pbProgress.Value = 100
-            MsgBox("Checking for duplicates is complete." + vbNewLine + "You can see the results in the list behind this message." + vbNewLine + "If the list is empty then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
+            MsgBox("Checking For duplicates Is complete." + vbNewLine + "You can see the results In the list behind this message." + vbNewLine + "If the list Is empty Then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
         Else
-            lblDuplicatesAmount.Text = "Searching for duplicates failed."
+                lblDuplicatesAmount.Text = "Searching for duplicates failed."
             frmMain.WriteToLog("Searching for duplicates failed with 1 or more errors.", "Error")
         End If
 
