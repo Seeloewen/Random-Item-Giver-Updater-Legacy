@@ -1143,47 +1143,51 @@ Public Class frmMain
                 Dim version As String = Replace(ParseVersion, ",", "")
 
                 Try
-                    If Convert.ToInt32(version) > 13 Then
+                    If Convert.ToInt32(version) > 14 Then
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version"
-                        MsgBox("A datapack has been detected but the Version number is greater than 13." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
-                        WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
+                        MsgBox("A datapack has been detected but the version number is greater than 14." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
+                        WriteToLog("Detected unsupported datapack version. This may cause issues. (Pack number " + version + ")", "Warning")
+                        cbxVersion.SelectedItem = "Version 1.20"
+                    ElseIf version = "14" Then
+                        lblDatapackDetection.Text = "Detected datapack as version 1.20."
+                        WriteToLog("Detected datapack version 1.20 Snapshot (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.20"
                     ElseIf version = "13" Then
-                        lblDatapackDetection.Text = "Detected datapack as version 1.20."
-                        WriteToLog("Detected datapack version 1.20.", "Info")
+                        lblDatapackDetection.Text = "Detected datapack as version 1.20 Snapshot."
+                        WriteToLog("Detected datapack version 1.20 Snapshot (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.20"
                     ElseIf version = "12" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.19.4."
-                        WriteToLog("Detected datapack version 1.19.4.", "Info")
+                        WriteToLog("Detected datapack version 1.19.4 (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.19.4"
                     ElseIf version = "11" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.19.4 Snapshot (Outdated)."
-                        WriteToLog("Detected datapack version 1.19.4 Snapshot.", "Info")
+                        WriteToLog("Detected datapack version 1.19.4 Snapshot (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.19.4"
                     ElseIf version = "10" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.19 - 1.19.3."
-                        WriteToLog("Detected datapack version 1.19 - 1.19.3.", "Info")
+                        WriteToLog("Detected datapack version 1.19 - 1.19.3 (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.19 - 1.19.3"
                     ElseIf version = "9" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.18.2."
-                        WriteToLog("Detected datapack version 1.18.2.", "Info")
+                        WriteToLog("Detected datapack version 1.18.2 (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.18 - 1.18.2"
                     ElseIf version = "8" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.18 - 1.18.1 (Outdated)"
-                        WriteToLog("Detected datapack version 1.18 - 1.18.1.", "Info")
+                        WriteToLog("Detected datapack version 1.18 - 1.18.1 (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.18 - 1.18.2"
                     ElseIf version = "7" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.17 - 1.17.1."
-                        WriteToLog("Detected datapack version 1.17 - 1.17.1.", "Info")
+                        WriteToLog("Detected datapack version 1.17 - 1.17.1 (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.17 - 1.17.1"
                     ElseIf version = "6" Then
                         lblDatapackDetection.Text = "Detected datapack as version 1.16.2 - 1.16.5."
-                        WriteToLog("Detected datapack version 1.16.2 - 1.16.5.", "Info")
+                        WriteToLog("Detected datapack version 1.16.2 - 1.16.5 (Pack number " + version + ")", "Info")
                         cbxVersion.SelectedItem = "Version 1.16.2 - 1.16.5"
                     ElseIf Convert.ToInt32(version) < 6 Then
                         lblDatapackDetection.Text = "Detected datapack, but version is most likely unsupported"
                         MsgBox("A datapack has been detected but the version number is smaller than 6." + vbNewLine + "This means that the datapack version is older than 1.15 which the Random Item Giver does not support." + vbNewLine + "The oldest available version has been selected but will most likely not work.", MsgBoxStyle.Exclamation, "Warning")
-                        WriteToLog("Detected unsupported datapack version. This may cause issues.", "Warning")
+                        WriteToLog("Detected unsupported datapack version. This may cause issues. (Pack number " + version + ")", "Warning")
                         cbxVersion.SelectedItem = "Version 1.16.2 - 1.16.5"
                     Else
                         lblDatapackDetection.Text = "Detected datapack, but could not determine version."

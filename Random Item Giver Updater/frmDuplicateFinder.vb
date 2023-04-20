@@ -74,7 +74,9 @@ Public Class frmDuplicateFinder
             Dim ParseVersion As String = Replace(VersionString, "    " + QuM + "pack_format" + QuM + ": ", "")
             Dim Version As String = Replace(ParseVersion, ",", "")
 
-            If Version = "11" OrElse Version = "10" Then
+            If Version = 14 OrElse Version = 13 Then
+                DatapackVersion = "1.20"
+            ElseIf Version = 12 OrElse Version = "11" OrElse Version = "10" Then
                 DatapackVersion = "1.19"
             ElseIf Version = "9" OrElse Version = "8" Then
                 DatapackVersion = "1.18"
@@ -158,10 +160,10 @@ Public Class frmDuplicateFinder
 
     Private Sub InitializeChecking()
         'Decided which loot tables to check depending on the datapack version
-        If DatapackVersion = "1.19" Or DatapackVersion = "1.18" Or DatapackVersion = "1.16" Then
+        If DatapackVersion = "1.20" OrElse DatapackVersion = "1.19" Or DatapackVersion = "1.18" Or DatapackVersion = "1.16" Then
             If DatapackVersion = "1.18" Then
                 DuplicateFinderProgress = 1.78
-            ElseIf DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
+            ElseIf DatapackVersion = "1.20" OrElse DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
                 DuplicateFinderProgress = 1.38
             End If
 
@@ -236,7 +238,7 @@ Public Class frmDuplicateFinder
                 CheckLootTable(64, "special_xvx")
                 CheckLootTable(64, "special_xxv")
 
-                If DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
+                If DatapackVersion = "1.20" OrElse DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
                     'Random amount of same items
                     CheckLootTable(-1, "main")
                     CheckLootTable(-1, "main_without_creative-only")
@@ -278,6 +280,8 @@ Public Class frmDuplicateFinder
                 DuplicateFinderResult = "failed"
             End Try
         ElseIf DatapackVersion = "None" Then
+            DuplicateFinderResult = "failed"
+            MsgBox("The datapack version could not be determined." + vbNewLine + "Cannot search for duplicates.", MsgBoxStyle.Critical, "Error")
         Else
             DuplicateFinderResult = "failed"
             MsgBox("An unknown error occured." + vbNewLine + "Cannot search for duplicates.", MsgBoxStyle.Critical, "Error")
