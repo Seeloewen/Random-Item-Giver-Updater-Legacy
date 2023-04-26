@@ -16,6 +16,7 @@ Public Class frmMain
     Dim settingsFile As String = appData + "\Random Item Giver Updater\settings.txt" 'Location of the settings file
     Public logDirectory As String = appData + "\Random Item Giver Updater\Logs\" 'Directory where the log files are saved
     Dim logFileName As String 'File name of the log file
+    Public design As String = "Light" 'Selected design
 
     'Profile variables
     Public profileDirectory As String = appData + "\Random Item Giver Updater\Profiles\" 'Directory where the profiles are located
@@ -91,45 +92,21 @@ Public Class frmMain
             End If
         Next
 
-        'Set appearance of buttons depending on selected design
-        For Each btn As Button In Controls.OfType(Of Button)
-            If Not btn.Equals(btnHamburger) Then
-                If My.Settings.Design = "Dark" Then
-                    btn.ForeColor = Color.White
-                    btn.BackgroundImage = My.Resources.imgButton
-                ElseIf My.Settings.Design = "Light" Then
-                    btn.ForeColor = Color.Black
-                    btn.BackgroundImage = My.Resources.imgButtonLight
-                End If
-            End If
-            If (Not btn.Equals(btnHamburger)) And (Not btn.Equals(btnAddItem)) Then
-                If My.Settings.Design = "Light" Then
-                    btn.BackColor = Color.FromArgb(207, 207, 207)
-                    btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(207, 207, 207)
-                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(207, 207, 207)
-                ElseIf My.Settings.Design = "Dark" Then
-                    btn.BackColor = Color.FromArgb(127, 127, 127)
-                    btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(127, 127, 127)
-                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 127, 127)
-                End If
-            End If
-        Next
-
         'Create directory in appdata if it doesnt exist already
-        If My.Computer.FileSystem.DirectoryExists(AppData + "\Random Item Giver Updater\") = False Then
-            My.Computer.FileSystem.CreateDirectory(AppData + "\Random Item Giver Updater\")
+        If My.Computer.FileSystem.DirectoryExists(appData + "\Random Item Giver Updater\") = False Then
+            My.Computer.FileSystem.CreateDirectory(appData + "\Random Item Giver Updater\")
             WriteToLog("Created the 'Random Item Giver Updater' directory in the Appdata folder for application files.", "Info")
         End If
 
         'Post initial log text
-        WriteToLog("Random Item Giver Updater " + VersionLog, "Info")
+        WriteToLog("Random Item Giver Updater " + versionLog, "Info")
         WriteToLog("You are running a beta build, issues may occur!", "Warning")
 
         'If software gets started for the first time, add default schemes and create file that indicates that the software was started once already.
-        If My.Computer.FileSystem.FileExists(AppData + "\Random Item Giver Updater\FirstStartCompleted") = False Then
-            My.Computer.FileSystem.WriteAllText(AppData + "\Random Item Giver Updater\FirstStartCompleted", "", False)
-            If My.Computer.FileSystem.DirectoryExists(SchemeDirectory) = False Then
-                My.Computer.FileSystem.CreateDirectory(SchemeDirectory)
+        If My.Computer.FileSystem.FileExists(appData + "\Random Item Giver Updater\FirstStartCompleted") = False Then
+            My.Computer.FileSystem.WriteAllText(appData + "\Random Item Giver Updater\FirstStartCompleted", "", False)
+            If My.Computer.FileSystem.DirectoryExists(schemeDirectory) = False Then
+                My.Computer.FileSystem.CreateDirectory(schemeDirectory)
             End If
             AddDefaultSchemes()
         End If
@@ -137,13 +114,14 @@ Public Class frmMain
         'Initialize User Settings and Preferences
         InitializeLoadingSettings()
         InitializeProfilesAndSchemes()
-        LoadDarkmode()
+        DetermineDesign()
+        LoadDesign()
 
         'Disable log if setting is enabled
         If My.Settings.DisableLogging = True Then
             frmOutput.rtbLog.Clear()
-            If My.Computer.FileSystem.FileExists(AppData + "\Random Item Giver Updater\DebugLogTemp") Then
-                My.Computer.FileSystem.DeleteFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
+            If My.Computer.FileSystem.FileExists(appData + "\Random Item Giver Updater\DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile(appData + "\Random Item Giver Updater\DebugLogTemp")
             End If
         End If
 
@@ -154,15 +132,15 @@ Public Class frmMain
 
         'Define several variables (I know I could probably do this way easier but... yeah)
         qm = Quotationmark.Text
-        CodeEnd = rtbCodeEnd.Lines
-        Items2 = rtbItems2.Lines
-        Items3 = rtbItems3.Lines
-        Items5 = rtbItems5.Lines
-        Items10 = rtbItems10.Lines
-        Items32 = rtbItems32.Lines
-        Items64 = rtbItems64.Lines
-        ItemsRandomSame116 = rtbItemsRandomSame116.Lines
-        ItemsRandomSame119 = rtbItemsRandomSame119.Lines
+        codeEnd = rtbCodeEnd.Lines
+        items2 = rtbItems2.Lines
+        items3 = rtbItems3.Lines
+        items5 = rtbItems5.Lines
+        items10 = rtbItems10.Lines
+        items32 = rtbItems32.Lines
+        items64 = rtbItems64.Lines
+        itemsRandomSame116 = rtbItemsRandomSame116.Lines
+        itemsRandomSame119 = rtbItemsRandomSame119.Lines
 
         'Load advanced view setting
         If My.Settings.UseAdvancedViewByDefault = True Then
@@ -272,8 +250,8 @@ Public Class frmMain
 
     Private Sub rtbLog_TextChanged(sender As Object, e As EventArgs) Handles rtbLog.TextChanged
         'Updadte log file and log in output window
-        rtbLog.SaveFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
-        frmOutput.rtbLog.LoadFile(AppData + "\Random Item Giver Updater\DebugLogTemp")
+        rtbLog.SaveFile(appData + "\Random Item Giver Updater\DebugLogTemp")
+        frmOutput.rtbLog.LoadFile(appData + "\Random Item Giver Updater\DebugLogTemp")
     End Sub
 
     Private Sub btnHamburger_Click(sender As Object, e As EventArgs) Handles btnHamburger.Click
@@ -296,11 +274,11 @@ Public Class frmMain
         If cbSamePrefix.Checked Then
             tbSamePrefix.Enabled = True
             gbItemID.Text = "Items (ID)"
-            SamePrefix = True
+            samePrefix = True
         Else
             tbSamePrefix.Enabled = False
             gbItemID.Text = "Items (Prefix:ID)"
-            SamePrefix = False
+            samePrefix = False
         End If
     End Sub
 
@@ -308,22 +286,22 @@ Public Class frmMain
         'Toggle the custom NBT tag setting
         If cbCustomNBT.Checked Then
             tbCustomNBT.Enabled = True
-            CustomNBT = True
+            customNBT = True
         Else
             tbCustomNBT.Enabled = False
-            CustomNBT = False
+            customNBT = False
         End If
     End Sub
 
     Private Sub cbCreativeOnly_CheckedChanged(sender As Object, e As EventArgs) Handles cbCreativeOnly.CheckedChanged
         'Toggle the creative-only setting
         If cbCreativeOnly.Checked Then
-            CreativeOnly = True
+            creativeOnly = True
             rbtnOtherItem.Enabled = True
             rbtnCommandBlock.Enabled = True
             rbtnSpawnEgg.Enabled = True
         Else
-            CreativeOnly = False
+            creativeOnly = False
             rbtnOtherItem.Enabled = False
             rbtnCommandBlock.Enabled = False
             rbtnSpawnEgg.Enabled = False
@@ -338,7 +316,7 @@ Public Class frmMain
     Private Sub cbAddItemsFast_CheckedChanged(sender As Object, e As EventArgs) Handles cbAddItemsFast.CheckedChanged
         'Toggle fast item adding method
         If cbAddItemsFast.Checked Then
-            AddItemsFast = True
+            addItemsFast = True
             cbCreativeOnly.Checked = False
             cbCreativeOnly.Enabled = False
             cbSuspiciousStew.Enabled = False
@@ -362,7 +340,7 @@ Public Class frmMain
             cbPainting.Enabled = False
             MsgBox("This setting speeds up the process of adding items, narrowing it down to only a few seconds in most cases." + vbNewLine + "This is recommended if you need to add 100+ Items." + vbNewLine + vbNewLine + "Please note that if you enable this option, the items will only be added to the main loot table. This means that you won't be able to use the item settings in the datapack afterwards.", MsgBoxStyle.Information, "Enable Fast Item Adding")
         Else
-            AddItemsFast = False
+            addItemsFast = False
             cbCreativeOnly.Checked = False
             cbCreativeOnly.Enabled = True
             cbSuspiciousStew.Enabled = True
@@ -405,7 +383,7 @@ Public Class frmMain
 
     Private Sub rtbItem_TextChanged(sender As Object, e As EventArgs) Handles rtbItem.TextChanged
         'Pass text onto the variable
-        ItemsList = rtbItem.Lines
+        itemsList = rtbItem.Lines
 
         'Check the amount of items (lines) and change recommendation of checkbox for fast item adding
         If rtbItem.Lines.Count > 99 Then
@@ -420,96 +398,96 @@ Public Class frmMain
 
     Private Sub tbSamePrefix_TextChanged(sender As Object, e As EventArgs) Handles tbSamePrefix.TextChanged
         'Pass text onto the variable
-        SamePrefixString = tbSamePrefix.Text
+        samePrefixString = tbSamePrefix.Text
     End Sub
 
     Private Sub tbCustomNBT_TextChanged(sender As Object, e As EventArgs) Handles tbCustomNBT.TextChanged
         'Pass text onto the variable
-        CustomNBTString = tbCustomNBT.Text
+        customNBTString = tbCustomNBT.Text
     End Sub
 
     Private Sub cbNormalItem_CheckedChanged(sender As Object, e As EventArgs) Handles cbNormalItem.CheckedChanged
         'Pass checkstate onto the variable
-        NormalItem = cbNormalItem.CheckState
+        normalItem = cbNormalItem.CheckState
     End Sub
 
     Private Sub cbSuspiciousStew_CheckedChanged(sender As Object, e As EventArgs) Handles cbSuspiciousStew.CheckedChanged
         'Pass checkstate onto the variable
-        SuspiciousStew = cbSuspiciousStew.CheckState
+        suspiciousStew = cbSuspiciousStew.CheckState
     End Sub
 
     Private Sub cbEnchantedBook_CheckedChanged(sender As Object, e As EventArgs) Handles cbEnchantedBook.CheckedChanged
         'Pass checkstate onto the variable
-        EnchantedBook = cbEnchantedBook.CheckState
+        enchantedBook = cbEnchantedBook.CheckState
     End Sub
 
     Private Sub cbPotion_CheckedChanged(sender As Object, e As EventArgs) Handles cbPotion.CheckedChanged
         'Pass checkstate onto the variable
-        Potion = cbPotion.CheckState
+        potion = cbPotion.CheckState
     End Sub
 
     Private Sub cbSplashPotion_CheckedChanged(sender As Object, e As EventArgs) Handles cbSplashPotion.CheckedChanged
         'Pass checkstate onto the variable
-        SplashPotion = cbSplashPotion.CheckState
+        splashPotion = cbSplashPotion.CheckState
     End Sub
     Private Sub cbLingeringPotion_CheckedChanged(sender As Object, e As EventArgs) Handles cbLingeringPotion.CheckedChanged
         'Pass checkstate onto the variable
-        LingeringPotion = cbLingeringPotion.CheckState
+        lingeringPotion = cbLingeringPotion.CheckState
     End Sub
 
     Private Sub cbTippedArrow_CheckedChanged(sender As Object, e As EventArgs) Handles cbTippedArrow.CheckedChanged
         'Pass checkstate onto the variable
-        TippedArrow = cbTippedArrow.CheckState
+        tippedArrow = cbTippedArrow.CheckState
     End Sub
 
     Private Sub cbGoatHorn_CheckedChanged(sender As Object, e As EventArgs) Handles cbGoatHorn.CheckedChanged
         'Pass checkstate onto the variable
-        GoatHorn = cbGoatHorn.CheckState
+        goatHorn = cbGoatHorn.CheckState
     End Sub
 
     Private Sub cbPainting_CheckedChanged(sender As Object, e As EventArgs) Handles cbPainting.CheckedChanged
         'Pass checkstate onto the variable
-        Painting = cbPainting.CheckState
+        painting = cbPainting.CheckState
     End Sub
 
     Private Sub rbtnSpawnEgg_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnSpawnEgg.CheckedChanged
         'Pass checkstate onto the variable
         If rbtnSpawnEgg.Checked Then
-            SpawnEgg = True
+            spawnEgg = True
         Else
-            SpawnEgg = False
+            spawnEgg = False
         End If
     End Sub
 
     Private Sub rbtnCommandBlock_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnCommandBlock.CheckedChanged
         'Pass checkstate onto the variable
         If rbtnCommandBlock.Checked Then
-            CommandBlock = True
+            commandBlock = True
         Else
-            CommandBlock = False
+            commandBlock = False
         End If
     End Sub
 
     Private Sub rbtnOtherItem_CheckedChanged(sender As Object, e As EventArgs) Handles rbtnOtherItem.CheckedChanged
         'Pass checkstate onto the variable
         If rbtnOtherItem.Checked Then
-            OtherCreativeOnlyItem = True
+            otherCreativeOnlyItem = True
         Else
-            OtherCreativeOnlyItem = False
+            otherCreativeOnlyItem = False
         End If
     End Sub
 
     Private Sub tbDatapackPath_TextChanged(sender As Object, e As EventArgs) Handles tbDatapackPath.TextChanged
         'Pass checkstate onto the variable
-        DatapackPath = tbDatapackPath.Text
-        If FirstLoadCompleted Then
+        datapackPath = tbDatapackPath.Text
+        If firstLoadCompleted Then
             DetermineDatapackVersion()
         End If
     End Sub
 
     Private Sub cbxVersion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxVersion.SelectedIndexChanged
         'Pass text onto the variable
-        DatapackVersion = cbxVersion.SelectedItem
+        datapackVersion = cbxVersion.SelectedItem
 
         'Toggle certain checkboxes depending on selected version
         If cbAddItemsFast.Checked = False Then
@@ -607,7 +585,7 @@ Public Class frmMain
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         'When starting the application, run initial datapack detection and set firstloadcompleted to true. This variable is used to determine whether the startup process has been completed
         DetermineDatapackVersion()
-        FirstLoadCompleted = True
+        firstLoadCompleted = True
     End Sub
 
     Private Sub cbxScheme_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxScheme.SelectedIndexChanged
@@ -617,8 +595,8 @@ Public Class frmMain
 
     Private Sub btnDeleteSelectedScheme_Click(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.Click
         'Delete the currently selected scheme if it exists
-        If My.Computer.FileSystem.FileExists(SchemeDirectory + cbxScheme.SelectedItem + ".txt") Then
-            My.Computer.FileSystem.DeleteFile(SchemeDirectory + cbxScheme.SelectedItem + ".txt")
+        If My.Computer.FileSystem.FileExists(schemeDirectory + cbxScheme.SelectedItem + ".txt") Then
+            My.Computer.FileSystem.DeleteFile(schemeDirectory + cbxScheme.SelectedItem + ".txt")
             MsgBox("Scheme was deleted.", MsgBoxStyle.Information, "Deleted")
             WriteToLog("Deleted scheme " + cbxScheme.SelectedItem, "Info")
             cbxScheme.Items.Remove(cbxScheme.SelectedItem)
@@ -647,14 +625,14 @@ Public Class frmMain
 
         'Save log file if auto save is enabled
         If My.Settings.AutoSaveLogs = True Then
-            LogFileName = "Random_Item_Giver_Updater_Log_" + DateTime.Now + "_Ver_" + VersionLog
-            LogFileName = LogFileName.Replace(":", "-")
-            LogFileName = LogFileName.Replace(".", "-")
-            LogFileName = LogFileName.Replace(" ", "_")
-            LogFileName = LogFileName.Replace("(", "")
-            LogFileName = LogFileName.Replace(")", "")
-            LogFileName = LogDirectory + LogFileName + ".txt"
-            frmOutput.SaveLog(LogFileName, False)
+            logFileName = "Random_Item_Giver_Updater_Log_" + DateTime.Now + "_Ver_" + versionLog
+            logFileName = logFileName.Replace(":", "-")
+            logFileName = logFileName.Replace(".", "-")
+            logFileName = logFileName.Replace(" ", "_")
+            logFileName = logFileName.Replace("(", "")
+            logFileName = logFileName.Replace(")", "")
+            logFileName = logDirectory + logFileName + ".txt"
+            frmOutput.SaveLog(logFileName, False)
         End If
     End Sub
 
@@ -717,8 +695,33 @@ Public Class frmMain
 
     '-- Custom methods --
 
-    Private Sub LoadDarkmode()
+    Public Sub DetermineDesign()
+        'Check which setting is selected
         If My.Settings.Design = "Dark" Then
+            design = "Dark"
+        ElseIf My.Settings.Design = "Light" Then
+            design = "Light"
+        ElseIf My.Settings.Design = "System Default" Then
+            'Check the registry key for Windows App Design to get current design
+            Dim registryKey As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", True)
+            If registryKey IsNot Nothing Then
+                Dim value As Object = registryKey.GetValue("AppsUseLightTheme")
+                If value IsNot Nothing AndAlso TypeOf value Is Integer Then
+                    If CInt(value) = 0 Then 'Dark design
+                        WriteToLog("Determined dark design based on registry key value", "Info")
+                        design = "Dark"
+                    Else 'Light design
+                        WriteToLog("Determined light design based on registry key value", "Info")
+                        design = "Light"
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub LoadDesign()
+        'Load darkmode
+        If design = "Dark" Then
             BackColor = Color.FromArgb(50, 50, 50)
             lblHeader.ForeColor = Color.White
             lblItemsTotal.ForeColor = Color.White
@@ -792,12 +795,36 @@ Public Class frmMain
             rbtnOtherItem.ForeColor = Color.White
             rbtnOtherItem.BackColor = Color.FromArgb(127, 127, 127)
         End If
+
+        'Set appearance of buttons depending on selected design
+        For Each btn As Button In Controls.OfType(Of Button)
+            If Not btn.Equals(btnHamburger) Then
+                If design = "Dark" Then
+                    btn.ForeColor = Color.White
+                    btn.BackgroundImage = My.Resources.imgButton
+                ElseIf design = "Light" Then
+                    btn.ForeColor = Color.Black
+                    btn.BackgroundImage = My.Resources.imgButtonLight
+                End If
+            End If
+            If (Not btn.Equals(btnHamburger)) And (Not btn.Equals(btnAddItem)) Then
+                If design = "Light" Then
+                    btn.BackColor = Color.FromArgb(207, 207, 207)
+                    btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(207, 207, 207)
+                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(207, 207, 207)
+                ElseIf design = "Dark" Then
+                    btn.BackColor = Color.FromArgb(127, 127, 127)
+                    btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(127, 127, 127)
+                    btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 127, 127)
+                End If
+            End If
+        Next
     End Sub
 
     Private Sub CheckForFirstStart()
         'Check if application was already started once using this version. If not, show update news
-        If My.Computer.FileSystem.FileExists(AppData + "\Random Item Giver Updater\FirstStart_" + RawVersion) = False Then
-            My.Computer.FileSystem.WriteAllText(AppData + "\Random Item Giver Updater\FirstStart_" + RawVersion, "", False)
+        If My.Computer.FileSystem.FileExists(appData + "\Random Item Giver Updater\FirstStart_" + rawVersion) = False Then
+            My.Computer.FileSystem.WriteAllText(appData + "\Random Item Giver Updater\FirstStart_" + rawVersion, "", False)
             frmUpdateNews.ShowDialog()
         End If
     End Sub
@@ -1139,8 +1166,8 @@ Public Class frmMain
             If My.Computer.FileSystem.FileExists(tbDatapackPath.Text + "/pack.mcmeta") Then
 
                 Dim versionString As String = System.IO.File.ReadAllLines(tbDatapackPath.Text + "/pack.mcmeta")(2)
-                Dim parseVersion As String = Replace(VersionString, "    " + qm + "pack_format" + qm + ": ", "")
-                Dim version As String = Replace(ParseVersion, ",", "")
+                Dim parseVersion As String = Replace(versionString, "    " + qm + "pack_format" + qm + ": ", "")
+                Dim version As String = Replace(parseVersion, ",", "")
 
                 Try
                     If Convert.ToInt32(version) > 14 Then
@@ -1585,16 +1612,16 @@ Public Class frmMain
     End Function
 
     Private Sub InitializeLoadingSettings()
-        If My.Computer.FileSystem.FileExists(SettingsFile) Then
+        If My.Computer.FileSystem.FileExists(settingsFile) Then
             Try
                 'Try to load settings and determine version
-                SettingsArray = File.ReadAllLines(SettingsFile)
-                LoadedSettingsVersion = SettingsArray(1).Replace("Version=", "")
-                WriteToLog("Found settings version " + LoadedSettingsVersion.ToString, "Info")
+                settingsArray = File.ReadAllLines(settingsFile)
+                loadedSettingsVersion = settingsArray(1).Replace("Version=", "")
+                WriteToLog("Found settings version " + loadedSettingsVersion.ToString, "Info")
 
                 'Resize array so all settings can fit in it (Array size = Amount of lines that the settings file should have)
-                ReDim Preserve SettingsArray(22)
-                ConvertSettings(SettingsFile)
+                ReDim Preserve settingsArray(22)
+                ConvertSettings(settingsFile)
             Catch ex As Exception
                 MsgBox("Error when loading settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
                 WriteToLog("Error when loading settings: " + ex.Message, "Error")
@@ -1602,14 +1629,14 @@ Public Class frmMain
 
         Else
             'Show error and create new settings file if none exists
-            WriteToLog("Could not find settings file. Creating a new one (Version " + SettingsVersion.ToString + ").", "Warning")
-            My.Computer.FileSystem.WriteAllText(SettingsFile, "", False)
-            frmSettings.SaveSettings(SettingsFile)
+            WriteToLog("Could not find settings file. Creating a new one (Version " + settingsVersion.ToString + ").", "Warning")
+            My.Computer.FileSystem.WriteAllText(settingsFile, "", False)
+            frmSettings.SaveSettings(settingsFile)
         End If
 
         'Check if log directory exists and create it if not
-        If My.Computer.FileSystem.DirectoryExists(LogDirectory) = False Then
-            My.Computer.FileSystem.CreateDirectory(LogDirectory)
+        If My.Computer.FileSystem.DirectoryExists(logDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(logDirectory)
         End If
     End Sub
 
@@ -1640,7 +1667,7 @@ Public Class frmMain
                     If ((settingsArray(5) = "AutoSaveLogs=True" = False And settingsArray(4) = "AutoSaveLogs=False")) = False Then
                         settingsArray(5) = frmSettings.SettingsFilePreset.Lines(5)
                     End If
-                    If ((settingsArray(5) = "Design=Light" = False And settingsArray(4) = "Design=Dark")) = False Then
+                    If ((settingsArray(5) = "Design=Light" = False And settingsArray(4) = "Design=Dark" And settingsArray(4) = "Design=System Default")) = False Then
                         settingsArray(6) = frmSettings.SettingsFilePreset.Lines(6)
                     End If
                     If (settingsArray(7) = "/") = False Then
@@ -1705,49 +1732,49 @@ Public Class frmMain
     End Sub
 
     Public Function SettingsFaulty() As Boolean
-        If (SettingsArray(0) = "#Random Item Giver Settings File") = False Then
+        If (settingsArray(0) = "#Random Item Giver Settings File") = False Then
             Return True
-        ElseIf (SettingsArray(1) = "Version=" + SettingsVersion.ToString) = False Then
+        ElseIf (settingsArray(1) = "Version=" + settingsVersion.ToString) = False Then
             Return True
-        ElseIf (SettingsArray(2) = "/") = False Then
+        ElseIf (settingsArray(2) = "/") = False Then
             Return True
-        ElseIf (SettingsArray(3) = "#General1") = False Then
+        ElseIf (settingsArray(3) = "#General1") = False Then
             Return True
-        ElseIf ((SettingsArray(4) = "UseAdvancedViewByDefault=True" = False And SettingsArray(4) = "UseAdvancedViewByDefault=False" = False)) Then
+        ElseIf ((settingsArray(4) = "UseAdvancedViewByDefault=True" = False And settingsArray(4) = "UseAdvancedViewByDefault=False" = False)) Then
             Return True
-        ElseIf ((SettingsArray(5) = "AutoSaveLogs=True" = False And SettingsArray(5) = "AutoSaveLogs=False" = False)) Then
+        ElseIf ((settingsArray(5) = "AutoSaveLogs=True" = False And settingsArray(5) = "AutoSaveLogs=False" = False)) Then
             Return True
-        ElseIf ((SettingsArray(6) = "Design=Light" = False And SettingsArray(6) = "Design=Dark" = False)) Then
+        ElseIf ((settingsArray(6) = "Design=Light" = False And settingsArray(6) = "Design=Dark" = False And settingsArray(6) = "Design=System Default" = False)) Then
             Return True
-        ElseIf (SettingsArray(7) = "/") = False Then
+        ElseIf (settingsArray(7) = "/") = False Then
             Return True
-        ElseIf (SettingsArray(8) = "#General2") = False Then
+        ElseIf (settingsArray(8) = "#General2") = False Then
             Return True
-        ElseIf ((SettingsArray(9) = "DisableLogging=True" = False And SettingsArray(9) = "DisableLogging=False" = False)) Then
+        ElseIf ((settingsArray(9) = "DisableLogging=True" = False And settingsArray(9) = "DisableLogging=False" = False)) Then
             Return True
-        ElseIf ((SettingsArray(10) = "HideAlphaWarning=True" = False And SettingsArray(10) = "HideAlphaWarning=False" = False)) Then
+        ElseIf ((settingsArray(10) = "HideAlphaWarning=True" = False And settingsArray(10) = "HideAlphaWarning=False" = False)) Then
             Return True
-        ElseIf (SettingsArray(11) = "/") = False Then
+        ElseIf (settingsArray(11) = "/") = False Then
             Return True
-        ElseIf (SettingsArray(12) = "#Datapack Profiles") = False Then
+        ElseIf (settingsArray(12) = "#Datapack Profiles") = False Then
             Return True
-        ElseIf ((SettingsArray(13) = "LoadDefaultProfile=True" = False And SettingsArray(13) = "LoadDefaultProfile=False" = False)) Then
+        ElseIf ((settingsArray(13) = "LoadDefaultProfile=True" = False And settingsArray(13) = "LoadDefaultProfile=False" = False)) Then
             Return True
-        ElseIf String.IsNullOrEmpty(SettingsArray(14)) Then
+        ElseIf String.IsNullOrEmpty(settingsArray(14)) Then
             Return True
-        ElseIf (SettingsArray(15) = "/") = False Then
+        ElseIf (settingsArray(15) = "/") = False Then
             Return True
-        ElseIf (SettingsArray(16) = "#Schemes") = False Then
+        ElseIf (settingsArray(16) = "#Schemes") = False Then
             Return True
-        ElseIf ((SettingsArray(17) = "SelectDefaultScheme=True" = False And SettingsArray(17) = "SelectDefaultScheme=False" = False)) Then
+        ElseIf ((settingsArray(17) = "SelectDefaultScheme=True" = False And settingsArray(17) = "SelectDefaultScheme=False" = False)) Then
             Return True
-        ElseIf String.IsNullOrEmpty(SettingsArray(18)) Then
+        ElseIf String.IsNullOrEmpty(settingsArray(18)) Then
             Return True
-        ElseIf (SettingsArray(19) = "/") = False Then
+        ElseIf (settingsArray(19) = "/") = False Then
             Return True
-        ElseIf (SettingsArray(20) = "#Item List Importer") = False Then
+        ElseIf (settingsArray(20) = "#Item List Importer") = False Then
             Return True
-        ElseIf ((SettingsArray(21) = "DontImportVanillaItemsByDefault=True" = False And SettingsArray(21) = "DontImportVanillaItemsByDefault=False" = False)) Then
+        ElseIf ((settingsArray(21) = "DontImportVanillaItemsByDefault=True" = False And settingsArray(21) = "DontImportVanillaItemsByDefault=False" = False)) Then
             Return True
         Else
             Return False
@@ -1760,34 +1787,34 @@ Public Class frmMain
         Try
 
             'Load general 1 settings
-            My.Settings.UseAdvancedViewByDefault = Convert.ToBoolean(SettingsArray(4).Replace("UseAdvancedViewByDefault=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(4), "Info")
-            My.Settings.AutoSaveLogs = Convert.ToBoolean(SettingsArray(5).Replace("AutoSaveLogs=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(5), "Info")
-            My.Settings.Design = SettingsArray(6).Replace("Design=", "")
-            WriteToLog("Loaded setting " + SettingsArray(6), "Info")
+            My.Settings.UseAdvancedViewByDefault = Convert.ToBoolean(settingsArray(4).Replace("UseAdvancedViewByDefault=", ""))
+            WriteToLog("Loaded setting " + settingsArray(4), "Info")
+            My.Settings.AutoSaveLogs = Convert.ToBoolean(settingsArray(5).Replace("AutoSaveLogs=", ""))
+            WriteToLog("Loaded setting " + settingsArray(5), "Info")
+            My.Settings.Design = settingsArray(6).Replace("Design=", "")
+            WriteToLog("Loaded setting " + settingsArray(6), "Info")
 
             'Load general 2 settings
-            My.Settings.DisableLogging = Convert.ToBoolean(SettingsArray(9).Replace("DisableLogging=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(9), "Info")
-            My.Settings.HideAlphaWarning = Convert.ToBoolean(SettingsArray(10).Replace("HideAlphaWarning=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(10), "Info")
+            My.Settings.DisableLogging = Convert.ToBoolean(settingsArray(9).Replace("DisableLogging=", ""))
+            WriteToLog("Loaded setting " + settingsArray(9), "Info")
+            My.Settings.HideAlphaWarning = Convert.ToBoolean(settingsArray(10).Replace("HideAlphaWarning=", ""))
+            WriteToLog("Loaded setting " + settingsArray(10), "Info")
 
             'Load datapack profiles settings
-            My.Settings.LoadDefaultProfile = Convert.ToBoolean(SettingsArray(13).Replace("LoadDefaultProfile=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(13), "Info")
-            My.Settings.DefaultProfile = SettingsArray(14).Replace("DefaultProfile=", "")
-            WriteToLog("Loaded setting " + SettingsArray(14), "Info")
+            My.Settings.LoadDefaultProfile = Convert.ToBoolean(settingsArray(13).Replace("LoadDefaultProfile=", ""))
+            WriteToLog("Loaded setting " + settingsArray(13), "Info")
+            My.Settings.DefaultProfile = settingsArray(14).Replace("DefaultProfile=", "")
+            WriteToLog("Loaded setting " + settingsArray(14), "Info")
 
             'Load scheme settings
-            My.Settings.SelectDefaultScheme = Convert.ToBoolean(SettingsArray(17).Replace("SelectDefaultScheme=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(17), "Info")
-            My.Settings.DefaultScheme = SettingsArray(18).Replace("DefaultScheme=", "")
-            WriteToLog("Loaded setting " + SettingsArray(18), "Info")
+            My.Settings.SelectDefaultScheme = Convert.ToBoolean(settingsArray(17).Replace("SelectDefaultScheme=", ""))
+            WriteToLog("Loaded setting " + settingsArray(17), "Info")
+            My.Settings.DefaultScheme = settingsArray(18).Replace("DefaultScheme=", "")
+            WriteToLog("Loaded setting " + settingsArray(18), "Info")
 
             'Load Item List Importer Settings
-            My.Settings.DontImportVanillaItemsByDefault = Convert.ToBoolean(SettingsArray(21).Replace("DontImportVanillaItemsByDefault=", ""))
-            WriteToLog("Loaded setting " + SettingsArray(21), "Info")
+            My.Settings.DontImportVanillaItemsByDefault = Convert.ToBoolean(settingsArray(21).Replace("DontImportVanillaItemsByDefault=", ""))
+            WriteToLog("Loaded setting " + settingsArray(21), "Info")
 
         Catch ex As Exception
 
@@ -1797,8 +1824,8 @@ Public Class frmMain
             'If loading settings failed, show an option to reset settings
             Select Case MsgBox("An error occured while loading your settings. " + vbNewLine + "Do you want to reset your settings? This probably fixes the problem.", vbCritical + vbYesNo, "Error")
                 Case Windows.Forms.DialogResult.Yes
-                    My.Computer.FileSystem.WriteAllText(SettingsFile, "", False)
-                    frmSettings.SaveSettings(SettingsFile)
+                    My.Computer.FileSystem.WriteAllText(settingsFile, "", False)
+                    frmSettings.SaveSettings(settingsFile)
                     MsgBox("Successfully reset your settings!" + vbNewLine + "Please restart the application for changes to take affect.", MsgBoxStyle.Information, "Reset settings")
                     WriteToLog("Successfully reset settings!", "Info")
                     Close()
@@ -1867,10 +1894,10 @@ Public Class frmMain
 
     Private Sub AddMultipleItems()
         'Add all items in the textbox line by line
-        For Each line As String In ItemsList
-            IgnoreDuplicates = False
-            DuplicateDetected = False
-            Item = line
+        For Each line As String In itemsList
+            ignoreDuplicates = False
+            duplicateDetected = False
+            item = line
             CallAddItem()
         Next
     End Sub
@@ -1878,1228 +1905,1228 @@ Public Class frmMain
     Private Sub CallAddItem()
 
         'Disable the creative-only options if 'creative-only' is generally disabled
-        If CreativeOnly = False Then
-            CommandBlock = False
-            OtherCreativeOnlyItem = False
-            SpawnEgg = False
+        If creativeOnly = False Then
+            commandBlock = False
+            otherCreativeOnlyItem = False
+            spawnEgg = False
         End If
 
         'Beginn adding items for the specific version if string is not empty
 
-        If String.IsNullOrEmpty(Item) = False Then
+        If String.IsNullOrEmpty(item) = False Then
 
-            If DatapackVersion = "Version 1.16.2 - 1.16.5" Then
+            If datapackVersion = "Version 1.16.2 - 1.16.5" Then
 
                 'Add item to loot tables for 1 item
-                If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
-                    AddItem(Item, "1", "1.16", "main")
+                If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    AddItem(item, "1", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 2 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 3 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 5 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 10 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 32 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 64 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot table for random amount of same items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.16", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.16", "tipped_arrows")
                 End If
 
                 'Add item to loot table for random amount of different items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.16", "tipped_arrows")
-                End If
-
-            ElseIf DatapackVersion = "Version 1.17 - 1.17.1" Then
-
-                If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
-                    AddItem(Item, "1", "1.17", "main")
-                End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "main_without_creative-only")
-                End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "special_vxx")
-                End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "special_vvx")
-                End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "special_xvx")
-                End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "special_xvv")
-                End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "special_xxv")
-                End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "special_vxv")
-                End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "suspicious_stews")
-                End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "enchanted_books")
-                End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "potions")
-                End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "splash_potions")
-                End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "lingering_potions")
-                End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.17", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.16", "tipped_arrows")
                 End If
 
-            ElseIf DatapackVersion = "Version 1.18 - 1.18.2" Then
+            ElseIf datapackVersion = "Version 1.17 - 1.17.1" Then
+
+                If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    AddItem(item, "1", "1.17", "main")
+                End If
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "main_without_creative-only")
+                End If
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "special_vxx")
+                End If
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "special_vvx")
+                End If
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "special_xvx")
+                End If
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "special_xvv")
+                End If
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "special_xxv")
+                End If
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "special_vxv")
+                End If
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "suspicious_stews")
+                End If
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "enchanted_books")
+                End If
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "potions")
+                End If
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "splash_potions")
+                End If
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "lingering_potions")
+                End If
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.17", "tipped_arrows")
+                End If
+
+            ElseIf datapackVersion = "Version 1.18 - 1.18.2" Then
 
                 'Add item to loot tables for 1 item
-                If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
-                    AddItem(Item, "1", "1.18", "main")
+                If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    AddItem(item, "1", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.18", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 2 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.18", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 3 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.18", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 5 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.18", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 10 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.18", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 32 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.18", "tipped_arrows")
                 End If
 
                 'Add item to loot tables for 64 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.18", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.18", "tipped_arrows")
                 End If
 
-            ElseIf DatapackVersion = "Version 1.19 - 1.19.3" OrElse DatapackVersion = "Version 1.19.4" Then
+            ElseIf datapackVersion = "Version 1.19 - 1.19.3" OrElse datapackVersion = "Version 1.19.4" Then
 
                 'Add item to loot tables for 1 item
-                If NormalItem And (ItemAddMode = "Normal" Or ItemAddMode = "Fast") Then
-                    AddItem(Item, "1", "1.19", "main")
+                If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    AddItem(item, "1", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "1", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "1", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for 2 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "2", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "2", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for 3 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "3", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "3", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for 5 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "5", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "5", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for 10 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "10", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "10", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for 32 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "32", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "32", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for 64 items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "64", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "64", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for random amount of same items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-1", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "-1", "1.19", "paintings")
                 End If
 
                 'Add item to loot tables for random amount of different items
-                If NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "main")
+                If normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "main")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "main_without_creative-only")
+                If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "main_without_creative-only")
                 End If
-                If CommandBlock = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "special_vxx")
+                If commandBlock = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "special_vxx")
                 End If
-                If OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "special_vvx")
+                If otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "special_vvx")
                 End If
-                If SpawnEgg = False And OtherCreativeOnlyItem = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "special_xvx")
+                If spawnEgg = False And otherCreativeOnlyItem = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "special_xvx")
                 End If
-                If SpawnEgg = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "special_xvv")
+                If spawnEgg = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "special_xvv")
                 End If
-                If SpawnEgg = False And CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "special_xxv")
+                If spawnEgg = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "special_xxv")
                 End If
-                If CommandBlock = False And NormalItem And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "special_vxv")
+                If commandBlock = False And normalItem And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "special_vxv")
                 End If
-                If SuspiciousStew And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "suspicious_stews")
+                If suspiciousStew And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "suspicious_stews")
                 End If
-                If EnchantedBook And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "enchanted_books")
+                If enchantedBook And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "enchanted_books")
                 End If
-                If Potion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "potions")
+                If potion And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "potions")
                 End If
-                If SplashPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "splash_potions")
+                If splashPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "splash_potions")
                 End If
-                If LingeringPotion And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "lingering_potions")
+                If lingeringPotion And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "lingering_potions")
                 End If
-                If TippedArrow And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "tipped_arrows")
+                If tippedArrow And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "tipped_arrows")
                 End If
-                If GoatHorn And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "goat_horns")
+                If goatHorn And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "goat_horns")
                 End If
-                If Painting And ItemAddMode = "Normal" Then
-                    AddItem(Item, "-2", "1.19", "paintings")
+                If painting And itemAddMode = "Normal" Then
+                    AddItem(item, "-2", "1.19", "paintings")
                 End If
             End If
 
             'Update And report workerprogress
-            Workerprogress = Workerprogress + ProgressStep
-            bgwAddItems.ReportProgress(Workerprogress)
-            Invoke(Sub() tbSmallOutput.Text = Output)
-            TotalItemAmount = TotalItemAmount - 1
-            Invoke(Sub() lblItemsTotal.Text = "Adding items... (" + TotalItemAmount.ToString + " items remaining)")
+            workerProgress = workerProgress + progressStep
+            bgwAddItems.ReportProgress(workerProgress)
+            Invoke(Sub() tbSmallOutput.Text = output)
+            totalItemAmount = totalItemAmount - 1
+            Invoke(Sub() lblItemsTotal.Text = "Adding items... (" + totalItemAmount.ToString + " items remaining)")
         Else
             MsgBox("Please enter a text in the ID textbox!", MsgBoxStyle.Critical, "Error")
         End If
@@ -3156,19 +3183,19 @@ Public Class frmMain
         WriteToLog("Loading profiles...", "Info")
 
         'Check if profile directory exists and create it if it is missing
-        If My.Computer.FileSystem.DirectoryExists(ProfileDirectory) = False Then
-            My.Computer.FileSystem.CreateDirectory(ProfileDirectory)
+        If My.Computer.FileSystem.DirectoryExists(profileDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(profileDirectory)
             WriteToLog("Created profile directory", "Info")
         End If
 
         'Load profile files from specified directory
-        GetProfileFiles(ProfileDirectory)
+        GetProfileFiles(profileDirectory)
 
         'Load default profile if option is enabled
         If My.Settings.LoadDefaultProfile = True Then
             frmSettings.cbLoadDefaultProfile.Checked = True
             If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
-                If My.Computer.FileSystem.FileExists(ProfileDirectory + My.Settings.DefaultProfile + ".txt") Then
+                If My.Computer.FileSystem.FileExists(profileDirectory + My.Settings.DefaultProfile + ".txt") Then
                     cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
                     frmLoadProfileFrom.InitializeLoadingProfile(cbxDefaultProfile.SelectedItem, False)
                     WriteToLog("Loaded default profile " + cbxDefaultProfile.SelectedItem, "Info")
@@ -3176,7 +3203,7 @@ Public Class frmMain
                     frmSettings.Show()
                     frmSettings.cbLoadDefaultProfile.Checked = False
                     My.Settings.LoadDefaultProfile = False
-                    frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                    frmSettings.SaveSettings(appData + "/Random Item Giver Updater/settings.txt")
                     frmSettings.Close()
                     WriteToLog("Error when loading profile: Default profile doesn't exist. Disabled 'Load profile by default' option.", "Error")
                 End If
@@ -3184,7 +3211,7 @@ Public Class frmMain
                 frmSettings.Show()
                 frmSettings.cbLoadDefaultProfile.Checked = False
                 My.Settings.LoadDefaultProfile = False
-                frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                frmSettings.SaveSettings(appData + "/Random Item Giver Updater/settings.txt")
                 frmSettings.Close()
                 WriteToLog("Error when loading profile: Default profile is empty. Disabled 'Load profile by default' option.", "Error")
             End If
@@ -3196,25 +3223,25 @@ Public Class frmMain
         WriteToLog("Loading schemes...", "Info")
 
         'Check if scheme directory exists
-        If My.Computer.FileSystem.DirectoryExists(SchemeDirectory) = False Then
-            My.Computer.FileSystem.CreateDirectory(SchemeDirectory)
+        If My.Computer.FileSystem.DirectoryExists(schemeDirectory) = False Then
+            My.Computer.FileSystem.CreateDirectory(schemeDirectory)
         End If
 
         'Clear list of already existing schemes and load new list of schemes
         cbxScheme.Items.Clear()
-        GetSchemeFiles(SchemeDirectory)
+        GetSchemeFiles(schemeDirectory)
 
         'Select default scheme if enabled
         If My.Settings.SelectDefaultScheme = True Then
             frmSettings.cbSelectDefaultScheme.Checked = True
             If String.IsNullOrEmpty(My.Settings.DefaultScheme) = False Then
-                If My.Computer.FileSystem.FileExists(SchemeDirectory + My.Settings.DefaultScheme + ".txt") Then
+                If My.Computer.FileSystem.FileExists(schemeDirectory + My.Settings.DefaultScheme + ".txt") Then
                     cbxScheme.SelectedItem = My.Settings.DefaultScheme
                 Else
                     frmSettings.Show()
                     frmSettings.cbSelectDefaultScheme.Checked = False
                     My.Settings.SelectDefaultScheme = False
-                    frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                    frmSettings.SaveSettings(appData + "/Random Item Giver Updater/settings.txt")
                     frmSettings.Close()
                     WriteToLog("Error when loading scheme: Default scheme doesn't exist. Disabled 'Select scheme by default' option.", "Error")
                 End If
@@ -3222,7 +3249,7 @@ Public Class frmMain
                 frmSettings.Show()
                 frmSettings.cbSelectDefaultScheme.Checked = False
                 My.Settings.SelectDefaultScheme = False
-                frmSettings.SaveSettings(AppData + "/Random Item Giver Updater/settings.txt")
+                frmSettings.SaveSettings(appData + "/Random Item Giver Updater/settings.txt")
                 frmSettings.Close()
                 WriteToLog("Error when loading scheme: Default scheme is empty. Disabled 'Select scheme by default' option.", "Error")
             End If
@@ -3283,40 +3310,40 @@ Public Class frmMain
 
     Public Sub AddDefaultSchemes() 'Creates profiles for the default schemes. Overwrites existing ones.
         'Normal Item
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Normal Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Normal Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Suspicious Stew
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Suspicious Stew" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Suspicious Stew" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Enchanted Book
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Enchanted Book" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Enchanted Book" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Potion
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Splash Potion
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Splash Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Splash Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Lingering Potion
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Lingering Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Lingering Potion" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Tipped Arrow
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Tipped Arrow" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Tipped Arrow" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Goat Horn
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Goat Horn" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Goat Horn" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Spawn Egg
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Spawn Egg" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Spawn Egg" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Command Block
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Command Block" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Command Block" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Other Creative-Only Item
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Other Creative-Only Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Other Creative-Only Item" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False", False)
 
         'Painting
-        My.Computer.FileSystem.WriteAllText(SchemeDirectory + "Painting" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
+        My.Computer.FileSystem.WriteAllText(schemeDirectory + "Painting" + ".txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
 
         WriteToLog("Restored default schemes.", "Info")
     End Sub
@@ -3324,26 +3351,26 @@ Public Class frmMain
     '-- Button animations --
 
     Private Sub btnHamburger_MouseDown(sender As Object, e As MouseEventArgs) Handles btnHamburger.MouseDown
-        If My.Settings.Design = "Light" Then
+        If design = "Light" Then
             btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonClick
-        ElseIf My.Settings.Design = "Dark" Then
+        ElseIf design = "Dark" Then
             btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonDarkClick
         End If
     End Sub
 
     Private Sub btnHamburger_MouseEnter(sender As Object, e As EventArgs) Handles btnHamburger.MouseEnter
-        If My.Settings.Design = "Light" Then
+        If design = "Light" Then
             btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonHover
-        ElseIf My.Settings.Design = "Dark" Then
+        ElseIf design = "Dark" Then
             btnHamburger.BackgroundImage = My.Resources.imgHamburgerButtonDarkHover
         End If
     End Sub
 
     Private Sub btnHamburger_MouseLeave(sender As Object, e As EventArgs) Handles btnHamburger.MouseLeave
         If cmsHamburgerButton.Visible = False Then
-            If My.Settings.Design = "Light" Then
+            If design = "Light" Then
                 btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
-            ElseIf My.Settings.Design = "Dark" Then
+            ElseIf design = "Dark" Then
                 btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
             End If
         End If
@@ -3351,9 +3378,9 @@ Public Class frmMain
 
     Private Sub btnHamburger_MouseUp(sender As Object, e As MouseEventArgs) Handles btnHamburger.MouseUp
         If cmsHamburgerButton.Visible = False Then
-            If My.Settings.Design = "Light" Then
+            If design = "Light" Then
                 btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
-            ElseIf My.Settings.Design = "Dark" Then
+            ElseIf design = "Dark" Then
                 btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
             End If
         End If
@@ -3365,9 +3392,9 @@ Public Class frmMain
     End Sub
 
     Private Sub btnAddItem_MouseDown(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
@@ -3375,250 +3402,250 @@ Public Class frmMain
 
 
     Private Sub btnAddItem_MouseEnter(sender As Object, e As EventArgs) Handles btnAddItem.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnAddItem_MouseLeave(sender As Object, e As EventArgs) Handles btnAddItem.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnAddItem.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnAddItem_MouseUp(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnAddItem.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnLoadProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnLoadProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnLoadProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnLoadProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnSaveProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnSaveProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnSaveProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnSaveProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub ToolsToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             'Get the sub menu
             Dim subMenu As ToolStripDropDownMenu = DirectCast(sender, ToolStripMenuItem).DropDown
 
@@ -3629,7 +3656,7 @@ Public Class frmMain
     End Sub
 
     Private Sub HelpToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If design = "Dark" Then
             'Get the sub menu
             Dim subMenu As ToolStripDropDownMenu = DirectCast(sender, ToolStripMenuItem).DropDown
 

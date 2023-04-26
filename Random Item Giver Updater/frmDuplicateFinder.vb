@@ -99,10 +99,10 @@ Public Class frmDuplicateFinder
     Private Sub frmDuplicateFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Set appearance of buttons depending on selected design
         For Each ctrl As Control In Controls.OfType(Of Button)
-            If My.Settings.Design = "Dark" Then
+            If frmMain.design = "Dark" Then
                 ctrl.ForeColor = Color.White
                 ctrl.BackgroundImage = My.Resources.imgButton
-            ElseIf My.Settings.Design = "Light" Then
+            ElseIf frmMain.design = "Light" Then
                 ctrl.ForeColor = Color.Black
                 ctrl.BackgroundImage = My.Resources.imgButtonLight
             End If
@@ -112,7 +112,7 @@ Public Class frmDuplicateFinder
         QuM = Quotationmark.Text
 
         'Load dark mode
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             BackColor = Color.FromArgb(50, 50, 50)
             lblHeader.ForeColor = Color.White
             lblDescription.ForeColor = Color.White
@@ -134,7 +134,7 @@ Public Class frmDuplicateFinder
             pbProgress.Value = 100
             MsgBox("Checking For duplicates Is complete." + vbNewLine + "You can see the results In the list behind this message." + vbNewLine + "If the list Is empty Then there aren't any duplicates.", MsgBoxStyle.Information, "Duplicate checker")
         Else
-                lblDuplicatesAmount.Text = "Searching for duplicates failed."
+            lblDuplicatesAmount.Text = "Searching for duplicates failed."
             frmMain.WriteToLog("Searching for duplicates failed with 1 or more errors.", "Error")
         End If
 
@@ -437,12 +437,12 @@ Public Class frmDuplicateFinder
         Dim str(1) As String
         Dim itm As ListViewItem
 
-        While DoLoopNum < NumLinesOnlyDups
-            str(0) = DuplicatesOnly(DoLoopNum)
+        While doLoopNum < numLinesOnlyDups
+            str(0) = DuplicatesOnly(doLoopNum)
             str(1) = PathAmount + lootTable
             itm = New ListViewItem(str)
             Invoke(Sub() lvDuplicates.Items.Add(itm))
-            DoLoopNum = DoLoopNum + 1
+            doLoopNum = doLoopNum + 1
         End While
 
         'Report aand log that the process has finished
@@ -454,72 +454,72 @@ Public Class frmDuplicateFinder
     '-- Button animations --
 
     Private Sub btnBrowse_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnBrowse.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnBrowse.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnBrowse_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowse.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnBrowse.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnBrowse.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnBrowse_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowse.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnBrowse.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnBrowse.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnBrowse_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowse.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnBrowse.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnBrowse.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnCheck_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCheck.MouseDown
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnCheck.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnCheck.BackgroundImage = My.Resources.imgButtonClickLight
         End If
 
     End Sub
 
     Private Sub btnCheck_MouseEnter(sender As Object, e As EventArgs) Handles btnCheck.MouseEnter
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnCheck.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnCheck.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
 
     End Sub
 
     Private Sub btnCheck_MouseLeave(sender As Object, e As EventArgs) Handles btnCheck.MouseLeave
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnCheck.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnCheck.BackgroundImage = My.Resources.imgButtonLight
         End If
 
     End Sub
 
     Private Sub btnCheck_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCheck.MouseUp
-        If My.Settings.Design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnCheck.BackgroundImage = My.Resources.imgButton
-        ElseIf My.Settings.Design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnCheck.BackgroundImage = My.Resources.imgButtonLight
         End If
 
