@@ -156,6 +156,11 @@ Public Class frmDuplicateFinder
         pbProgress.Value = e.ProgressPercentage
     End Sub
 
+    Private Sub bgwSearchForDuplicates_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwSearchForDuplicates.DoWork
+        'Begin the duplicate finder process
+        InitializeChecking()
+    End Sub
+
     '-- Custom Methods --
 
     Private Sub InitializeChecking()
