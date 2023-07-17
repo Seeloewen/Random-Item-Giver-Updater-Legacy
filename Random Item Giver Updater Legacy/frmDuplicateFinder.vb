@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel.Design
+Imports System.IO
 
 Public Class frmDuplicateFinder
 
@@ -74,7 +75,13 @@ Public Class frmDuplicateFinder
             Dim ParseVersion As String = Replace(VersionString, "    " + QuM + "pack_format" + QuM + ": ", "")
             Dim Version As String = Replace(ParseVersion, ",", "")
 
-            If Version = "14" OrElse Version = "13" Then
+            If Version = "15" Then
+                If File.Exists(tbDatapackPath.Text + "/updater.txt") Then
+                    DatapackVersion = "1.20.1"
+                Else
+                    DatapackVersion = "1.20"
+                End If
+            ElseIf Version = "14" OrElse Version = "13" Then
                 DatapackVersion = "1.20"
             ElseIf Version = "12" OrElse Version = "11" OrElse Version = "10" Then
                 DatapackVersion = "1.19"
@@ -165,10 +172,10 @@ Public Class frmDuplicateFinder
 
     Private Sub InitializeChecking()
         'Decided which loot tables to check depending on the datapack version
-        If DatapackVersion = "1.20" OrElse DatapackVersion = "1.19" Or DatapackVersion = "1.18" Or DatapackVersion = "1.16" Then
+        If DatapackVersion = "1.20.1" OrElse DatapackVersion = "1.20" OrElse DatapackVersion = "1.19" Or DatapackVersion = "1.18" Or DatapackVersion = "1.16" Then
             If DatapackVersion = "1.18" Then
                 DuplicateFinderProgress = 1.78
-            ElseIf DatapackVersion = "1.20" OrElse DatapackVersion = "1.19" OrElse DatapackVersion = "1.16" Then
+            Else
                 DuplicateFinderProgress = 1.38
             End If
 
@@ -298,15 +305,28 @@ Public Class frmDuplicateFinder
         If DatapackVersion = "1.17" Then
             PathAmount = ""
         Else
-            If itemAmount = 1 Then
-                PathAmount = "1item/"
-            ElseIf itemAmount = 2 Then
-                PathAmount = "2sameitems/"
-            ElseIf itemAmount = 3 Then
-                PathAmount = "3sameitems/"
-            ElseIf itemAmount = 5 Then
-                PathAmount = "5sameitems/"
-            ElseIf itemAmount = 10 Then
+            If DatapackVersion = "1.20.1" Then
+                If itemAmount = 1 Then
+                    PathAmount = "01item/"
+                ElseIf itemAmount = 2 Then
+                    PathAmount = "02sameitems/"
+                ElseIf itemAmount = 3 Then
+                    PathAmount = "03sameitems/"
+                ElseIf itemAmount = 5 Then
+                    PathAmount = "05sameitems/"
+                End If
+            Else
+                If itemAmount = 1 Then
+                    PathAmount = "1item/"
+                ElseIf itemAmount = 2 Then
+                    PathAmount = "2sameitems/"
+                ElseIf itemAmount = 3 Then
+                    PathAmount = "3sameitems/"
+                ElseIf itemAmount = 5 Then
+                    PathAmount = "5sameitems/"
+                End If
+            End If
+            If itemAmount = 10 Then
                 PathAmount = "10sameitems/"
             ElseIf itemAmount = 32 Then
                 PathAmount = "32sameitems/"

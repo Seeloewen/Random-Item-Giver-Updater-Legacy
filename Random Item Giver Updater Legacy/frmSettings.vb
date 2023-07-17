@@ -144,8 +144,8 @@ Public Class frmSettings
     End Sub
 
     Private Sub btnOpenLogDirectory_Click(sender As Object, e As EventArgs) Handles btnOpenLogDirectory.Click
-        If My.Computer.FileSystem.DirectoryExists(frmMain.LogDirectory) Then
-            Process.Start("explorer.exe", frmMain.LogDirectory)
+        If My.Computer.FileSystem.DirectoryExists(frmMain.logDirectory) Then
+            Process.Start("explorer.exe", frmMain.logDirectory)
         Else
             MsgBox("Cannot find log directory, please restart the application.", MsgBoxStyle.Critical, "Error")
         End If
@@ -193,13 +193,13 @@ Public Class frmSettings
 
     Private Sub btnNavGeneral1_Click(sender As Object, e As EventArgs) Handles btnNavGeneral1.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -218,13 +218,13 @@ Public Class frmSettings
 
     Private Sub btnNavGeneral2_Click(sender As Object, e As EventArgs) Handles btnNavGeneral2.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -243,13 +243,13 @@ Public Class frmSettings
 
     Private Sub btnNavDatapackProfiles_Click(sender As Object, e As EventArgs) Handles btnNavDatapackProfiles.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
@@ -268,13 +268,13 @@ Public Class frmSettings
 
     Private Sub btnNavSchemes_Click(sender As Object, e As EventArgs) Handles btnNavSchemes.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -293,13 +293,13 @@ Public Class frmSettings
 
     Private Sub btnNavItemListImporter_Click(sender As Object, e As EventArgs) Handles btnNavItemListImporter.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark

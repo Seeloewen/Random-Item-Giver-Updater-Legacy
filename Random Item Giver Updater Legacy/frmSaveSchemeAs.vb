@@ -367,6 +367,5 @@
         ElseIf frmMain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 End Class
