@@ -171,12 +171,12 @@ Public Class frmProfileEditor
     Private Sub SaveProfile(profileName)
         'Save profile settings into variables. If no text is given, a placeholder will be inserted
         If String.IsNullOrEmpty(tbDatapackPath.Text) Then
-            datapackPath = tbDatapackPath.Text = "None"
+            datapackPath = "None"
         Else
-            datapackPath = tbDatapackPath.Text = frmMain.tbDatapackPath.Text
+            datapackPath = tbDatapackPath.Text
         End If
         If String.IsNullOrEmpty(cbxDatapackVersion.SelectedItem) Then
-            datapackVersion = cbxDatapackVersion.Text = "None"
+            datapackVersion = "None"
         Else
             datapackVersion = cbxDatapackVersion.SelectedItem
         End If
