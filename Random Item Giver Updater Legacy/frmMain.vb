@@ -16,6 +16,7 @@ Public Class frmMain
     Public logDirectory As String = appData + "\Random Item Giver Updater Legacy\Logs\" 'Directory where the log files are saved
     Dim logFileName As String 'File name of the log file
     Public design As String = "System Default" 'Selected design
+    Dim osVersion As Version = Environment.OSVersion.Version
 
     'Profile variables
     Public profileDirectory As String = appData + "\Random Item Giver Updater Legacy\Profiles\" 'Directory where the profiles are located
@@ -115,6 +116,7 @@ Public Class frmMain
         End If
 
         'Initialize User Settings and Preferences
+        CheckOS()
         InitializeLoadingSettings()
         InitializeProfilesAndSchemes()
         DetermineDesign()
@@ -677,6 +679,13 @@ Public Class frmMain
     End Sub
 
     '-- Custom methods --
+
+    Private Sub CheckOS()
+        'Check whether the software runs under a supported OS or not (Supported: Windows 8.1+)
+        If (osVersion.Major = 6 And osVersion.Minor = 0) OrElse (osVersion.Major = 6 And osVersion.Minor = 1) OrElse (osVersion.Major = 6 And osVersion.Minor = 2) Then
+            MsgBox("You are using an Operating System that is no longer officially supported by the software. Errors and other problems may occur and you will not receive support.", MsgBoxStyle.Exclamation, "Warning")
+        End If
+    End Sub
 
     Public Sub DetermineDesign()
         'Check which setting is selected
