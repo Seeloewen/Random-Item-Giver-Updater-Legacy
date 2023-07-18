@@ -7,8 +7,6 @@ The Software has a very simple UI and lots of help elements and explainations in
 
 There is also a neat settings menu which lets you choose many preferences for the software and even edit profiles and schemes for adding items!
 
-The software is still in development but its basic functionality is there and works great.
-
 ## Adding items to datapack
 The software allows you to easily add items to datapack. It supports all available versions of the datapack and new versions are added as fast as possible.
 You can set a custom prefix and NBT tag and select the loot tables the item should be added to. It also has a detector to automatically detect which datapack version the selected datapack folder is. It also gives a warning if you try to add an item that already exists in the datapack to avoid duplicates. You can also save profiles and schemes and load them to quickly switch between different datapacks and item types. And if you aren't a very technical user, there is also a non-advanced view which is way easier to understand.
