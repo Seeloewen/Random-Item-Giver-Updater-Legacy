@@ -587,7 +587,7 @@ Public Class frmSettings
 
             'Set current version number in settings file
             settingsArray(1) = String.Format("Version={0}", frmMain.settingsVersion)
-            frmMain.WriteToLog(String.Format("Set new version number to {0}", frmMain.settingsVersion), "Info")
+            frmMain.WriteToLog(String.Format("Set version number to {0}", frmMain.settingsVersion), "Info")
 
             'Save general 1 settings
             If cbUseAdvancedViewByDefault.Checked Then
@@ -602,7 +602,7 @@ Public Class frmSettings
             Else
                 My.Settings.AutoSaveLogs = False
             End If
-            settingsArray(5) = String.Format("AutoSaveLogs={0}" + My.Settings.AutoSaveLogs)
+            settingsArray(5) = String.Format("AutoSaveLogs={0}", My.Settings.AutoSaveLogs)
             frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(5)), "Info")
             If cbxDesign.SelectedIndex = 0 Then
                 My.Settings.Design = "Light"
@@ -611,7 +611,7 @@ Public Class frmSettings
             ElseIf cbxDesign.SelectedIndex = 2 Then
                 My.Settings.Design = "System Default"
             End If
-            settingsArray(6) = String.Format("Design={0}" + My.Settings.Design)
+            settingsArray(6) = String.Format("Design={0}", My.Settings.Design)
             frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(6)), "Info")
 
             'Save general 2 Settings
@@ -629,7 +629,7 @@ Public Class frmSettings
             Else
                 My.Settings.HideLegacyWarning = False
             End If
-            settingsArray(10) = "HideAlphaWarning=" + My.Settings.HideLegacyWarning.ToString
+            settingsArray(10) = "HideLegacyWarning=" + My.Settings.HideLegacyWarning.ToString
             frmMain.WriteToLog("Saved setting " + settingsArray(10), "Info")
 
             'Save datapack profiles settings

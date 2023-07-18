@@ -1890,7 +1890,7 @@ Public Class frmMain
                     If ((settingsArray(9) = "DisableLogging=True" = False And settingsArray(9) = "DisableLogging=False" = False)) Then
                         settingsArray(9) = frmSettings.SettingsFilePreset.Lines(9)
                     End If
-                    If ((settingsArray(10) = "HideAlphaWarning=True" = False And settingsArray(10) = "HideAlphaWarning=False" = False)) Then
+                    If ((settingsArray(10) = "HideLegacyWarning=True" = False And settingsArray(10) = "HideLegacyWarning=False" = False)) Then
                         settingsArray(10) = frmSettings.SettingsFilePreset.Lines(10)
                     End If
                     If (settingsArray(11) = "/") = False Then
@@ -1964,7 +1964,7 @@ Public Class frmMain
             Return True
         ElseIf ((settingsArray(9) = "DisableLogging=True" = False And settingsArray(9) = "DisableLogging=False" = False)) Then
             Return True
-        ElseIf ((settingsArray(10) = "HideAlphaWarning=True" = False And settingsArray(10) = "HideAlphaWarning=False" = False)) Then
+        ElseIf ((settingsArray(10) = "HideLegacyWarning=True" = False And settingsArray(10) = "HideLegacyWarning=False" = False)) Then
             Return True
         ElseIf (settingsArray(11) = "/") = False Then
             Return True
@@ -2009,7 +2009,7 @@ Public Class frmMain
             'Load general 2 settings
             My.Settings.DisableLogging = Convert.ToBoolean(settingsArray(9).Replace("DisableLogging=", ""))
             WriteToLog("Loaded setting " + settingsArray(9), "Info")
-            My.Settings.HideLegacyWarning = Convert.ToBoolean(settingsArray(10).Replace("HideAlphaWarning=", ""))
+            My.Settings.HideLegacyWarning = Convert.ToBoolean(settingsArray(10).Replace("HideLegacyWarning=", ""))
             WriteToLog("Loaded setting " + settingsArray(10), "Info")
 
             'Load datapack profiles settings

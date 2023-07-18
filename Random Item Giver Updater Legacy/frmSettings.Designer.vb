@@ -144,9 +144,9 @@ Partial Class frmSettings
         Me.cbHideBetaWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbHideBetaWarning.Location = New System.Drawing.Point(13, 208)
         Me.cbHideBetaWarning.Name = "cbHideBetaWarning"
-        Me.cbHideBetaWarning.Size = New System.Drawing.Size(181, 20)
+        Me.cbHideBetaWarning.Size = New System.Drawing.Size(195, 20)
         Me.cbHideBetaWarning.TabIndex = 27
-        Me.cbHideBetaWarning.Text = "Hide beta version warning"
+        Me.cbHideBetaWarning.Text = "Hide legacy version warning"
         Me.cbHideBetaWarning.UseVisualStyleBackColor = True
         '
         'lblBetaWarning
@@ -710,7 +710,7 @@ Partial Class frmSettings
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(749, 501)
+        Me.ClientSize = New System.Drawing.Size(747, 502)
         Me.Controls.Add(Me.gbDatapackProfiles)
         Me.Controls.Add(Me.gbItemListImporter)
         Me.Controls.Add(Me.gbSchemes)

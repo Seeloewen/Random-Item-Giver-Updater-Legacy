@@ -128,7 +128,7 @@ Design=Light
 /
 #General2
 DisableLogging=False
-HideAlphaWarning=False
+HideLegacyWarning=False
 /
 #Datapack Profiles
 LoadDefaultProfile=False
