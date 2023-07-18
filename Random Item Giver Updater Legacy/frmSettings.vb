@@ -629,8 +629,8 @@ Public Class frmSettings
             Else
                 My.Settings.HideLegacyWarning = False
             End If
-            settingsArray(10) = "HideLegacyWarning=" + My.Settings.HideLegacyWarning.ToString
-            frmMain.WriteToLog("Saved setting " + settingsArray(10), "Info")
+            settingsArray(10) = String.Format("HideLegacyWarning={0}", My.Settings.HideLegacyWarning.ToString)
+            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(10)), "Info")
 
             'Save datapack profiles settings
             If cbLoadDefaultProfile.Checked Then
@@ -639,10 +639,10 @@ Public Class frmSettings
             Else
                 My.Settings.LoadDefaultProfile = False
             End If
-            settingsArray(13) = "LoadDefaultProfile=" + My.Settings.LoadDefaultProfile.ToString
-            frmMain.WriteToLog("Saved setting " + settingsArray(13), "Info")
-            settingsArray(14) = "DefaultProfile=" + My.Settings.DefaultProfile
-            frmMain.WriteToLog("Saved setting " + settingsArray(14), "Info")
+            settingsArray(13) = String.Format("LoadDefaultProfile={0}", My.Settings.LoadDefaultProfile.ToString)
+            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(13)), "Info")
+            settingsArray(14) = String.Format("DefaultProfile={0}", My.Settings.DefaultProfile)
+            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(14)), "Info")
 
             'Save scheme settings
             If cbSelectDefaultScheme.Checked Then
@@ -654,10 +654,10 @@ Public Class frmSettings
             If String.IsNullOrEmpty(My.Settings.DefaultScheme) Then
                 My.Settings.DefaultScheme = "Normal Item"
             End If
-            settingsArray(17) = "SelectDefaultScheme=" + My.Settings.SelectDefaultScheme.ToString
-            frmMain.WriteToLog("Saved setting " + settingsArray(17), "Info")
-            settingsArray(18) = "DefaultScheme=" + My.Settings.DefaultScheme
-            frmMain.WriteToLog("Saved setting " + settingsArray(18), "Info")
+            settingsArray(17) = String.Format("SelectDefaultScheme={0}", My.Settings.SelectDefaultScheme.ToString)
+            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(17)), "Info")
+            settingsArray(18) = String.Format("DefaultScheme={0}", My.Settings.DefaultScheme)
+            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(18)), "Info")
 
             'Save Item List Importer Settings
             If cbDontImportVanillaItemsByDefault.Checked Then
@@ -665,14 +665,14 @@ Public Class frmSettings
             Else
                 My.Settings.DontImportVanillaItemsByDefault = False
             End If
-            settingsArray(21) = "DontImportVanillaItemsByDefault=" + My.Settings.DontImportVanillaItemsByDefault.ToString
-            frmMain.WriteToLog("Saved setting " + settingsArray(21), "Info")
+            settingsArray(21) = String.Format("DontImportVanillaItemsByDefault={0}", My.Settings.DontImportVanillaItemsByDefault.ToString)
+            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(21)), "Info")
 
             'Write settings array to file
-            File.WriteAllLines(frmMain.appData + "/Random Item Giver Updater/settings.txt", settingsArray)
+            File.WriteAllLines(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData), settingsArray)
         Catch ex As Exception
-            MsgBox("Could not save settings: " + ex.Message, MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog("Could not save settings: " + ex.Message, "Error")
+            MsgBox(String.Format("Could not save settings: {0}", ex.Message), MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog(String.Format("Could not save settings: {0}", ex.Message), "Error")
         End Try
     End Sub
 
