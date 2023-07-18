@@ -14,6 +14,9 @@ Public Class frmLoadProfileFrom
     '-- Event handlers --
 
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Load the design
+        LoadDesign()
+
         'Checks if the profile directory exists. If yes, it clears the combobox to avoid duplicates and it starts getting all available profiles, see method below
         If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
             cbxProfiles.Items.Clear()
