@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblIntroduction.Text" xml:space="preserve">
-    <value>Welcome to the Random Item Giver Updater Legacy Help Documentary!
+    <value>Welcome to the Random Item Giver Updater Legacy Help Documentation!
 
-This documentary contains (hopefully) everything you need to know when using this application. It's designed to help users that aren't very tech-savvy 
+This documentation contains (hopefully) everything you need to know when using this application. It's designed to help users that aren't very tech-savvy 
 and maybe also people who already know how things work.
 
-The images and explanations in this documentary are always up-to-date to the version you're running so you can get the newest information. Each page 
+The images and explanations in this documentation are always up-to-date to the version you're running so you can get the newest information. Each page 
 also shows the 'last edited' date so you can check if it's actually updated. If you find any mistakes, please don't hesitate to let me know!
 
 Use the tabs above to switch between pages. Each page contains information on a specific topic and is illustrated with pictures to further help 
@@ -133,7 +133,7 @@ else that's off-topic or just some small information that isn't worth its own pa
 You may also find links at the bottom of pages. These links sometimes open other help pages, sometimes they show small  explanations for words 
 or open help pages, there's a bunch of things these can do.
 
-In case this documentary doesn't solve issues you might be experiencing or you still need further help you can always contact me on discord.
+In case this documentation doesn't solve issues you might be experiencing or you still need further help you can always contact me on discord.
 </value>
   </data>
   <data name="lblSimpleOverview.Text" xml:space="preserve">
@@ -186,7 +186,7 @@ process has been completed.</value>
 It's pretty simple: You select the datapack, hit "Check datapack" and after loading for a bit it will show a list of all duplicates that were found,  and also 
 which loot table the originate from.
 
-After that, you will need to manually open up the loot tables and remove the duplicates. This will probably be improved in the future.</value>
+After that, you will need to manually open up the loot tables and remove the duplicates.</value>
   </data>
   <data name="lblDescriptionSchemes.Text" xml:space="preserve">
     <value>Profiles and Schemes allow you to quickly save information so you can access it later on. It also gets saved if you restart or even reinstall the software.

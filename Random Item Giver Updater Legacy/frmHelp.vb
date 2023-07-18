@@ -117,7 +117,7 @@
             lblLastEditedAddingItemsAdvanced.ForeColor = Color.White
             llblHowToFindItemIDAdvanced.LinkColor = Color.LightBlue
             llblWhatsTheFastWayAdvanced.LinkColor = Color.LightBlue
-            lblLastEditedAddingItemsAdvanced.ForeColor = Color.White
+            lblLastEditedAddingItemsAdvanced.BackColor = Color.FromArgb(50, 50, 50)
             pbDuplicateFinder.BackgroundImage = My.Resources.imgDuplicateFinderDarkHelp
             lblChooseDatapack.BackColor = Color.FromArgb(105, 105, 105)
             lblChooseDatapack.ForeColor = Color.FromArgb(128, 255, 255)
