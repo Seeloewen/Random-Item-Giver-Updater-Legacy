@@ -25,8 +25,8 @@ Partial Class frmChangelog
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChangelog))
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.rtbChangelog = New System.Windows.Forms.RichTextBox()
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.gbChangelog = New System.Windows.Forms.GroupBox()
+        Me.btnOK = New System.Windows.Forms.Button()
         Me.gbChangelog.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,6 +52,15 @@ Partial Class frmChangelog
         Me.rtbChangelog.TabIndex = 1
         Me.rtbChangelog.Text = resources.GetString("rtbChangelog.Text")
         '
+        'gbChangelog
+        '
+        Me.gbChangelog.Controls.Add(Me.rtbChangelog)
+        Me.gbChangelog.Location = New System.Drawing.Point(12, 39)
+        Me.gbChangelog.Name = "gbChangelog"
+        Me.gbChangelog.Size = New System.Drawing.Size(445, 353)
+        Me.gbChangelog.TabIndex = 3
+        Me.gbChangelog.TabStop = False
+        '
         'btnOK
         '
         Me.btnOK.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
@@ -67,15 +76,6 @@ Partial Class frmChangelog
         Me.btnOK.TabIndex = 2
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
-        '
-        'gbChangelog
-        '
-        Me.gbChangelog.Controls.Add(Me.rtbChangelog)
-        Me.gbChangelog.Location = New System.Drawing.Point(12, 39)
-        Me.gbChangelog.Name = "gbChangelog"
-        Me.gbChangelog.Size = New System.Drawing.Size(445, 353)
-        Me.gbChangelog.TabIndex = 3
-        Me.gbChangelog.TabStop = False
         '
         'frmChangelog
         '

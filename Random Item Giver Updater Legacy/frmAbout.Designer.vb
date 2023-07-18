@@ -40,15 +40,15 @@ Partial Class frmAbout
         Me.lblBuild.Name = "lblBuild"
         Me.lblBuild.Size = New System.Drawing.Size(355, 60)
         Me.lblBuild.TabIndex = 4
-        Me.lblBuild.Text = "Version 0.5.1-b (08.04.2023)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This software is not affiliated " &
-    "with Mojang Studios"
+        Me.lblBuild.Text = "Version 0.5.2 (18.07.2023)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This software is not affiliated wi" &
+    "th Mojang Studios"
         Me.lblBuild.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblHeader
         '
         Me.lblHeader.AutoSize = True
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHeader.Location = New System.Drawing.Point(19, 9)
+        Me.lblHeader.Location = New System.Drawing.Point(20, 9)
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(336, 58)
         Me.lblHeader.TabIndex = 3

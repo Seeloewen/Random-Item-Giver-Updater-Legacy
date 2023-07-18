@@ -5,8 +5,8 @@ Public Class frmMain
 
     'General variables for the software
     Public appData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public versionLog As String = "0.5.1-b (08.04.2023)" 'Version that gets displayed in the log
-    Public rawVersion As String = "0.5.1-b"
+    Public versionLog As String = "0.5.2 (18.07.2023)" 'Version that gets displayed in the log
+    Public rawVersion As String = "0.5.2"
     Public settingsVersion As Double = 4 'Current version of the settings file that the app is using
     Dim settingsArray As String() 'Array which the settings will be loaded in
     Dim loadedSettingsVersion As Double 'Version of the settings file that gets loaded
@@ -97,7 +97,7 @@ Public Class frmMain
 
         'Post initial log text
         WriteToLog(String.Format("Random Item Giver Updater Legacy {0}", versionLog), "Info")
-        WriteToLog("You are running a beta build, please be aware of issues that may occur!", "Warning")
+        WriteToLog("You are running a legacy build, please be aware of issues that may occur!", "Warning")
 
         'Add click event of frmMain to every control in frmMain
         For Each ctrl As Control In Controls
@@ -132,7 +132,7 @@ Public Class frmMain
 
         'Hide Legacy Warning if setting is enabled
         If My.Settings.HideLegacyWarning = False Then
-            MsgBox("Warning: You are running a legacy beta version of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs or other issues." + vbNewLine + vbNewLine + "Please note that this version of the software will no longer receive major content updates!" + vbNewLine + vbNewLine + "Things may break, you should use this software at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
+            MsgBox("Warning: You are running a legacy version of the Random Item Giver Updater." + vbNewLine + vbNewLine + "You have to expect to find bugs or other issues." + vbNewLine + vbNewLine + "Please note that this version of the software will no longer receive major content updates!" + vbNewLine + vbNewLine + "Things may break, you should use this software at your own risk and with caution.", MsgBoxStyle.Exclamation, "Warning")
         End If
 
         'Define several variables (I know I could probably do this way easier but... yeah)
@@ -638,7 +638,7 @@ Public Class frmMain
         frmOutput.Show()
     End Sub
 
-    Private Sub DToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DocumentaryToolStripMenuItem.Click
+    Private Sub DToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DocumentationToolStripMenuItem.Click
         'Reset hamburger button to default state
         btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
 

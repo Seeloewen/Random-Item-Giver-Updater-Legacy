@@ -74,15 +74,8 @@ Partial Class frmMain
         Me.lblBoxSelectDatapackHeader = New System.Windows.Forms.Label()
         Me.lblBoxAddItemHeader = New System.Windows.Forms.Label()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsHamburgerButton = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbPainting = New System.Windows.Forms.CheckBox()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.pbLine = New System.Windows.Forms.PictureBox()
@@ -96,6 +89,13 @@ Partial Class frmMain
         Me.btnBrowseDatapackPath = New System.Windows.Forms.Button()
         Me.pbSelectDatapack = New System.Windows.Forms.PictureBox()
         Me.pbAddItem = New System.Windows.Forms.PictureBox()
+        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbItemID.SuspendLayout()
@@ -112,9 +112,9 @@ Partial Class frmMain
         Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblHeader.Location = New System.Drawing.Point(85, 25)
         Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(518, 29)
+        Me.lblHeader.Size = New System.Drawing.Size(426, 29)
         Me.lblHeader.TabIndex = 56
-        Me.lblHeader.Text = "Random Item Giver Updater Legacy (BETA)"
+        Me.lblHeader.Text = "Random Item Giver Updater Legacy"
         '
         'lblVersion
         '
@@ -673,23 +673,8 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicateFinderToolStripMenuItem, Me.ItemListImporterToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.ToolsToolStripMenuItem.Text = "Tools"
-        '
-        'DuplicateFinderToolStripMenuItem
-        '
-        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
-        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinder
-        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
-        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
-        '
-        'ItemListImporterToolStripMenuItem
-        '
-        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgItemListImporter
-        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
-        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
         '
         'cmsHamburgerButton
         '
@@ -698,50 +683,13 @@ Partial Class frmMain
         Me.cmsHamburgerButton.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.cmsHamburgerButton.Size = New System.Drawing.Size(134, 108)
         '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgSettings
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.EinstellungenToolStripMenuItem.Text = "Settings"
-        '
-        'OutputToolStripMenuItem
-        '
-        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgOutput
-        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.OutputToolStripMenuItem.Text = "Output"
-        '
         'HelpToolStripMenuItem
         '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DocumentaryToolStripMenuItem, Me.ChangelogToolStripMenuItem, Me.AboutToolStripMenuItem1})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DocumentationToolStripMenuItem, Me.ChangelogToolStripMenuItem, Me.AboutToolStripMenuItem1})
         Me.HelpToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.HelpToolStripMenuItem.Text = "Help"
-        '
-        'DocumentaryToolStripMenuItem
-        '
-        Me.DocumentaryToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
-        Me.DocumentaryToolStripMenuItem.Name = "DocumentaryToolStripMenuItem"
-        Me.DocumentaryToolStripMenuItem.Size = New System.Drawing.Size(174, 26)
-        Me.DocumentaryToolStripMenuItem.Text = "Documentary"
-        '
-        'ChangelogToolStripMenuItem
-        '
-        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgUpdate
-        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(174, 26)
-        Me.ChangelogToolStripMenuItem.Text = "Changelog"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAbout
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(174, 26)
-        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'cbPainting
         '
@@ -941,6 +889,58 @@ Partial Class frmMain
         Me.pbAddItem.TabIndex = 93
         Me.pbAddItem.TabStop = False
         '
+        'DuplicateFinderToolStripMenuItem
+        '
+        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
+        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinder
+        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
+        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
+        '
+        'ItemListImporterToolStripMenuItem
+        '
+        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgItemListImporter
+        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
+        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
+        '
+        'EinstellungenToolStripMenuItem
+        '
+        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgSettings
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.EinstellungenToolStripMenuItem.Text = "Settings"
+        '
+        'OutputToolStripMenuItem
+        '
+        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgOutput
+        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
+        Me.OutputToolStripMenuItem.Text = "Output"
+        '
+        'DocumentationToolStripMenuItem
+        '
+        Me.DocumentationToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
+        Me.DocumentationToolStripMenuItem.Name = "DocumentationToolStripMenuItem"
+        Me.DocumentationToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.DocumentationToolStripMenuItem.Text = "Documentation"
+        '
+        'ChangelogToolStripMenuItem
+        '
+        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgUpdate
+        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.ChangelogToolStripMenuItem.Text = "Changelog"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAbout
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(187, 26)
+        Me.AboutToolStripMenuItem1.Text = "About"
+        '
         'DToolStripMenuItem
         '
         Me.DToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
@@ -1026,7 +1026,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater Legacy BETA 0.5.1"
+        Me.Text = "Random Item Giver Updater Legacy 0.5.2"
         Me.gbItemID.ResumeLayout(False)
         Me.cmsHamburgerButton.ResumeLayout(False)
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1108,7 +1108,7 @@ Partial Class frmMain
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DuplicateFinderToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ItemListImporterToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DocumentaryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DocumentationToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ChangelogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents cbPainting As CheckBox
