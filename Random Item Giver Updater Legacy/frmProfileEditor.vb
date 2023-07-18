@@ -48,7 +48,7 @@ Public Class frmProfileEditor
         End If
     End Sub
 
-    Private Sub cbxProfile_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub cbxProfile_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxProfile.SelectedIndexChanged
         'Begin loading the selected profile
         InitializeLoadingProfile(cbxProfile.SelectedItem, False)
     End Sub
@@ -333,9 +333,9 @@ Public Class frmProfileEditor
     End Sub
 
     Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
 
