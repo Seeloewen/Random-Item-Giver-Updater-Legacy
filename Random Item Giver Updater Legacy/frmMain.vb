@@ -561,7 +561,7 @@ Public Class frmMain
 
     Private Sub btnLoadProfile_Click(sender As Object, e As EventArgs) Handles btnLoadProfile.Click
         'Open the Load profile dialog
-        frmLoadProfileFrom.ShowDialog()
+        frmLoadProfileFrom.ShowDialog("Main")
     End Sub
 
     Private Sub btnSaveProfile_Click(sender As Object, e As EventArgs) Handles btnSaveProfile.Click

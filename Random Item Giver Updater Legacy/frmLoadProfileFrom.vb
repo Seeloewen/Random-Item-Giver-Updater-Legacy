@@ -6,12 +6,22 @@ Public Class frmLoadProfileFrom
     Dim ProfileList As String()
     Dim ProfileContent As String()
     Dim LoadFromProfile As String
+    Dim Destination As String
 
     'Variables that store profile content
     Dim DatapackPath As String
     Dim DatapackVersion As String
 
     '-- Event handlers --
+
+    ' Konstruktor, der die Argumente entgegennimmt
+    Overloads Sub ShowDialog(destination As String)
+        'Set the destination
+        Me.Destination = destination
+
+        'Actually show the window
+        ShowDialog()
+    End Sub
 
     Private Sub frmLoadProfileFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load the design
@@ -60,9 +70,13 @@ Public Class frmLoadProfileFrom
     End Sub
 
     Public Sub LoadProfile(profile As String, showMessage As Boolean)
-        'Load settings from profile
-        frmMain.tbDatapackPath.Text = ProfileContent(0)
-        frmMain.cbxVersion.Text = ProfileContent(1)
+        'Load settings from profile to the selected destination
+        If Destination = "Main" Then
+            frmMain.tbDatapackPath.Text = ProfileContent(0)
+            frmMain.cbxVersion.Text = ProfileContent(1)
+        ElseIf Destination = "Duplicate Finder" Then
+            frmDuplicateFinder.tbDatapackPath.Text = ProfileContent(0)
+        End If
 
         'If ShowMessage is enabled, it will show a messagebox when loading completes.
         If showMessage Then
