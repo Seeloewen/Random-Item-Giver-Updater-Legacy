@@ -141,6 +141,18 @@
     <Compile Include="frmProfileEditor.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmRenameProfile.Designer.vb">
+      <DependentUpon>frmRenameProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRenameProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRenameScheme.Designer.vb">
+      <DependentUpon>frmRenameScheme.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRenameScheme.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmSaveProfileAs.Designer.vb">
       <DependentUpon>frmSaveProfileAs.vb</DependentUpon>
     </Compile>
@@ -214,6 +226,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProfileEditor.resx">
       <DependentUpon>frmProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRenameProfile.resx">
+      <DependentUpon>frmRenameProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRenameScheme.resx">
+      <DependentUpon>frmRenameScheme.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSaveProfileAs.resx">
       <DependentUpon>frmSaveProfileAs.vb</DependentUpon>

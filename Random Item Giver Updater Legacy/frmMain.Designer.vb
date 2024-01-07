@@ -99,6 +99,7 @@ Partial Class frmMain
         Me.DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.rtbItemsRandomSame1202 = New System.Windows.Forms.RichTextBox()
+        Me.btnRenameScheme = New System.Windows.Forms.Button()
         Me.gbItemID.SuspendLayout()
         Me.cmsHamburgerButton.SuspendLayout()
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -857,7 +858,7 @@ Partial Class frmMain
         Me.btnOverwriteSelectedScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOverwriteSelectedScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOverwriteSelectedScheme.ForeColor = System.Drawing.Color.Black
-        Me.btnOverwriteSelectedScheme.Location = New System.Drawing.Point(490, 620)
+        Me.btnOverwriteSelectedScheme.Location = New System.Drawing.Point(490, 576)
         Me.btnOverwriteSelectedScheme.Name = "btnOverwriteSelectedScheme"
         Me.btnOverwriteSelectedScheme.Size = New System.Drawing.Size(179, 32)
         Me.btnOverwriteSelectedScheme.TabIndex = 86
@@ -893,7 +894,7 @@ Partial Class frmMain
         Me.btnSaveAsNewScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveAsNewScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveAsNewScheme.ForeColor = System.Drawing.Color.Black
-        Me.btnSaveAsNewScheme.Location = New System.Drawing.Point(490, 582)
+        Me.btnSaveAsNewScheme.Location = New System.Drawing.Point(490, 535)
         Me.btnSaveAsNewScheme.Name = "btnSaveAsNewScheme"
         Me.btnSaveAsNewScheme.Size = New System.Drawing.Size(179, 32)
         Me.btnSaveAsNewScheme.TabIndex = 85
@@ -964,12 +965,31 @@ Partial Class frmMain
         Me.rtbItemsRandomSame1202.TabIndex = 100
         Me.rtbItemsRandomSame1202.Text = resources.GetString("rtbItemsRandomSame1202.Text")
         '
+        'btnRenameScheme
+        '
+        Me.btnRenameScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
+        Me.btnRenameScheme.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnRenameScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRenameScheme.FlatAppearance.BorderSize = 0
+        Me.btnRenameScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnRenameScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnRenameScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRenameScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRenameScheme.ForeColor = System.Drawing.Color.Black
+        Me.btnRenameScheme.Location = New System.Drawing.Point(490, 617)
+        Me.btnRenameScheme.Name = "btnRenameScheme"
+        Me.btnRenameScheme.Size = New System.Drawing.Size(179, 32)
+        Me.btnRenameScheme.TabIndex = 101
+        Me.btnRenameScheme.Text = "Rename selected scheme"
+        Me.btnRenameScheme.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(719, 808)
+        Me.Controls.Add(Me.btnRenameScheme)
         Me.Controls.Add(Me.rtbItemsRandomSame1202)
         Me.Controls.Add(Me.cbPainting)
         Me.Controls.Add(Me.btnAddItem)
@@ -1123,4 +1143,5 @@ Partial Class frmMain
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents cbPainting As CheckBox
     Friend WithEvents rtbItemsRandomSame1202 As RichTextBox
+    Friend WithEvents btnRenameScheme As Button
 End Class

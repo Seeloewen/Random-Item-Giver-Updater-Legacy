@@ -23,13 +23,9 @@ Partial Class frmProfileEditor
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProfileEditor))
-        Me.btnClose = New System.Windows.Forms.Button()
         Me.lblChooseProfile = New System.Windows.Forms.Label()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.gbEditProfile = New System.Windows.Forms.GroupBox()
         Me.cbxDatapackVersion = New System.Windows.Forms.ComboBox()
-        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.lblDatapackVersion = New System.Windows.Forms.Label()
         Me.tbDatapackPath = New System.Windows.Forms.TextBox()
         Me.lblDatapackPath = New System.Windows.Forms.Label()
@@ -37,25 +33,13 @@ Partial Class frmProfileEditor
         Me.fbdProfileEditor = New System.Windows.Forms.FolderBrowserDialog()
         Me.cbxProfile = New System.Windows.Forms.ComboBox()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.btnRename = New System.Windows.Forms.Button()
         Me.gbEditProfile.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnClose
-        '
-        Me.btnClose.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
-        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnClose.FlatAppearance.BorderSize = 0
-        Me.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.ForeColor = System.Drawing.Color.Black
-        Me.btnClose.Location = New System.Drawing.Point(17, 260)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(190, 27)
-        Me.btnClose.TabIndex = 17
-        Me.btnClose.Text = "Close"
-        Me.btnClose.UseVisualStyleBackColor = True
         '
         'lblChooseProfile
         '
@@ -66,40 +50,6 @@ Partial Class frmProfileEditor
         Me.lblChooseProfile.Size = New System.Drawing.Size(212, 16)
         Me.lblChooseProfile.TabIndex = 16
         Me.lblChooseProfile.Text = "Choose the profile you want to edit:"
-        '
-        'btnDelete
-        '
-        Me.btnDelete.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
-        Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDelete.FlatAppearance.BorderSize = 0
-        Me.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.ForeColor = System.Drawing.Color.Black
-        Me.btnDelete.Location = New System.Drawing.Point(213, 260)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(188, 27)
-        Me.btnDelete.TabIndex = 15
-        Me.btnDelete.Text = "Delete profile"
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
-        Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSave.FlatAppearance.BorderSize = 0
-        Me.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.Color.Black
-        Me.btnSave.Location = New System.Drawing.Point(407, 260)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(177, 27)
-        Me.btnSave.TabIndex = 14
-        Me.btnSave.Text = "Save changes"
-        Me.btnSave.UseVisualStyleBackColor = True
         '
         'gbEditProfile
         '
@@ -128,23 +78,6 @@ Partial Class frmProfileEditor
         Me.cbxDatapackVersion.Name = "cbxDatapackVersion"
         Me.cbxDatapackVersion.Size = New System.Drawing.Size(246, 24)
         Me.cbxDatapackVersion.TabIndex = 23
-        '
-        'btnBrowse
-        '
-        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
-        Me.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnBrowse.FlatAppearance.BorderSize = 0
-        Me.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBrowse.ForeColor = System.Drawing.Color.Black
-        Me.btnBrowse.Location = New System.Drawing.Point(450, 45)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(113, 23)
-        Me.btnBrowse.TabIndex = 20
-        Me.btnBrowse.Text = "Browse"
-        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'lblDatapackVersion
         '
@@ -198,7 +131,7 @@ Partial Class frmProfileEditor
         Me.cbxProfile.FormattingEnabled = True
         Me.cbxProfile.Location = New System.Drawing.Point(17, 61)
         Me.cbxProfile.Name = "cbxProfile"
-        Me.cbxProfile.Size = New System.Drawing.Size(322, 24)
+        Me.cbxProfile.Size = New System.Drawing.Size(384, 24)
         Me.cbxProfile.TabIndex = 21
         '
         'lblHeader
@@ -211,12 +144,98 @@ Partial Class frmProfileEditor
         Me.lblHeader.TabIndex = 22
         Me.lblHeader.Text = "Profile Editor"
         '
+        'btnClose
+        '
+        Me.btnClose.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnClose.FlatAppearance.BorderSize = 0
+        Me.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.ForeColor = System.Drawing.Color.Black
+        Me.btnClose.Location = New System.Drawing.Point(17, 260)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(190, 27)
+        Me.btnClose.TabIndex = 17
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnDelete.FlatAppearance.BorderSize = 0
+        Me.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.Color.Black
+        Me.btnDelete.Location = New System.Drawing.Point(213, 260)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(188, 27)
+        Me.btnDelete.TabIndex = 15
+        Me.btnDelete.Text = "Delete profile"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.Color.Black
+        Me.btnSave.Location = New System.Drawing.Point(407, 260)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(177, 27)
+        Me.btnSave.TabIndex = 14
+        Me.btnSave.Text = "Save changes"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnBrowse
+        '
+        Me.btnBrowse.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnBrowse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnBrowse.FlatAppearance.BorderSize = 0
+        Me.btnBrowse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnBrowse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBrowse.ForeColor = System.Drawing.Color.Black
+        Me.btnBrowse.Location = New System.Drawing.Point(450, 45)
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Size = New System.Drawing.Size(113, 23)
+        Me.btnBrowse.TabIndex = 20
+        Me.btnBrowse.Text = "Browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
+        '
+        'btnRename
+        '
+        Me.btnRename.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnRename.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRename.FlatAppearance.BorderSize = 0
+        Me.btnRename.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
+        Me.btnRename.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
+        Me.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRename.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRename.ForeColor = System.Drawing.Color.Black
+        Me.btnRename.Location = New System.Drawing.Point(407, 61)
+        Me.btnRename.Name = "btnRename"
+        Me.btnRename.Size = New System.Drawing.Size(178, 24)
+        Me.btnRename.TabIndex = 23
+        Me.btnRename.Text = "Rename"
+        Me.btnRename.UseVisualStyleBackColor = True
+        '
         'frmProfileEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(597, 296)
+        Me.Controls.Add(Me.btnRename)
         Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.cbxProfile)
         Me.Controls.Add(Me.settings)
@@ -253,4 +272,5 @@ Partial Class frmProfileEditor
     Friend WithEvents cbxProfile As ComboBox
     Friend WithEvents lblHeader As Label
     Friend WithEvents cbxDatapackVersion As ComboBox
+    Friend WithEvents btnRename As Button
 End Class

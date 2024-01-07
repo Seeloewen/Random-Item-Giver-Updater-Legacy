@@ -680,6 +680,15 @@ Public Class frmMain
         frmItemListImporter.ShowDialog()
     End Sub
 
+    Private Sub btnRenameScheme_Click(sender As Object, e As EventArgs) Handles btnRenameScheme.Click
+        'Check if a scheme is loaded and open the scheme renaming window
+        If String.IsNullOrEmpty(cbxScheme.Text) = False Then
+            frmRenameScheme.ShowDialog(cbxScheme.Text)
+        Else
+            MsgBox("Please load a scheme in order to rename it.", MsgBoxStyle.Critical, "Error")
+        End If
+    End Sub
+
     '-- Custom methods --
 
     Private Sub CheckOS()
@@ -4230,6 +4239,9 @@ Public Class frmMain
     End Sub
 
     Sub GetProfileFiles(path As String)
+        'Clear previous entries
+        cbxDefaultProfile.Items.Clear()
+
         'Gets all sub-directories that exist in the specified directory and add them to the combobox for profiles
         If path.Trim().Length = 0 Then
             Return
@@ -4254,6 +4266,9 @@ Public Class frmMain
     End Sub
 
     Sub GetSchemeFiles(path As String)
+        'Clear previous entries
+        cbxScheme.Items.Clear()
+
         'Gets all sub-directories that exist in the specified directory and add them to the combobox for schemes
         If path.Trim().Length = 0 Then
             Return
@@ -4366,7 +4381,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
 
@@ -4376,7 +4390,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnAddItem_MouseLeave(sender As Object, e As EventArgs) Handles btnAddItem.MouseLeave
@@ -4385,7 +4398,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnAddItem_MouseUp(sender As Object, e As MouseEventArgs) Handles btnAddItem.MouseUp
@@ -4394,7 +4406,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnAddItem.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseDown
@@ -4403,7 +4414,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseEnter
@@ -4412,7 +4422,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveAsNewScheme.MouseLeave
@@ -4421,7 +4430,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSaveAsNewScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveAsNewScheme.MouseUp
@@ -4430,7 +4438,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveAsNewScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseDown
@@ -4439,7 +4446,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseEnter
@@ -4448,7 +4454,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnOverwriteSelectedScheme.MouseLeave
@@ -4457,7 +4462,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOverwriteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOverwriteSelectedScheme.MouseUp
@@ -4466,7 +4470,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnOverwriteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseDown
@@ -4475,7 +4478,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseEnter
@@ -4484,7 +4486,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnDeleteSelectedScheme.MouseLeave
@@ -4493,7 +4494,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnDeleteSelectedScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnDeleteSelectedScheme.MouseUp
@@ -4502,7 +4502,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnDeleteSelectedScheme.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseDown(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseDown
@@ -4511,7 +4510,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseEnter(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseEnter
@@ -4520,7 +4518,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseLeave(sender As Object, e As EventArgs) Handles btnBrowseDatapackPath.MouseLeave
@@ -4529,7 +4526,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnBrowseDatapackPath_MouseUp(sender As Object, e As MouseEventArgs) Handles btnBrowseDatapackPath.MouseUp
@@ -4538,7 +4534,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnBrowseDatapackPath.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnLoadProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseDown
@@ -4547,7 +4542,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnLoadProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseEnter
@@ -4556,7 +4550,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnLoadProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnLoadProfile.MouseLeave
@@ -4565,7 +4558,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnLoadProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnLoadProfile.MouseUp
@@ -4574,7 +4566,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnLoadProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSaveProfile_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseDown
@@ -4583,7 +4574,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnSaveProfile_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseEnter
@@ -4592,7 +4582,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnSaveProfile_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveProfile.MouseLeave
@@ -4601,7 +4590,6 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSaveProfile_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveProfile.MouseUp
@@ -4610,7 +4598,38 @@ Public Class frmMain
         ElseIf design = "Light" Then
             btnSaveProfile.BackgroundImage = My.Resources.imgButtonLight
         End If
+    End Sub
 
+    Private Sub btnRenameScheme_MouseDown(sender As Object, e As MouseEventArgs) Handles btnRenameScheme.MouseDown
+        If design = "Dark" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButtonClick
+        ElseIf design = "Light" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButtonClickLight
+        End If
+    End Sub
+
+    Private Sub btnRenameScheme_MouseEnter(sender As Object, e As EventArgs) Handles btnRenameScheme.MouseEnter
+        If design = "Dark" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButtonHover
+        ElseIf design = "Light" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButtonHoverLight
+        End If
+    End Sub
+
+    Private Sub btnRenameScheme_MouseLeave(sender As Object, e As EventArgs) Handles btnRenameScheme.MouseLeave
+        If design = "Dark" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf design = "Light" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
+    End Sub
+
+    Private Sub btnRenameScheme_MouseUp(sender As Object, e As MouseEventArgs) Handles btnRenameScheme.MouseUp
+        If design = "Dark" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButton
+        ElseIf design = "Light" Then
+            btnRenameScheme.BackgroundImage = My.Resources.imgButtonLight
+        End If
     End Sub
 
     Private Sub ToolsToolStripMenuItem_MouseEnter(sender As Object, e As EventArgs) Handles ToolsToolStripMenuItem.MouseEnter
