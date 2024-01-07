@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Simple tool to add items to the Random Item Giver datapack with several other useful features")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("Random Item Giver Updater Legacy by Seeloewen")>
-<Assembly: AssemblyCopyright("(c) 2023 Louis")>
+<Assembly: AssemblyCopyright("(c) 2024 Louis")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -30,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' indem Sie "*" wie unten gezeigt eingeben:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("0.5.1.0")>
-<Assembly: AssemblyFileVersion("0.5.1.0")>
+<Assembly: AssemblyVersion("0.5.3.0")>
+<Assembly: AssemblyFileVersion("0.5.3.0")>

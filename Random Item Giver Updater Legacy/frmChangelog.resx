@@ -118,7 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.5.2 (18.07.2023)
+    <value>Version 0.5.3 (07.01.2024)
++ Added option to rename schemes and profiles
++ Added support for pack format 16 to 26
++ Added support for newer loot table structure in recent Random Item Giver versions
+* Rewrote duplicate finder
+* Fixed Profile Editor "Browse" button looking wrong in dark design
+
+Version 0.5.2 (18.07.2023)
 + Added "System Default" design option which loads by default
 + Added more Exception Handlers in case errors occur
 + Added detection for outdated OS

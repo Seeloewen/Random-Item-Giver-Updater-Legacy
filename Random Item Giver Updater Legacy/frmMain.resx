@@ -150,6 +150,20 @@
   <metadata name="cmsHamburgerButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>307, 10</value>
   </metadata>
+  <data name="rtbItemsRandomSame1202.Text" xml:space="preserve">
+    <value>          "functions": [
+            {
+              "function": "minecraft:set_count",
+                "count": {
+                  "type": "minecraft:score",
+                  "target": {
+                    "type": "minecraft:fixed",
+                    "name": "RandomItemGiver"
+                },
+                "score": "RandomAmountSameItemsNumber"
+              }
+            }</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pbLine.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -304,20 +318,6 @@
         EiMAMEuMAMAsMQIAs8QIAMwSIwAwS4wAwCwxAgCzxAgAzBIjADBLjADALDECALPECADMEiMAMEuMAMAs
         MQIAs8QIAMwSIwAwyX//8/9Gc6DtFo7nPwAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="rtbItemsRandomSame1202.Text" xml:space="preserve">
-    <value>          "functions": [
-            {
-              "function": "minecraft:set_count",
-                "count": {
-                  "type": "minecraft:score",
-                  "target": {
-                    "type": "minecraft:fixed",
-                    "name": "RandomItemGiver"
-                },
-                "score": "RandomAmountSameItemsNumber"
-              }
-            }</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

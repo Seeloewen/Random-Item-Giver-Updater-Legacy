@@ -40,7 +40,7 @@ Partial Class frmAbout
         Me.lblBuild.Name = "lblBuild"
         Me.lblBuild.Size = New System.Drawing.Size(355, 60)
         Me.lblBuild.TabIndex = 4
-        Me.lblBuild.Text = "Version 0.5.2 (18.07.2023)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This software is not affiliated wi" &
+        Me.lblBuild.Text = "Version 0.5.3 (07.01.2024)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This software is not affiliated wi" &
     "th Mojang Studios"
         Me.lblBuild.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '

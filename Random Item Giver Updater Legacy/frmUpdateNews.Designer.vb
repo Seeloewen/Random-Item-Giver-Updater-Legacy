@@ -44,7 +44,7 @@ Partial Class frmUpdateNews
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(307, 25)
         Me.lblHeader.TabIndex = 0
-        Me.lblHeader.Text = "Version 0.5.2 - What's new?"
+        Me.lblHeader.Text = "Version 0.5.3 - What's new?"
         '
         'lblNewsHeader1
         '
@@ -52,9 +52,9 @@ Partial Class frmUpdateNews
         Me.lblNewsHeader1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsHeader1.Location = New System.Drawing.Point(16, 56)
         Me.lblNewsHeader1.Name = "lblNewsHeader1"
-        Me.lblNewsHeader1.Size = New System.Drawing.Size(305, 24)
+        Me.lblNewsHeader1.Size = New System.Drawing.Size(235, 24)
         Me.lblNewsHeader1.TabIndex = 1
-        Me.lblNewsHeader1.Text = "Addded support for newer versions"
+        Me.lblNewsHeader1.Text = "Support for newer versions"
         '
         'lblNewsDesc1
         '
@@ -62,10 +62,10 @@ Partial Class frmUpdateNews
         Me.lblNewsDesc1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsDesc1.Location = New System.Drawing.Point(17, 82)
         Me.lblNewsDesc1.Name = "lblNewsDesc1"
-        Me.lblNewsDesc1.Size = New System.Drawing.Size(458, 32)
+        Me.lblNewsDesc1.Size = New System.Drawing.Size(434, 32)
         Me.lblNewsDesc1.TabIndex = 2
-        Me.lblNewsDesc1.Text = "The software now supports pack versions 12, 13, 14 and 15. This also comes" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "with " &
-    "proper support for 1.20.1."
+        Me.lblNewsDesc1.Text = "The software now supports pack versions 16 to 26. This also comes with " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "compatib" &
+    "ility for 1.20.2 to 1.20.4."
         '
         'llblFullChangelog
         '
@@ -84,11 +84,11 @@ Partial Class frmUpdateNews
         Me.lblNewsDesc2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsDesc2.Location = New System.Drawing.Point(17, 155)
         Me.lblNewsDesc2.Name = "lblNewsDesc2"
-        Me.lblNewsDesc2.Size = New System.Drawing.Size(462, 48)
+        Me.lblNewsDesc2.Size = New System.Drawing.Size(456, 48)
         Me.lblNewsDesc2.TabIndex = 6
-        Me.lblNewsDesc2.Text = "The design setting now has a ""System default"" option and the software shows" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "a wa" &
-    "rning on an unsupported OS. Additionally, the code was cleaned up and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "improved." &
-    ""
+        Me.lblNewsDesc2.Text = "The Duplicate Finder has been reworked to fix several long-standing issues " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and " &
+    "to ensure better performance. Compatibility for newer versions of the" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Datapack " &
+    "was also added."
         '
         'lblNewsHeader2
         '
@@ -96,9 +96,9 @@ Partial Class frmUpdateNews
         Me.lblNewsHeader2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsHeader2.Location = New System.Drawing.Point(16, 131)
         Me.lblNewsHeader2.Name = "lblNewsHeader2"
-        Me.lblNewsHeader2.Size = New System.Drawing.Size(245, 24)
+        Me.lblNewsHeader2.Size = New System.Drawing.Size(217, 24)
         Me.lblNewsHeader2.TabIndex = 5
-        Me.lblNewsHeader2.Text = "Several small improvements"
+        Me.lblNewsHeader2.Text = "Duplicate Finder Rework"
         '
         'lblNewsDesc3
         '
@@ -106,10 +106,10 @@ Partial Class frmUpdateNews
         Me.lblNewsDesc3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsDesc3.Location = New System.Drawing.Point(17, 250)
         Me.lblNewsDesc3.Name = "lblNewsDesc3"
-        Me.lblNewsDesc3.Size = New System.Drawing.Size(435, 32)
+        Me.lblNewsDesc3.Size = New System.Drawing.Size(433, 32)
         Me.lblNewsDesc3.TabIndex = 9
-        Me.lblNewsDesc3.Text = "Many issues have been fixed, like the duplicate finder or the profile editor" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "not" &
-    " working at all. There were also some smaller bug fixes."
+        Me.lblNewsDesc3.Text = "You can now rename your profiles and schemes however you like! A few" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "performance" &
+    " improvements and bug fixes have also been implemented."
         '
         'lblNewsHeader3
         '
@@ -117,9 +117,9 @@ Partial Class frmUpdateNews
         Me.lblNewsHeader3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNewsHeader3.Location = New System.Drawing.Point(16, 225)
         Me.lblNewsHeader3.Name = "lblNewsHeader3"
-        Me.lblNewsHeader3.Size = New System.Drawing.Size(210, 24)
+        Me.lblNewsHeader3.Size = New System.Drawing.Size(217, 24)
         Me.lblNewsHeader3.TabIndex = 8
-        Me.lblNewsHeader3.Text = "Fixed a bunch of issues"
+        Me.lblNewsHeader3.Text = "Additional Improvements"
         '
         'PictureBox1
         '

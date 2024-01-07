@@ -74,16 +74,11 @@ Partial Class frmMain
         Me.lblBoxSelectDatapackHeader = New System.Windows.Forms.Label()
         Me.lblBoxAddItemHeader = New System.Windows.Forms.Label()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsHamburgerButton = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbPainting = New System.Windows.Forms.CheckBox()
+        Me.rtbItemsRandomSame1202 = New System.Windows.Forms.RichTextBox()
+        Me.btnRenameScheme = New System.Windows.Forms.Button()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.pbLine = New System.Windows.Forms.PictureBox()
         Me.pbHeader = New System.Windows.Forms.PictureBox()
@@ -96,10 +91,15 @@ Partial Class frmMain
         Me.btnBrowseDatapackPath = New System.Windows.Forms.Button()
         Me.pbSelectDatapack = New System.Windows.Forms.PictureBox()
         Me.pbAddItem = New System.Windows.Forms.PictureBox()
+        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.rtbItemsRandomSame1202 = New System.Windows.Forms.RichTextBox()
-        Me.btnRenameScheme = New System.Windows.Forms.Button()
         Me.gbItemID.SuspendLayout()
         Me.cmsHamburgerButton.SuspendLayout()
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -678,43 +678,12 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         '
-        'DuplicateFinderToolStripMenuItem
-        '
-        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
-        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinder
-        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
-        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
-        '
-        'ItemListImporterToolStripMenuItem
-        '
-        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgItemListImporter
-        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
-        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
-        '
         'cmsHamburgerButton
         '
         Me.cmsHamburgerButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EinstellungenToolStripMenuItem, Me.OutputToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.cmsHamburgerButton.Name = "cmsHamburgerButton"
         Me.cmsHamburgerButton.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.cmsHamburgerButton.Size = New System.Drawing.Size(134, 108)
-        '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgSettings
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.EinstellungenToolStripMenuItem.Text = "Settings"
-        '
-        'OutputToolStripMenuItem
-        '
-        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgOutput
-        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.OutputToolStripMenuItem.Text = "Output"
         '
         'HelpToolStripMenuItem
         '
@@ -723,27 +692,6 @@ Partial Class frmMain
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.HelpToolStripMenuItem.Text = "Help"
-        '
-        'DocumentationToolStripMenuItem
-        '
-        Me.DocumentationToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
-        Me.DocumentationToolStripMenuItem.Name = "DocumentationToolStripMenuItem"
-        Me.DocumentationToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
-        Me.DocumentationToolStripMenuItem.Text = "Documentation"
-        '
-        'ChangelogToolStripMenuItem
-        '
-        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgUpdate
-        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
-        Me.ChangelogToolStripMenuItem.Text = "Changelog"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAbout
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(187, 26)
-        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'cbPainting
         '
@@ -757,6 +705,32 @@ Partial Class frmMain
         Me.cbPainting.TabIndex = 99
         Me.cbPainting.Text = "Painting"
         Me.cbPainting.UseVisualStyleBackColor = False
+        '
+        'rtbItemsRandomSame1202
+        '
+        Me.rtbItemsRandomSame1202.Location = New System.Drawing.Point(1101, 429)
+        Me.rtbItemsRandomSame1202.Name = "rtbItemsRandomSame1202"
+        Me.rtbItemsRandomSame1202.Size = New System.Drawing.Size(49, 45)
+        Me.rtbItemsRandomSame1202.TabIndex = 100
+        Me.rtbItemsRandomSame1202.Text = resources.GetString("rtbItemsRandomSame1202.Text")
+        '
+        'btnRenameScheme
+        '
+        Me.btnRenameScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
+        Me.btnRenameScheme.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
+        Me.btnRenameScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnRenameScheme.FlatAppearance.BorderSize = 0
+        Me.btnRenameScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnRenameScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
+        Me.btnRenameScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRenameScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRenameScheme.ForeColor = System.Drawing.Color.Black
+        Me.btnRenameScheme.Location = New System.Drawing.Point(490, 617)
+        Me.btnRenameScheme.Name = "btnRenameScheme"
+        Me.btnRenameScheme.Size = New System.Drawing.Size(179, 32)
+        Me.btnRenameScheme.TabIndex = 101
+        Me.btnRenameScheme.Text = "Rename selected scheme"
+        Me.btnRenameScheme.UseVisualStyleBackColor = False
         '
         'btnAddItem
         '
@@ -943,6 +917,58 @@ Partial Class frmMain
         Me.pbAddItem.TabIndex = 93
         Me.pbAddItem.TabStop = False
         '
+        'DuplicateFinderToolStripMenuItem
+        '
+        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
+        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinder
+        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
+        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
+        '
+        'ItemListImporterToolStripMenuItem
+        '
+        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgItemListImporter
+        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
+        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
+        '
+        'EinstellungenToolStripMenuItem
+        '
+        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgSettings
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.EinstellungenToolStripMenuItem.Text = "Settings"
+        '
+        'OutputToolStripMenuItem
+        '
+        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgOutput
+        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.OutputToolStripMenuItem.Text = "Output"
+        '
+        'DocumentationToolStripMenuItem
+        '
+        Me.DocumentationToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
+        Me.DocumentationToolStripMenuItem.Name = "DocumentationToolStripMenuItem"
+        Me.DocumentationToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.DocumentationToolStripMenuItem.Text = "Documentation"
+        '
+        'ChangelogToolStripMenuItem
+        '
+        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgUpdate
+        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.ChangelogToolStripMenuItem.Text = "Changelog"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAbout
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(187, 26)
+        Me.AboutToolStripMenuItem1.Text = "About"
+        '
         'DToolStripMenuItem
         '
         Me.DToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
@@ -956,32 +982,6 @@ Partial Class frmMain
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 26)
         Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'rtbItemsRandomSame1202
-        '
-        Me.rtbItemsRandomSame1202.Location = New System.Drawing.Point(1101, 429)
-        Me.rtbItemsRandomSame1202.Name = "rtbItemsRandomSame1202"
-        Me.rtbItemsRandomSame1202.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItemsRandomSame1202.TabIndex = 100
-        Me.rtbItemsRandomSame1202.Text = resources.GetString("rtbItemsRandomSame1202.Text")
-        '
-        'btnRenameScheme
-        '
-        Me.btnRenameScheme.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
-        Me.btnRenameScheme.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgButtonLight
-        Me.btnRenameScheme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRenameScheme.FlatAppearance.BorderSize = 0
-        Me.btnRenameScheme.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
-        Me.btnRenameScheme.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer), CType(CType(194, Byte), Integer))
-        Me.btnRenameScheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRenameScheme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRenameScheme.ForeColor = System.Drawing.Color.Black
-        Me.btnRenameScheme.Location = New System.Drawing.Point(490, 617)
-        Me.btnRenameScheme.Name = "btnRenameScheme"
-        Me.btnRenameScheme.Size = New System.Drawing.Size(179, 32)
-        Me.btnRenameScheme.TabIndex = 101
-        Me.btnRenameScheme.Text = "Rename selected scheme"
-        Me.btnRenameScheme.UseVisualStyleBackColor = False
         '
         'frmMain
         '
@@ -1056,7 +1056,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater Legacy 0.5.2"
+        Me.Text = "Random Item Giver Updater Legacy 0.5.3"
         Me.gbItemID.ResumeLayout(False)
         Me.cmsHamburgerButton.ResumeLayout(False)
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).EndInit()
