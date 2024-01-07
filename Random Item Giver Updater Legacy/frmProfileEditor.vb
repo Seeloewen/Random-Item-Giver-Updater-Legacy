@@ -102,6 +102,15 @@ Public Class frmProfileEditor
                 ctrl.BackgroundImage = My.Resources.imgButtonLight
             End If
         Next
+
+        'Set design of button in 'Edit profile' box
+        If frmMain.design = "Dark" Then
+            btnBrowse.ForeColor = Color.White
+            btnBrowse.BackgroundImage = My.Resources.imgButton
+        ElseIf frmMain.design = "Light" Then
+            btnBrowse.ForeColor = Color.Black
+            btnBrowse.BackgroundImage = My.Resources.imgButtonLight
+        End If
     End Sub
 
     Public Sub InitializeLoadingProfile(profile As String, showMessage As Boolean)
