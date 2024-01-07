@@ -1,6 +1,6 @@
 # Random Item Giver Updater Legacy
 
-### Please note that the app has entered the legacy state, meaning it will no longer receive major content updates or updates for newer Minecraft versions. You should head over and downloaad the newest version instead: https://github.com/Seeloewen/Random-Item-Giver-Updater/
+### Please note that the app has entered the legacy state, meaning it will no longer receive major content updates or improvements, only updates for compatibility with newer datapack versions and bug fixes. You should head over and downloaad the newest version instead: https://github.com/Seeloewen/Random-Item-Giver-Updater/
 
 ![GitHub all releases](https://img.shields.io/github/downloads/Seeloewen/Random-Item-Giver-Updater-Legacy/total?style=for-the-badge)
 
