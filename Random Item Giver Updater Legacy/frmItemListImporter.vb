@@ -88,7 +88,7 @@ Public Class frmItemListImporter
                 Close()
             End If
         Else
-            MsgBox("An error occured while importing items." + MsgBoxStyle.Information, "Error")
+            MsgBox("An error occured while importing items.", MsgBoxStyle.Critical, "Error")
         End If
 
         'Reset controls to default state
