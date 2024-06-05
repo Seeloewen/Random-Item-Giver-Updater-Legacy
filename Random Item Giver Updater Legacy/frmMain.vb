@@ -2014,6 +2014,7 @@ Public Class frmMain
         btnSaveAsNewScheme.Show()
         btnDeleteSelectedScheme.Show()
         cbPainting.Show()
+        btnRenameScheme.Show()
 
         'Change position and dimensions of some controls
         cbEnableAdvancedView.Top = 677
@@ -2044,6 +2045,7 @@ Public Class frmMain
         btnSaveAsNewScheme.Hide()
         btnDeleteSelectedScheme.Hide()
         cbPainting.Hide()
+        btnRenameScheme.Hide()
 
         cbAddItemsFast.Top = 532
         cbAddItemsFast.Left = 320
