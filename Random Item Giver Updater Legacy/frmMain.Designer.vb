@@ -56,28 +56,22 @@ Partial Class frmMain
         Me.cbCustomNBT = New System.Windows.Forms.CheckBox()
         Me.tbCustomNBT = New System.Windows.Forms.TextBox()
         Me.fbdMainFolderPath = New System.Windows.Forms.FolderBrowserDialog()
-        Me.Quotationmark = New System.Windows.Forms.Label()
-        Me.rtbCodeEnd = New System.Windows.Forms.RichTextBox()
-        Me.rtbItems64 = New System.Windows.Forms.RichTextBox()
-        Me.rtbItems32 = New System.Windows.Forms.RichTextBox()
-        Me.rtbItems10 = New System.Windows.Forms.RichTextBox()
-        Me.rtbItems3 = New System.Windows.Forms.RichTextBox()
-        Me.rtbItems5 = New System.Windows.Forms.RichTextBox()
-        Me.rtbItems2 = New System.Windows.Forms.RichTextBox()
-        Me.rtbLog = New System.Windows.Forms.RichTextBox()
         Me.pbAddingItemsProgress = New System.Windows.Forms.ProgressBar()
         Me.bgwAddItems = New System.ComponentModel.BackgroundWorker()
         Me.lblItemsTotal = New System.Windows.Forms.Label()
-        Me.cbxDefaultProfile = New System.Windows.Forms.ComboBox()
-        Me.rtbItemsRandomSame119 = New System.Windows.Forms.RichTextBox()
-        Me.rtbItemsRandomSame116 = New System.Windows.Forms.RichTextBox()
         Me.lblBoxSelectDatapackHeader = New System.Windows.Forms.Label()
         Me.lblBoxAddItemHeader = New System.Windows.Forms.Label()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmsHamburgerButton = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbPainting = New System.Windows.Forms.CheckBox()
-        Me.rtbItemsRandomSame1202 = New System.Windows.Forms.RichTextBox()
         Me.btnRenameScheme = New System.Windows.Forms.Button()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.pbLine = New System.Windows.Forms.PictureBox()
@@ -91,13 +85,6 @@ Partial Class frmMain
         Me.btnBrowseDatapackPath = New System.Windows.Forms.Button()
         Me.pbSelectDatapack = New System.Windows.Forms.PictureBox()
         Me.pbAddItem = New System.Windows.Forms.PictureBox()
-        Me.DuplicateFinderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ItemListImporterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OutputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DocumentationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChangelogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.gbItemID.SuspendLayout()
@@ -519,85 +506,6 @@ Partial Class frmMain
         Me.fbdMainFolderPath.Description = "Select the datapack which you want to edit."
         Me.fbdMainFolderPath.RootFolder = System.Environment.SpecialFolder.MyComputer
         '
-        'Quotationmark
-        '
-        Me.Quotationmark.AutoSize = True
-        Me.Quotationmark.Location = New System.Drawing.Point(1218, 281)
-        Me.Quotationmark.Name = "Quotationmark"
-        Me.Quotationmark.Size = New System.Drawing.Size(12, 13)
-        Me.Quotationmark.TabIndex = 82
-        Me.Quotationmark.Text = """"
-        '
-        'rtbCodeEnd
-        '
-        Me.rtbCodeEnd.Location = New System.Drawing.Point(1101, 378)
-        Me.rtbCodeEnd.Name = "rtbCodeEnd"
-        Me.rtbCodeEnd.Size = New System.Drawing.Size(49, 45)
-        Me.rtbCodeEnd.TabIndex = 81
-        Me.rtbCodeEnd.Text = "        }" & Global.Microsoft.VisualBasic.ChrW(10) & "      ]" & Global.Microsoft.VisualBasic.ChrW(10) & "    }" & Global.Microsoft.VisualBasic.ChrW(10) & "  ]" & Global.Microsoft.VisualBasic.ChrW(10) & "}"
-        '
-        'rtbItems64
-        '
-        Me.rtbItems64.Location = New System.Drawing.Point(1156, 327)
-        Me.rtbItems64.Name = "rtbItems64"
-        Me.rtbItems64.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItems64.TabIndex = 80
-        Me.rtbItems64.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
-    "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 64" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
-        '
-        'rtbItems32
-        '
-        Me.rtbItems32.Location = New System.Drawing.Point(1101, 327)
-        Me.rtbItems32.Name = "rtbItems32"
-        Me.rtbItems32.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItems32.TabIndex = 79
-        Me.rtbItems32.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
-    "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 32" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
-        '
-        'rtbItems10
-        '
-        Me.rtbItems10.Location = New System.Drawing.Point(1156, 276)
-        Me.rtbItems10.Name = "rtbItems10"
-        Me.rtbItems10.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItems10.TabIndex = 78
-        Me.rtbItems10.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
-    "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 10" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
-        '
-        'rtbItems3
-        '
-        Me.rtbItems3.Location = New System.Drawing.Point(1156, 224)
-        Me.rtbItems3.Name = "rtbItems3"
-        Me.rtbItems3.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItems3.TabIndex = 77
-        Me.rtbItems3.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
-    "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 3" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
-        '
-        'rtbItems5
-        '
-        Me.rtbItems5.Location = New System.Drawing.Point(1101, 276)
-        Me.rtbItems5.Name = "rtbItems5"
-        Me.rtbItems5.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItems5.TabIndex = 76
-        Me.rtbItems5.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
-    "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 5" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
-        '
-        'rtbItems2
-        '
-        Me.rtbItems2.Location = New System.Drawing.Point(1101, 224)
-        Me.rtbItems2.Name = "rtbItems2"
-        Me.rtbItems2.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItems2.TabIndex = 75
-        Me.rtbItems2.Text = "          ""functions"": [" & Global.Microsoft.VisualBasic.ChrW(10) & "            {" & Global.Microsoft.VisualBasic.ChrW(10) & "              ""function"": ""minecraft:set_c" &
-    "ount""," & Global.Microsoft.VisualBasic.ChrW(10) & "              ""count"": 2" & Global.Microsoft.VisualBasic.ChrW(10) & "            }"
-        '
-        'rtbLog
-        '
-        Me.rtbLog.Location = New System.Drawing.Point(1221, 224)
-        Me.rtbLog.Name = "rtbLog"
-        Me.rtbLog.Size = New System.Drawing.Size(51, 54)
-        Me.rtbLog.TabIndex = 83
-        Me.rtbLog.Text = ""
-        '
         'pbAddingItemsProgress
         '
         Me.pbAddingItemsProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -621,30 +529,6 @@ Partial Class frmMain
         Me.lblItemsTotal.Size = New System.Drawing.Size(208, 24)
         Me.lblItemsTotal.TabIndex = 86
         Me.lblItemsTotal.Text = "Total amount of items: 0"
-        '
-        'cbxDefaultProfile
-        '
-        Me.cbxDefaultProfile.FormattingEnabled = True
-        Me.cbxDefaultProfile.Location = New System.Drawing.Point(1278, 224)
-        Me.cbxDefaultProfile.Name = "cbxDefaultProfile"
-        Me.cbxDefaultProfile.Size = New System.Drawing.Size(121, 21)
-        Me.cbxDefaultProfile.TabIndex = 87
-        '
-        'rtbItemsRandomSame119
-        '
-        Me.rtbItemsRandomSame119.Location = New System.Drawing.Point(1156, 378)
-        Me.rtbItemsRandomSame119.Name = "rtbItemsRandomSame119"
-        Me.rtbItemsRandomSame119.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItemsRandomSame119.TabIndex = 89
-        Me.rtbItemsRandomSame119.Text = resources.GetString("rtbItemsRandomSame119.Text")
-        '
-        'rtbItemsRandomSame116
-        '
-        Me.rtbItemsRandomSame116.Location = New System.Drawing.Point(1156, 429)
-        Me.rtbItemsRandomSame116.Name = "rtbItemsRandomSame116"
-        Me.rtbItemsRandomSame116.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItemsRandomSame116.TabIndex = 90
-        Me.rtbItemsRandomSame116.Text = resources.GetString("rtbItemsRandomSame116.Text")
         '
         'lblBoxSelectDatapackHeader
         '
@@ -678,12 +562,43 @@ Partial Class frmMain
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         '
+        'DuplicateFinderToolStripMenuItem
+        '
+        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
+        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinder
+        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
+        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
+        '
+        'ItemListImporterToolStripMenuItem
+        '
+        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgItemListImporter
+        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
+        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
+        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
+        '
         'cmsHamburgerButton
         '
         Me.cmsHamburgerButton.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EinstellungenToolStripMenuItem, Me.OutputToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.cmsHamburgerButton.Name = "cmsHamburgerButton"
         Me.cmsHamburgerButton.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.cmsHamburgerButton.Size = New System.Drawing.Size(134, 108)
+        '
+        'EinstellungenToolStripMenuItem
+        '
+        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgSettings
+        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
+        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.EinstellungenToolStripMenuItem.Text = "Settings"
+        '
+        'OutputToolStripMenuItem
+        '
+        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgOutput
+        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
+        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
+        Me.OutputToolStripMenuItem.Text = "Output"
         '
         'HelpToolStripMenuItem
         '
@@ -692,6 +607,27 @@ Partial Class frmMain
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'DocumentationToolStripMenuItem
+        '
+        Me.DocumentationToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
+        Me.DocumentationToolStripMenuItem.Name = "DocumentationToolStripMenuItem"
+        Me.DocumentationToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.DocumentationToolStripMenuItem.Text = "Documentation"
+        '
+        'ChangelogToolStripMenuItem
+        '
+        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgUpdate
+        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
+        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
+        Me.ChangelogToolStripMenuItem.Text = "Changelog"
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAbout
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(187, 26)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'cbPainting
         '
@@ -705,14 +641,6 @@ Partial Class frmMain
         Me.cbPainting.TabIndex = 99
         Me.cbPainting.Text = "Painting"
         Me.cbPainting.UseVisualStyleBackColor = False
-        '
-        'rtbItemsRandomSame1202
-        '
-        Me.rtbItemsRandomSame1202.Location = New System.Drawing.Point(1101, 429)
-        Me.rtbItemsRandomSame1202.Name = "rtbItemsRandomSame1202"
-        Me.rtbItemsRandomSame1202.Size = New System.Drawing.Size(49, 45)
-        Me.rtbItemsRandomSame1202.TabIndex = 100
-        Me.rtbItemsRandomSame1202.Text = resources.GetString("rtbItemsRandomSame1202.Text")
         '
         'btnRenameScheme
         '
@@ -917,58 +845,6 @@ Partial Class frmMain
         Me.pbAddItem.TabIndex = 93
         Me.pbAddItem.TabStop = False
         '
-        'DuplicateFinderToolStripMenuItem
-        '
-        Me.DuplicateFinderToolStripMenuItem.BackColor = System.Drawing.Color.White
-        Me.DuplicateFinderToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinder
-        Me.DuplicateFinderToolStripMenuItem.Name = "DuplicateFinderToolStripMenuItem"
-        Me.DuplicateFinderToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.DuplicateFinderToolStripMenuItem.Text = "Duplicate Finder"
-        '
-        'ItemListImporterToolStripMenuItem
-        '
-        Me.ItemListImporterToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgItemListImporter
-        Me.ItemListImporterToolStripMenuItem.Name = "ItemListImporterToolStripMenuItem"
-        Me.ItemListImporterToolStripMenuItem.Size = New System.Drawing.Size(204, 26)
-        Me.ItemListImporterToolStripMenuItem.Text = "Item List Importer"
-        '
-        'EinstellungenToolStripMenuItem
-        '
-        Me.EinstellungenToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.EinstellungenToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgSettings
-        Me.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem"
-        Me.EinstellungenToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.EinstellungenToolStripMenuItem.Text = "Settings"
-        '
-        'OutputToolStripMenuItem
-        '
-        Me.OutputToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OutputToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgOutput
-        Me.OutputToolStripMenuItem.Name = "OutputToolStripMenuItem"
-        Me.OutputToolStripMenuItem.Size = New System.Drawing.Size(133, 26)
-        Me.OutputToolStripMenuItem.Text = "Output"
-        '
-        'DocumentationToolStripMenuItem
-        '
-        Me.DocumentationToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
-        Me.DocumentationToolStripMenuItem.Name = "DocumentationToolStripMenuItem"
-        Me.DocumentationToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
-        Me.DocumentationToolStripMenuItem.Text = "Documentation"
-        '
-        'ChangelogToolStripMenuItem
-        '
-        Me.ChangelogToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgUpdate
-        Me.ChangelogToolStripMenuItem.Name = "ChangelogToolStripMenuItem"
-        Me.ChangelogToolStripMenuItem.Size = New System.Drawing.Size(187, 26)
-        Me.ChangelogToolStripMenuItem.Text = "Changelog"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAbout
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(187, 26)
-        Me.AboutToolStripMenuItem1.Text = "About"
-        '
         'DToolStripMenuItem
         '
         Me.DToolStripMenuItem.Image = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgHelp
@@ -988,9 +864,8 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(719, 808)
+        Me.ClientSize = New System.Drawing.Size(727, 808)
         Me.Controls.Add(Me.btnRenameScheme)
-        Me.Controls.Add(Me.rtbItemsRandomSame1202)
         Me.Controls.Add(Me.cbPainting)
         Me.Controls.Add(Me.btnAddItem)
         Me.Controls.Add(Me.pbLine)
@@ -1006,18 +881,15 @@ Partial Class frmMain
         Me.Controls.Add(Me.btnOverwriteSelectedScheme)
         Me.Controls.Add(Me.btnSaveProfile)
         Me.Controls.Add(Me.btnSaveAsNewScheme)
-        Me.Controls.Add(Me.rtbItemsRandomSame116)
         Me.Controls.Add(Me.cbAddItemsFast)
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.cbGoatHorn)
-        Me.Controls.Add(Me.rtbItemsRandomSame119)
         Me.Controls.Add(Me.cbNormalItem)
         Me.Controls.Add(Me.cbxVersion)
         Me.Controls.Add(Me.tbSmallOutput)
         Me.Controls.Add(Me.lblOutput)
         Me.Controls.Add(Me.lblDatapackDetection)
         Me.Controls.Add(Me.tbSamePrefix)
-        Me.Controls.Add(Me.cbxDefaultProfile)
         Me.Controls.Add(Me.cbSamePrefix)
         Me.Controls.Add(Me.btnBrowseDatapackPath)
         Me.Controls.Add(Me.rbtnCommandBlock)
@@ -1028,23 +900,14 @@ Partial Class frmMain
         Me.Controls.Add(Me.cbSplashPotion)
         Me.Controls.Add(Me.lblSelectDatapack)
         Me.Controls.Add(Me.cbLingeringPotion)
-        Me.Controls.Add(Me.rtbLog)
         Me.Controls.Add(Me.cbTippedArrow)
-        Me.Controls.Add(Me.Quotationmark)
         Me.Controls.Add(Me.cbSuspiciousStew)
-        Me.Controls.Add(Me.rtbCodeEnd)
         Me.Controls.Add(Me.cbPotion)
-        Me.Controls.Add(Me.rtbItems64)
         Me.Controls.Add(Me.cbEnchantedBook)
-        Me.Controls.Add(Me.rtbItems32)
         Me.Controls.Add(Me.cbCreativeOnly)
-        Me.Controls.Add(Me.rtbItems10)
-        Me.Controls.Add(Me.rtbItems3)
         Me.Controls.Add(Me.lblAddNewItems)
         Me.Controls.Add(Me.gbItemID)
-        Me.Controls.Add(Me.rtbItems5)
         Me.Controls.Add(Me.cbCustomNBT)
-        Me.Controls.Add(Me.rtbItems2)
         Me.Controls.Add(Me.tbCustomNBT)
         Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.pbSelectDatapack)
@@ -1092,18 +955,9 @@ Partial Class frmMain
     Friend WithEvents tbDatapackPath As TextBox
     Friend WithEvents lblSelectDatapack As Label
     Friend WithEvents fbdMainFolderPath As FolderBrowserDialog
-    Friend WithEvents Quotationmark As Label
-    Friend WithEvents rtbCodeEnd As RichTextBox
-    Friend WithEvents rtbItems64 As RichTextBox
-    Friend WithEvents rtbItems32 As RichTextBox
-    Friend WithEvents rtbItems10 As RichTextBox
-    Friend WithEvents rtbItems3 As RichTextBox
-    Friend WithEvents rtbItems5 As RichTextBox
-    Friend WithEvents rtbItems2 As RichTextBox
     Friend WithEvents lblDatapackDetection As Label
     Friend WithEvents rtbItem As RichTextBox
     Friend WithEvents gbItemID As GroupBox
-    Friend WithEvents rtbLog As RichTextBox
     Friend WithEvents cbGoatHorn As CheckBox
     Friend WithEvents lblVersion As Label
     Friend WithEvents cbxVersion As ComboBox
@@ -1118,10 +972,7 @@ Partial Class frmMain
     Friend WithEvents btnOverwriteSelectedScheme As Button
     Friend WithEvents btnSaveAsNewScheme As Button
     Friend WithEvents cbEnableAdvancedView As CheckBox
-    Friend WithEvents cbxDefaultProfile As ComboBox
     Friend WithEvents btnDeleteSelectedScheme As Button
-    Friend WithEvents rtbItemsRandomSame119 As RichTextBox
-    Friend WithEvents rtbItemsRandomSame116 As RichTextBox
     Friend WithEvents pbSelectDatapack As PictureBox
     Friend WithEvents lblBoxSelectDatapackHeader As Label
     Friend WithEvents pbAddItem As PictureBox
@@ -1142,6 +993,5 @@ Partial Class frmMain
     Friend WithEvents ChangelogToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents cbPainting As CheckBox
-    Friend WithEvents rtbItemsRandomSame1202 As RichTextBox
     Friend WithEvents btnRenameScheme As Button
 End Class
