@@ -36,11 +36,11 @@ Public Class frmRenameScheme
 
     Public Sub RenameScheme()
         'Check if a scheme is loaded and if it exists, then rename the scheme file and reload the scheme files in the main window
-        If String.IsNullOrEmpty(scheme) = False Then
-            If File.Exists(String.Format("{0}{1}.txt", frmMain.schemeDirectory, scheme)) Then
-                My.Computer.FileSystem.RenameFile(String.Format("{0}{1}.txt", frmMain.schemeDirectory, scheme), String.Format("{0}.txt", tbRenameSchemeTo.Text))
-                MsgBox(String.Format("The scheme '{0}' was successfully renamed to '{1}'!", scheme, tbRenameSchemeTo.Text), MsgBoxStyle.Information, "Renamed Scheme")
-                frmMain.WriteToLog(String.Format("The scheme '{0}' was successfully renamed to '{1}'!", scheme, tbRenameSchemeTo.Text), "Info")
+        If Not String.IsNullOrEmpty(scheme) Then
+            If File.Exists($"{frmMain.schemeDirectory}{scheme}.txt") Then
+                My.Computer.FileSystem.RenameFile($"{frmMain.schemeDirectory}{scheme}.txt", $"{tbRenameSchemeTo.Text}.txt")
+                MsgBox($"The scheme '{scheme}' was successfully renamed to '{tbRenameSchemeTo.Text}'!", MsgBoxStyle.Information, "Renamed Scheme")
+                frmMain.WriteToLog($"The scheme '{scheme}' was successfully renamed to '{tbRenameSchemeTo.Text}'!", "Info")
                 frmMain.GetSchemeFiles(frmMain.schemeDirectory)
                 frmMain.cbxScheme.Text = tbRenameSchemeTo.Text
                 Close()

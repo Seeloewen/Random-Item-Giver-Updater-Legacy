@@ -21,22 +21,22 @@
         'Saves the profile. It checks if the profile already exists or not. If it exists, it will show a warning, otherwise it will not.
         'It will then create a text file with the name set in ProfileName and write the content of the variable to the file.
         'It will show an error if ProfileName is empty or ProfileDirectory doesn't exist.
-        If String.IsNullOrEmpty(tbSaveProfileAs.Text) = False Then
+        If Not String.IsNullOrEmpty(tbSaveProfileAs.Text) Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
-                If My.Computer.FileSystem.FileExists(String.Format("{0}{1}.txt", frmMain.profileDirectory, tbSaveProfileAs.Text)) Then
+                If My.Computer.FileSystem.FileExists($"{frmMain.profileDirectory}{tbSaveProfileAs.Text}.txt") Then
                     Select Case MsgBox("A profile with this name already exists. Do you want to overwrite it?", vbQuestion + vbYesNo, "Profile already exists")
                         Case Windows.Forms.DialogResult.Yes
-                            My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.profileDirectory, tbSaveProfileAs.Text), DatapackPath + vbNewLine + DatapackVersion, False)
+                            My.Computer.FileSystem.WriteAllText($"{frmMain.profileDirectory}{tbSaveProfileAs.Text}.txt", DatapackPath + vbNewLine + DatapackVersion, False)
                             MsgBox("Profile was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
-                            frmMain.WriteToLog(String.Format("Saved and overwrote profile {0}", tbSaveProfileAs.Text), "Info")
+                            frmMain.WriteToLog($"Saved and overwrote profile {tbSaveProfileAs.Text}", "Info")
                             Close()
                         Case Windows.Forms.DialogResult.No
                             MsgBox("Profile was not overwritten. Please select a different profile name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
                     End Select
                 Else
-                    My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.profileDirectory, tbSaveProfileAs.Text), DatapackPath + vbNewLine + DatapackVersion, False)
+                    My.Computer.FileSystem.WriteAllText($"{frmMain.profileDirectory}{tbSaveProfileAs.Text}.txt", DatapackPath + vbNewLine + DatapackVersion, False)
                     MsgBox("Profile was saved.", MsgBoxStyle.Information, "Saved")
-                    frmMain.WriteToLog(String.Format("Saved profile {0}", tbSaveProfileAs.Text), "Info")
+                    frmMain.WriteToLog($"Saved profile {tbSaveProfileAs.Text}", "Info")
                     Close()
                 End If
             Else
@@ -89,9 +89,9 @@
         End If
 
         'Update the selected profile. This will save and overwrite the selected profile without showing any warning or message. Used if a profile is old or corrupted.
-        If String.IsNullOrEmpty(profileName) = False Then
+        If Not String.IsNullOrEmpty(profileName) Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
-                My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.profileDirectory, profileName), DatapackPath + vbNewLine + DatapackVersion, False)
+                My.Computer.FileSystem.WriteAllText($"{frmMain.profileDirectory}{profileName}.txt", DatapackPath + vbNewLine + DatapackVersion, False)
             Else
                 MsgBox("Error: Couldn't update profile. Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
             End If
@@ -103,74 +103,66 @@
     '-- Button animations --
 
     Private Sub btnSave_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSave.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnSave_MouseEnter(sender As Object, e As EventArgs) Handles btnSave.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSave.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseEnter(sender As Object, e As EventArgs) Handles btnCancel.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseLeave(sender As Object, e As EventArgs) Handles btnCancel.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnCancel.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnCancel.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 End Class

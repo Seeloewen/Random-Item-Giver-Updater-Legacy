@@ -5,6 +5,9 @@
     Private Sub frmAbout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Load user preferences
         LoadDesign()
+
+        'Get version from main window
+        lblBuild.Text = $"Version {frmMain.versionLog}"
     End Sub
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
@@ -23,6 +26,7 @@
     End Sub
 
     '-- Custom methods --
+
     Private Sub LoadDesign()
         'Set appearance of buttons depending on selected design
         For Each ctrl As Control In Controls.OfType(Of Button)
@@ -37,12 +41,19 @@
 
         'Load dark mode
         If frmMain.design = "Dark" Then
-            lblHeader.ForeColor = Color.White
-            lblBuild.ForeColor = Color.White
-            gbLicense.ForeColor = Color.White
-            rtbLicense.BackColor = Color.FromArgb(50, 50, 50)
+
+            'Labels
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is Label Then
+                    ctrl.ForeColor = Color.White
+                End If
+            Next
+
+            'Everything else
             BackColor = Color.FromArgb(50, 50, 50)
             rtbLicense.ForeColor = Color.White
+            rtbLicense.BackColor = Color.FromArgb(50, 50, 50)
+            gbLicense.ForeColor = Color.White
             llblGithub.LinkColor = Color.LightBlue
         End If
     End Sub
@@ -55,7 +66,6 @@
         ElseIf frmMain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnOK_MouseEnter(sender As Object, e As EventArgs) Handles btnOK.MouseEnter
@@ -64,7 +74,6 @@
         ElseIf frmMain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnOK_MouseLeave(sender As Object, e As EventArgs) Handles btnOK.MouseLeave
@@ -73,7 +82,6 @@
         ElseIf frmMain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOK_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOK.MouseUp
@@ -82,6 +90,5 @@
         ElseIf frmMain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 End Class

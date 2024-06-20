@@ -33,11 +33,11 @@ Public Class frmRenameProfile
 
     Public Sub RenameProfile()
         'Check if a profile is loaded and if it exists, then rename the profile file and reload the profile files in the main window
-        If String.IsNullOrEmpty(profile) = False Then
-            If File.Exists(String.Format("{0}{1}.txt", frmMain.profileDirectory, profile)) Then
-                My.Computer.FileSystem.RenameFile(String.Format("{0}{1}.txt", frmMain.profileDirectory, profile), String.Format("{0}.txt", tbRenameProfileTo.Text))
-                MsgBox(String.Format("The profile '{0}' was successfully renamed to '{1}'!", profile, tbRenameProfileTo.Text), MsgBoxStyle.Information, "Renamed profile")
-                frmMain.WriteToLog(String.Format("The profile '{0}' was successfully renamed to '{1}'!", profile, tbRenameProfileTo.Text), "Info")
+        If Not String.IsNullOrEmpty(profile) Then
+            If File.Exists($"{frmMain.profileDirectory}{profile}.txt") Then
+                My.Computer.FileSystem.RenameFile($"{frmMain.profileDirectory}{profile}.txt", $"{tbRenameProfileTo.Text}.txt")
+                MsgBox($"The profile '{profile}' was successfully renamed to '{tbRenameProfileTo.Text}'!", MsgBoxStyle.Information, "Renamed profile")
+                frmMain.WriteToLog($"The profile '{profile}' was successfully renamed to '{tbRenameProfileTo.Text}'!", "Info")
                 frmMain.GetProfileFiles(frmMain.profileDirectory)
                 frmProfileEditor.GetFiles(frmMain.profileDirectory)
                 frmProfileEditor.cbxProfile.Text = tbRenameProfileTo.Text

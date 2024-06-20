@@ -63,76 +63,22 @@
 
     Public Sub SaveScheme(nameSource As String, overwrite As Boolean)
         'Save currently selected settings into Variables
-        If frmMain.rbtnSpawnEgg.Checked = True Then
-            spawnEgg = True
-        Else
-            spawnEgg = False
-        End If
-        If frmMain.rbtnCommandBlock.Checked = True Then
-            commandBlock = True
-        Else
-            spawnEgg = False
-        End If
-        If frmMain.rbtnOtherItem.Checked = True Then
-            otherCreativeOnlyItem = True
-        Else
-            otherCreativeOnlyItem = False
-        End If
-        If frmMain.cbSamePrefix.Checked Then
-            samePrefix = True
-        Else
-            samePrefix = False
-        End If
-        If frmMain.cbCustomNBT.Checked = True Then
-            customNBT = True
-        Else
-            customNBT = False
-        End If
-        If frmMain.cbNormalItem.Checked = True Then
-            normalItem = True
-        Else
-            normalItem = False
-        End If
-        If frmMain.cbSuspiciousStew.Checked = True Then
-            suspiciousStew = True
-        Else
-            suspiciousStew = False
-        End If
-        If frmMain.cbEnchantedBook.Checked = True Then
-            enchantedBook = True
-        Else
-            enchantedBook = False
-        End If
-        If frmMain.cbPotion.Checked = True Then
-            potion = True
-        Else
-            potion = False
-        End If
-        If frmMain.cbSplashPotion.Checked = True Then
-            splashPotion = True
-        Else
-            splashPotion = False
-        End If
-        If frmMain.cbLingeringPotion.Checked = True Then
-            lingeringPotion = True
-        Else
-            lingeringPotion = False
-        End If
-        If frmMain.cbTippedArrow.Checked = True Then
-            tippedArrow = True
-        Else
-            tippedArrow = False
-        End If
-        If frmMain.cbGoatHorn.Checked = True Then
-            goatHorn = True
-        Else
-            goatHorn = False
-        End If
-        If frmMain.cbCreativeOnly.Checked = True Then
-            creativeOnly = True
-        Else
-            creativeOnly = False
-        End If
+        spawnEgg = frmMain.rbtnSpawnEgg.Checked
+        commandBlock = frmMain.rbtnCommandBlock.Checked
+        otherCreativeOnlyItem = frmMain.rbtnOtherItem.Checked
+        samePrefix = frmMain.cbSamePrefix.Checked
+        customNBT = frmMain.cbCustomNBT.Checked
+        normalItem = frmMain.cbNormalItem.Checked
+        suspiciousStew = frmMain.cbSuspiciousStew.Checked
+        enchantedBook = frmMain.cbEnchantedBook.Checked
+        potion = frmMain.cbPotion.Checked
+        splashPotion = frmMain.cbSplashPotion.Checked
+        lingeringPotion = frmMain.cbLingeringPotion.Checked
+        tippedArrow = frmMain.cbTippedArrow.Checked
+        goatHorn = frmMain.cbGoatHorn.Checked
+        creativeOnly = frmMain.cbCreativeOnly.Checked
+        painting = frmMain.cbPainting.Checked
+
         If String.IsNullOrEmpty(frmMain.tbSamePrefix.Text) Then
             samePrefixString = "minecraft"
         Else
@@ -149,27 +95,27 @@
         'It will then create a text file with the name set in NameSource and write the content of the variables to the file.
         'It will also reload the scheme combobox in main window
         'It sill show an error if NameSource is empty or ProfileDirectory doesn't exist.
-        If overwrite = False Then
-            If String.IsNullOrEmpty(nameSource) = False Then
+        If Not overwrite Then
+            If Not String.IsNullOrEmpty(nameSource) Then
                 If My.Computer.FileSystem.DirectoryExists(frmMain.schemeDirectory) Then
-                    If My.Computer.FileSystem.FileExists(frmMain.schemeDirectory + nameSource + ".txt") Then
+                    If My.Computer.FileSystem.FileExists($"{frmMain.schemeDirectory}{nameSource}.txt") Then
                         Select Case MsgBox("A scheme with this name already exists. Do you want to overwrite it?", vbQuestion + vbYesNo, "Scheme already exists")
                             Case Windows.Forms.DialogResult.Yes
-                                My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.schemeDirectory, nameSource), samePrefix.ToString + vbNewLine + samePrefixString + vbNewLine + customNBT.ToString + vbNewLine + customNBTString + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine + painting.ToString + vbNewLine, False)
+                                My.Computer.FileSystem.WriteAllText($"{frmMain.schemeDirectory}{nameSource}.txt", samePrefix.ToString + vbNewLine + samePrefixString + vbNewLine + customNBT.ToString + vbNewLine + customNBTString + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine + painting.ToString + vbNewLine, False)
                                 frmMain.cbxScheme.Items.Clear()
                                 frmMain.GetSchemeFiles(frmMain.schemeDirectory)
                                 MsgBox("Scheme was overwritten and saved.", MsgBoxStyle.Information, "Overwritten and saved")
-                                frmMain.WriteToLog(String.Format("Saved and overwrote scheme {0}", nameSource), "Info")
+                                frmMain.WriteToLog($"Saved and overwrote scheme {nameSource}", "Info")
                                 Close()
                             Case Windows.Forms.DialogResult.No
                                 MsgBox("Scheme was not overwritten. Please select a different scheme name.", MsgBoxStyle.Exclamation, "Profile not overwritten.")
                         End Select
                     Else
-                        My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.schemeDirectory, nameSource), samePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + customNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine + painting.ToString + vbNewLine, False)
+                        My.Computer.FileSystem.WriteAllText($"{frmMain.schemeDirectory}{nameSource}.txt", samePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + customNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine + painting.ToString + vbNewLine, False)
                         frmMain.cbxScheme.Items.Clear()
                         frmMain.GetSchemeFiles(frmMain.schemeDirectory)
                         MsgBox("Scheme was saved.", MsgBoxStyle.Information, "Saved")
-                        frmMain.WriteToLog(String.Format("Saved scheme {0}", nameSource), "Info")
+                        frmMain.WriteToLog($"Saved scheme {nameSource}", "Info")
                         Close()
                     End If
                 Else
@@ -179,13 +125,13 @@
                 MsgBox("Error: Scheme name is empty. Please enter a scheme name.", MsgBoxStyle.Critical, "Error")
             End If
         Else
-            If String.IsNullOrEmpty(nameSource) = False Then
+            If Not String.IsNullOrEmpty(nameSource) Then
                 If My.Computer.FileSystem.DirectoryExists(frmMain.schemeDirectory) Then
-                    My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.schemeDirectory, nameSource), samePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + customNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine + painting.ToString + vbNewLine, False)
+                    My.Computer.FileSystem.WriteAllText($"{frmMain.schemeDirectory}{nameSource}.txt", samePrefix.ToString + vbNewLine + frmMain.tbSamePrefix.Text + vbNewLine + customNBT.ToString + vbNewLine + frmMain.tbCustomNBT.Text + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine + painting.ToString + vbNewLine, False)
                     frmMain.cbxScheme.Items.Clear()
                     frmMain.GetSchemeFiles(frmMain.schemeDirectory)
                     MsgBox("Scheme was overwritten and saved.", MsgBoxStyle.Information, "Saved")
-                    frmMain.WriteToLog(String.Format("Saved and overwrote scheme {0}", nameSource), "Info")
+                    frmMain.WriteToLog($"Saved and overwrote scheme {nameSource}", "Info")
                     Close()
                 Else
                     MsgBox("Error: Scheme directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
@@ -198,76 +144,22 @@
 
     Public Sub UpdateScheme(schemeName)
         'Save currently selected settings into Variables
-        If frmMain.rbtnSpawnEgg.Checked = True Then
-            spawnEgg = True
-        Else
-            spawnEgg = False
-        End If
-        If frmMain.rbtnCommandBlock.Checked = True Then
-            commandBlock = True
-        Else
-            spawnEgg = False
-        End If
-        If frmMain.rbtnOtherItem.Checked = True Then
-            otherCreativeOnlyItem = True
-        Else
-            otherCreativeOnlyItem = False
-        End If
-        If frmMain.cbSamePrefix.Checked Then
-            samePrefix = True
-        Else
-            samePrefix = False
-        End If
-        If frmMain.cbCustomNBT.Checked = True Then
-            customNBT = True
-        Else
-            customNBT = False
-        End If
-        If frmMain.cbNormalItem.Checked = True Then
-            normalItem = True
-        Else
-            normalItem = False
-        End If
-        If frmMain.cbSuspiciousStew.Checked = True Then
-            suspiciousStew = True
-        Else
-            suspiciousStew = False
-        End If
-        If frmMain.cbEnchantedBook.Checked = True Then
-            enchantedBook = True
-        Else
-            enchantedBook = False
-        End If
-        If frmMain.cbPotion.Checked = True Then
-            potion = True
-        Else
-            potion = False
-        End If
-        If frmMain.cbSplashPotion.Checked = True Then
-            splashPotion = True
-        Else
-            splashPotion = False
-        End If
-        If frmMain.cbLingeringPotion.Checked = True Then
-            lingeringPotion = True
-        Else
-            lingeringPotion = False
-        End If
-        If frmMain.cbTippedArrow.Checked = True Then
-            tippedArrow = True
-        Else
-            tippedArrow = False
-        End If
-        If frmMain.cbGoatHorn.Checked = True Then
-            goatHorn = True
-        Else
-            goatHorn = False
-        End If
-        If frmMain.cbCreativeOnly.Checked = True Then
-            creativeOnly = True
-        Else
-            creativeOnly = False
-        End If
+        spawnEgg = frmMain.rbtnSpawnEgg.Checked
+        commandBlock = frmMain.rbtnCommandBlock.Checked
+        otherCreativeOnlyItem = frmMain.rbtnOtherItem.Checked
+        samePrefix = frmMain.cbSamePrefix.Checked
+        customNBT = frmMain.cbCustomNBT.Checked
+        normalItem = frmMain.cbNormalItem.Checked
+        suspiciousStew = frmMain.cbSuspiciousStew.Checked
+        enchantedBook = frmMain.cbEnchantedBook.Checked
+        potion = frmMain.cbPotion.Checked
+        splashPotion = frmMain.cbSplashPotion.Checked
+        lingeringPotion = frmMain.cbLingeringPotion.Checked
+        tippedArrow = frmMain.cbTippedArrow.Checked
+        goatHorn = frmMain.cbGoatHorn.Checked
+        creativeOnly = frmMain.cbCreativeOnly.Checked
+        painting = frmMain.cbPainting.Checked
+
         If String.IsNullOrEmpty(frmMain.tbSamePrefix.Text) Then
             samePrefixString = "minecraft"
         Else
@@ -278,16 +170,11 @@
         Else
             customNBTString = frmMain.tbCustomNBT.Text
         End If
-        If frmMain.cbPainting.Checked = True Then
-            painting = True
-        Else
-            painting = False
-        End If
 
         'Update the selected scheme. This will save and overwrite the selected scheme without showing any warning or message. Used if a scheme is old or corrupted.
-        If String.IsNullOrEmpty(schemeName) = False Then
+        If Not String.IsNullOrEmpty(schemeName) Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.schemeDirectory) Then
-                My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.schemeDirectory, schemeName), samePrefix.ToString + vbNewLine + samePrefixString + vbNewLine + customNBT.ToString + vbNewLine + customNBTString + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine, False)
+                My.Computer.FileSystem.WriteAllText($"{frmMain.schemeDirectory}{schemeName}.txt", samePrefix.ToString + vbNewLine + samePrefixString + vbNewLine + customNBT.ToString + vbNewLine + customNBTString + vbNewLine + normalItem.ToString + vbNewLine + suspiciousStew.ToString + vbNewLine + enchantedBook.ToString + vbNewLine + potion.ToString + vbNewLine + splashPotion.ToString + vbNewLine + lingeringPotion.ToString + vbNewLine + tippedArrow.ToString + vbNewLine + goatHorn.ToString + vbNewLine + creativeOnly.ToString + vbNewLine + spawnEgg.ToString + vbNewLine + commandBlock.ToString + vbNewLine + otherCreativeOnlyItem.ToString + vbNewLine, False)
             Else
                 MsgBox("Error: Couldn't update scheme. Scheme directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")
             End If
@@ -313,7 +200,6 @@
         ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSave.MouseLeave
@@ -322,7 +208,6 @@
         ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
@@ -331,7 +216,6 @@
         ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseDown(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseDown
@@ -340,7 +224,6 @@
         ElseIf frmMain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseEnter(sender As Object, e As EventArgs) Handles btnCancel.MouseEnter
@@ -349,7 +232,6 @@
         ElseIf frmMain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseLeave(sender As Object, e As EventArgs) Handles btnCancel.MouseLeave
@@ -358,7 +240,6 @@
         ElseIf frmMain.design = "Light" Then
             btnCancel.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnCancel_MouseUp(sender As Object, e As MouseEventArgs) Handles btnCancel.MouseUp

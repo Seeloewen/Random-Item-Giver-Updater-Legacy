@@ -38,7 +38,7 @@ Public Class frmItemListImporter
         dontImportVanillaItems = cbDontImportVanilla.CheckState
         result = "success"
         rtbItems.Clear()
-        frmMain.WriteToLog(String.Format("Importing item list from {0}", tbImportFromFile.Text), "Info")
+        frmMain.WriteToLog($"Importing item list from {tbImportFromFile.Text}", "Info")
 
         'Start item list import
         bgwItemListImporter.RunWorkerAsync()
@@ -108,23 +108,12 @@ Public Class frmItemListImporter
                 'Remove text if file was generated using TellMe Mod
                 For x As Integer = 0 To itemList.Length - 1
                     itemList(x) = itemList(x).Replace("Registry name", "")
-                Next
 
-                'Add quotation marks to avoid some issues
-                For x As Integer = 0 To itemList.Length - 1
-                    itemList(x) = Chr(34) + itemList(x) + Chr(34)
-                Next
-
-                'Remove vanilla items if enabled
-                If dontImportVanillaItems = True Then
-                    For x As Integer = 0 To itemList.Length - 1
+                    If dontImportVanillaItems = True Then
+                        itemList(x) = Chr(34) + itemList(x) + Chr(34)
                         itemList(x) = itemList(x).Replace("minecraft:", "")
-                    Next
-                End If
-
-                'Remove quotation mark
-                For x As Integer = 0 To itemList.Length - 1
-                    itemList(x) = itemList(x).Replace(Chr(34), "")
+                        itemList(x) = itemList(x).Replace(Chr(34), "")
+                    End If
                 Next
 
                 'Remove empty lines
@@ -144,8 +133,8 @@ Public Class frmItemListImporter
                 result = "failed"
             End If
         Catch ex As Exception
-            MsgBox(String.Format("An error occured while trying to import items: {0}", ex.Message), MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog(String.Format("Importing items failed: {0}", ex.Message), "Error")
+            MsgBox($"An error occured while trying to import items: {ex.Message}", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog($"Importing items failed: {ex.Message}", "Error")
             result = "failed"
         End Try
     End Sub

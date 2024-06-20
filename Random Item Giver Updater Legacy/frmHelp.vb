@@ -89,36 +89,37 @@
     Private Sub LoadDesign()
         'Load dark mode
         If frmMain.design = "Dark" Then
-            lblHeader.ForeColor = Color.White
+
             BackColor = Color.FromArgb(50, 50, 50)
-            tpIntroduction.BackColor = Color.FromArgb(50, 50, 50)
+
+            'Buttons
+            For Each btn As Button In Controls.OfType(Of Button)
+                btn.ForeColor = Color.White
+            Next
+
+            'Images
+            pbAddItemsBasic.BackgroundImage = My.Resources.imgAddingItemsBasicDark
+            pbDuplicateFinder.BackgroundImage = My.Resources.imgDuplicateFinderDarkHelp
+            pbAddItemsAdvanced.BackgroundImage = My.Resources.imgAddingItemsAdvancedDark
+            pbNavigationBar.BackgroundImage = My.Resources.imgHelpNavigationBarDark
+            btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+            btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+            btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+            btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+            btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+            btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+            btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavDark
+
+            'Labels
+            lblHeader.ForeColor = Color.White
             lblIntroduction.ForeColor = Color.White
-            llblDiscord.LinkColor = Color.LightBlue
             lblLastEditedIntroduction.ForeColor = Color.White
-            tpSimpleOverview.BackColor = Color.FromArgb(50, 50, 50)
             lblSimpleOverview.ForeColor = Color.White
             lblLastEditedSimpleOverview.ForeColor = Color.White
-            llblRIGPMC.LinkColor = Color.LightBlue
-            llblRIGGithub.LinkColor = Color.LightBlue
-            pbAddItemsBasic.BackgroundImage = My.Resources.imgAddingItemsBasicDark
             lblAddItemsToDatapackBasic.ForeColor = Color.White
-            tpAddingItemsBasic.BackColor = Color.FromArgb(50, 50, 50)
-            btnNavIntroduction.ForeColor = Color.White
-            btnNavSimpleOverview.ForeColor = Color.White
-            btnNavAddingItemsBasic.ForeColor = Color.White
-            btnNavAddingItemsAdvanced.ForeColor = Color.White
-            btnNavDuplicateFinder.ForeColor = Color.White
-            btnNavProfilesAndSchemes.ForeColor = Color.White
-            btnNavOther.ForeColor = Color.White
-            llblHowToFindTheItemIDBasic.LinkColor = Color.LightBlue
-            llblWhatIsTheFastWayBasic.LinkColor = Color.LightBlue
             lblLastEditedAddItemsBasic.ForeColor = Color.White
-            pbAddItemsAdvanced.BackgroundImage = My.Resources.imgAddingItemsAdvancedDark
             lblLastEditedAddingItemsAdvanced.ForeColor = Color.White
-            llblHowToFindItemIDAdvanced.LinkColor = Color.LightBlue
-            llblWhatsTheFastWayAdvanced.LinkColor = Color.LightBlue
             lblLastEditedAddingItemsAdvanced.BackColor = Color.FromArgb(50, 50, 50)
-            pbDuplicateFinder.BackgroundImage = My.Resources.imgDuplicateFinderDarkHelp
             lblChooseDatapack.BackColor = Color.FromArgb(105, 105, 105)
             lblChooseDatapack.ForeColor = Color.FromArgb(128, 255, 255)
             lblDuplicateList.ForeColor = Color.FromArgb(128, 255, 255)
@@ -126,13 +127,9 @@
             lblDescriptionDuplicateFinder.ForeColor = Color.White
             lblLastEditedDuplicateFinder.ForeColor = Color.White
             lblLastEditedProfilesAndSchemes.ForeColor = Color.White
-            tpAddingItemsAdvanced.BackColor = Color.FromArgb(50, 50, 50)
-            tpDuplicateFinder.BackColor = Color.FromArgb(50, 50, 50)
-            tpProfilesAndSchemes.BackColor = Color.FromArgb(50, 50, 50)
             lblDescriptionSchemes.ForeColor = Color.White
             lblDescriptionAddingItemsAdvanced.ForeColor = Color.White
             lblDescriptionAddItemsBasic.ForeColor = Color.White
-            tpOther.BackColor = Color.FromArgb(50, 50, 50)
             lblOther.ForeColor = Color.White
             lblBeginChecking.ForeColor = Color.FromArgb(121, 255, 255)
             lblBeginChecking.BackColor = Color.FromArgb(68, 68, 68)
@@ -160,39 +157,49 @@
             lblSpecifyNBTTagBasic.BackColor = Color.FromArgb(100, 100, 100)
             lblAddItemsToDatapackBasic.ForeColor = Color.FromArgb(121, 255, 255)
             lblAddItemsToDatapackBasic.BackColor = Color.FromArgb(68, 68, 68)
+            lblLastEditedOther.ForeColor = Color.White
+
+            'Tab pages
+            tpIntroduction.BackColor = Color.FromArgb(50, 50, 50)
+            tpSimpleOverview.BackColor = Color.FromArgb(50, 50, 50)
+            tpAddingItemsBasic.BackColor = Color.FromArgb(50, 50, 50)
+            tpAddingItemsAdvanced.BackColor = Color.FromArgb(50, 50, 50)
+            tpDuplicateFinder.BackColor = Color.FromArgb(50, 50, 50)
+            tpProfilesAndSchemes.BackColor = Color.FromArgb(50, 50, 50)
+            tpOther.BackColor = Color.FromArgb(50, 50, 50)
+
+            'Link label
+            llblDiscord.LinkColor = Color.LightBlue
+            llblRIGPMC.LinkColor = Color.LightBlue
+            llblRIGGithub.LinkColor = Color.LightBlue
+            llblHowToFindTheItemIDBasic.LinkColor = Color.LightBlue
+            llblWhatIsTheFastWayBasic.LinkColor = Color.LightBlue
+            llblHowToFindItemIDAdvanced.LinkColor = Color.LightBlue
+            llblWhatsTheFastWayAdvanced.LinkColor = Color.LightBlue
             llblDatapackPMC.LinkColor = Color.LightBlue
             llblDatapackGithub.LinkColor = Color.LightBlue
             llblSoftwareGithub.LinkColor = Color.LightBlue
             llblOtherDiscord.LinkColor = Color.LightBlue
             llblTellMe.LinkColor = Color.LightBlue
-            lblLastEditedOther.ForeColor = Color.White
             llblNewVersion.LinkColor = Color.LightBlue
-            pbNavigationBar.BackgroundImage = My.Resources.imgHelpNavigationBarDark
-            btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavDark
         End If
     End Sub
 
     '-- Button animations --
 
     Private Sub btnNavIntroduction_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavIntroduction.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavIntroduction_MouseEnter(sender As Object, e As EventArgs) Handles btnNavIntroduction.MouseEnter
         If (selectedPage = 1) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -200,9 +207,9 @@
 
     Private Sub btnNavIntroduction_MouseLeave(sender As Object, e As EventArgs) Handles btnNavIntroduction.MouseLeave
         If (selectedPage = 1) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -210,27 +217,27 @@
 
     Private Sub btnNavIntroduction_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavIntroduction.MouseUp
         If (selectedPage = 1) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavSimpleOverview_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavSimpleOverview.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavSimpleOverview_MouseEnter(sender As Object, e As EventArgs) Handles btnNavSimpleOverview.MouseEnter
         If (selectedPage = 2) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -238,9 +245,9 @@
 
     Private Sub btnNavSimpleOverview_MouseLeave(sender As Object, e As EventArgs) Handles btnNavSimpleOverview.MouseLeave
         If (selectedPage = 2) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -248,27 +255,27 @@
 
     Private Sub btnNavSimpleOverview_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavSimpleOverview.MouseUp
         If (selectedPage = 2) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavAddingItemsBasic_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavAddingItemsBasic.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavAddingItemsBasic_MouseEnter(sender As Object, e As EventArgs) Handles btnNavAddingItemsBasic.MouseEnter
         If (selectedPage = 3) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -276,9 +283,9 @@
 
     Private Sub btnNavAddingItemsBasic_MouseLeave(sender As Object, e As EventArgs) Handles btnNavAddingItemsBasic.MouseLeave
         If (selectedPage = 3) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -286,27 +293,27 @@
 
     Private Sub btnNavAddingItemsBasic_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavAddingItemsBasic.MouseUp
         If (selectedPage = 3) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavAddingItemsAdvanced_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavAddingItemsAdvanced.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavAddingItemsAdvanced_MouseEnter(sender As Object, e As EventArgs) Handles btnNavAddingItemsAdvanced.MouseEnter
         If (selectedPage = 4) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -314,9 +321,9 @@
 
     Private Sub btnNavAddingItemsAdvanced_MouseLeave(sender As Object, e As EventArgs) Handles btnNavAddingItemsAdvanced.MouseLeave
         If (selectedPage = 4) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -324,27 +331,27 @@
 
     Private Sub btnNavAddingItemsAdvanced_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavAddingItemsAdvanced.MouseUp
         If (selectedPage = 4) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavAddingItemsAdvanced.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavDuplicateFinder_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavDuplicateFinder.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavDuplicateFinder_MouseEnter(sender As Object, e As EventArgs) Handles btnNavDuplicateFinder.MouseEnter
         If (selectedPage = 5) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -352,9 +359,9 @@
 
     Private Sub btnNavDuplicateFinder_MouseLeave(sender As Object, e As EventArgs) Handles btnNavDuplicateFinder.MouseLeave
         If (selectedPage = 5) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -362,27 +369,27 @@
 
     Private Sub btnNavDuplicateFinder_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavDuplicateFinder.MouseUp
         If (selectedPage = 5) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavProfilesAndSchemes_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavProfilesAndSchemes.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavProfilesAndSchemes_MouseEnter(sender As Object, e As EventArgs) Handles btnNavProfilesAndSchemes.MouseEnter
         If (selectedPage = 6) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -390,9 +397,9 @@
 
     Private Sub btnNavProfilesAndSchemes_MouseLeave(sender As Object, e As EventArgs) Handles btnNavProfilesAndSchemes.MouseLeave
         If (selectedPage = 6) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -400,27 +407,27 @@
 
     Private Sub btnNavProfilesAndSchemes_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavProfilesAndSchemes.MouseUp
         If (selectedPage = 6) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavOther_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavOther.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavOther_MouseEnter(sender As Object, e As EventArgs) Handles btnNavOther.MouseEnter
         If (selectedPage = 7) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -428,9 +435,9 @@
 
     Private Sub btnNavOther_MouseLeave(sender As Object, e As EventArgs) Handles btnNavOther.MouseLeave
         If (selectedPage = 7) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -438,9 +445,9 @@
 
     Private Sub btnNavOther_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavOther.MouseUp
         If (selectedPage = 7) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -448,7 +455,7 @@
 
     Private Sub btnNavIntroduction_Click(sender As Object, e As EventArgs) Handles btnNavIntroduction.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
@@ -456,7 +463,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -473,7 +480,7 @@
 
     Private Sub btnNavSimpleOverview_Click(sender As Object, e As EventArgs) Handles btnNavSimpleOverview.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
@@ -481,7 +488,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -498,7 +505,7 @@
 
     Private Sub btnNavAddingItemsBasic_Click(sender As Object, e As EventArgs) Handles btnNavAddingItemsBasic.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavClick
@@ -506,7 +513,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
@@ -523,7 +530,7 @@
 
     Private Sub btnNavAddingItemsAdvanced_Click(sender As Object, e As EventArgs) Handles btnNavAddingItemsAdvanced.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
@@ -531,7 +538,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -548,7 +555,7 @@
 
     Private Sub btnNavDuplicateFinder_Click(sender As Object, e As EventArgs) Handles btnNavDuplicateFinder.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
@@ -556,7 +563,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -573,7 +580,7 @@
 
     Private Sub btnNavProfilesAndSchemes_Click(sender As Object, e As EventArgs) Handles btnNavProfilesAndSchemes.Click
         'Change button design
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
@@ -581,7 +588,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavClick
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNav
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark
@@ -598,7 +605,7 @@
 
     Private Sub btnNavOther_Click(sender As Object, e As EventArgs) Handles btnNavOther.Click
         'Change button design
-        If frmmain.design = "Light" Then
+        If frmMain.design = "Light" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNav
@@ -606,7 +613,7 @@
             btnNavDuplicateFinder.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavProfilesAndSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
             btnNavOther.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design = "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavIntroduction.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSimpleOverview.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavAddingItemsBasic.BackgroundImage = My.Resources.imgButtonSettingsNavDark

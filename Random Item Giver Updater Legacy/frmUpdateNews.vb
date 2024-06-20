@@ -32,14 +32,15 @@
 
         'Load dark mode
         If frmMain.design = "Dark" Then
-            lblHeader.ForeColor = Color.White
+            'Labels
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is Label Then
+                    ctrl.ForeColor = Color.White
+                End If
+            Next
+
+            'Everything else
             BackColor = Color.FromArgb(50, 50, 50)
-            lblNewsDesc1.ForeColor = Color.White
-            lblNewsHeader1.ForeColor = Color.White
-            lblNewsDesc2.ForeColor = Color.White
-            lblNewsHeader2.ForeColor = Color.White
-            lblNewsDesc3.ForeColor = Color.White
-            lblNewsHeader3.ForeColor = Color.White
             llblFullChangelog.LinkColor = Color.LightBlue
         End If
     End Sub
@@ -47,38 +48,34 @@
     '-- Button animations --
 
     Private Sub btnOK_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOK.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnOK.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnOK_MouseEnter(sender As Object, e As EventArgs) Handles btnOK.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnOK.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnOK_MouseLeave(sender As Object, e As EventArgs) Handles btnOK.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnOK.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOK_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOK.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmmain.design = "Dark" Then
             btnOK.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmmain.design = "Light" Then
             btnOK.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 End Class

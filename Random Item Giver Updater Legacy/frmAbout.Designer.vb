@@ -29,6 +29,7 @@ Partial Class frmAbout
         Me.rtbLicense = New System.Windows.Forms.RichTextBox()
         Me.llblGithub = New System.Windows.Forms.LinkLabel()
         Me.btnOK = New System.Windows.Forms.Button()
+        Me.lblCreator = New System.Windows.Forms.Label()
         Me.gbLicense.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -36,12 +37,11 @@ Partial Class frmAbout
         '
         Me.lblBuild.AutoSize = True
         Me.lblBuild.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBuild.Location = New System.Drawing.Point(12, 73)
+        Me.lblBuild.Location = New System.Drawing.Point(78, 77)
         Me.lblBuild.Name = "lblBuild"
-        Me.lblBuild.Size = New System.Drawing.Size(355, 60)
+        Me.lblBuild.Size = New System.Drawing.Size(154, 20)
         Me.lblBuild.TabIndex = 4
-        Me.lblBuild.Text = "Version 0.5.3 (07.01.2024)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Seeloewen (Louis)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This software is not affiliated wi" &
-    "th Mojang Studios"
+        Me.lblBuild.Text = "Version {ver} ({date})"
         Me.lblBuild.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'lblHeader
@@ -105,12 +105,24 @@ Partial Class frmAbout
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
+        'lblCreator
+        '
+        Me.lblCreator.AutoSize = True
+        Me.lblCreator.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCreator.Location = New System.Drawing.Point(12, 98)
+        Me.lblCreator.Name = "lblCreator"
+        Me.lblCreator.Size = New System.Drawing.Size(355, 40)
+        Me.lblCreator.TabIndex = 8
+        Me.lblCreator.Text = "Seeloewen (Louis)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This software is not affiliated with Mojang Studios" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.lblCreator.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
         'frmAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(372, 446)
+        Me.Controls.Add(Me.lblCreator)
         Me.Controls.Add(Me.llblGithub)
         Me.Controls.Add(Me.gbLicense)
         Me.Controls.Add(Me.btnOK)
@@ -135,4 +147,5 @@ Partial Class frmAbout
     Friend WithEvents gbLicense As GroupBox
     Friend WithEvents rtbLicense As RichTextBox
     Friend WithEvents llblGithub As LinkLabel
+    Friend WithEvents lblCreator As Label
 End Class

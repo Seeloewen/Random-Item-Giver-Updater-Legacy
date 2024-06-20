@@ -38,11 +38,11 @@ Public Class frmProfileEditor
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         'Delete the currently selected profile if it exists
-        If My.Computer.FileSystem.FileExists(String.Format("{0}{1}.txt", frmMain.profileDirectory, cbxProfile.SelectedItem)) Then
-            My.Computer.FileSystem.DeleteFile(String.Format("{0}{1}.txt", frmMain.profileDirectory, cbxProfile.SelectedItem))
+        If My.Computer.FileSystem.FileExists($"{frmMain.profileDirectory}{cbxProfile.SelectedItem}.txt") Then
+            My.Computer.FileSystem.DeleteFile($"{frmMain.profileDirectory}{cbxProfile.SelectedItem}.txt")
             cbxProfile.Items.Remove(cbxProfile.SelectedItem)
             MsgBox("Profile was deleted.", MsgBoxStyle.Information, "Deleted")
-            frmMain.WriteToLog(String.Format("Deleted profile {0}", cbxProfile.SelectedItem), "Info")
+            frmMain.WriteToLog($"Deleted profile {cbxProfile.SelectedItem}", "Info")
         Else
             MsgBox("Error: Profile does not exist.", MsgBoxStyle.Critical, "Error")
         End If
@@ -66,7 +66,7 @@ Public Class frmProfileEditor
 
     Private Sub btnRename_Click(sender As Object, e As EventArgs) Handles btnRename.Click
         'Check if a profile is loaded and open the profile renaming window
-        If String.IsNullOrEmpty(cbxProfile.Text) = False Then
+        If Not String.IsNullOrEmpty(cbxProfile.Text) Then
             frmRenameProfile.ShowDialog(cbxProfile.Text)
         Else
             MsgBox("Please load a profile in order to rename it.", MsgBoxStyle.Critical, "Error")
@@ -116,8 +116,8 @@ Public Class frmProfileEditor
     Public Sub InitializeLoadingProfile(profile As String, showMessage As Boolean)
         'Checks if a profile is selected. It then reads the content of the profile file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
         'It then starts to convert and load the profile, see the the method below.
-        If String.IsNullOrEmpty(profile) = False Then
-            loadFromProfile = String.Format("{0}{1}.txt", frmMain.profileDirectory, profile)
+        If Not String.IsNullOrEmpty(profile) Then
+            loadFromProfile = $"{frmMain.profileDirectory}{profile}.txt"
             profileContent = File.ReadAllLines(loadFromProfile)
             ReDim Preserve profileContent(2)
             CheckAndConvertProfile(profile, showMessage)
@@ -158,7 +158,7 @@ Public Class frmProfileEditor
 
         'If ShowMessage is enabled, it will show a messagebox when loading completes.
         If showMessage Then
-            MsgBox(String.Format("Loaded profile {0}.", profile), MsgBoxStyle.Information, "Loaded profile")
+            MsgBox($"Loaded profile {profile}.", MsgBoxStyle.Information, "Loaded profile")
         End If
     End Sub
 
@@ -178,14 +178,13 @@ Public Class frmProfileEditor
                 If Directory.Exists(Profile) Then
                     GetFiles(Profile)
                 Else
-                    Profile = Profile.Replace(Path, "")
-                    Profile = Profile.Replace(".txt", "")
+                    Profile = Profile.Replace(Path, "").Replace(".txt", "")
                     cbxProfile.Items.Add(Profile)
                 End If
             Next
         Catch ex As Exception
-            MsgBox(String.Format("Error: Could not load profiles. Please try again.{0}Exception: {1}", vbNewLine, ex.Message))
-            frmMain.WriteToLog(String.Format("Error when loading profiles for Profile Manager: {0}", ex.Message), "Error")
+            MsgBox($"Error: Could not load profiles. Please try again.{vbNewLine}Exception: {ex.Message}")
+            frmMain.WriteToLog($"Error when loading profiles for Profile Manager: {ex.Message}", "Error")
         End Try
     End Sub
 
@@ -203,10 +202,10 @@ Public Class frmProfileEditor
         End If
 
         'Update the selected profile. This will save and overwrite the selected profile without showing any warning or message. Used if a profile is old or corrupted.
-        If String.IsNullOrEmpty(profileName) = False Then
+        If Not String.IsNullOrEmpty(profileName) Then
             If My.Computer.FileSystem.DirectoryExists(frmMain.profileDirectory) Then
-                My.Computer.FileSystem.WriteAllText(String.Format("{0}{1}.txt", frmMain.profileDirectory, profileName), datapackPath + vbNewLine + datapackVersion, False)
-                frmMain.WriteToLog(String.Format("Saved changes to profile {0}", profileName), "Info")
+                My.Computer.FileSystem.WriteAllText($"{frmMain.profileDirectory}{profileName}.txt", datapackPath + vbNewLine + datapackVersion, False)
+                frmMain.WriteToLog($"Saved changes to profile {profileName}", "Info")
                 MsgBox("Updated the selected profile.", MsgBoxStyle.Information, "Success")
             Else
                 MsgBox("Error: Couldn't save profile. Profile directory does not exist. Please restart the application.", MsgBoxStyle.Critical, "Error")

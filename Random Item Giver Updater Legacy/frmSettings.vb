@@ -14,17 +14,13 @@ Public Class frmSettings
         LoadDesign()
 
         'Load settings
-        If My.Settings.UseAdvancedViewByDefault = True Then
-            cbUseAdvancedViewByDefault.Checked = True
-        Else
-            cbUseAdvancedViewByDefault.Checked = False
-        End If
-
-        If My.Settings.AutoSaveLogs = True Then
-            cbAutoSaveLogs.Checked = True
-        Else
-            cbAutoSaveLogs.Checked = False
-        End If
+        cbUseAdvancedViewByDefault.Checked = My.Settings.UseAdvancedViewByDefault
+        cbAutoSaveLogs.Checked = My.Settings.AutoSaveLogs
+        cbDisableLogging.Checked = My.Settings.DisableLogging
+        cbHideBetaWarning.Checked = My.Settings.HideLegacyWarning
+        cbLoadDefaultProfile.Checked = My.Settings.LoadDefaultProfile
+        cbSelectDefaultScheme.Checked = My.Settings.SelectDefaultScheme
+        cbDontImportVanillaItemsByDefault.Checked = My.Settings.DontImportVanillaItemsByDefault
 
         If My.Settings.Design = "Light" Then
             cbxDesign.SelectedIndex = 0
@@ -32,36 +28,6 @@ Public Class frmSettings
             cbxDesign.SelectedIndex = 1
         ElseIf My.Settings.Design = "System Default" Then
             cbxDesign.SelectedIndex = 2
-        End If
-
-        If My.Settings.DisableLogging = True Then
-            cbDisableLogging.Checked = True
-        Else
-            cbDisableLogging.Checked = False
-        End If
-
-        If My.Settings.HideLegacyWarning = True Then
-            cbHideBetaWarning.Checked = True
-        Else
-            cbHideBetaWarning.Checked = False
-        End If
-
-        If My.Settings.LoadDefaultProfile = True Then
-            cbLoadDefaultProfile.Checked = True
-        Else
-            cbLoadDefaultProfile.Checked = False
-        End If
-
-        If My.Settings.SelectDefaultScheme = True Then
-            cbSelectDefaultScheme.Checked = True
-        Else
-            cbSelectDefaultScheme.Checked = False
-        End If
-
-        If My.Settings.DontImportVanillaItemsByDefault = True Then
-            cbDontImportVanillaItemsByDefault.Checked = True
-        Else
-            cbDontImportVanillaItemsByDefault.Checked = False
         End If
 
         'Load profiles
@@ -72,10 +38,10 @@ Public Class frmSettings
         cbxDefaultProfile.Items.Clear()
         GetProfileFiles(frmMain.profileDirectory)
 
-        If My.Settings.LoadDefaultProfile = True Then
+        If My.Settings.LoadDefaultProfile Then
             cbLoadDefaultProfile.Checked = True
-            If String.IsNullOrEmpty(My.Settings.DefaultProfile) = False Then
-                If My.Computer.FileSystem.FileExists(String.Format("{0}{1}.txt", frmMain.profileDirectory, My.Settings.DefaultProfile)) Then
+            If Not String.IsNullOrEmpty(My.Settings.DefaultProfile) Then
+                If My.Computer.FileSystem.FileExists($"{frmMain.profileDirectory}{My.Settings.DefaultProfile}.txt") Then
                     cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
                 Else
                     MsgBox("Error: Default profile no longer exists. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
@@ -90,17 +56,17 @@ Public Class frmSettings
         End If
 
         'Load Schemes
-        If My.Computer.FileSystem.DirectoryExists(frmMain.schemeDirectory) = False Then
+        If Not My.Computer.FileSystem.DirectoryExists(frmMain.schemeDirectory) Then
             My.Computer.FileSystem.CreateDirectory(frmMain.schemeDirectory)
         End If
 
         cbxDefaultScheme.Items.Clear()
         GetSchemeFiles(frmMain.schemeDirectory)
 
-        If My.Settings.SelectDefaultScheme = True Then
+        If My.Settings.SelectDefaultScheme Then
             cbSelectDefaultScheme.Checked = True
-            If String.IsNullOrEmpty(My.Settings.DefaultScheme) = False Then
-                If My.Computer.FileSystem.FileExists(String.Format("{0}{1}.txt", frmMain.schemeDirectory, My.Settings.DefaultScheme)) Then
+            If Not String.IsNullOrEmpty(My.Settings.DefaultScheme) Then
+                If My.Computer.FileSystem.FileExists($"{frmMain.schemeDirectory}{My.Settings.DefaultScheme}.txt") Then
                     cbxDefaultScheme.SelectedItem = My.Settings.DefaultScheme
                 Else
                     MsgBox("Error: Default scheme no longer exists. Option will be disabled automatically.", MsgBoxStyle.Critical, "Error")
@@ -153,11 +119,11 @@ Public Class frmSettings
 
     Private Sub btnSaveSettings_Click(sender As Object, e As EventArgs) Handles btnSaveSettings.Click
         'If the settings file exists, save settings. If none exists, create one first.
-        If My.Computer.FileSystem.FileExists(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData)) Then
-            SaveSettings(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData))
+        If My.Computer.FileSystem.FileExists($"{frmMain.appData}/Random Item Giver Updater Legacy/settings.txt") Then
+            SaveSettings($"{frmMain.appData}/Random Item Giver Updater Legacy/settings.txt")
         Else
-            My.Computer.FileSystem.WriteAllText(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData), "", False)
-            SaveSettings(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData))
+            My.Computer.FileSystem.WriteAllText($"{frmMain.appData}/Random Item Giver Updater Legacy/settings.txt", "", False)
+            SaveSettings($"{frmMain.appData}/Random Item Giver Updater Legacy/settings.txt")
         End If
 
         'Close settings
@@ -318,24 +284,24 @@ Public Class frmSettings
     Private Sub btnClearTempFiles_Click(sender As Object, e As EventArgs) Handles btnClearTempFiles.Click
         'Deletes all temporary files created by the application: Old settings files and Temporary log files
         Try
-            If My.Computer.FileSystem.FileExists(String.Format("{0}/Random Item Giver Updater Legacy/settings.old", frmMain.appData)) Then
-                My.Computer.FileSystem.DeleteFile(String.Format("{0}/Random Item Giver Updater Legacy/settings.old", frmMain.appData))
+            If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.old") Then
+                My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.old")
             End If
-            If My.Computer.FileSystem.FileExists(String.Format("{0}/Random Item Giver Updater Legacy/DebugLogTemp", frmMain.appData)) Then
-                My.Computer.FileSystem.DeleteFile(String.Format("{0}/Random Item Giver Updater Legacy/DebugLogTemp", frmMain.appData))
+            If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp")
             End If
             MsgBox("Successfully deleted all temporary files.", MsgBoxStyle.Information, "Cleared temporary files")
             frmMain.WriteToLog("Deleted all temporary files.", "Info")
         Catch ex As Exception
-            MsgBox(String.Format("Could not delete temporary files: {0}", ex.Message), MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog(String.Format("Could not delete temporary files: {0}", ex.Message), "Error")
+            MsgBox($"Could not delete temporary files: {ex.Message}", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog($"Could not delete temporary files: {ex.Message}", "Error")
         End Try
     End Sub
 
     Private Sub btnViewTempDir_Click(sender As Object, e As EventArgs) Handles btnViewTempDir.Click
         'Open directory, where the application saves its temporary files in explorer.
-        If My.Computer.FileSystem.DirectoryExists(String.Format("{0}\Random Item Giver Updater Legacy", frmMain.appData)) Then
-            Process.Start("explorer.exe", String.Format("{0}\Random Item Giver Updater Legacy", frmMain.appData))
+        If My.Computer.FileSystem.DirectoryExists($"{frmMain.appData}\Random Item Giver Updater Legacy") Then
+            Process.Start("explorer.exe", $"{frmMain.appData}\Random Item Giver Updater Legacy")
         Else
             MsgBox("Cannot find directory, please restart the application.", MsgBoxStyle.Critical, "Error")
         End If
@@ -347,17 +313,17 @@ Public Class frmSettings
     End Sub
 
     Private Sub ofdImportSettings_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ofdImportSettings.FileOk
-        frmMain.WriteToLog("-- Importing settings --", "Info")
+        frmMain.WriteToLog("Importing settings...", "Info")
 
         'Read lines from selected file into the main settings file and restart application to apply them
         Try
-            File.WriteAllLines(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData), File.ReadAllLines(ofdImportSettings.FileName))
+            File.WriteAllLines($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.txt", File.ReadAllLines(ofdImportSettings.FileName))
             MsgBox("Successfully imported settings!" + vbNewLine + "Click 'OK' to close the application and apply them.", MsgBoxStyle.Information, "Imported settings")
-            frmMain.WriteToLog(String.Format("Successfully imported settings from file {0}", ofdImportSettings.FileName), "Info")
+            frmMain.WriteToLog($"Successfully imported settings from file {ofdImportSettings.FileName}", "Info")
             frmMain.Close()
         Catch ex As Exception
-            MsgBox(String.Format("Could not import settings: {0}", ex.Message), MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog(String.Format("Could not import settings: {0}", ex.Message), "Error")
+            MsgBox($"Could not import settings: {ex.Message}", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog($"Could not import settings: {ex.Message}", "Error")
         End Try
     End Sub
 
@@ -366,11 +332,11 @@ Public Class frmSettings
 
         'Saves a copy of the settings file to the selected location
         Try
-            File.WriteAllLines(String.Format("{0}\RandomItemGiverUpdaterLegacySettingsExported.txt", fbdExportSettings.SelectedPath), File.ReadAllLines(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData)))
-            MsgBox(String.Format("Successfully exported your settings to {0}\RandomItemGiverUpdaterLegacySettingsExported.txt", fbdExportSettings.SelectedPath), MsgBoxStyle.Information, "Successfully exported settings")
+            File.WriteAllLines($"{fbdExportSettings.SelectedPath}\RandomItemGiverUpdaterLegacySettingsExported.txt", File.ReadAllLines($"{frmMain.appData}/Random Item Giver Updater Legacy/settings.txt"))
+            MsgBox($"Successfully exported your settings to {fbdExportSettings.SelectedPath}\RandomItemGiverUpdaterLegacySettingsExported.txt", MsgBoxStyle.Information, "Successfully exported settings")
         Catch ex As Exception
-            MsgBox(String.Format("Could not export settings: {0}", ex.Message), MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog(String.Format("Could not export settings: {0}", ex.Message), "Error")
+            MsgBox($"Could not export settings: {ex.Message}", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog($"Could not export settings: {ex.Message}", "Error")
         End Try
     End Sub
 
@@ -399,7 +365,7 @@ Public Class frmSettings
         'Show warning that all settings, profiles, schemes etc. will be deleted. If continued, it will delete the mentioned files, reset the internal settings and close the application
         Select Case MsgBox("Warning: Resetting the software deletes all user settings, profiles, schemes and other files saved by the application. This does NOT uninstall the software, but rather delete its user preferences. Only continue if you know what you are doing. Are you sure you want to continue?", vbExclamation + vbYesNo, "Reset software")
             Case Windows.Forms.DialogResult.Yes
-                My.Computer.FileSystem.DeleteDirectory(String.Format("{0}/Random Item Giver Updater Legacy/", frmMain.appData), FileIO.DeleteDirectoryOption.DeleteAllContents)
+                My.Computer.FileSystem.DeleteDirectory($"{frmMain.appData}/Random Item Giver Updater Legacy/", FileIO.DeleteDirectoryOption.DeleteAllContents)
                 My.Settings.Reset()
                 MsgBox("All profiles, schemes, user settings and other application files have been deleted. The software will now close.", MsgBoxStyle.Information, "Cancelled")
                 frmMain.Close()
@@ -413,49 +379,62 @@ Public Class frmSettings
     Private Sub LoadDesign()
         'Load darkmode
         If frmMain.design = "Dark" Then
-            lblHeader.ForeColor = Color.White
-            gbGeneral1.ForeColor = Color.White
-            gbGeneral2.ForeColor = Color.White
-            gbDatapackProfiles.ForeColor = Color.White
-            gbSchemes.ForeColor = Color.White
-            gbItemListImporter.ForeColor = Color.White
-            BackColor = Color.FromArgb(50, 50, 50)
+            'Images
             pbSettingsNavigationBar.BackgroundImage = My.Resources.imgSettingsNavigationBarDark
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavDark
-            lblAdvancedViewByDefault.ForeColor = Color.White
-            cbUseAdvancedViewByDefault.ForeColor = Color.White
-            lblAutoSaveLogs.ForeColor = Color.White
-            cbAutoSaveLogs.ForeColor = Color.White
-            lblDesign.ForeColor = Color.White
+
+            'Textboxes
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is TextBox Then
+                    ctrl.ForeColor = Color.White
+                    ctrl.BackColor = Color.FromArgb(100, 100, 100)
+                End If
+            Next
+
+            'Groupboxes
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is GroupBox Then
+                    ctrl.ForeColor = Color.White
+                End If
+            Next
+
+            'Labels
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is Label Then
+                    ctrl.ForeColor = Color.White
+                End If
+            Next
+
+            'Checkboxes and radio buttons
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is CheckBox Or TypeOf ctrl Is RadioButton Then
+                    ctrl.ForeColor = Color.White
+                End If
+            Next
+
+            'Comboboxes
+            For Each ctrl As Control In Controls
+                If TypeOf ctrl Is Button Then
+                    btnNavGeneral1.ForeColor = Color.White
+                    btnNavGeneral2.ForeColor = Color.White
+                    btnNavDatapackProfiles.ForeColor = Color.White
+                    btnNavSchemes.ForeColor = Color.White
+                    btnNavItemListImporter.ForeColor = Color.White
+                End If
+            Next
+
+            'Everything else
+            BackColor = Color.FromArgb(50, 50, 50)
             cbxDesign.BackColor = Color.DimGray
-            cbxDesign.ForeColor = Color.White
-            lblEditProfiles.ForeColor = Color.White
-            cbLoadDefaultProfile.ForeColor = Color.White
             cbxDefaultProfile.BackColor = Color.DimGray
-            cbxDefaultProfile.ForeColor = Color.White
-            lblTempFiles.ForeColor = Color.White
-            lblLogging.ForeColor = Color.White
-            cbDisableLogging.ForeColor = Color.White
-            lblBetaWarning.ForeColor = Color.White
-            cbHideBetaWarning.ForeColor = Color.White
-            lblImportExportSettings.ForeColor = Color.White
-            lblResetSoftware.ForeColor = Color.White
-            lblEditSchemeEditor.ForeColor = Color.White
-            cbSelectDefaultScheme.ForeColor = Color.White
-            cbxDefaultScheme.ForeColor = Color.White
             cbxDefaultScheme.BackColor = Color.DimGray
-            lblRestoreDefaultSchemes.ForeColor = Color.White
-            lblDefaultSettingsItemImporter.ForeColor = Color.White
-            cbDontImportVanillaItemsByDefault.ForeColor = Color.White
-            btnNavGeneral1.ForeColor = Color.White
-            btnNavGeneral2.ForeColor = Color.White
-            btnNavDatapackProfiles.ForeColor = Color.White
-            btnNavSchemes.ForeColor = Color.White
-            btnNavItemListImporter.ForeColor = Color.White
+            cbxDesign.ForeColor = Color.White
+            cbxDefaultProfile.ForeColor = Color.White
+            cbxDefaultScheme.ForeColor = Color.White
         End If
 
         'Set appearance of buttons depending on selected design
@@ -541,14 +520,13 @@ Public Class frmSettings
                 If Directory.Exists(Profile) Then
                     GetProfileFiles(Profile)
                 Else
-                    Profile = Profile.Replace(path, "")
-                    Profile = Profile.Replace(".txt", "")
+                    Profile = Profile.Replace(path, "").Replace(".txt", "")
                     cbxDefaultProfile.Items.Add(Profile)
                 End If
             Next
         Catch ex As Exception
-            MsgBox(String.Format("Error: Could not load profiles. Please try again.{0}Exception: {1}"), vbNewLine, ex.Message)
-            frmMain.WriteToLog(String.Format("Error when loading profiles for Settings: {0}", ex.Message), "Error")
+            MsgBox($"Error: Could not load profiles. Please try again.{vbNewLine}Exception: {ex.Message}")
+            frmMain.WriteToLog($"Error when loading profiles for Settings: {ex.Message}", "Error")
         End Try
     End Sub
 
@@ -565,14 +543,13 @@ Public Class frmSettings
                 If Directory.Exists(Scheme) Then
                     GetSchemeFiles(Scheme)
                 Else
-                    Scheme = Scheme.Replace(path, "")
-                    Scheme = Scheme.Replace(".txt", "")
+                    Scheme = Scheme.Replace(path, "").Replace(".txt", "")
                     cbxDefaultScheme.Items.Add(Scheme)
                 End If
             Next
         Catch ex As Exception
-            MsgBox(String.Format("Error: Could not load schemes. Please try again.{0}Exception: {1}", vbNewLine, ex.Message))
-            frmMain.WriteToLog(String.Format("Error when loading schemes for Settings: {0}", ex.Message), "Error")
+            MsgBox($"Error: Could not load schemes. Please try again.{vbNewLine}Exception: {ex.Message}")
+            frmMain.WriteToLog($"Error when loading schemes for Settings: {ex.Message}", "Error")
         End Try
     End Sub
 
@@ -586,24 +563,18 @@ Public Class frmSettings
             settingsArray = File.ReadAllLines(settingsFile)
 
             'Set current version number in settings file
-            settingsArray(1) = String.Format("Version={0}", frmMain.settingsVersion)
-            frmMain.WriteToLog(String.Format("Set version number to {0}", frmMain.settingsVersion), "Info")
+            settingsArray(1) = $"Version={frmMain.settingsVersion}"
+            frmMain.WriteToLog($"Set version number to {frmMain.settingsVersion}", "Info")
 
             'Save general 1 settings
-            If cbUseAdvancedViewByDefault.Checked Then
-                My.Settings.UseAdvancedViewByDefault = True
-            Else
-                My.Settings.UseAdvancedViewByDefault = False
-            End If
-            settingsArray(4) = String.Format("UseAdvancedViewByDefault={0}", My.Settings.UseAdvancedViewByDefault)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(4)), "Info")
-            If cbAutoSaveLogs.Checked Then
-                My.Settings.AutoSaveLogs = True
-            Else
-                My.Settings.AutoSaveLogs = False
-            End If
-            settingsArray(5) = String.Format("AutoSaveLogs={0}", My.Settings.AutoSaveLogs)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(5)), "Info")
+            My.Settings.UseAdvancedViewByDefault = cbUseAdvancedViewByDefault.Checked
+            settingsArray(4) = $"UseAdvancedViewByDefault={My.Settings.UseAdvancedViewByDefault}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(4)}", "Info")
+
+            My.Settings.AutoSaveLogs = cbAutoSaveLogs.Checked
+            settingsArray(5) = $"AutoSaveLogs={My.Settings.AutoSaveLogs}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(5)}", "Info")
+
             If cbxDesign.SelectedIndex = 0 Then
                 My.Settings.Design = "Light"
             ElseIf cbxDesign.SelectedIndex = 1 Then
@@ -611,8 +582,8 @@ Public Class frmSettings
             ElseIf cbxDesign.SelectedIndex = 2 Then
                 My.Settings.Design = "System Default"
             End If
-            settingsArray(6) = String.Format("Design={0}", My.Settings.Design)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(6)), "Info")
+            settingsArray(6) = $"Design={My.Settings.Design}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(6)}", "Info")
 
             'Save general 2 Settings
             If cbDisableLogging.Checked Then
@@ -621,16 +592,12 @@ Public Class frmSettings
                 My.Settings.DisableLogging = False
                 frmOutput.rtbLog.Clear()
             End If
-            settingsArray(9) = String.Format("DisableLogging={0}", My.Settings.DisableLogging)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(9)), "Info")
+            settingsArray(9) = $"DisableLogging={My.Settings.DisableLogging}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(9)}", "Info")
 
-            If cbHideBetaWarning.Checked Then
-                My.Settings.HideLegacyWarning = True
-            Else
-                My.Settings.HideLegacyWarning = False
-            End If
-            settingsArray(10) = String.Format("HideLegacyWarning={0}", My.Settings.HideLegacyWarning.ToString)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(10)), "Info")
+            My.Settings.HideLegacyWarning = cbHideBetaWarning.Checked
+            settingsArray(10) = $"HideLegacyWarning={My.Settings.HideLegacyWarning}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(10)}", "Info")
 
             'Save datapack profiles settings
             If cbLoadDefaultProfile.Checked Then
@@ -639,10 +606,10 @@ Public Class frmSettings
             Else
                 My.Settings.LoadDefaultProfile = False
             End If
-            settingsArray(13) = String.Format("LoadDefaultProfile={0}", My.Settings.LoadDefaultProfile.ToString)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(13)), "Info")
-            settingsArray(14) = String.Format("DefaultProfile={0}", My.Settings.DefaultProfile)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(14)), "Info")
+            settingsArray(13) = $"LoadDefaultProfile={My.Settings.LoadDefaultProfile}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(13)}", "Info")
+            settingsArray(14) = $"DefaultProfile={My.Settings.DefaultProfile}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(14)}", "Info")
 
             'Save scheme settings
             If cbSelectDefaultScheme.Checked Then
@@ -654,43 +621,39 @@ Public Class frmSettings
             If String.IsNullOrEmpty(My.Settings.DefaultScheme) Then
                 My.Settings.DefaultScheme = "Normal Item"
             End If
-            settingsArray(17) = String.Format("SelectDefaultScheme={0}", My.Settings.SelectDefaultScheme.ToString)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(17)), "Info")
-            settingsArray(18) = String.Format("DefaultScheme={0}", My.Settings.DefaultScheme)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(18)), "Info")
+            settingsArray(17) = $"SelectDefaultScheme={My.Settings.SelectDefaultScheme}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(17)}", "Info")
+            settingsArray(18) = $"DefaultScheme={My.Settings.DefaultScheme}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(18)}", "Info")
 
             'Save Item List Importer Settings
-            If cbDontImportVanillaItemsByDefault.Checked Then
-                My.Settings.DontImportVanillaItemsByDefault = True
-            Else
-                My.Settings.DontImportVanillaItemsByDefault = False
-            End If
-            settingsArray(21) = String.Format("DontImportVanillaItemsByDefault={0}", My.Settings.DontImportVanillaItemsByDefault.ToString)
-            frmMain.WriteToLog(String.Format("Saved setting {0}", settingsArray(21)), "Info")
+            My.Settings.DontImportVanillaItemsByDefault = cbDontImportVanillaItemsByDefault.Checked
+            settingsArray(21) = $"DontImportVanillaItemsByDefault={My.Settings.DontImportVanillaItemsByDefault}"
+            frmMain.WriteToLog($"Saved setting {settingsArray(21)}", "Info")
 
             'Write settings array to file
-            File.WriteAllLines(String.Format("{0}/Random Item Giver Updater Legacy/settings.txt", frmMain.appData), settingsArray)
+            File.WriteAllLines($"{frmMain.appData}/Random Item Giver Updater Legacy/settings.txt", settingsArray)
         Catch ex As Exception
-            MsgBox(String.Format("Could not save settings: {0}", ex.Message), MsgBoxStyle.Critical, "Error")
-            frmMain.WriteToLog(String.Format("Could not save settings: {0}", ex.Message), "Error")
+            MsgBox($"Could not save settings: {ex.Message}", MsgBoxStyle.Critical, "Error")
+            frmMain.WriteToLog($"Could not save settings: {ex.Message}", "Error")
         End Try
     End Sub
 
     '-- Button animations --
 
     Private Sub btnNavGeneral1_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavGeneral1.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavGeneral1_MouseEnter(sender As Object, e As EventArgs) Handles btnNavGeneral1.MouseEnter
         If (selectedPage = 1) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -698,9 +661,9 @@ Public Class frmSettings
 
     Private Sub btnNavGeneral1_MouseLeave(sender As Object, e As EventArgs) Handles btnNavGeneral1.MouseLeave
         If (selectedPage = 1) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -708,27 +671,27 @@ Public Class frmSettings
 
     Private Sub btnNavGeneral1_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavGeneral1.MouseUp
         If (selectedPage = 1) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavGeneral1.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavGeneral2_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavGeneral2.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavGeneral2_MouseEnter(sender As Object, e As EventArgs) Handles btnNavGeneral2.MouseEnter
         If (selectedPage = 2) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -736,9 +699,9 @@ Public Class frmSettings
 
     Private Sub btnNavGeneral2_MouseLeave(sender As Object, e As EventArgs) Handles btnNavGeneral2.MouseLeave
         If (selectedPage = 2) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -746,27 +709,27 @@ Public Class frmSettings
 
     Private Sub btnNavGeneral2_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavGeneral2.MouseUp
         If (selectedPage = 2) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavGeneral2.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavDatapackProfiles_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavDatapackProfiles.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavDatapackProfiles_MouseEnter(sender As Object, e As EventArgs) Handles btnNavDatapackProfiles.MouseEnter
         If (selectedPage = 3) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -774,9 +737,9 @@ Public Class frmSettings
 
     Private Sub btnNavDatapackProfiles_MouseLeave(sender As Object, e As EventArgs) Handles btnNavDatapackProfiles.MouseLeave
         If (selectedPage = 3) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -784,27 +747,27 @@ Public Class frmSettings
 
     Private Sub btnNavDatapackProfiles_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavDatapackProfiles.MouseUp
         If (selectedPage = 3) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavDatapackProfiles.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavSchemes_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavSchemes.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavSchemes_MouseEnter(sender As Object, e As EventArgs) Handles btnNavSchemes.MouseEnter
         If (selectedPage = 4) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -812,9 +775,9 @@ Public Class frmSettings
 
     Private Sub btnNavSchemes_MouseLeave(sender As Object, e As EventArgs) Handles btnNavSchemes.MouseLeave
         If (selectedPage = 4) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -822,27 +785,27 @@ Public Class frmSettings
 
     Private Sub btnNavSchemes_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavSchemes.MouseUp
         If (selectedPage = 4) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavSchemes.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnNavItemListImporter_MouseDown(sender As Object, e As MouseEventArgs) Handles btnNavItemListImporter.MouseDown
-        If frmmain.design =  "Light" Then
+        If frmMain.design = "Light" Then
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavClick
-        ElseIf frmmain.design =  "Dark" Then
+        ElseIf frmMain.design = "Dark" Then
             btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavDarkClick
         End If
     End Sub
 
     Private Sub btnNavItemListImporter_MouseEnter(sender As Object, e As EventArgs) Handles btnNavItemListImporter.MouseEnter
         If (selectedPage = 5) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavHover
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavDarkHover
             End If
         End If
@@ -850,9 +813,9 @@ Public Class frmSettings
 
     Private Sub btnNavItemListImporter_MouseLeave(sender As Object, e As EventArgs) Handles btnNavItemListImporter.MouseLeave
         If (selectedPage = 5) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
@@ -860,371 +823,331 @@ Public Class frmSettings
 
     Private Sub btnNavItemListImporter_MouseUp(sender As Object, e As MouseEventArgs) Handles btnNavItemListImporter.MouseUp
         If (selectedPage = 5) = False Then
-            If frmmain.design =  "Light" Then
+            If frmMain.design = "Light" Then
                 btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNav
-            ElseIf frmmain.design =  "Dark" Then
+            ElseIf frmMain.design = "Dark" Then
                 btnNavItemListImporter.BackgroundImage = My.Resources.imgButtonSettingsNavDark
             End If
         End If
     End Sub
 
     Private Sub btnSaveSettings_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSaveSettings.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnSaveSettings_MouseEnter(sender As Object, e As EventArgs) Handles btnSaveSettings.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnSaveSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnSaveSettings.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnSaveSettings_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSaveSettings.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSaveSettings.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseDown(sender As Object, e As MouseEventArgs) Handles btnQuitWithoutSaving.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseEnter(sender As Object, e As EventArgs) Handles btnQuitWithoutSaving.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseLeave(sender As Object, e As EventArgs) Handles btnQuitWithoutSaving.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnQuitWithoutSaving_MouseUp(sender As Object, e As MouseEventArgs) Handles btnQuitWithoutSaving.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnQuitWithoutSaving.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOpenLogDirectory.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseEnter(sender As Object, e As EventArgs) Handles btnOpenLogDirectory.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseLeave(sender As Object, e As EventArgs) Handles btnOpenLogDirectory.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOpenLogDirectory_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOpenLogDirectory.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenLogDirectory.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnClearTempFiles_MouseDown(sender As Object, e As MouseEventArgs) Handles btnClearTempFiles.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnClearTempFiles_MouseEnter(sender As Object, e As EventArgs) Handles btnClearTempFiles.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnClearTempFiles_MouseLeave(sender As Object, e As EventArgs) Handles btnClearTempFiles.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnClearTempFiles_MouseUp(sender As Object, e As MouseEventArgs) Handles btnClearTempFiles.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClearTempFiles.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnViewTempDir_MouseDown(sender As Object, e As MouseEventArgs) Handles btnViewTempDir.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnViewTempDir_MouseEnter(sender As Object, e As EventArgs) Handles btnViewTempDir.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnViewTempDir_MouseLeave(sender As Object, e As EventArgs) Handles btnViewTempDir.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnViewTempDir_MouseUp(sender As Object, e As MouseEventArgs) Handles btnViewTempDir.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnViewTempDir.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnImportSettings_MouseDown(sender As Object, e As MouseEventArgs) Handles btnImportSettings.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnImportSettings_MouseEnter(sender As Object, e As EventArgs) Handles btnImportSettings.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnImportSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnImportSettings.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnImportSettings_MouseUp(sender As Object, e As MouseEventArgs) Handles btnImportSettings.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnImportSettings.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnExportSettings_MouseDown(sender As Object, e As MouseEventArgs) Handles btnExportSettings.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnExportSettings_MouseEnter(sender As Object, e As EventArgs) Handles btnExportSettings.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnExportSettings_MouseLeave(sender As Object, e As EventArgs) Handles btnExportSettings.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnExportSettings_MouseUp(sender As Object, e As MouseEventArgs) Handles btnExportSettings.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnExportSettings.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnResetSoftware_MouseDown(sender As Object, e As MouseEventArgs) Handles btnResetSoftware.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnResetSoftware_MouseEnter_1(sender As Object, e As EventArgs) Handles btnResetSoftware.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnResetSoftware_MouseLeave_1(sender As Object, e As EventArgs) Handles btnResetSoftware.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnResetSoftware_MouseUp(sender As Object, e As MouseEventArgs) Handles btnResetSoftware.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnResetSoftware.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseDown(sender As Object, e As MouseEventArgs) Handles btnOpenProfileEditor.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseEnter(sender As Object, e As EventArgs) Handles btnOpenProfileEditor.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseLeave(sender As Object, e As EventArgs) Handles btnOpenProfileEditor.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnOpenProfileEditor_MouseUp(sender As Object, e As MouseEventArgs) Handles btnOpenProfileEditor.MouseUp
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnOpenProfileEditor.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseDown(sender As Object, e As MouseEventArgs) Handles btnRestoreDefaultSchemes.MouseDown
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonClickLight
         End If
-
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseEnter(sender As Object, e As EventArgs) Handles btnRestoreDefaultSchemes.MouseEnter
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
-
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseLeave(sender As Object, e As EventArgs) Handles btnRestoreDefaultSchemes.MouseLeave
-        If frmmain.design =  "Dark" Then
+        If frmMain.design = "Dark" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design =  "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 
     Private Sub btnRestoreDefaultSchemes_MouseUp(sender As Object, e As MouseEventArgs) Handles btnRestoreDefaultSchemes.MouseUp
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnRestoreDefaultSchemes.BackgroundImage = My.Resources.imgButtonLight
         End If
-
     End Sub
 End Class
