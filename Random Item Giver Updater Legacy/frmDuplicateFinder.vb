@@ -144,11 +144,12 @@ Public Class frmDuplicateFinder
     Private Sub CheckDatapack()
         'Check the datapack version by reading the pack format in the pack.mcmeta file
         Try
-            datapackPath = $"{tbDatapackPath.Text}/data/randomitemgiver/loot_tables/"
             Dim version As Integer = File.ReadAllLines($"{tbDatapackPath.Text}/pack.mcmeta")(2).Replace("    ""pack_format"": ", "").Replace(",", "")
 
             Select Case version
-                Case 16 To 26
+                Case 48
+                    datapackVersion = "1.21"
+                Case 16 To 47
                     datapackVersion = "1.20.2"
                 Case 15
                     If File.Exists($"{tbDatapackPath.Text}/updater.txt") Then
@@ -170,6 +171,12 @@ Public Class frmDuplicateFinder
                     datapackVersion = "Null"
             End Select
 
+            If datapackVersion = "1.21" Then
+                datapackPath = $"{tbDatapackPath.Text}/data/randomitemgiver/loot_table/"
+            Else
+                datapackPath = $"{tbDatapackPath.Text}/data/randomitemgiver/loot_tables/"
+            End If
+
             frmMain.WriteToLog($"Detected datapack as version {datapackVersion} In duplicate finder", "Info")
         Catch ex As Exception
             MsgBox($"Error {ex.Message}" + +vbNewLine + vbNewLine + "Searching for duplicates may fail since the datapack is invalid.", MsgBoxStyle.Critical, "Error")
@@ -179,7 +186,7 @@ Public Class frmDuplicateFinder
 
     Private Sub InitializeChecking()
         'Decide which loot tables to check depending on the datapack version
-        If datapackVersion = "1.20.2+" Then
+        If datapackVersion = "1.20.2" OrElse datapackVersion = "1.21" Then
 
             'Set progress step
             duplicateFinderProgress = 2.5
@@ -325,7 +332,7 @@ Public Class frmDuplicateFinder
         If datapackVersion = "1.17" Then
             pathAmount = ""
         Else
-            If datapackVersion = "1.20.1" OrElse datapackVersion = "1.20.2+" Then
+            If datapackVersion = "1.20.1" OrElse datapackVersion = "1.20.2" OrElse datapackVersion = "1.21" Then
                 If itemAmount = 1 Then
                     pathAmount = "01item/"
                 ElseIf itemAmount = 2 Then
@@ -390,6 +397,7 @@ Public Class frmDuplicateFinder
                 """type"": ""minecraft:fixed"",",
                 """score"": ""RandomAmountSameItemsGen""",
                 """score"": ""RandomAmountSameItemsNumber""",
+                """score"": ""rig_RandomAmountSameItemsNumber""",
                 "minecraft:",
                 "{",
                 "}",

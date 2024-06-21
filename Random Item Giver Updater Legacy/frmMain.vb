@@ -1,5 +1,6 @@
 ﻿Imports System.Environment
 Imports System.IO
+Imports System.Reflection
 Imports System.Runtime.InteropServices
 
 Partial Class frmMain
@@ -15,6 +16,7 @@ Partial Class frmMain
     Dim actionRunning As Boolean = False 'Whether an action is running or not
     Dim settingsFile As String = $"{appData}\Random Item Giver Updater Legacy\settings.txt" 'Location of the settings file
     Public logDirectory As String = $"{appData}\Random Item Giver Updater Legacy\Logs\" 'Directory where the log files are saved
+    Public datapackPathExtension As String
     Dim logFileName As String 'File name of the log file
     Public design As String = "System Default" 'Selected design
     Dim osVersion As Version = Environment.OSVersion.Version
@@ -116,8 +118,8 @@ Partial Class frmMain
         'Disable log if setting is enabled
         If My.Settings.DisableLogging Then
             frmOutput.rtbLog.Clear()
-            If My.Computer.FileSystem.FileExists(appData + "\Random Item Giver Updater Legacy\DebugLogTemp") Then
-                My.Computer.FileSystem.DeleteFile(appData + "\Random Item Giver Updater Legacy\DebugLogTemp")
+            If My.Computer.FileSystem.FileExists($"{appData}\Random Item Giver Updater Legacy\DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile($"{appData}\Random Item Giver Updater Legacy\DebugLogTemp")
             End If
         End If
 
@@ -155,7 +157,7 @@ Partial Class frmMain
             totalItemAmount = rtbItem.Lines.Count
             bgwAddItems.RunWorkerAsync()
         Else
-            MsgBox("Please enter a datapack path!", MsgBoxStyle.Critical, "Error")
+            MsgBox("Please enter a valid datapack path!", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
@@ -301,7 +303,7 @@ Partial Class frmMain
             cbCustomNBT.Enabled = True
             cbCustomNBT.Checked = False
             If cbAddItemsFast.Checked = False Then
-                If datapackVersion = "Version 1.20" OrElse datapackVersion = "Version 1.19.4" OrElse datapackVersion = "Version 1.20.1" OrElse datapackVersion = "Version 1.20.2 - 1.20.4" Then
+                If datapackVersion = "Version 1.20" OrElse datapackVersion = "Version 1.19.4" OrElse datapackVersion = "Version 1.20.1" OrElse datapackVersion = "Version 1.20.2 - 1.20.4" OrElse datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21" Then
                     cbPainting.Enabled = True
                     cbGoatHorn.Enabled = True
                 ElseIf datapackVersion = "Version 1.19 - 1.19.3" Then
@@ -413,13 +415,20 @@ Partial Class frmMain
 
         'Toggle certain checkboxes depending on selected version
         If cbAddItemsFast.Checked = False Then
-            If datapackVersion = "Version 1.20" OrElse datapackVersion = "Version 1.19.4" OrElse datapackVersion = "Version 1.20.1" OrElse datapackVersion = "Version 1.20.2 - 1.20.4" Then
+            If datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21" Then
+                cbCustomNBT.Text = "Item Stack Component"
+                cbPainting.Enabled = True
+                cbGoatHorn.Enabled = True
+            ElseIf datapackVersion = "Version 1.20" OrElse datapackVersion = "Version 1.19.4" OrElse datapackVersion = "Version 1.20.1" OrElse datapackVersion = "Version 1.20.2 - 1.20.4" Then
+                cbCustomNBT.Text = "NBT Tag"
                 cbPainting.Enabled = True
                 cbGoatHorn.Enabled = True
             ElseIf datapackVersion = "Version 1.19 - 1.19.3" Then
+                cbCustomNBT.Text = "NBT Tag"
                 cbPainting.Enabled = False
                 cbGoatHorn.Enabled = True
             ElseIf datapackVersion = "Version 1.16.2 - 1.16.5" OrElse datapackVersion = "Version 1.17 - 1.17.1" OrElse datapackVersion = "Version 1.18 - 1.18.2" Then
+                cbCustomNBT.Text = "NBT Tag"
                 cbPainting.Enabled = False
                 cbGoatHorn.Enabled = False
             End If
@@ -638,7 +647,7 @@ Partial Class frmMain
         btnBrowseDatapackPath.Enabled = True
         tbDatapackPath.Enabled = True
         'Only enable some settings depending on version of datapack
-        If cbxVersion.SelectedItem = "Version 1.19.4" OrElse cbxVersion.SelectedItem = "Version 1.20" OrElse cbxVersion.SelectedItem = "Version 1.20.1" OrElse cbxVersion.SelectedItem = "Version 1.20.2 - 1.20.4" Then
+        If cbxVersion.SelectedItem = "Version 1.19.4" OrElse cbxVersion.SelectedItem = "Version 1.20" OrElse cbxVersion.SelectedItem = "Version 1.20.1" OrElse cbxVersion.SelectedItem = "Version 1.20.2 - 1.20.4" OrElse cbxVersion.SelectedItem = "Version 1.20.5 - 1.20.6" OrElse cbxVersion.SelectedItem = "Version 1.21" Then
             cbPainting.Enabled = True
             cbGoatHorn.Enabled = True
         ElseIf cbxVersion.SelectedItem = "Version 1.19 - 1.19.3" Then
@@ -991,11 +1000,27 @@ Partial Class frmMain
 
                 Try
                     Select Case version
-                        Case > 26
+                        Case > 48
                             lblDatapackDetection.Text = "Detected datapack, but could not determine version"
-                            MsgBox("A datapack has been detected but the pack format is greater than 26." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
+                            MsgBox("A datapack has been detected but the pack format is greater than 48." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
                             WriteToLog($"Detected unsupported datapack version. This may cause issues. (Pack format {version})", "Warning")
-                            cbxVersion.SelectedItem = "Version 1.20.2 - 1.20.4"
+                            cbxVersion.SelectedItem = "Version 1.21"
+                        Case 48
+                            lblDatapackDetection.Text = "Detected datapack as version 1.21."
+                            WriteToLog($"Detected datapack version 1.21 (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.21"
+                        Case 42 To 47
+                            lblDatapackDetection.Text = "Detected datapack as version 1.21 Snapshot."
+                            WriteToLog($"Detected datapack version 1.21 Snapshot (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.21"
+                        Case 41
+                            lblDatapackDetection.Text = "Detected datapack as version 1.20.5 - 1.20.6."
+                            WriteToLog($"Detected datapack version 1.20.5 - 1.20.6 (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.20.5 - 1.20.6"
+                        Case 27 To 40
+                            lblDatapackDetection.Text = "Detected datapack as version 1.20.5 - 1.20.6 Snapshot."
+                            WriteToLog($"Detected datapack version 1.20.5 - 1.20.6 Snapshot (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.20.5 - 1.20.6"
                         Case 26
                             lblDatapackDetection.Text = "Detected datapack as version 1.20.3 - 1.20.4."
                             WriteToLog($"Detected datapack version 1.20.3 - 1.20.4 (Pack format {version})", "Info")
@@ -1063,11 +1088,18 @@ Partial Class frmMain
                             lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                             WriteToLog("Detected datapack, but could not determine version.", "Error")
                     End Select
+
+                    'Since Snapshot 24w21a, datapacks use a slightly different folder structure
+                    If version >= 45 Then
+                        datapackPathExtension = "\data\randomitemgiver\loot_table\"
+                    Else
+                        datapackPathExtension = "\data\randomitemgiver\loot_tables\"
+                    End If
                 Catch ex As Exception
                     MsgBox($"Error when selecting datapack: {ex.Message}", MsgBoxStyle.Critical, "Error")
                     lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                     WriteToLog("Detected datapack, couldn't determine version.", "Error")
-                    cbxVersion.SelectedItem = "Version 1.20.2 - 1.20.4"
+                    cbxVersion.SelectedItem = "Version 1.21"
                 End Try
             Else
                 lblDatapackDetection.Text = "Folder found, but could not detect datapack."
@@ -1093,7 +1125,7 @@ Partial Class frmMain
                 Case 1
                     If version = "1.16" OrElse version = "1.18" OrElse version = "1.19" Then
                         itemAmountPath = "1item\"
-                    ElseIf version = "1.20.1" OrElse version = "1.20.2" Then
+                    ElseIf version = "1.20.1" OrElse version = "1.20.2" OrElse version = "1.20.5" Then
                         itemAmountPath = "01item\"
                     End If
                 Case -1
@@ -1101,7 +1133,7 @@ Partial Class frmMain
                 Case -2
                     itemAmountPath = "randomamountdifitems\"
                 Case > 1
-                    If (version = "1.20.1" OrElse version = "1.20.2") And (itemAmount = 1 OrElse itemAmount = 2 OrElse itemAmount = 3 OrElse itemAmount = 5) Then
+                    If (version = "1.20.1" OrElse version = "1.20.2" OrElse version = "1.20.5") And (itemAmount = 1 OrElse itemAmount = 2 OrElse itemAmount = 3 OrElse itemAmount = 5) Then
                         itemAmountPath = $"0{itemAmount}sameitems\"
                     Else
                         itemAmountPath = $"{itemAmount}sameitems\"
@@ -1111,8 +1143,8 @@ Partial Class frmMain
             'Check if the loot table exists and try to load it. If it fails, stop adding item.
             Dim file As String = ""
             Try
-                If My.Computer.FileSystem.FileExists($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json") Then
-                    file = My.Computer.FileSystem.ReadAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json")
+                If My.Computer.FileSystem.FileExists($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json") Then
+                    file = My.Computer.FileSystem.ReadAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json")
                 End If
             Catch ex As Exception
                 WriteToLog($"Could not add item {itemID} to loot table {lootTable} for amount {itemAmount} and version {version}. {ex.Message}", "Error")
@@ -1121,6 +1153,7 @@ Partial Class frmMain
 
             'Item attributes
             Dim nbtTag As String = ""
+            Dim itemStackComponent = ""
             Dim prefix As String = ""
             Dim fullItemName As String = ""
 
@@ -1129,10 +1162,18 @@ Partial Class frmMain
                 Try
 
                     'Set custom NTB tag and prefix
-                    If customNBT = True Then
-                        nbtTag = customNBTString.Replace("""", "\""") 'Fix quotiation marks in NBT tags
+                    If version = "1.20.5" Then
+                        If customNBT = True Then
+                            itemStackComponent = customNBTString
+                        Else
+                            itemStackComponent = "NONE"
+                        End If
                     Else
-                        nbtTag = "NONE"
+                        If customNBT = True Then
+                            nbtTag = customNBTString.Replace("""", "\""") 'Fix quotiation marks in NBT tags
+                        Else
+                            nbtTag = "NONE"
+                        End If
                     End If
 
                     'Determine the full item name based on the item ID
@@ -1159,7 +1200,7 @@ Partial Class frmMain
                         Case 64
                             itemConstruct = items64
                         Case -1
-                            If version = "1.20.2" Then
+                            If version = "1.20.2" OrElse version = "1.20.1" OrElse version = "1.20.5" Then
                                 itemConstruct = randomAmountSameItem1_20_2
                             ElseIf version = "1.19" Then
                                 itemConstruct = randomAmountSameItem1_19
@@ -1169,12 +1210,86 @@ Partial Class frmMain
                     End Select
 
                     'Version 1.20.2
-                    If version = "1.20.2" Then
+                    If version = "1.20.5" Then
+
+                        'Remove the last few lines to allow for new items to be added
+                        Dim bracketCount As Integer = 0
+                        Dim editFileLines As List(Of String) = IO.File.ReadAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json").ToList()
+
+                        Dim line As Integer = editFileLines.Count - 1
+                        While bracketCount < 5
+                            If editFileLines(line).Contains("}") OrElse editFileLines(line).Contains("]") Then
+                                bracketCount += 1
+                            End If
+
+                            editFileLines.Remove(editFileLines(line))
+                            line -= 1
+                        End While
+                        IO.File.WriteAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json", editFileLines)
+
+                        'Add the item based on item amount
+                        If itemAmount = 1 OrElse itemAmount = -2 Then
+
+                            'Add the item to the corresponding loot table
+                            If Not cbCustomNBT.Checked Then
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
+                                                                    "        }," + vbNewLine +
+                                                                    "        {" + vbNewLine +
+                                                                    "          ""type"": ""minecraft:item""," + vbNewLine +
+                                                                    $"          ""name"": ""{fullItemName}""" + vbNewLine +
+                                                                    endPart, True)
+                            ElseIf cbCustomNBT.Checked Then
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
+                                                                    "        }," + vbNewLine +
+                                                                    "        {" + vbNewLine +
+                                                                    "          ""type"": ""minecraft:item""," + vbNewLine +
+                                                                    $"          ""name"": ""{fullItemName}""," + vbNewLine +
+                                                                    "                    ""functions"": [" + vbNewLine +
+                                                                    "                        {" + vbNewLine +
+                                                                    "                            ""function"": ""set_components""," + vbNewLine +
+                                                                    "                            ""components"": {" + vbNewLine +
+                                                                    itemStackComponent + vbNewLine +
+                                                                    "                           }" + vbNewLine +
+                                                                    "                        }" + vbNewLine +
+                                                                    "                    ]" + vbNewLine +
+                                                                    endPart, True)
+                            End If
+                        Else
+                            'Add the item to the corresponding loot table
+                            If Not cbCustomNBT.Checked Then
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
+                                                                    "        }," + vbNewLine +
+                                                                    "        {" + vbNewLine +
+                                                                    "          ""type"": ""minecraft:item""," + vbNewLine +
+                                                                    $"          ""name"": ""{fullItemName}""," + vbNewLine +
+                                                                    itemConstruct + vbNewLine +
+                                                                    "          ]" + vbNewLine +
+                                                                    endPart, True)
+                            ElseIf cbCustomNBT.Checked Then
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
+                                                                    "        }," + vbNewLine +
+                                                                    "        {" + vbNewLine +
+                                                                    "          ""type"": ""minecraft:item""," + vbNewLine +
+                                                                    $"          ""name"": ""{fullItemName}""," + vbNewLine +
+                                                                    $"{itemConstruct}," + vbNewLine +
+                                                                    "                        {" + vbNewLine +
+                                                                    "                            ""function"": ""set_components""," + vbNewLine +
+                                                                    "                            ""components"": {" + vbNewLine +
+                                                                    itemStackComponent + vbNewLine +
+                                                                    "                           }" + vbNewLine +
+                                                                    "                        }" + vbNewLine +
+                                                                    "                    ]" + vbNewLine +
+                                                                    endPart, True)
+                            End If
+                        End If
+
+                        'Version 1.20.2
+                    ElseIf version = "1.20.2" Then
 
                         'Remove the last few lines to allow for new items to be added
                         Dim bracketCount As Integer = 0
                         Dim editFileLines As List(Of String) = New List(Of String)
-                        Using reader As New StreamReader($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json")
+                        Using reader As New StreamReader($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json")
                             While Not reader.EndOfStream
                                 Dim l As String = reader.ReadLine()
                                 editFileLines.Add(l)
@@ -1190,21 +1305,21 @@ Partial Class frmMain
                             editFileLines.Remove(editFileLines(line))
                             line -= 1
                         End While
-                        IO.File.WriteAllLines($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json", editFileLines)
+                        IO.File.WriteAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json", editFileLines)
 
                         'Add the item based on item amount
                         If itemAmount = 1 OrElse itemAmount = -2 Then
 
                             'Add the item to the corresponding loot table
                             If (lootTable = "normal_items" OrElse lootTable = "other_items" OrElse lootTable = "command_blocks" OrElse lootTable = "spawn_eggs") And Not cbCustomNBT.Checked Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
                                                                     $"          ""name"": ""{fullItemName}""" + vbNewLine +
                                                                     endPart, True)
                             ElseIf ((lootTable = "normal_items" OrElse lootTable = "other_items" OrElse lootTable = "command_blocks" OrElse lootTable = "spawn_eggs") And cbCustomNBT.Checked) OrElse (lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" OrElse lootTable = "goat_horns" OrElse lootTable = "paintings") Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1220,7 +1335,7 @@ Partial Class frmMain
                         Else
                             'Add the item to the corresponding loot table
                             If (lootTable = "normal_items" OrElse lootTable = "other_items" OrElse lootTable = "command_blocks" OrElse lootTable = "spawn_eggs") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1229,7 +1344,7 @@ Partial Class frmMain
                                                                     "          ]" + vbNewLine +
                                                                     endPart, True)
                             ElseIf ((lootTable = "normal_items" OrElse lootTable = "other_items" OrElse lootTable = "command_blocks" OrElse lootTable = "spawn_eggs") And cbCustomNBT.Checked = True) OrElse (lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" OrElse lootTable = "goat_horns" OrElse lootTable = "paintings") Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1250,7 +1365,7 @@ Partial Class frmMain
                         'Remove the last few lines to allow for new items to be added
                         Dim bracketCount As Integer = 0
                         Dim editFileLines As List(Of String) = New List(Of String)
-                        Using reader As New StreamReader($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json")
+                        Using reader As New StreamReader($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json")
                             While Not reader.EndOfStream
                                 Dim l As String = reader.ReadLine()
                                 editFileLines.Add(l)
@@ -1266,19 +1381,19 @@ Partial Class frmMain
                             editFileLines.Remove(editFileLines(line))
                             line -= 1
                         End While
-                        IO.File.WriteAllLines($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json", editFileLines)
+                        IO.File.WriteAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json", editFileLines)
 
                         'Remove the items from the specific loot tables
                         If itemAmount = 1 OrElse itemAmount = -2 Then
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                    "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
                                                                     $"          ""name"": ""{fullItemName}""" + vbNewLine +
                                                                     endPart, True)
                             ElseIf ((lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True) OrElse (lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" OrElse lootTable = "goat_horns" OrElse lootTable = "paintings") Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1294,7 +1409,7 @@ Partial Class frmMain
                         Else
 
                             If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1303,7 +1418,7 @@ Partial Class frmMain
                                                                     "          ]" + vbNewLine +
                                                                     endPart, True)
                             ElseIf ((lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True) OrElse (lootTable = "suspicious_stews" OrElse lootTable = "enchanted_books" OrElse lootTable = "potions" OrElse lootTable = "splash_potions" OrElse lootTable = "lingering_potions" OrElse lootTable = "tipped_arrows" OrElse lootTable = "goat_horns" OrElse lootTable = "paintings") Then
-                                My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json",
+                                My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json",
                                                                     "        }," + vbNewLine +
                                                                     "        {" + vbNewLine +
                                                                     "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1338,7 +1453,7 @@ Partial Class frmMain
                         'Remove the last few lines to allow for new items to be added
                         Dim bracketCount As Integer = 0
                         Dim editFileLines As List(Of String) = New List(Of String)
-                        Using reader As New StreamReader($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json")
+                        Using reader As New StreamReader($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json")
                             While Not reader.EndOfStream
                                 Dim l As String = reader.ReadLine()
                                 editFileLines.Add(l)
@@ -1354,18 +1469,18 @@ Partial Class frmMain
                             editFileLines.Remove(editFileLines(line))
                             line -= 1
                         End While
-                        IO.File.WriteAllLines($"{datapackPath}\data\randomitemgiver\loot_tables\{itemAmountPath}{lootTable}.json", editFileLines)
+                        IO.File.WriteAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json", editFileLines)
 
                         'Add the item to the corresponding loot table
                         If (lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = False Then
-                            My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{lootTable}.json",
+                            My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{lootTable}.json",
                                                                "        }," + vbNewLine +
                                                                 "        {" + vbNewLine +
                                                                 "          ""type"": ""minecraft:item""," + vbNewLine +
                                                                 $"          ""name"": ""{fullItemName}""" + vbNewLine +
                                                                 endPart, True)
                         ElseIf ((lootTable = "main" OrElse lootTable = "main_without_creative-only" OrElse lootTable = "special_xvv" OrElse lootTable = "special_xvx" OrElse lootTable = "special_vvx" OrElse lootTable = "special_xxv" OrElse lootTable = "Special_xvv" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vvx" OrElse lootTable = "special_vxv" OrElse lootTable = "special_vxx") And cbCustomNBT.Checked = True) OrElse (lootTable = "suspicious_stew" OrElse lootTable = "enchanted_books" OrElse lootTable = "potion" OrElse lootTable = "splash_potion" OrElse lootTable = "lingering_potion" OrElse lootTable = "tipped_arrow") Then
-                            My.Computer.FileSystem.WriteAllText($"{datapackPath}\data\randomitemgiver\loot_tables\{lootTable}.json",
+                            My.Computer.FileSystem.WriteAllText($"{datapackPath}{datapackPathExtension}{lootTable}.json",
                                                                 "        }," + vbNewLine +
                                                                 "        {" + vbNewLine +
                                                                 "          ""type"": ""minecraft:item""," + vbNewLine +
@@ -1379,6 +1494,24 @@ Partial Class frmMain
                                                                 endPart, True)
                         End If
                     End If
+
+                    'The software sometimes sneaks in additional brackets that shouldn't be there - I couldn't figure out why, so here's a temporary fix
+                    Dim fileLines As List(Of String) = IO.File.ReadAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json").ToList()
+                    Dim removalFileLines As List(Of Integer) = New List(Of Integer)
+
+                    For i As Integer = 0 To fileLines.Count - 1
+                        If i + 2 <= fileLines.Count - 1 Then
+                            If fileLines(i).Contains("}") And fileLines(i + 1).Contains("},") And fileLines(i + 2).Contains("{") Then
+                                removalFileLines.Add(i)
+                            End If
+                        End If
+                    Next
+
+                    For Each i As Integer In removalFileLines
+                        fileLines.RemoveAt(i)
+                    Next
+                    IO.File.WriteAllLines($"{datapackPath}{datapackPathExtension}{itemAmountPath}{lootTable}.json", fileLines)
+
                 Catch ex As Exception
                     exceptionAddItem = ex.Message
                     addItemResult = "error"
@@ -1722,7 +1855,7 @@ Partial Class frmMain
     Private Sub CallAddItem()
 
         'Disable the creative-only options if 'creative-only' is generally disabled
-        If creativeOnly = False Then
+        If Not creativeOnly Then
             commandBlock = False
             otherCreativeOnlyItem = False
             spawnEgg = False
@@ -2077,8 +2210,6 @@ Partial Class frmMain
                             ItemAmount = -2
                     End Select
                 Next
-
-
             ElseIf datapackVersion = "Version 1.20.2 - 1.20.4" Then
 
                 Dim ItemAmount As Integer = 1
@@ -2122,6 +2253,72 @@ Partial Class frmMain
                     End If
                     If painting And itemAddMode = "Normal" Then
                         AddItem(item, ItemAmount, "1.20.2", "paintings")
+                    End If
+
+                    'Select the new item amount based on the old one
+                    Select Case ItemAmount
+                        Case 1
+                            ItemAmount = 2
+                        Case 2
+                            ItemAmount = 3
+                        Case 3
+                            ItemAmount = 5
+                        Case 5
+                            ItemAmount = 10
+                        Case 10
+                            ItemAmount = 32
+                        Case 32
+                            ItemAmount = 64
+                        Case 64
+                            ItemAmount = -1
+                        Case -1
+                            ItemAmount = -2
+                    End Select
+                Next
+
+            ElseIf datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21" Then
+
+                Dim ItemAmount As Integer = 1
+
+                'Go through all the loot tables
+                For i As Integer = 1 To 9
+
+                    'Add the item to all the loot tables
+                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                        AddItem(item, ItemAmount, "1.20.5", "normal_items")
+                    End If
+                    If otherCreativeOnlyItem = True And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "other_items")
+                    End If
+                    If spawnEgg = True And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "spawn_eggs")
+                    End If
+                    If commandBlock = True And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "command_blocks")
+                    End If
+                    If suspiciousStew And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "suspicious_stews")
+                    End If
+                    If enchantedBook And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "enchanted_books")
+                    End If
+                    If potion And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "potions")
+                    End If
+                    If splashPotion And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "splash_potions")
+                    End If
+                    If lingeringPotion And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "lingering_potions")
+                    End If
+                    If tippedArrow And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "tipped_arrows")
+                    End If
+                    If goatHorn And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "goat_horns")
+                    End If
+                    If painting And itemAddMode = "Normal" Then
+                        AddItem(item, ItemAmount, "1.20.5", "paintings")
                     End If
 
                     'Select the new item amount based on the old one

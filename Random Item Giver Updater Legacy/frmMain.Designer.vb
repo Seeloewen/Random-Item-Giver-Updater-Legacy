@@ -125,7 +125,7 @@ Partial Class frmMain
         Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxVersion.ForeColor = System.Drawing.Color.Black
         Me.cbxVersion.FormattingEnabled = True
-        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.20.2 - 1.20.4", "Version 1.20.1", "Version 1.20", "Version 1.19.4", "Version 1.19 - 1.19.3", "Version 1.18 - 1.18.2", "Version 1.17 - 1.17.1", "Version 1.16.2 - 1.16.5"})
+        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.21", "Version 1.20.5 - 1.20.6", "Version 1.20.2 - 1.20.4", "Version 1.20.1", "Version 1.20", "Version 1.19.4", "Version 1.19 - 1.19.3", "Version 1.18 - 1.18.2", "Version 1.17 - 1.17.1", "Version 1.16.2 - 1.16.5"})
         Me.cbxVersion.Location = New System.Drawing.Point(101, 226)
         Me.cbxVersion.Name = "cbxVersion"
         Me.cbxVersion.Size = New System.Drawing.Size(241, 24)
@@ -491,14 +491,16 @@ Partial Class frmMain
         '
         'tbCustomNBT
         '
+        Me.tbCustomNBT.AcceptsReturn = True
         Me.tbCustomNBT.BackColor = System.Drawing.Color.DarkGray
         Me.tbCustomNBT.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.tbCustomNBT.Enabled = False
         Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCustomNBT.ForeColor = System.Drawing.Color.Black
         Me.tbCustomNBT.Location = New System.Drawing.Point(42, 558)
+        Me.tbCustomNBT.Multiline = True
         Me.tbCustomNBT.Name = "tbCustomNBT"
-        Me.tbCustomNBT.Size = New System.Drawing.Size(258, 19)
+        Me.tbCustomNBT.Size = New System.Drawing.Size(258, 20)
         Me.tbCustomNBT.TabIndex = 78
         '
         'fbdMainFolderPath
