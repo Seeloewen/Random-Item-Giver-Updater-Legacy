@@ -1500,8 +1500,8 @@ Partial Class frmMain
                     Dim removalFileLines As List(Of Integer) = New List(Of Integer)
 
                     For i As Integer = 0 To fileLines.Count - 1
-                        If i + 2 <= fileLines.Count - 1 Then
-                            If fileLines(i).Contains("}") And fileLines(i + 1).Contains("},") And fileLines(i + 2).Contains("{") Then
+                        If i + 3 <= fileLines.Count - 1 Then
+                            If fileLines(i).Contains("}") And fileLines(i + 1).Contains("},") And fileLines(i + 2).Contains("{") And fileLines(i + 3).Contains("""type""") Then
                                 removalFileLines.Add(i)
                             End If
                         End If
