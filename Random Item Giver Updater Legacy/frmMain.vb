@@ -639,9 +639,13 @@ Partial Class frmMain
         cbTippedArrow.Enabled = True
         rtbItem.Enabled = True
         cbSamePrefix.Enabled = True
-        tbSamePrefix.Enabled = True
+        If cbSamePrefix.Checked Then
+            tbSamePrefix.Enabled = True
+        End If
         cbCustomNBT.Enabled = True
-        tbCustomNBT.Enabled = True
+        If cbCustomNBT.Checked Then
+            tbCustomNBT.Enabled = True
+        End If
         cbAddItemsFast.Enabled = True
         cbxVersion.Enabled = True
         btnBrowseDatapackPath.Enabled = True
