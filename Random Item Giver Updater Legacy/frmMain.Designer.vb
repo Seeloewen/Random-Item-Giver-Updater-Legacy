@@ -921,7 +921,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater Legacy 0.5.3"
+        Me.Text = "Random Item Giver Updater Legacy 0.5.4-Dev"
         Me.gbItemID.ResumeLayout(False)
         Me.cmsHamburgerButton.ResumeLayout(False)
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).EndInit()
