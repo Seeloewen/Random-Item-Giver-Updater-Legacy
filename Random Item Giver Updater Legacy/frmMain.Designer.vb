@@ -125,7 +125,7 @@ Partial Class frmMain
         Me.cbxVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxVersion.ForeColor = System.Drawing.Color.Black
         Me.cbxVersion.FormattingEnabled = True
-        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.21", "Version 1.20.5 - 1.20.6", "Version 1.20.2 - 1.20.4", "Version 1.20.1", "Version 1.20", "Version 1.19.4", "Version 1.19 - 1.19.3", "Version 1.18 - 1.18.2", "Version 1.17 - 1.17.1", "Version 1.16.2 - 1.16.5"})
+        Me.cbxVersion.Items.AddRange(New Object() {"Version 1.21 -1.21.3", "Version 1.20.5 - 1.20.6", "Version 1.20.2 - 1.20.4", "Version 1.20.1", "Version 1.20", "Version 1.19.4", "Version 1.19 - 1.19.3", "Version 1.18 - 1.18.2", "Version 1.17 - 1.17.1", "Version 1.16.2 - 1.16.5"})
         Me.cbxVersion.Location = New System.Drawing.Point(101, 226)
         Me.cbxVersion.Name = "cbxVersion"
         Me.cbxVersion.Size = New System.Drawing.Size(241, 24)
@@ -921,7 +921,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater Legacy 0.5.4-Dev"
+        Me.Text = "Random Item Giver Updater Legacy 0.5.4"
         Me.gbItemID.ResumeLayout(False)
         Me.cmsHamburgerButton.ResumeLayout(False)
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).EndInit()

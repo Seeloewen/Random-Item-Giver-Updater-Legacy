@@ -303,7 +303,7 @@ Partial Class frmMain
             cbCustomNBT.Enabled = True
             cbCustomNBT.Checked = False
             If cbAddItemsFast.Checked = False Then
-                If datapackVersion = "Version 1.20" OrElse datapackVersion = "Version 1.19.4" OrElse datapackVersion = "Version 1.20.1" OrElse datapackVersion = "Version 1.20.2 - 1.20.4" OrElse datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21" Then
+                If datapackVersion = "Version 1.20" OrElse datapackVersion = "Version 1.19.4" OrElse datapackVersion = "Version 1.20.1" OrElse datapackVersion = "Version 1.20.2 - 1.20.4" OrElse datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21 - 1.21.3" Then
                     cbPainting.Enabled = True
                     cbGoatHorn.Enabled = True
                 ElseIf datapackVersion = "Version 1.19 - 1.19.3" Then
@@ -415,7 +415,7 @@ Partial Class frmMain
 
         'Toggle certain checkboxes depending on selected version
         If cbAddItemsFast.Checked = False Then
-            If datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21" Then
+            If datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21 - 1.21.3" Then
                 cbCustomNBT.Text = "Item Stack Component"
                 cbPainting.Enabled = True
                 cbGoatHorn.Enabled = True
@@ -651,7 +651,7 @@ Partial Class frmMain
         btnBrowseDatapackPath.Enabled = True
         tbDatapackPath.Enabled = True
         'Only enable some settings depending on version of datapack
-        If cbxVersion.SelectedItem = "Version 1.19.4" OrElse cbxVersion.SelectedItem = "Version 1.20" OrElse cbxVersion.SelectedItem = "Version 1.20.1" OrElse cbxVersion.SelectedItem = "Version 1.20.2 - 1.20.4" OrElse cbxVersion.SelectedItem = "Version 1.20.5 - 1.20.6" OrElse cbxVersion.SelectedItem = "Version 1.21" Then
+        If cbxVersion.SelectedItem = "Version 1.19.4" OrElse cbxVersion.SelectedItem = "Version 1.20" OrElse cbxVersion.SelectedItem = "Version 1.20.1" OrElse cbxVersion.SelectedItem = "Version 1.20.2 - 1.20.4" OrElse cbxVersion.SelectedItem = "Version 1.20.5 - 1.20.6" OrElse cbxVersion.SelectedItem = "Version 1.21 - 1.21.3" Then
             cbPainting.Enabled = True
             cbGoatHorn.Enabled = True
         ElseIf cbxVersion.SelectedItem = "Version 1.19 - 1.19.3" Then
@@ -1004,19 +1004,27 @@ Partial Class frmMain
 
                 Try
                     Select Case version
-                        Case > 48
+                        Case > 57
                             lblDatapackDetection.Text = "Detected datapack, but could not determine version"
-                            MsgBox("A datapack has been detected but the pack format is greater than 48." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
+                            MsgBox("A datapack has been detected but the pack format is greater than 57." + vbNewLine + "This means that the datapack is possibly newer than the software supports." + vbNewLine + "The newest available version in the software has been selected but is not guaranteed to work.", MsgBoxStyle.Exclamation, "Warning")
                             WriteToLog($"Detected unsupported datapack version. This may cause issues. (Pack format {version})", "Warning")
-                            cbxVersion.SelectedItem = "Version 1.21"
+                            cbxVersion.SelectedItem = "Version 1.21 - 1.21.3"
+                        Case 57
+                            lblDatapackDetection.Text = "Detected datapack as version 1.21.2 - 1.21.3."
+                            WriteToLog($"Detected datapack version 1.21.2 - 1.21.3 (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.21 - 1.21.3"
+                        Case 49 To 56
+                            lblDatapackDetection.Text = "Detected datapack as version 1.21.2 Snapshot."
+                            WriteToLog($"Detected datapack version 1.21.2 Snapshot (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.21 - 1.21.3"
                         Case 48
-                            lblDatapackDetection.Text = "Detected datapack as version 1.21."
-                            WriteToLog($"Detected datapack version 1.21 (Pack format {version})", "Info")
-                            cbxVersion.SelectedItem = "Version 1.21"
+                            lblDatapackDetection.Text = "Detected datapack as version 1.21 - 1.21.1."
+                            WriteToLog($"Detected datapack version 1.21 - 1.21.1 (Pack format {version})", "Info")
+                            cbxVersion.SelectedItem = "Version 1.21 - 1.21.3"
                         Case 42 To 47
                             lblDatapackDetection.Text = "Detected datapack as version 1.21 Snapshot."
                             WriteToLog($"Detected datapack version 1.21 Snapshot (Pack format {version})", "Info")
-                            cbxVersion.SelectedItem = "Version 1.21"
+                            cbxVersion.SelectedItem = "Version 1.21 - 1.21.3"
                         Case 41
                             lblDatapackDetection.Text = "Detected datapack as version 1.20.5 - 1.20.6."
                             WriteToLog($"Detected datapack version 1.20.5 - 1.20.6 (Pack format {version})", "Info")
@@ -1103,7 +1111,7 @@ Partial Class frmMain
                     MsgBox($"Error when selecting datapack: {ex.Message}", MsgBoxStyle.Critical, "Error")
                     lblDatapackDetection.Text = "Detected datapack, but could not determine version."
                     WriteToLog("Detected datapack, couldn't determine version.", "Error")
-                    cbxVersion.SelectedItem = "Version 1.21"
+                    cbxVersion.SelectedItem = "Version 1.21 - 1.21.3"
                 End Try
             Else
                 lblDatapackDetection.Text = "Folder found, but could not detect datapack."
@@ -2280,7 +2288,7 @@ Partial Class frmMain
                     End Select
                 Next
 
-            ElseIf datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21" Then
+            ElseIf datapackVersion = "Version 1.20.5 - 1.20.6" OrElse datapackVersion = "Version 1.21 - 1.21.3" Then
 
                 Dim ItemAmount As Integer = 1
 

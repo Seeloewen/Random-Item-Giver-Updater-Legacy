@@ -1,5 +1,4 @@
-﻿Imports System.ComponentModel.Design
-Imports System.IO
+﻿Imports System.IO
 
 Public Class frmDuplicateFinder
 
@@ -147,7 +146,7 @@ Public Class frmDuplicateFinder
             Dim version As Integer = File.ReadAllLines($"{tbDatapackPath.Text}/pack.mcmeta")(2).Replace("    ""pack_format"": ", "").Replace(",", "")
 
             Select Case version
-                Case 48
+                Case 48 To 57
                     datapackVersion = "1.21"
                 Case 16 To 47
                     datapackVersion = "1.20.2"

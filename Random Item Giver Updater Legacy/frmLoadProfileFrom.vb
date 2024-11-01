@@ -115,7 +115,7 @@ Public Class frmLoadProfileFrom
                         profileContent(0) = "None"
                     End If
                     If String.IsNullOrEmpty(profileContent(1)) Then
-                        profileContent(1) = "Version 1.21"
+                        profileContent(1) = "Version 1.21 - 1.21.3"
                     End If
                     LoadProfile(profile, False)
                     frmSaveProfileAs.UpdateProfile(profile)
