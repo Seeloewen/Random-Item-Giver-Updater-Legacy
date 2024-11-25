@@ -109,10 +109,8 @@ Public Class frmItemListImporter
                 For x As Integer = 0 To itemList.Length - 1
                     itemList(x) = itemList(x).Replace("Registry name", "")
 
-                    If dontImportVanillaItems = True Then
-                        itemList(x) = Chr(34) + itemList(x) + Chr(34)
-                        itemList(x) = itemList(x).Replace("minecraft:", "")
-                        itemList(x) = itemList(x).Replace(Chr(34), "")
+                    If dontImportVanillaItems = True And itemList(x).Contains("minecraft:") Then
+                        itemList(x) = ""
                     End If
                 Next
 
