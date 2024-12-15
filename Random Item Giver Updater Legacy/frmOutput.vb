@@ -1,4 +1,6 @@
-﻿Public Class frmOutput
+﻿Imports System.IO
+
+Public Class frmOutput
 
     '-- Event handlers --
 
@@ -30,8 +32,10 @@
         'Prepare file name for saving the log and show dialog
         sfdLog.FileName = $"Random_Item_Giver_Updater_Legacy_Log_{DateTime.Now}_Ver_{frmMain.versionLog}"
         sfdLog.FileName = sfdLog.FileName.Replace(":", "-").Replace(".", "-").Replace(" ", "_").Replace("(", "").Replace(")", "")
-        sfdLog.ShowDialog()
-        SaveLog(sfdLog.FileName, True)
+
+        If sfdLog.ShowDialog() = DialogResult.OK Then
+            SaveLog(sfdLog.FileName, True)
+        End If
     End Sub
 
 
@@ -70,97 +74,97 @@
     '-- Button animations --
 
     Private Sub btnSave_MouseDown(sender As Object, e As MouseEventArgs) Handles btnSave.MouseDown
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonClickLight
         End If
     End Sub
 
     Private Sub btnSave_MouseEnter(sender As Object, e As EventArgs) Handles btnSave.MouseEnter
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
     End Sub
 
     Private Sub btnSave_MouseLeave(sender As Object, e As EventArgs) Handles btnSave.MouseLeave
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
     End Sub
 
     Private Sub btnSave_MouseUp(sender As Object, e As MouseEventArgs) Handles btnSave.MouseUp
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnSave.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnSave.BackgroundImage = My.Resources.imgButtonLight
         End If
     End Sub
 
     Private Sub btnClear_MouseDown(sender As Object, e As MouseEventArgs) Handles btnClear.MouseDown
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClear.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClear.BackgroundImage = My.Resources.imgButtonClickLight
         End If
     End Sub
 
     Private Sub btnClear_MouseEnter(sender As Object, e As EventArgs) Handles btnClear.MouseEnter
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClear.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClear.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
     End Sub
 
     Private Sub btnClear_MouseLeave(sender As Object, e As EventArgs) Handles btnClear.MouseLeave
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClear.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClear.BackgroundImage = My.Resources.imgButtonLight
         End If
     End Sub
 
     Private Sub btnClear_MouseUp(sender As Object, e As MouseEventArgs) Handles btnClear.MouseUp
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
 
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClear.BackgroundImage = My.Resources.imgButtonLight
         End If
     End Sub
 
     Private Sub btnClose_MouseDown(sender As Object, e As MouseEventArgs) Handles btnClose.MouseDown
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClose.BackgroundImage = My.Resources.imgButtonClick
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClose.BackgroundImage = My.Resources.imgButtonClickLight
         End If
     End Sub
 
     Private Sub btnClose_MouseEnter(sender As Object, e As EventArgs) Handles btnClose.MouseEnter
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClose.BackgroundImage = My.Resources.imgButtonHover
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClose.BackgroundImage = My.Resources.imgButtonHoverLight
         End If
     End Sub
 
     Private Sub btnClose_MouseLeave(sender As Object, e As EventArgs) Handles btnClose.MouseLeave
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClose.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClose.BackgroundImage = My.Resources.imgButtonLight
         End If
     End Sub
 
     Private Sub btnClose_MouseUp(sender As Object, e As MouseEventArgs) Handles btnClose.MouseUp
-        If frmmain.design = "Dark" Then
+        If frmMain.design = "Dark" Then
             btnClose.BackgroundImage = My.Resources.imgButton
-        ElseIf frmmain.design = "Light" Then
+        ElseIf frmMain.design = "Light" Then
             btnClose.BackgroundImage = My.Resources.imgButtonLight
         End If
     End Sub

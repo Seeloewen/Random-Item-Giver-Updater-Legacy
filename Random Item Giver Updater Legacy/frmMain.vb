@@ -405,7 +405,7 @@ Partial Class frmMain
         'Pass checkstate onto the variable
         datapackPath = tbDatapackPath.Text
         If firstLoadCompleted Then
-            DetermineDatapackVersion()
+            GetDatapackVersion(tbDatapackPath.Text)
         End If
     End Sub
 
@@ -481,7 +481,7 @@ Partial Class frmMain
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         'When starting the application, run initial datapack detection and set firstloadcompleted to true. This variable is used to determine whether the startup process has been completed
-        DetermineDatapackVersion()
+        GetDatapackVersion(tbDatapackPath.Text)
         firstLoadCompleted = True
     End Sub
 
@@ -989,18 +989,15 @@ Partial Class frmMain
         End If
     End Sub
 
-
-    Public Sub DetermineDatapackVersion()
-        'Detect version of the datapack
-        If My.Computer.FileSystem.DirectoryExists(tbDatapackPath.Text) Then
+    Public Sub GetDatapackVersion(datapackPath As String) 'Detect version of the datapack
+        If My.Computer.FileSystem.DirectoryExists(datapackPath) Then
 
             'If the datapack contains a pack.mcmeta, read the line containing the version number and remove the unnecessary content to only show version number
             'Based on that number, it will set the datapack version. If the version is unknown, it will show a warning (Too old/too high)
-            If My.Computer.FileSystem.FileExists($"{tbDatapackPath.Text}\pack.mcmeta") Then
+            If My.Computer.FileSystem.FileExists($"{datapackPath}\pack.mcmeta") Then
 
-                Dim versionString As String = File.ReadAllLines($"{tbDatapackPath.Text}\pack.mcmeta")(2)
-                Dim parseVersion As String = Replace(versionString, "    " + Chr(34) + "pack_format" + Chr(34) + ": ", "")
-                Dim version As Integer = Convert.ToInt32(Replace(parseVersion, ",", ""))
+                Dim verString As String = Replace(File.ReadAllLines($"{datapackPath}\pack.mcmeta")(2), "    " + Chr(34) + "pack_format" + Chr(34) + ": ", "")
+                Dim version As Integer = Convert.ToInt32(Replace(verString, ",", ""))
 
                 Try
                     Select Case version
