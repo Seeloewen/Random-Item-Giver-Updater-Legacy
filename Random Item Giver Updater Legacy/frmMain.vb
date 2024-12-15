@@ -144,18 +144,22 @@ Partial Class frmMain
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
         'Check if datapack path exists
         If My.Computer.FileSystem.DirectoryExists(datapackPath) Then
-            'Reset previous progress
-            pbAddingItemsProgress.Value = 0
-            workerProgress = 0
-            totalDuplicatesIgnored = 0
-            addItemResult = "success"
+            If Not String.IsNullOrEmpty(rtbItem.Text) Then 'Check for invalid entries could be more advanced, but it works for now
+                'Reset previous progress
+                pbAddingItemsProgress.Value = 0
+                workerProgress = 0
+                totalDuplicatesIgnored = 0
+                addItemResult = "success"
 
-            'Disable all user input while the process runs
-            DisableInput()
+                'Disable all user input while the process runs
+                DisableInput()
 
-            'Set total amount of items and start the backgroundworker that adds the items
-            totalItemAmount = rtbItem.Lines.Count
-            bgwAddItems.RunWorkerAsync()
+                'Set total amount of items and start the backgroundworker that adds the items
+                totalItemAmount = rtbItem.Lines.Count
+                bgwAddItems.RunWorkerAsync()
+            Else
+                MsgBox("Please enter a valid amount of items!", MsgBoxStyle.Critical, "Error")
+            End If
         Else
             MsgBox("Please enter a valid datapack path!", MsgBoxStyle.Critical, "Error")
         End If
