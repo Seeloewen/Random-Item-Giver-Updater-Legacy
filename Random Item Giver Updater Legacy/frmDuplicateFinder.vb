@@ -146,7 +146,7 @@ Public Class frmDuplicateFinder
             Dim version As Integer = File.ReadAllLines($"{tbDatapackPath.Text}/pack.mcmeta")(2).Replace("    ""pack_format"": ", "").Replace(",", "")
 
             Select Case version
-                Case 48 To 57
+                Case 48 To 71
                     datapackVersion = "1.21"
                 Case 16 To 47
                     datapackVersion = "1.20.2"
