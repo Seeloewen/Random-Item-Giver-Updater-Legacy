@@ -1,7 +1,5 @@
 ﻿Imports System.Environment
 Imports System.IO
-Imports System.Reflection
-Imports System.Runtime.InteropServices
 
 Partial Class frmMain
 
@@ -166,47 +164,42 @@ Partial Class frmMain
     End Sub
 
     Private Sub bgwAddItems_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bgwAddItems.DoWork
+        'Checks if there are 2000 or more Items being added and recommends the python script to the user
+        If itemsList.Count >= 2000 And (datapackVersion IsNot "Version 1.16.2 - 1.16.5" And datapackVersion IsNot "Version 1.17 - 1.17.1" And datapackVersion IsNot "Version 1.18 - 1.18.2" And datapackVersion IsNot "Version 1.19 - 1.19.3" And datapackVersion IsNot "Version 1.19.4" And datapackVersion IsNot "Version 1.20" And datapackVersion IsNot "Version 1.20.1" And datapackVersion IsNot "Version 1.20.2 - 1.20.4" And datapackVersion IsNot "Version 1.20.5 - 1.20.6") Then
+            Select Case MsgBox("Warning: You are trying to add 2000 or more items." + vbNewLine +
+                               "Using the normal/fast adding options, this will most likely take several hours. It is recommended to use the 'last resort' option, which is a python script that is way faster but does not support any loot tables besides the main one. It will also require the prefixes to be specified in the item list for each item seperately." + vbNewLine + vbNewLine +
+                               "Despite these limitation, do you wish to use the Python script? Use at your own risk." + vbNewLine + vbNewLine +
+                               "Click 'Yes' to use the Python script, click 'No' to use the normal method, click 'Cancel' to not add items", vbExclamation + vbYesNoCancel, "Warning")
+                Case DialogResult.Yes
+                    AddItemsPython()
+                    Return
+                Case DialogResult.Cancel
+                    addItemResult = "cancelled"
+                    Return
+            End Select
+        End If
+
         'Checks if there are 100 or more Items being added while AddItemsFast is disabled and will show a warning if thats the case
         If itemsList.Count >= 100 And Not addItemsFast Then
-            Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Fast Item Adding' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue?", vbExclamation + vbYesNo, "Warning")
-                Case Windows.Forms.DialogResult.Yes
-                    'Sets ItemAddMode. This should be redundant in this case, despite of this I will still leave it there to be save
-                    If addItemsFast Then
-                        itemAddMode = "Fast"
-                    Else
-                        itemAddMode = "Normal"
-                    End If
-
-                    'Resets variables used to detect duplicates
-                    ignoreDuplicates = False
-                    duplicateDetected = False
-
-                    WriteToLog($"Adding {totalItemAmount} items. This can take a while depending on the mode and amount of items.", "Info")
-
-                    'Calculate ProgressStep
-                    progressStep = 100 / itemsList.Count
-
-                    'Start adding the items
-                    BeginAddingItems()
+            Select Case MsgBox("Warning: You are trying to add 100 or more items." + vbNewLine + "This may take a long time to complete. It's recommended to enable 'Fast Item Adding' to speed up the process." + vbNewLine + vbNewLine + "Are you sure you want to continue without?", vbExclamation + vbYesNo, "Warning")
+                Case DialogResult.No
+                    addItemResult = "cancelled"
+                    Return
             End Select
-        Else
-            'Resets variables used to detect duplicates
-            ignoreDuplicates = False
-            duplicateDetected = False
-
-            'Sets ItemAddMode
-            If addItemsFast Then
-                itemAddMode = "Fast"
-            Else
-                itemAddMode = "Normal"
-            End If
-
-            'Start the corresponding method for adding items depending on the amount. Will also calculate ProgressStep and post result afterwards.
-            WriteToLog($"Adding {totalItemAmount} item(s)...", "Info")
-            progressStep = 100 / itemsList.Count
-            BeginAddingItems()
-
         End If
+
+        'Add items normally
+        If addItemsFast Then
+            itemAddMode = "Fast"
+        Else
+            itemAddMode = "Normal"
+        End If
+
+        ignoreDuplicates = False
+        duplicateDetected = False
+        progressStep = 100 / itemsList.Count
+        WriteToLog($"Adding {totalItemAmount} items. This can take a while depending on the mode and amount of items.", "Info")
+        BeginAddingItems()
     End Sub
 
     Private Sub rtbLog_TextChanged(sender As Object, e As EventArgs)
@@ -1138,6 +1131,58 @@ Partial Class frmMain
             lblDatapackDetection.Text = "No datapack detected."
         End If
 
+    End Sub
+
+
+    Private Sub AddItemsPython()
+        'Check if python is installed
+        Dim pyKeyComputer As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Python", False)
+        Dim pyKeyUser As Microsoft.Win32.RegistryKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\Python", False)
+        If pyKeyComputer Is Nothing And pyKeyUser Is Nothing Then
+            Select Case MessageBox.Show("It looks like you don't have Python installed on your System, which is required to run the script." + vbNewLine + "If you believe this is an error, or you still want to continue, click 'Yes' to run the script. Otherwise Click 'No' to cancel", "Python not found", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                Case DialogResult.No
+                    addItemResult = "cancelled"
+                    Return
+            End Select
+        End If
+
+        'Get all items from the current main loot table
+        Dim fContent As String() = File.ReadAllLines($"{datapackPath}\data\randomitemgiver\loot_table\01item\normal_items.json")
+        Dim oldItems As List(Of String) = New List(Of String)
+
+        'I should probably use a JSON lib for this, but .NET 4.8.1 doesn't have one and I don't want to start using a new library for a legacy project
+        For Each s As String In fContent
+            If s.Contains("""name""") Then
+                Dim item As String = s.Replace("""name"":", "").Replace("""", "") 'Strip the json identifier from the value
+
+                While item(0) = " "
+                    item = item.Remove(0, 1)
+                End While
+
+                oldItems.Add(item)
+            End If
+        Next
+
+        'Bundle old items and new items together in a list
+        Dim newItems(oldItems.Count + itemsList.Length - 1) As String
+        oldItems.CopyTo(newItems)
+        itemsList.CopyTo(newItems, oldItems.Count)
+        File.WriteAllLines($"{appData}\Random Item Giver Updater Legacy\ItemsTemp", newItems)
+
+        'Check and run python script
+        If Not File.Exists("loot_table_creator.py") Then
+            MessageBox.Show("The Loot Table Creator script could not be found. Cannot continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            addItemResult = "cancelled"
+            Return
+        End If
+        Dim pAdd As New Process
+        pAdd.StartInfo.FileName = "python"
+        pAdd.StartInfo.Arguments = $"loot_table_creator.py ""{datapackPath.Replace("\", "/")}/data/randomitemgiver/loot_table/01item"""
+        pAdd.StartInfo.UseShellExecute = False
+        pAdd.StartInfo.CreateNoWindow = True
+        pAdd.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory
+        pAdd.Start()
+        pAdd.WaitForExit()
     End Sub
 
     Private Sub AddItem(itemID As String, itemAmount As Integer, version As String, lootTable As String)
@@ -2565,40 +2610,40 @@ Partial Class frmMain
 
     Public Sub AddDefaultSchemes() 'Creates profiles for the default schemes. Overwrites existing ones.
         'Normal Item
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Normal Item.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Normal Item.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Suspicious Stew
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Suspicious Stew.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Suspicious Stew.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Enchanted Book
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Enchanted Book.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Enchanted Book.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Potion
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Potion.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Potion.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Splash Potion
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Splash Potion.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Splash Potion.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Lingering Potion
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Lingering Potion.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Lingering Potion.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Tipped Arrow
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Tipped Arrow.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Tipped Arrow.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Goat Horn
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Goat Horn.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Goat Horn.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Spawn Egg
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Spawn Egg.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Spawn Egg.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Command Block
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Command Block.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Command Block.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False", False)
 
         'Other Creative-Only Item
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Other Creative-Only Item.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Other Creative-Only Item.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True" + vbNewLine + "False", False)
 
         'Painting
-        My.Computer.FileSystem.WriteAllText($"{schemeDirectory} Painting.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
+        My.Computer.FileSystem.WriteAllText($"{schemeDirectory}Painting.txt", "True" + vbNewLine + "minecraft" + vbNewLine + "False" + vbNewLine + "None" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "False" + vbNewLine + "True", False)
 
         WriteToLog("Restored default schemes.", "Info")
     End Sub
