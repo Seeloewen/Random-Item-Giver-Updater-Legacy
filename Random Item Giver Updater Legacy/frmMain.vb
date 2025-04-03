@@ -151,6 +151,7 @@ Partial Class frmMain
 
                 'Disable all user input while the process runs
                 DisableInput()
+                btnAddItem.Hide()
 
                 'Set total amount of items and start the backgroundworker that adds the items
                 totalItemAmount = rtbItem.Lines.Count
@@ -596,7 +597,6 @@ Partial Class frmMain
 
     Private Sub DisableInput()
         'Disable input for controls
-        btnAddItem.Hide()
         cbCreativeOnly.Enabled = False
         rbtnCommandBlock.Enabled = False
         rbtnSpawnEgg.Enabled = False
@@ -1946,7 +1946,7 @@ Partial Class frmMain
                 For i As Integer = 1 To 9
 
                     'Add the item to all the loot tables
-                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    If normalItem And (itemAddMode = "Normal" Or (itemAddMode = "Fast" And i = 1)) Then
                         AddItem(item, ItemAmount, "1.16", "main")
                     End If
                     If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
@@ -2067,7 +2067,7 @@ Partial Class frmMain
                 For i As Integer = 1 To 7
 
                     'Add the item to all the loot tables
-                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    If normalItem And (itemAddMode = "Normal" Or (itemAddMode = "Fast" And i = 1)) Then
                         AddItem(item, ItemAmount, "1.18", "main")
                     End If
                     If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
@@ -2135,7 +2135,7 @@ Partial Class frmMain
                 For i As Integer = 1 To 9
 
                     'Add the item to all the loot tables
-                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    If normalItem And (itemAddMode = "Normal" Or (itemAddMode = "Fast" And i = 1)) Then
                         AddItem(item, ItemAmount, "1.19", "main")
                     End If
                     If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
@@ -2215,7 +2215,7 @@ Partial Class frmMain
                 For i As Integer = 1 To 9
 
                     'Add the item to all the loot tables
-                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    If normalItem And (itemAddMode = "Normal" Or (itemAddMode = "Fast" And i = 1)) Then
                         AddItem(item, ItemAmount, "1.20.1", "main")
                     End If
                     If spawnEgg = False And otherCreativeOnlyItem = False And commandBlock = False And normalItem And itemAddMode = "Normal" Then
@@ -2292,7 +2292,7 @@ Partial Class frmMain
                 For i As Integer = 1 To 9
 
                     'Add the item to all the loot tables
-                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    If normalItem And (itemAddMode = "Normal" Or (itemAddMode = "Fast" And i = 1)) Then
                         AddItem(item, ItemAmount, "1.20.2", "normal_items")
                     End If
                     If otherCreativeOnlyItem = True And itemAddMode = "Normal" Then
@@ -2358,7 +2358,7 @@ Partial Class frmMain
                 For i As Integer = 1 To 9
 
                     'Add the item to all the loot tables
-                    If normalItem And (itemAddMode = "Normal" Or itemAddMode = "Fast") Then
+                    If normalItem And (itemAddMode = "Normal" Or (itemAddMode = "Fast" And i = 1)) Then
                         AddItem(item, ItemAmount, "1.20.5", "normal_items")
                     End If
                     If otherCreativeOnlyItem = True And itemAddMode = "Normal" Then
