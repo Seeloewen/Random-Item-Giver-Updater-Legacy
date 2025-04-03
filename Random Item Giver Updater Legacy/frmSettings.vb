@@ -282,13 +282,16 @@ Public Class frmSettings
         gbItemListImporter.Show()
     End Sub
     Private Sub btnClearTempFiles_Click(sender As Object, e As EventArgs) Handles btnClearTempFiles.Click
-        'Deletes all temporary files created by the application: Old settings files and Temporary log files
+        'Deletes all temporary files created by the application: Old settings files and Temporary log files, as well as temp files for the python script
         Try
             If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.old") Then
                 My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.old")
             End If
             If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp") Then
                 My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp")
+            End If
+            If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\ItemsTemp") Then
+                My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\ItemsTemp")
             End If
             MsgBox("Successfully deleted all temporary files.", MsgBoxStyle.Information, "Cleared temporary files")
             frmMain.WriteToLog("Deleted all temporary files.", "Info")
