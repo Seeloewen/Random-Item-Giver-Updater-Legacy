@@ -123,8 +123,8 @@ either only items with or without prefix and not a mix of both.
 It generally accepts all text files, though .txt or .csv is recommended.
 
 It's recommended to use some kind of mod to generate a list of items.
-For Forge 1.17+ , the "TellMe" Mod is a good option. A list of items with their prefixes can be
-generated using '/tellme dump to-file csv items-registry-name-only'.
+The "TellMe" or "Seeloewen ItemDumper" Mods are good options. A list of items with their prefixes 
+can be generated using '/tellme dump to-file csv items-registry-name-only'.
 </value>
   </data>
   <metadata name="ofdImportFromFile.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
