@@ -19,67 +19,72 @@
         End If
     End Sub
 
-    Private Sub llblRIGPMC_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblRIGPMC.LinkClicked
+    Private Sub llblRIGPMC_LinkClicked(sender As Object, e As EventArgs) Handles llblRIGPMC.LinkClicked
         'Open Planet Minecraft webpage of the Random Item Giver Datapack
         Process.Start("https://www.planetminecraft.com/data-pack/random-item-giver-datapack-1-0-0-minecraft-1-16-2/")
     End Sub
 
-    Private Sub llblRIGGithub_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblRIGGithub.LinkClicked
+    Private Sub llblRIGGithub_LinkClicked(sender As Object, e As EventArgs) Handles llblRIGGithub.LinkClicked
         'Open GitHub webpage of the Random Item Giver Datapack
         Process.Start("https://github.com/Seeloewen/Random-Item-Giver-Datapack")
     End Sub
 
-    Private Sub llblDiscord_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblDiscord.LinkClicked
+    Private Sub llblDiscord_LinkClicked(sender As Object, e As EventArgs) Handles llblDiscord.LinkClicked
         'Open Louis9's discord
         Process.Start("https://discord.gg/YAc2CcZPm3")
     End Sub
 
-    Private Sub llblTellMe_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblTellMe.LinkClicked
+    Private Sub llblTellMe_LinkClicked(sender As Object, e As EventArgs) Handles llblTellMe.LinkClicked
         'Open TellMe curseforge page
         Process.Start("https://www.curseforge.com/minecraft/mc-mods/tellme")
     End Sub
 
-    Private Sub llblOtherDiscord_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblOtherDiscord.LinkClicked
+    Private Sub llblOtherDiscord_LinkClicked(sender As Object, e As EventArgs) Handles llblOtherDiscord.LinkClicked
         'Open Louis9's discord
         Process.Start("https://discord.gg/YAc2CcZPm3")
     End Sub
 
-    Private Sub llblDatapackPMC_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblDatapackPMC.LinkClicked
+    Private Sub llblDatapackPMC_LinkClicked(sender As Object, e As EventArgs) Handles llblDatapackPMC.LinkClicked
         'Open Random Item Giver Planet Minecraft page
         Process.Start("https://www.planetminecraft.com/data-pack/random-item-giver-datapack-1-0-0-minecraft-1-16-2/")
     End Sub
 
-    Private Sub llblSoftwareGithub_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblSoftwareGithub.LinkClicked
+    Private Sub llblSoftwareGithub_LinkClicked(sender As Object, e As EventArgs) Handles llblSoftwareGithub.LinkClicked
         'Open Random Item Giver Updater Github page
-        Process.Start("https://github.com/Seeloewen/Random-Item-Giver-Updater")
+        Process.Start("https://github.com/Seeloewen/Random-Item-Giver-Updater-Legacy")
     End Sub
 
-    Private Sub llblDatapackGithub_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblDatapackGithub.LinkClicked
+    Private Sub llblDatapackGithub_LinkClicked(sender As Object, e As EventArgs) Handles llblDatapackGithub.LinkClicked
         'Open Random Item Giver datapack Github page
         Process.Start("https://github.com/Seeloewen/Random-Item-Giver-Datapack")
     End Sub
 
-    Private Sub llblNewVersion_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblNewVersion.LinkClicked
+    Private Sub llblNewVersion_LinkClicked(sender As Object, e As EventArgs) Handles llblNewVersion.LinkClicked
         'Open GitHub page of new version
         Process.Start("https://github.com/Seeloewen/Random-Item-Giver-Updater")
     End Sub
 
-    Private Sub llblHowToFindItemIDAdvanced_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblHowToFindItemIDAdvanced.Click
+    Private Sub llblSeeloewenItemDumper_LinkClicked(sender As Object, e As EventArgs) Handles llblSeeloewenItemDumper.LinkClicked
+        'Open CurseForge page of Seeloewen ItemDumper
+        Process.Start("https://www.curseforge.com/minecraft/mc-mods/seeloewen-itemdumper")
+    End Sub
+
+    Private Sub llblHowToFindItemIDAdvanced_LinkClicked(sender As Object, e As EventArgs) Handles llblHowToFindItemIDAdvanced.Click
         'Open explanation of how to find the item ID
         MsgBox(msgItemID, MsgBoxStyle.Question, "How to find the Item ID?")
     End Sub
 
-    Private Sub llblWhatsTheFastWayAdvanced_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblWhatsTheFastWayAdvanced.Click
+    Private Sub llblWhatsTheFastWayAdvanced_LinkClicked(sender As Object, e As EventArgs) Handles llblWhatsTheFastWayAdvanced.Click
         'Open explanation of the fast way
         MsgBox(msgFastWay, MsgBoxStyle.Question, "What is the 'fast way'?")
     End Sub
 
-    Private Sub llblHowToFindTheItemIDBasic_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblHowToFindTheItemIDBasic.LinkClicked
+    Private Sub llblHowToFindTheItemIDBasic_LinkClicked(sender As Object, e As EventArgs) Handles llblHowToFindTheItemIDBasic.LinkClicked
         'Open explanation of how to find the item ID
         MsgBox(msgItemID, MsgBoxStyle.Question, "How to find the Item ID?")
     End Sub
 
-    Private Sub lblWhatIsTheFastWayBasic_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llblWhatIsTheFastWayBasic.LinkClicked
+    Private Sub lblWhatIsTheFastWayBasic_LinkClicked(sender As Object, e As EventArgs) Handles llblWhatIsTheFastWayBasic.LinkClicked
         'Open explanation of the fast way
         MsgBox(msgFastWay, MsgBoxStyle.Question, "What is the 'fast way'?")
     End Sub
@@ -169,6 +174,7 @@
             tpOther.BackColor = Color.FromArgb(50, 50, 50)
 
             'Link label
+            llblSeeloewenItemDumper.LinkColor = Color.LightBlue
             llblDiscord.LinkColor = Color.LightBlue
             llblRIGPMC.LinkColor = Color.LightBlue
             llblRIGGithub.LinkColor = Color.LightBlue

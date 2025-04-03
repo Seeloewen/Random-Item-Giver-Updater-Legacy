@@ -117,6 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblOther.Text" xml:space="preserve">
+    <value>The Item List Importer allows you to select a file, that contains a list of items. You can use a list that contains prefixes or no prefixes, but not a mix. 
+Depending on this, you will also need to select the correct option in the main menu. It's recommended to use some  kind of mod to generate that
+list. I recommend using the "TellMe" or the "Seeloewen ItemDumper" Mod. If your list contains vanilla items, you can also select to not import them, 
+which is recommended, since the datapack usually already contains those.
+
+The output log contains detailed information about what happens in the software. This can be really useful if you need to debug the software 
+or just want to know what exactly is going on. The colors help you to differentiate the different types of messages, which are INFO, WARNING and 
+ERROR. You can also save the log as a text file, if you wish to.
+
+If you want to visit the Github page of this software, here you go:
+
+
+You may also like to visit the websites where the Random Item Giver is hosted:
+
+
+
+
+Also, I wanna say thanks to Phoenix SC who originally made the datapack! I asked him if I could continue updating the datapack and he gave me permission! 
+Without him, all of this wouldn't have existed in the first place. Additionally, I need to give credit to the many different people who contributed to the 
+datapack in some way. You can find them in the CREDITS.txt file in the Random Item Giver Datapack.
+
+If you need further help, want to report a bug, or have any other issue, you an always join my discord server!
+
+
+
+Lastly, please note that this software has entered legacy state and was replaced by a newer, more stable version which you can find here. While this version 
+may still be maintained for a bit, it will no longer receive major content updates or support for newer MC versions. It is recommended to switch to the new 
+software as soon as possible.</value>
+  </data>
   <data name="lblIntroduction.Text" xml:space="preserve">
     <value>Welcome to the Random Item Giver Updater Legacy Help Documentation!
 
@@ -196,40 +226,10 @@ from a list. The settings menu features an option to automatically load a profil
 which allows you to edit profiles without loading them into the main window.
 
 Schemes on the other hand save information about specific item groups. It holds information like the item type (Potion, Enchanted Book, etc...) as well as the 
-NBT Tag and Prefix. This is useful if you're adding different kinds of items. You won't have to tick each checkbox over and over and enter the prefix 20 
-different times. You can just load the scheme! As with the Profiles, you will find an option to load a default scheme in the settings menu. Schemes don't have 
-their own editor, you will need to edit them through the main menu. There are also a handfull of default schemes which can be restored through the settings 
-menu, if necessary.</value>
-  </data>
-  <data name="lblOther.Text" xml:space="preserve">
-    <value>The Item List Importer allows you to select a file, that contains a list of items. You can use a list that contains prefixes or no prefixes, but not a mix. 
-Depending on this, you will also need to select the correct option in the main menu. It's recommended to use some  kind of mod to generate that
-list. For Forge, I recommend using the TellMe Mod. If your list contains vanilla items, you can also select to not import them, which is recommended, 
-since the datapack usually already contains those.
-
-The output log contains detailed information about what happens in the software. This can be really useful if you need to debug the software 
-or just want to know what exactly is going on. The colors help you to differentiate the different types of messages, which are INFO, WARNING and 
-ERROR. You can also save the log as a text file, if you wish to.
-
-If you want to visit the Github page of this software, here you go:
-
-
-You may also like to visit the websites where the Random Item Giver is hosted:
-
-
-
-
-Also, I wanna say thanks to Phoenix SC who originally made the datapack! I asked him if I could continue updating the datapack and he gave me permission! 
-Without him, all of this wouldn't have existed in the first place. Additionally, I need to give credit to the many different people who contributed to the 
-datapack in some way. You can find them in the CREDITS.txt file in the Random Item Giver Datapack.
-
-If you need further help, want to report a bug, or have any other issue, you an always join my discord server!
-
-
-
-Lastly, please note that this software has entered legacy state and was replaced by a newer, more stable version which you can find here. While this version 
-will still be maintained for a bit, it will no longer receive major content updates or support for newer MC versions. It is recommended to switch to the new 
-software as soon as possible.</value>
+NBT Tag / Item Stack Component and Prefix. This is useful if you're adding different kinds of items. You won't have to tick each checkbox over and over and 
+enter the prefix 20 different times. You can just load the scheme! As with the Profiles, you will find an option to load a default scheme in the settings menu.
+Schemes don't have their own editor, you will need to edit them through the main menu. There are also a handfull of default schemes which can be restored 
+through the settings menu, if necessary.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

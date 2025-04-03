@@ -75,6 +75,7 @@ Partial Class frmHelp
         Me.lblOther = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.pnlHelp = New System.Windows.Forms.Panel()
+        Me.llblSeeloewenItemDumper = New System.Windows.Forms.LinkLabel()
         Me.btnNavIntroduction = New System.Windows.Forms.Button()
         Me.btnNavOther = New System.Windows.Forms.Button()
         Me.btnNavProfilesAndSchemes = New System.Windows.Forms.Button()
@@ -126,7 +127,7 @@ Partial Class frmHelp
         Me.tpIntroduction.Location = New System.Drawing.Point(4, 25)
         Me.tpIntroduction.Name = "tpIntroduction"
         Me.tpIntroduction.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpIntroduction.Size = New System.Drawing.Size(1110, 899)
+        Me.tpIntroduction.Size = New System.Drawing.Size(1110, 906)
         Me.tpIntroduction.TabIndex = 0
         Me.tpIntroduction.Text = "Introduction"
         '
@@ -172,7 +173,7 @@ Partial Class frmHelp
         Me.tpSimpleOverview.Controls.Add(Me.lblSimpleOverview)
         Me.tpSimpleOverview.Location = New System.Drawing.Point(4, 25)
         Me.tpSimpleOverview.Name = "tpSimpleOverview"
-        Me.tpSimpleOverview.Size = New System.Drawing.Size(1110, 899)
+        Me.tpSimpleOverview.Size = New System.Drawing.Size(1110, 906)
         Me.tpSimpleOverview.TabIndex = 4
         Me.tpSimpleOverview.Text = "Simple Overview"
         '
@@ -390,7 +391,7 @@ Partial Class frmHelp
         Me.lblLastEditedAddingItemsAdvanced.Name = "lblLastEditedAddingItemsAdvanced"
         Me.lblLastEditedAddingItemsAdvanced.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedAddingItemsAdvanced.TabIndex = 33
-        Me.lblLastEditedAddingItemsAdvanced.Text = "Last edited: 18.07.2023"
+        Me.lblLastEditedAddingItemsAdvanced.Text = "Last edited: 03.04.2025"
         '
         'lblSelectItemTypeAdvanced
         '
@@ -398,7 +399,7 @@ Partial Class frmHelp
         Me.lblSelectItemTypeAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblSelectItemTypeAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSelectItemTypeAdvanced.ForeColor = System.Drawing.Color.Blue
-        Me.lblSelectItemTypeAdvanced.Location = New System.Drawing.Point(572, 357)
+        Me.lblSelectItemTypeAdvanced.Location = New System.Drawing.Point(557, 353)
         Me.lblSelectItemTypeAdvanced.Name = "lblSelectItemTypeAdvanced"
         Me.lblSelectItemTypeAdvanced.Size = New System.Drawing.Size(119, 40)
         Me.lblSelectItemTypeAdvanced.TabIndex = 27
@@ -422,7 +423,7 @@ Partial Class frmHelp
         Me.lblSpecifyPrefixAndNBTTagAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSpecifyPrefixAndNBTTagAdvanced.ForeColor = System.Drawing.Color.Blue
-        Me.lblSpecifyPrefixAndNBTTagAdvanced.Location = New System.Drawing.Point(287, 451)
+        Me.lblSpecifyPrefixAndNBTTagAdvanced.Location = New System.Drawing.Point(288, 445)
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Name = "lblSpecifyPrefixAndNBTTagAdvanced"
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Size = New System.Drawing.Size(196, 20)
         Me.lblSpecifyPrefixAndNBTTagAdvanced.TabIndex = 29
@@ -445,7 +446,7 @@ Partial Class frmHelp
         Me.lblEnterItemIDHereAdvanced.BackColor = System.Drawing.Color.DarkGray
         Me.lblEnterItemIDHereAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEnterItemIDHereAdvanced.ForeColor = System.Drawing.Color.Blue
-        Me.lblEnterItemIDHereAdvanced.Location = New System.Drawing.Point(311, 346)
+        Me.lblEnterItemIDHereAdvanced.Location = New System.Drawing.Point(304, 341)
         Me.lblEnterItemIDHereAdvanced.Name = "lblEnterItemIDHereAdvanced"
         Me.lblEnterItemIDHereAdvanced.Size = New System.Drawing.Size(149, 20)
         Me.lblEnterItemIDHereAdvanced.TabIndex = 24
@@ -522,7 +523,7 @@ Partial Class frmHelp
         Me.lblLastEditedDuplicateFinder.Name = "lblLastEditedDuplicateFinder"
         Me.lblLastEditedDuplicateFinder.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedDuplicateFinder.TabIndex = 29
-        Me.lblLastEditedDuplicateFinder.Text = "Last edited: 18.07.2023"
+        Me.lblLastEditedDuplicateFinder.Text = "Last edited: 03.04.2025"
         '
         'lblBeginChecking
         '
@@ -530,7 +531,7 @@ Partial Class frmHelp
         Me.lblBeginChecking.BackColor = System.Drawing.Color.FromArgb(CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer), CType(CType(179, Byte), Integer))
         Me.lblBeginChecking.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBeginChecking.ForeColor = System.Drawing.Color.Blue
-        Me.lblBeginChecking.Location = New System.Drawing.Point(461, 149)
+        Me.lblBeginChecking.Location = New System.Drawing.Point(391, 148)
         Me.lblBeginChecking.Name = "lblBeginChecking"
         Me.lblBeginChecking.Size = New System.Drawing.Size(117, 20)
         Me.lblBeginChecking.TabIndex = 28
@@ -542,7 +543,7 @@ Partial Class frmHelp
         Me.lblDuplicateList.BackColor = System.Drawing.Color.White
         Me.lblDuplicateList.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDuplicateList.ForeColor = System.Drawing.Color.Blue
-        Me.lblDuplicateList.Location = New System.Drawing.Point(461, 279)
+        Me.lblDuplicateList.Location = New System.Drawing.Point(442, 285)
         Me.lblDuplicateList.Name = "lblDuplicateList"
         Me.lblDuplicateList.Size = New System.Drawing.Size(165, 100)
         Me.lblDuplicateList.TabIndex = 26
@@ -606,6 +607,7 @@ Partial Class frmHelp
         'tpOther
         '
         Me.tpOther.BackColor = System.Drawing.Color.White
+        Me.tpOther.Controls.Add(Me.llblSeeloewenItemDumper)
         Me.tpOther.Controls.Add(Me.llblNewVersion)
         Me.tpOther.Controls.Add(Me.lblLastEditedOther)
         Me.tpOther.Controls.Add(Me.llblTellMe)
@@ -639,7 +641,7 @@ Partial Class frmHelp
         Me.lblLastEditedOther.Name = "lblLastEditedOther"
         Me.lblLastEditedOther.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedOther.TabIndex = 24
-        Me.lblLastEditedOther.Text = "Last edited: 18.07.2023"
+        Me.lblLastEditedOther.Text = "Last edited: 03.04.2025"
         '
         'llblTellMe
         '
@@ -723,6 +725,17 @@ Partial Class frmHelp
         Me.pnlHelp.Name = "pnlHelp"
         Me.pnlHelp.Size = New System.Drawing.Size(1107, 942)
         Me.pnlHelp.TabIndex = 10
+        '
+        'llblSeeloewenItemDumper
+        '
+        Me.llblSeeloewenItemDumper.AutoSize = True
+        Me.llblSeeloewenItemDumper.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.llblSeeloewenItemDumper.Location = New System.Drawing.Point(244, 875)
+        Me.llblSeeloewenItemDumper.Name = "llblSeeloewenItemDumper"
+        Me.llblSeeloewenItemDumper.Size = New System.Drawing.Size(326, 20)
+        Me.llblSeeloewenItemDumper.TabIndex = 26
+        Me.llblSeeloewenItemDumper.TabStop = True
+        Me.llblSeeloewenItemDumper.Text = "Seeloewen ItemDumper Mod on CurseForge"
         '
         'btnNavIntroduction
         '
@@ -990,4 +1003,5 @@ Partial Class frmHelp
     Friend WithEvents lblLastEditedDuplicateFinder As Label
     Friend WithEvents lblLastEditedProfilesAndSchemes As Label
     Friend WithEvents llblNewVersion As LinkLabel
+    Friend WithEvents llblSeeloewenItemDumper As LinkLabel
 End Class
