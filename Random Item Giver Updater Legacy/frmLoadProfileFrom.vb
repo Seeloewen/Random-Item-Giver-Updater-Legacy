@@ -1,12 +1,17 @@
 ﻿Imports System.IO
 
+Public Enum ProfileDestination
+    MAIN
+    DUPLICATE_FINDER
+End Enum
+
 Public Class frmLoadProfileFrom
 
     'Variables needed for the software to work correctly
     Dim profileList As String()
     Dim profileContent As String()
     Dim loadFromProfile As String
-    Dim destination As String
+    Dim destination As ProfileDestination = ProfileDestination.MAIN
 
     'Variables that store profile content
     Dim datapackPath As String
@@ -14,8 +19,7 @@ Public Class frmLoadProfileFrom
 
     '-- Event handlers --
 
-    ' Konstruktor, der die Argumente entgegennimmt
-    Overloads Sub ShowDialog(destination As String)
+    Overloads Sub ShowDialog(destination As ProfileDestination)
         'Set the destination
         Me.destination = destination
 
@@ -43,7 +47,7 @@ Public Class frmLoadProfileFrom
 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         'Starts the whole loading process
-        InitializeLoadingProfile(cbxProfiles.SelectedItem, True)
+        InitializeLoadingProfile(cbxProfiles.SelectedItem, True, destination)
     End Sub
 
     '-- Custom methods --
@@ -71,10 +75,10 @@ Public Class frmLoadProfileFrom
 
     Public Sub LoadProfile(profile As String, showMessage As Boolean)
         'Load settings from profile to the selected destination
-        If destination = "Main" Then
+        If destination = ProfileDestination.MAIN Then
             frmMain.tbDatapackPath.Text = profileContent(0)
             frmMain.cbxVersion.Text = profileContent(1)
-        ElseIf destination = "Duplicate Finder" Then
+        ElseIf destination = ProfileDestination.DUPLICATE_FINDER Then
             frmDuplicateFinder.tbDatapackPath.Text = profileContent(0)
         End If
 
@@ -84,14 +88,14 @@ Public Class frmLoadProfileFrom
         End If
     End Sub
 
-    Public Sub InitializeLoadingProfile(profile As String, showMessage As Boolean)
+    Public Sub InitializeLoadingProfile(profile As String, showMessage As Boolean, destination As ProfileDestination)
         'Checks if a profile is selected. It then reads the content of the profile file into the array. To avoid errors with the array being too small, it gets resized. The number represents the amount of settings.
         'It then starts to convert and load the profile, see the the method below.
         Try
             If Not String.IsNullOrEmpty(profile) Then
                 loadFromProfile = $"{frmMain.profileDirectory}{profile}.txt"
                 profileContent = File.ReadAllLines(loadFromProfile)
-                ReDim Preserve profileContent(2)
+                ReDim Preserve profileContent(1)
                 CheckAndConvertProfile(profile, showMessage)
                 Close()
             Else

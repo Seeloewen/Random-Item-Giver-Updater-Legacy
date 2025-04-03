@@ -136,7 +136,7 @@ Public Class frmDuplicateFinder
 
     Private Sub btnLoadProfile_Click(sender As Object, e As EventArgs) Handles btnLoadProfile.Click
         'Show profile loader
-        frmLoadProfileFrom.ShowDialog("Duplicate Finder")
+        frmLoadProfileFrom.ShowDialog(ProfileDestination.DUPLICATE_FINDER)
     End Sub
 
     '-- Custom Methods --

@@ -469,7 +469,7 @@ Partial Class frmMain
 
     Private Sub btnLoadProfile_Click(sender As Object, e As EventArgs) Handles btnLoadProfile.Click
         'Open the Load profile dialog
-        frmLoadProfileFrom.ShowDialog("Main")
+        frmLoadProfileFrom.ShowDialog(ProfileDestination.MAIN)
     End Sub
 
     Private Sub btnSaveProfile_Click(sender As Object, e As EventArgs) Handles btnSaveProfile.Click
@@ -2493,8 +2493,7 @@ Partial Class frmMain
             If Not String.IsNullOrEmpty(My.Settings.DefaultProfile) Then
                 If My.Computer.FileSystem.FileExists($"{profileDirectory}{My.Settings.DefaultProfile}.txt") Then
                     cbxDefaultProfile.SelectedItem = My.Settings.DefaultProfile
-                    frmLoadProfileFrom.InitializeLoadingProfile(cbxDefaultProfile.SelectedItem, False)
-                    WriteToLog($"Loaded default profile {cbxDefaultProfile.SelectedItem}", "Info")
+                    frmLoadProfileFrom.InitializeLoadingProfile(cbxDefaultProfile.SelectedItem, False, ProfileDestination.MAIN)
                 Else
                     frmSettings.Show()
                     frmSettings.cbLoadDefaultProfile.Checked = False
