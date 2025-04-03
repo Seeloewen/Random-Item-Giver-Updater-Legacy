@@ -1231,8 +1231,16 @@ Partial Class frmMain
             Dim prefix As String = ""
             Dim fullItemName As String = ""
 
+            'Determine the full item name based on the item ID
+            If samePrefix = True Then
+                prefix = samePrefixString
+                fullItemName = $"{prefix}:{itemID}"
+            Else
+                fullItemName = itemID
+            End If
+
             'If the item you want to add does not exist or duplicates are ignored add items depending on version and loot table
-            If file.Contains("""fullItemName""") = False Or ignoreDuplicates = True Then
+            If file.Contains($"""{fullItemName}""") = False Or ignoreDuplicates = True Then
                 Try
 
                     'Set custom NTB tag and prefix
@@ -1248,14 +1256,6 @@ Partial Class frmMain
                         Else
                             nbtTag = "NONE"
                         End If
-                    End If
-
-                    'Determine the full item name based on the item ID
-                    If samePrefix = True Then
-                        prefix = samePrefixString
-                        fullItemName = $"{prefix}:{itemID}"
-                    Else
-                        fullItemName = itemID
                     End If
 
                     'Set up item construct and item amount path based on item amount
