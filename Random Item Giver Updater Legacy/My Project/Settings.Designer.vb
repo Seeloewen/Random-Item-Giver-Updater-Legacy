@@ -152,7 +152,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Light")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("System Default")>  _
         Public Property Design() As String
             Get
                 Return CType(Me("Design"),String)

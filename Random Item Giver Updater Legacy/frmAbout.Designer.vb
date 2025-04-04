@@ -81,12 +81,12 @@ Partial Class frmAbout
         '
         Me.llblGithub.AutoSize = True
         Me.llblGithub.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblGithub.Location = New System.Drawing.Point(46, 372)
+        Me.llblGithub.Location = New System.Drawing.Point(17, 372)
         Me.llblGithub.Name = "llblGithub"
-        Me.llblGithub.Size = New System.Drawing.Size(282, 20)
+        Me.llblGithub.Size = New System.Drawing.Size(341, 20)
         Me.llblGithub.TabIndex = 7
         Me.llblGithub.TabStop = True
-        Me.llblGithub.Text = "Random Item Giver Updater - Github"
+        Me.llblGithub.Text = "Random Item Giver Updater Legacy - Github"
         '
         'btnOK
         '

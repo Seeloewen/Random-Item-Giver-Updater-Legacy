@@ -710,7 +710,7 @@ Partial Class frmSettings
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(747, 502)
+        Me.ClientSize = New System.Drawing.Size(747, 500)
         Me.Controls.Add(Me.gbDatapackProfiles)
         Me.Controls.Add(Me.gbItemListImporter)
         Me.Controls.Add(Me.gbSchemes)

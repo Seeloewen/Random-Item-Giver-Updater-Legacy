@@ -5,8 +5,8 @@ Partial Class frmMain
 
     'General variables for the software
     Public appData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public versionLog As String = "0.5.4-Dev (14.06.2024)" 'Version that gets displayed in the log
-    Public rawVersion As String = "0.5.4-Dev"
+    Public versionLog As String = "0.5.4 (04.04.2025)" 'Version that gets displayed in the log
+    Public rawVersion As String = "0.5.4"
     Public settingsVersion As Double = 4 'Current version of the settings file that the app is using
     Dim settingsArray As String() 'Array which the settings will be loaded in
     Dim loadedSettingsVersion As Double 'Version of the settings file that gets loaded
@@ -198,6 +198,7 @@ Partial Class frmMain
 
         ignoreDuplicates = False
         duplicateDetected = False
+        actionRunning = True
         progressStep = 100 / itemsList.Count
         WriteToLog($"Adding {totalItemAmount} items. This can take a while depending on the mode and amount of items.", "Info")
         BeginAddingItems()
@@ -435,6 +436,7 @@ Partial Class frmMain
 
     Private Sub bgwAddItems_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgwAddItems.RunWorkerCompleted
         'When adding the items is complete, enable all menu controls again and set progress to 100%
+        actionRunning = False
         pbAddingItemsProgress.Value = 100
         EnableInput()
 
@@ -581,7 +583,11 @@ Partial Class frmMain
         btnHamburger.BackgroundImage = My.Resources.imgHamburgerButton
 
         'Show item list importer
-        frmItemListImporter.ShowDialog()
+        If Not actionRunning Then
+            frmItemListImporter.ShowDialog()
+        Else
+            MessageBox.Show("You cannot open the Item List Importer while an action is running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End If
     End Sub
 
     Private Sub btnRenameScheme_Click(sender As Object, e As EventArgs) Handles btnRenameScheme.Click
@@ -597,6 +603,9 @@ Partial Class frmMain
 
     Private Sub DisableInput()
         'Disable input for controls
+        cbxScheme.Enabled = False
+        btnLoadProfile.Enabled = False
+        btnDeleteSelectedScheme.Enabled = False
         cbCreativeOnly.Enabled = False
         rbtnCommandBlock.Enabled = False
         rbtnSpawnEgg.Enabled = False
@@ -623,6 +632,9 @@ Partial Class frmMain
 
     Private Sub EnableInput()
         'Enable input for controls
+        cbxScheme.Enabled = True
+        btnLoadProfile.Enabled = True
+        btnDeleteSelectedScheme.Enabled = True
         cbCreativeOnly.Enabled = True
         rbtnCommandBlock.Enabled = True
         rbtnSpawnEgg.Enabled = True
@@ -1150,7 +1162,7 @@ Partial Class frmMain
         Dim fContent As String() = File.ReadAllLines($"{datapackPath}\data\randomitemgiver\loot_table\01item\normal_items.json")
         Dim oldItems As List(Of String) = New List(Of String)
 
-        'I should probably use a JSON lib for this, but .NET 4.8.1 doesn't have one and I don't want to start using a new library for a legacy project
+        'I should probably use a JSON lib for this, but .NET Framework 4.8.1 doesn't have one and I don't want to start using a new library for a legacy project
         For Each s As String In fContent
             If s.Contains("""name""") Then
                 Dim item As String = s.Replace("""name"":", "").Replace("""", "") 'Strip the json identifier from the value
@@ -1601,7 +1613,7 @@ Partial Class frmMain
 
             Else
                 'If duplicate exists show option to either ignore it or cancel 
-                Select Case MsgBox($"The item you are trying To add ({fullItemName}) already exists In the datapack.{vbNewLine}Are you sure you want To add it again? This will result In duplicates.", vbExclamation + vbYesNo, "Warning")
+                Select Case MsgBox($"The item you are trying to add ({fullItemName}) already exists in the datapack.{vbNewLine}Are you sure you want to add it again? This will result in duplicates.", vbExclamation + vbYesNo, "Warning")
                     Case Windows.Forms.DialogResult.Yes
                         ignoreDuplicates = True
                         AddItem(itemID, itemAmount, version, lootTable)

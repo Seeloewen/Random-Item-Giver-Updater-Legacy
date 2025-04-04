@@ -48,7 +48,7 @@ Partial Class frmChangelog
         Me.rtbChangelog.Location = New System.Drawing.Point(15, 19)
         Me.rtbChangelog.Name = "rtbChangelog"
         Me.rtbChangelog.ReadOnly = True
-        Me.rtbChangelog.Size = New System.Drawing.Size(424, 322)
+        Me.rtbChangelog.Size = New System.Drawing.Size(567, 435)
         Me.rtbChangelog.TabIndex = 1
         Me.rtbChangelog.Text = resources.GetString("rtbChangelog.Text")
         '
@@ -57,7 +57,7 @@ Partial Class frmChangelog
         Me.gbChangelog.Controls.Add(Me.rtbChangelog)
         Me.gbChangelog.Location = New System.Drawing.Point(12, 39)
         Me.gbChangelog.Name = "gbChangelog"
-        Me.gbChangelog.Size = New System.Drawing.Size(445, 353)
+        Me.gbChangelog.Size = New System.Drawing.Size(588, 470)
         Me.gbChangelog.TabIndex = 3
         Me.gbChangelog.TabStop = False
         '
@@ -70,7 +70,7 @@ Partial Class frmChangelog
         Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOK.ForeColor = System.Drawing.Color.Black
-        Me.btnOK.Location = New System.Drawing.Point(167, 399)
+        Me.btnOK.Location = New System.Drawing.Point(238, 517)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(133, 24)
         Me.btnOK.TabIndex = 2
@@ -82,7 +82,7 @@ Partial Class frmChangelog
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(469, 434)
+        Me.ClientSize = New System.Drawing.Size(612, 551)
         Me.Controls.Add(Me.gbChangelog)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.lblHeader)

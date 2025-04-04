@@ -27,7 +27,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Design" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Light</Value>
+      <Value Profile="(Default)">System Default</Value>
     </Setting>
     <Setting Name="AutoSaveLogs" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

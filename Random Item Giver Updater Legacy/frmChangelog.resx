@@ -118,7 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.5.3 (07.01.2024)
+    <value>Version 0.5.4 (04.04.2025)
++ Added support for pack formats 27 to 71 (1.20.5 - 1.21.5)
++ Added support for Item Stack Components in recent datapack versions
++ Added 'last resort' ultra fast item adding method
+* NBT/Item Stack Components can be added to items in all loot tables
+* Made GitHub links point to legacy version of the software
+* Updated help documentation
+* Fixed items on 1.20.1 not being added to 'randomamountdifitems' and 'randomamountsameitem' loot tables
+* Fixed NBT and Prefix textbox getting enabled again after item adding, even when not checked
+* Fixed some input still being possible while an action is running
+* Fixed exception when clicking on "Import Items" without any file selected
+* Fixed "Rename Selected Scheme" button not being hidden in basic view
+* Fixed output "Save" button giving confirmation even when cancelling
+* Fixed being able to click "Add Items" without any items specified
+* Fixed loading default profile on startup not working
+* Fixed several typos
+
+Version 0.5.3 (07.01.2024)
 + Added option to rename schemes and profiles
 + Added support for pack format 16 to 26
 + Added support for newer loot table structure in recent Random Item Giver versions
