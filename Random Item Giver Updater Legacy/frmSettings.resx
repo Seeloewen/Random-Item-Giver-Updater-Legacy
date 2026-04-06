@@ -152,12 +152,6 @@ DontImportVanillaItemsByDefault=True</value>
 sometimes a good idea to reset the entire software. Please note that this
 deletes all profiles, schemes, user settings etc.</value>
   </data>
-  <data name="lblTempFiles.Text" xml:space="preserve">
-    <value>The software stores some data in temporary text files to make some 
-processes easier. These files should only use up a few kilobytes of space.
-Please note that some files in this directory also contain profiles and
-schemes, those are not temporary and should not be deleted.</value>
-  </data>
   <data name="lblRestoreDefaultSchemes.Text" xml:space="preserve">
     <value>There are a few default schemes that are created when starting the software 
 for the first time. If you deleted them or for some other reason want to restore

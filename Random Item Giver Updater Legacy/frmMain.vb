@@ -14,6 +14,7 @@ Partial Class frmMain
     Dim actionRunning As Boolean = False 'Whether an action is running or not
     Dim settingsFile As String = $"{appData}\Random Item Giver Updater Legacy\settings.txt" 'Location of the settings file
     Public logDirectory As String = $"{appData}\Random Item Giver Updater Legacy\Logs\" 'Directory where the log files are saved
+    Public tempDirectory As String = $"{appData}\Random Item Giver Updater Legacy\Temp\"
     Public datapackPathExtension As String
     Dim logFileName As String 'File name of the log file
     Public design As String = "System Default" 'Selected design
@@ -79,10 +80,15 @@ Partial Class frmMain
             Rename($"{appData}\Random Item Giver Updater", $"{appData}\Random Item Giver Updater Legacy")
         End If
 
-        'Create directory in appdata if it doesnt exist already
+        'Create directory in appdata if it doesn't exist already
         If Not My.Computer.FileSystem.DirectoryExists($"{appData}\Random Item Giver Updater Legacy\") Then
             My.Computer.FileSystem.CreateDirectory($"{appData}\Random Item Giver Updater Legacy\")
-            WriteToLog("Created the 'Random Item Giver Updater Legacy' directory in the Appdata folder for application files.", "Info")
+        End If
+
+        'Create temp file directory if it doesn't exist already
+        If Not My.Computer.FileSystem.DirectoryExists($"{tempDirectory}") Then
+            My.Computer.FileSystem.CreateDirectory($"{tempDirectory}")
+            WriteToLog("Created the 'Temp' directory.", "Info")
         End If
 
         'Post initial log text
@@ -116,8 +122,8 @@ Partial Class frmMain
         'Disable log if setting is enabled
         If My.Settings.DisableLogging Then
             frmOutput.rtbLog.Clear()
-            If My.Computer.FileSystem.FileExists($"{appData}\Random Item Giver Updater Legacy\DebugLogTemp") Then
-                My.Computer.FileSystem.DeleteFile($"{appData}\Random Item Giver Updater Legacy\DebugLogTemp")
+            If My.Computer.FileSystem.FileExists($"{tempDirectory}DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile($"{tempDirectory}DebugLogTemp")
             End If
         End If
 
@@ -206,8 +212,8 @@ Partial Class frmMain
 
     Private Sub rtbLog_TextChanged(sender As Object, e As EventArgs)
         'Update log file and log in output window
-        rtbLog.SaveFile($"{appData}\Random Item Giver Updater Legacy\DebugLogTemp")
-        frmOutput.rtbLog.LoadFile($"{appData}\Random Item Giver Updater Legacy\DebugLogTemp")
+        rtbLog.SaveFile($"{tempDirectory}DebugLogTemp")
+        frmOutput.rtbLog.LoadFile($"{tempDirectory}DebugLogTemp")
     End Sub
 
     Private Sub btnHamburger_Click(sender As Object, e As EventArgs) Handles btnHamburger.Click
@@ -1179,7 +1185,7 @@ Partial Class frmMain
         Dim newItems(oldItems.Count + itemsList.Length - 1) As String
         oldItems.CopyTo(newItems)
         itemsList.CopyTo(newItems, oldItems.Count)
-        File.WriteAllLines($"{appData}\Random Item Giver Updater Legacy\ItemsTemp", newItems)
+        File.WriteAllLines($"{tempDirectory}ItemsTemp", newItems)
 
         'Check and run python script
         If Not File.Exists("loot_table_creator.py") Then
@@ -1751,11 +1757,11 @@ Partial Class frmMain
                     If ((settingsArray(21) = "DontImportVanillaItemsByDefault=True") = False And (settingsArray(21) = "DontImportVanillaItemsByDefault=False") = False) Then
                         settingsArray(21) = frmSettings.SettingsFilePreset.Lines(21)
                     End If
-                    System.IO.File.WriteAllLines(settingsFile, settingsArray)
+                    IO.File.WriteAllLines(settingsFile, settingsArray)
                     LoadSettings()
                     MsgBox("Loaded and converted settings. They should now work correctly!", MsgBoxStyle.Information, "Loaded and updated profile")
                     WriteToLog("Loaded and converted settings.", "Info")
-                Case Windows.Forms.DialogResult.No
+                Case DialogResult.No
                     WriteToLog("Ignored settings from newer version. Creating new file, current one will be renamed to settings.old", "Info")
                     My.Computer.FileSystem.RenameFile(settingsFile, "settings.old")
                     My.Computer.FileSystem.WriteAllText(settingsFile, "", False)

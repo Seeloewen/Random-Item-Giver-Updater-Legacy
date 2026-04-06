@@ -9,8 +9,8 @@ Public Class frmOutput
         LoadDesign()
 
         'Try to read the log file. Create a new one if none exists.
-        If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp") Then
-            rtbLog.LoadFile($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp")
+        If My.Computer.FileSystem.FileExists($"{frmMain.tempDirectory}DebugLogTemp") Then
+            rtbLog.LoadFile($"{frmMain.tempDirectory}DebugLogTemp")
         Else
             frmMain.WriteToLog("Error reading log file, creating new log..", "Error")
         End If

@@ -111,7 +111,7 @@ Partial Class frmSettings
         Me.lblResetWarning.AutoSize = True
         Me.lblResetWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblResetWarning.ForeColor = System.Drawing.Color.OrangeRed
-        Me.lblResetWarning.Location = New System.Drawing.Point(244, 362)
+        Me.lblResetWarning.Location = New System.Drawing.Point(244, 331)
         Me.lblResetWarning.Name = "lblResetWarning"
         Me.lblResetWarning.Size = New System.Drawing.Size(162, 16)
         Me.lblResetWarning.TabIndex = 33
@@ -122,7 +122,7 @@ Partial Class frmSettings
         '
         Me.lblResetSoftware.AutoSize = True
         Me.lblResetSoftware.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblResetSoftware.Location = New System.Drawing.Point(13, 304)
+        Me.lblResetSoftware.Location = New System.Drawing.Point(13, 273)
         Me.lblResetSoftware.Name = "lblResetSoftware"
         Me.lblResetSoftware.Size = New System.Drawing.Size(443, 48)
         Me.lblResetSoftware.TabIndex = 31
@@ -132,7 +132,7 @@ Partial Class frmSettings
         '
         Me.lblImportExportSettings.AutoSize = True
         Me.lblImportExportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblImportExportSettings.Location = New System.Drawing.Point(7, 245)
+        Me.lblImportExportSettings.Location = New System.Drawing.Point(7, 214)
         Me.lblImportExportSettings.Name = "lblImportExportSettings"
         Me.lblImportExportSettings.Size = New System.Drawing.Size(241, 16)
         Me.lblImportExportSettings.TabIndex = 28
@@ -142,7 +142,7 @@ Partial Class frmSettings
         '
         Me.cbHideBetaWarning.AutoSize = True
         Me.cbHideBetaWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbHideBetaWarning.Location = New System.Drawing.Point(13, 208)
+        Me.cbHideBetaWarning.Location = New System.Drawing.Point(13, 177)
         Me.cbHideBetaWarning.Name = "cbHideBetaWarning"
         Me.cbHideBetaWarning.Size = New System.Drawing.Size(195, 20)
         Me.cbHideBetaWarning.TabIndex = 27
@@ -153,7 +153,7 @@ Partial Class frmSettings
         '
         Me.lblBetaWarning.AutoSize = True
         Me.lblBetaWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBetaWarning.Location = New System.Drawing.Point(7, 189)
+        Me.lblBetaWarning.Location = New System.Drawing.Point(7, 158)
         Me.lblBetaWarning.Name = "lblBetaWarning"
         Me.lblBetaWarning.Size = New System.Drawing.Size(288, 16)
         Me.lblBetaWarning.TabIndex = 26
@@ -163,7 +163,7 @@ Partial Class frmSettings
         '
         Me.lblLogging.AutoSize = True
         Me.lblLogging.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblLogging.Location = New System.Drawing.Point(7, 129)
+        Me.lblLogging.Location = New System.Drawing.Point(7, 98)
         Me.lblLogging.Name = "lblLogging"
         Me.lblLogging.Size = New System.Drawing.Size(464, 16)
         Me.lblLogging.TabIndex = 25
@@ -173,7 +173,7 @@ Partial Class frmSettings
         '
         Me.cbDisableLogging.AutoSize = True
         Me.cbDisableLogging.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbDisableLogging.Location = New System.Drawing.Point(13, 148)
+        Me.cbDisableLogging.Location = New System.Drawing.Point(13, 117)
         Me.cbDisableLogging.Name = "cbDisableLogging"
         Me.cbDisableLogging.Size = New System.Drawing.Size(121, 20)
         Me.cbDisableLogging.TabIndex = 24
@@ -186,9 +186,10 @@ Partial Class frmSettings
         Me.lblTempFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTempFiles.Location = New System.Drawing.Point(10, 21)
         Me.lblTempFiles.Name = "lblTempFiles"
-        Me.lblTempFiles.Size = New System.Drawing.Size(447, 64)
+        Me.lblTempFiles.Size = New System.Drawing.Size(447, 32)
         Me.lblTempFiles.TabIndex = 22
-        Me.lblTempFiles.Text = resources.GetString("lblTempFiles.Text")
+        Me.lblTempFiles.Text = "The software stores some data in temporary text files to make some " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "processes ea" &
+    "sier. These files should only use up a few kilobytes of space."
         '
         'gbGeneral1
         '
@@ -327,7 +328,7 @@ Partial Class frmSettings
         Me.btnResetSoftware.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResetSoftware.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnResetSoftware.ForeColor = System.Drawing.Color.Black
-        Me.btnResetSoftware.Location = New System.Drawing.Point(10, 359)
+        Me.btnResetSoftware.Location = New System.Drawing.Point(10, 328)
         Me.btnResetSoftware.Name = "btnResetSoftware"
         Me.btnResetSoftware.Size = New System.Drawing.Size(228, 23)
         Me.btnResetSoftware.TabIndex = 32
@@ -344,7 +345,7 @@ Partial Class frmSettings
         Me.btnClearTempFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearTempFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClearTempFiles.ForeColor = System.Drawing.Color.Black
-        Me.btnClearTempFiles.Location = New System.Drawing.Point(10, 89)
+        Me.btnClearTempFiles.Location = New System.Drawing.Point(10, 58)
         Me.btnClearTempFiles.Name = "btnClearTempFiles"
         Me.btnClearTempFiles.Size = New System.Drawing.Size(228, 23)
         Me.btnClearTempFiles.TabIndex = 21
@@ -361,7 +362,7 @@ Partial Class frmSettings
         Me.btnViewTempDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnViewTempDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnViewTempDir.ForeColor = System.Drawing.Color.Black
-        Me.btnViewTempDir.Location = New System.Drawing.Point(244, 89)
+        Me.btnViewTempDir.Location = New System.Drawing.Point(244, 58)
         Me.btnViewTempDir.Name = "btnViewTempDir"
         Me.btnViewTempDir.Size = New System.Drawing.Size(228, 23)
         Me.btnViewTempDir.TabIndex = 23
@@ -378,7 +379,7 @@ Partial Class frmSettings
         Me.btnExportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportSettings.ForeColor = System.Drawing.Color.Black
-        Me.btnExportSettings.Location = New System.Drawing.Point(244, 264)
+        Me.btnExportSettings.Location = New System.Drawing.Point(244, 233)
         Me.btnExportSettings.Name = "btnExportSettings"
         Me.btnExportSettings.Size = New System.Drawing.Size(228, 23)
         Me.btnExportSettings.TabIndex = 30
@@ -395,7 +396,7 @@ Partial Class frmSettings
         Me.btnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportSettings.ForeColor = System.Drawing.Color.Black
-        Me.btnImportSettings.Location = New System.Drawing.Point(10, 264)
+        Me.btnImportSettings.Location = New System.Drawing.Point(10, 233)
         Me.btnImportSettings.Name = "btnImportSettings"
         Me.btnImportSettings.Size = New System.Drawing.Size(228, 23)
         Me.btnImportSettings.TabIndex = 29

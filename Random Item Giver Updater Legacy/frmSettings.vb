@@ -284,14 +284,11 @@ Public Class frmSettings
     Private Sub btnClearTempFiles_Click(sender As Object, e As EventArgs) Handles btnClearTempFiles.Click
         'Deletes all temporary files created by the application: Old settings files and Temporary log files, as well as temp files for the python script
         Try
-            If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.old") Then
-                My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\settings.old")
+            If My.Computer.FileSystem.FileExists($"{frmMain.tempDirectory}DebugLogTemp") Then
+                My.Computer.FileSystem.DeleteFile($"{frmMain.tempDirectory}DebugLogTemp")
             End If
-            If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp") Then
-                My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\DebugLogTemp")
-            End If
-            If My.Computer.FileSystem.FileExists($"{frmMain.appData}\Random Item Giver Updater Legacy\ItemsTemp") Then
-                My.Computer.FileSystem.DeleteFile($"{frmMain.appData}\Random Item Giver Updater Legacy\ItemsTemp")
+            If My.Computer.FileSystem.FileExists($"{frmMain.tempDirectory}ItemsTemp") Then
+                My.Computer.FileSystem.DeleteFile($"{frmMain.tempDirectory}ItemsTemp")
             End If
             MsgBox("Successfully deleted all temporary files.", MsgBoxStyle.Information, "Cleared temporary files")
             frmMain.WriteToLog("Deleted all temporary files.", "Info")
@@ -303,10 +300,10 @@ Public Class frmSettings
 
     Private Sub btnViewTempDir_Click(sender As Object, e As EventArgs) Handles btnViewTempDir.Click
         'Open directory, where the application saves its temporary files in explorer.
-        If My.Computer.FileSystem.DirectoryExists($"{frmMain.appData}\Random Item Giver Updater Legacy") Then
-            Process.Start("explorer.exe", $"{frmMain.appData}\Random Item Giver Updater Legacy")
+        If My.Computer.FileSystem.DirectoryExists($"{frmMain.tempDirectory}") Then
+            Process.Start("explorer.exe", $"{frmMain.tempDirectory}")
         Else
-            MsgBox("Cannot find directory, please restart the application.", MsgBoxStyle.Critical, "Error")
+            MsgBox("Cannot find temp directory, please restart the application.", MsgBoxStyle.Critical, "Error")
         End If
     End Sub
 
