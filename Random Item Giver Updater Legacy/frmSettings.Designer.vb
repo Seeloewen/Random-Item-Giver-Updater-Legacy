@@ -175,9 +175,9 @@ Partial Class frmSettings
         Me.cbDisableLogging.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbDisableLogging.Location = New System.Drawing.Point(13, 148)
         Me.cbDisableLogging.Name = "cbDisableLogging"
-        Me.cbDisableLogging.Size = New System.Drawing.Size(244, 20)
+        Me.cbDisableLogging.Size = New System.Drawing.Size(121, 20)
         Me.cbDisableLogging.TabIndex = 24
-        Me.cbDisableLogging.Text = "Disable logging (Not recommended)"
+        Me.cbDisableLogging.Text = "Disable logging"
         Me.cbDisableLogging.UseVisualStyleBackColor = True
         '
         'lblTempFiles
