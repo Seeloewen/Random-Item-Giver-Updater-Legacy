@@ -44,6 +44,7 @@ Partial Class frmHelp
         Me.lblDescriptionAddItemsBasic = New System.Windows.Forms.Label()
         Me.llblWhatIsTheFastWayBasic = New System.Windows.Forms.LinkLabel()
         Me.llblHowToFindTheItemIDBasic = New System.Windows.Forms.LinkLabel()
+        Me.pbAddItemsBasic = New System.Windows.Forms.PictureBox()
         Me.tpAddingItemsAdvanced = New System.Windows.Forms.TabPage()
         Me.lblLastEditedAddingItemsAdvanced = New System.Windows.Forms.Label()
         Me.lblSelectItemTypeAdvanced = New System.Windows.Forms.Label()
@@ -55,16 +56,19 @@ Partial Class frmHelp
         Me.lblSelectDatapackFolderAdvanced = New System.Windows.Forms.Label()
         Me.llblWhatsTheFastWayAdvanced = New System.Windows.Forms.LinkLabel()
         Me.lblDescriptionAddingItemsAdvanced = New System.Windows.Forms.Label()
+        Me.pbAddItemsAdvanced = New System.Windows.Forms.PictureBox()
         Me.tpDuplicateFinder = New System.Windows.Forms.TabPage()
         Me.lblLastEditedDuplicateFinder = New System.Windows.Forms.Label()
         Me.lblBeginChecking = New System.Windows.Forms.Label()
         Me.lblDuplicateList = New System.Windows.Forms.Label()
         Me.lblChooseDatapack = New System.Windows.Forms.Label()
         Me.lblDescriptionDuplicateFinder = New System.Windows.Forms.Label()
+        Me.pbDuplicateFinder = New System.Windows.Forms.PictureBox()
         Me.tpProfilesAndSchemes = New System.Windows.Forms.TabPage()
         Me.lblLastEditedProfilesAndSchemes = New System.Windows.Forms.Label()
         Me.lblDescriptionSchemes = New System.Windows.Forms.Label()
         Me.tpOther = New System.Windows.Forms.TabPage()
+        Me.llblSeeloewenItemDumper = New System.Windows.Forms.LinkLabel()
         Me.llblNewVersion = New System.Windows.Forms.LinkLabel()
         Me.lblLastEditedOther = New System.Windows.Forms.Label()
         Me.llblTellMe = New System.Windows.Forms.LinkLabel()
@@ -75,7 +79,6 @@ Partial Class frmHelp
         Me.lblOther = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.pnlHelp = New System.Windows.Forms.Panel()
-        Me.llblSeeloewenItemDumper = New System.Windows.Forms.LinkLabel()
         Me.btnNavIntroduction = New System.Windows.Forms.Button()
         Me.btnNavOther = New System.Windows.Forms.Button()
         Me.btnNavProfilesAndSchemes = New System.Windows.Forms.Button()
@@ -84,22 +87,19 @@ Partial Class frmHelp
         Me.btnNavAddingItemsBasic = New System.Windows.Forms.Button()
         Me.btnNavSimpleOverview = New System.Windows.Forms.Button()
         Me.pbNavigationBar = New System.Windows.Forms.PictureBox()
-        Me.pbAddItemsBasic = New System.Windows.Forms.PictureBox()
-        Me.pbAddItemsAdvanced = New System.Windows.Forms.PictureBox()
-        Me.pbDuplicateFinder = New System.Windows.Forms.PictureBox()
         Me.tcHelp.SuspendLayout()
         Me.tpIntroduction.SuspendLayout()
         Me.tpSimpleOverview.SuspendLayout()
         Me.tpAddingItemsBasic.SuspendLayout()
+        CType(Me.pbAddItemsBasic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tpAddingItemsAdvanced.SuspendLayout()
+        CType(Me.pbAddItemsAdvanced, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tpDuplicateFinder.SuspendLayout()
+        CType(Me.pbDuplicateFinder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tpProfilesAndSchemes.SuspendLayout()
         Me.tpOther.SuspendLayout()
         Me.pnlHelp.SuspendLayout()
         CType(Me.pbNavigationBar, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbAddItemsBasic, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbAddItemsAdvanced, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pbDuplicateFinder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tcHelp
@@ -112,7 +112,7 @@ Partial Class frmHelp
         Me.tcHelp.Controls.Add(Me.tpProfilesAndSchemes)
         Me.tcHelp.Controls.Add(Me.tpOther)
         Me.tcHelp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tcHelp.Location = New System.Drawing.Point(-6, 13)
+        Me.tcHelp.Location = New System.Drawing.Point(-6, -16)
         Me.tcHelp.Name = "tcHelp"
         Me.tcHelp.SelectedIndex = 0
         Me.tcHelp.Size = New System.Drawing.Size(1118, 935)
@@ -253,7 +253,7 @@ Partial Class frmHelp
         Me.lblLastEditedAddItemsBasic.Name = "lblLastEditedAddItemsBasic"
         Me.lblLastEditedAddItemsBasic.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedAddItemsBasic.TabIndex = 31
-        Me.lblLastEditedAddItemsBasic.Text = "Last edited: 18.07.2023"
+        Me.lblLastEditedAddItemsBasic.Text = "Last edited: 07.04.2026"
         '
         'lblSelectDatapackVersionBasic
         '
@@ -285,11 +285,11 @@ Partial Class frmHelp
         Me.lblSpecifyNBTTagBasic.BackColor = System.Drawing.Color.DarkGray
         Me.lblSpecifyNBTTagBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSpecifyNBTTagBasic.ForeColor = System.Drawing.Color.Blue
-        Me.lblSpecifyNBTTagBasic.Location = New System.Drawing.Point(331, 479)
+        Me.lblSpecifyNBTTagBasic.Location = New System.Drawing.Point(342, 470)
         Me.lblSpecifyNBTTagBasic.Name = "lblSpecifyNBTTagBasic"
-        Me.lblSpecifyNBTTagBasic.Size = New System.Drawing.Size(123, 20)
+        Me.lblSpecifyNBTTagBasic.Size = New System.Drawing.Size(103, 20)
         Me.lblSpecifyNBTTagBasic.TabIndex = 28
-        Me.lblSpecifyNBTTagBasic.Text = "Specify NBT tag"
+        Me.lblSpecifyNBTTagBasic.Text = "Specify prefix"
         '
         'lblAddItemsToDatapackBasic
         '
@@ -333,7 +333,7 @@ Partial Class frmHelp
         Me.lblDescriptionAddItemsBasic.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescriptionAddItemsBasic.Location = New System.Drawing.Point(5, 613)
         Me.lblDescriptionAddItemsBasic.Name = "lblDescriptionAddItemsBasic"
-        Me.lblDescriptionAddItemsBasic.Size = New System.Drawing.Size(1102, 220)
+        Me.lblDescriptionAddItemsBasic.Size = New System.Drawing.Size(1098, 220)
         Me.lblDescriptionAddItemsBasic.TabIndex = 24
         Me.lblDescriptionAddItemsBasic.Text = resources.GetString("lblDescriptionAddItemsBasic.Text")
         '
@@ -360,6 +360,17 @@ Partial Class frmHelp
         Me.llblHowToFindTheItemIDBasic.TabIndex = 20
         Me.llblHowToFindTheItemIDBasic.TabStop = True
         Me.llblHowToFindTheItemIDBasic.Text = "How to find the item ID?"
+        '
+        'pbAddItemsBasic
+        '
+        Me.pbAddItemsBasic.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAddingItemsBasic
+        Me.pbAddItemsBasic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbAddItemsBasic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbAddItemsBasic.Location = New System.Drawing.Point(251, 17)
+        Me.pbAddItemsBasic.Name = "pbAddItemsBasic"
+        Me.pbAddItemsBasic.Size = New System.Drawing.Size(616, 571)
+        Me.pbAddItemsBasic.TabIndex = 23
+        Me.pbAddItemsBasic.TabStop = False
         '
         'tpAddingItemsAdvanced
         '
@@ -391,7 +402,7 @@ Partial Class frmHelp
         Me.lblLastEditedAddingItemsAdvanced.Name = "lblLastEditedAddingItemsAdvanced"
         Me.lblLastEditedAddingItemsAdvanced.Size = New System.Drawing.Size(176, 20)
         Me.lblLastEditedAddingItemsAdvanced.TabIndex = 33
-        Me.lblLastEditedAddingItemsAdvanced.Text = "Last edited: 03.04.2025"
+        Me.lblLastEditedAddingItemsAdvanced.Text = "Last edited: 07.04.2026"
         '
         'lblSelectItemTypeAdvanced
         '
@@ -423,7 +434,7 @@ Partial Class frmHelp
         Me.lblSpecifyPrefixAndNBTTagAdvanced.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSpecifyPrefixAndNBTTagAdvanced.ForeColor = System.Drawing.Color.Blue
-        Me.lblSpecifyPrefixAndNBTTagAdvanced.Location = New System.Drawing.Point(288, 445)
+        Me.lblSpecifyPrefixAndNBTTagAdvanced.Location = New System.Drawing.Point(285, 439)
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Name = "lblSpecifyPrefixAndNBTTagAdvanced"
         Me.lblSpecifyPrefixAndNBTTagAdvanced.Size = New System.Drawing.Size(196, 20)
         Me.lblSpecifyPrefixAndNBTTagAdvanced.TabIndex = 29
@@ -499,6 +510,17 @@ Partial Class frmHelp
         Me.lblDescriptionAddingItemsAdvanced.TabIndex = 23
         Me.lblDescriptionAddingItemsAdvanced.Text = resources.GetString("lblDescriptionAddingItemsAdvanced.Text")
         '
+        'pbAddItemsAdvanced
+        '
+        Me.pbAddItemsAdvanced.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAddingItemsAdvanced
+        Me.pbAddItemsAdvanced.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbAddItemsAdvanced.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbAddItemsAdvanced.Location = New System.Drawing.Point(236, 20)
+        Me.pbAddItemsAdvanced.Name = "pbAddItemsAdvanced"
+        Me.pbAddItemsAdvanced.Size = New System.Drawing.Size(605, 596)
+        Me.pbAddItemsAdvanced.TabIndex = 22
+        Me.pbAddItemsAdvanced.TabStop = False
+        '
         'tpDuplicateFinder
         '
         Me.tpDuplicateFinder.BackColor = System.Drawing.Color.White
@@ -572,6 +594,18 @@ Partial Class frmHelp
         Me.lblDescriptionDuplicateFinder.TabIndex = 3
         Me.lblDescriptionDuplicateFinder.Text = resources.GetString("lblDescriptionDuplicateFinder.Text")
         '
+        'pbDuplicateFinder
+        '
+        Me.pbDuplicateFinder.BackColor = System.Drawing.Color.White
+        Me.pbDuplicateFinder.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinderHelp
+        Me.pbDuplicateFinder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.pbDuplicateFinder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pbDuplicateFinder.Location = New System.Drawing.Point(230, 18)
+        Me.pbDuplicateFinder.Name = "pbDuplicateFinder"
+        Me.pbDuplicateFinder.Size = New System.Drawing.Size(589, 503)
+        Me.pbDuplicateFinder.TabIndex = 0
+        Me.pbDuplicateFinder.TabStop = False
+        '
         'tpProfilesAndSchemes
         '
         Me.tpProfilesAndSchemes.BackColor = System.Drawing.Color.White
@@ -621,6 +655,17 @@ Partial Class frmHelp
         Me.tpOther.Size = New System.Drawing.Size(1110, 906)
         Me.tpOther.TabIndex = 6
         Me.tpOther.Text = "Other"
+        '
+        'llblSeeloewenItemDumper
+        '
+        Me.llblSeeloewenItemDumper.AutoSize = True
+        Me.llblSeeloewenItemDumper.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.llblSeeloewenItemDumper.Location = New System.Drawing.Point(244, 875)
+        Me.llblSeeloewenItemDumper.Name = "llblSeeloewenItemDumper"
+        Me.llblSeeloewenItemDumper.Size = New System.Drawing.Size(326, 20)
+        Me.llblSeeloewenItemDumper.TabIndex = 26
+        Me.llblSeeloewenItemDumper.TabStop = True
+        Me.llblSeeloewenItemDumper.Text = "Seeloewen ItemDumper Mod on CurseForge"
         '
         'llblNewVersion
         '
@@ -721,21 +766,10 @@ Partial Class frmHelp
         'pnlHelp
         '
         Me.pnlHelp.Controls.Add(Me.tcHelp)
-        Me.pnlHelp.Location = New System.Drawing.Point(16, 37)
+        Me.pnlHelp.Location = New System.Drawing.Point(16, 66)
         Me.pnlHelp.Name = "pnlHelp"
-        Me.pnlHelp.Size = New System.Drawing.Size(1107, 942)
+        Me.pnlHelp.Size = New System.Drawing.Size(1107, 913)
         Me.pnlHelp.TabIndex = 10
-        '
-        'llblSeeloewenItemDumper
-        '
-        Me.llblSeeloewenItemDumper.AutoSize = True
-        Me.llblSeeloewenItemDumper.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblSeeloewenItemDumper.Location = New System.Drawing.Point(244, 875)
-        Me.llblSeeloewenItemDumper.Name = "llblSeeloewenItemDumper"
-        Me.llblSeeloewenItemDumper.Size = New System.Drawing.Size(326, 20)
-        Me.llblSeeloewenItemDumper.TabIndex = 26
-        Me.llblSeeloewenItemDumper.TabStop = True
-        Me.llblSeeloewenItemDumper.Text = "Seeloewen ItemDumper Mod on CurseForge"
         '
         'btnNavIntroduction
         '
@@ -859,40 +893,6 @@ Partial Class frmHelp
         Me.pbNavigationBar.TabIndex = 2
         Me.pbNavigationBar.TabStop = False
         '
-        'pbAddItemsBasic
-        '
-        Me.pbAddItemsBasic.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAddingItemsBasic
-        Me.pbAddItemsBasic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbAddItemsBasic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pbAddItemsBasic.Location = New System.Drawing.Point(251, 17)
-        Me.pbAddItemsBasic.Name = "pbAddItemsBasic"
-        Me.pbAddItemsBasic.Size = New System.Drawing.Size(616, 571)
-        Me.pbAddItemsBasic.TabIndex = 23
-        Me.pbAddItemsBasic.TabStop = False
-        '
-        'pbAddItemsAdvanced
-        '
-        Me.pbAddItemsAdvanced.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgAddingItemsAdvanced
-        Me.pbAddItemsAdvanced.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbAddItemsAdvanced.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pbAddItemsAdvanced.Location = New System.Drawing.Point(236, 20)
-        Me.pbAddItemsAdvanced.Name = "pbAddItemsAdvanced"
-        Me.pbAddItemsAdvanced.Size = New System.Drawing.Size(605, 596)
-        Me.pbAddItemsAdvanced.TabIndex = 22
-        Me.pbAddItemsAdvanced.TabStop = False
-        '
-        'pbDuplicateFinder
-        '
-        Me.pbDuplicateFinder.BackColor = System.Drawing.Color.White
-        Me.pbDuplicateFinder.BackgroundImage = Global.Random_Item_Giver_Updater_Legacy.My.Resources.Resources.imgDuplicateFinderHelp
-        Me.pbDuplicateFinder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.pbDuplicateFinder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pbDuplicateFinder.Location = New System.Drawing.Point(230, 18)
-        Me.pbDuplicateFinder.Name = "pbDuplicateFinder"
-        Me.pbDuplicateFinder.Size = New System.Drawing.Size(589, 503)
-        Me.pbDuplicateFinder.TabIndex = 0
-        Me.pbDuplicateFinder.TabStop = False
-        '
         'frmHelp
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -922,19 +922,19 @@ Partial Class frmHelp
         Me.tpSimpleOverview.PerformLayout()
         Me.tpAddingItemsBasic.ResumeLayout(False)
         Me.tpAddingItemsBasic.PerformLayout()
+        CType(Me.pbAddItemsBasic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tpAddingItemsAdvanced.ResumeLayout(False)
         Me.tpAddingItemsAdvanced.PerformLayout()
+        CType(Me.pbAddItemsAdvanced, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tpDuplicateFinder.ResumeLayout(False)
         Me.tpDuplicateFinder.PerformLayout()
+        CType(Me.pbDuplicateFinder, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tpProfilesAndSchemes.ResumeLayout(False)
         Me.tpProfilesAndSchemes.PerformLayout()
         Me.tpOther.ResumeLayout(False)
         Me.tpOther.PerformLayout()
         Me.pnlHelp.ResumeLayout(False)
         CType(Me.pbNavigationBar, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbAddItemsBasic, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbAddItemsAdvanced, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pbDuplicateFinder, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -117,36 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblOther.Text" xml:space="preserve">
-    <value>The Item List Importer allows you to select a file, that contains a list of items. You can use a list that contains prefixes or no prefixes, but not a mix. 
-Depending on this, you will also need to select the correct option in the main menu. It's recommended to use some  kind of mod to generate that
-list. I recommend using the "TellMe" or the "Seeloewen ItemDumper" Mod. If your list contains vanilla items, you can also select to not import them, 
-which is recommended, since the datapack usually already contains those.
-
-The output log contains detailed information about what happens in the software. This can be really useful if you need to debug the software 
-or just want to know what exactly is going on. The colors help you to differentiate the different types of messages, which are INFO, WARNING and 
-ERROR. You can also save the log as a text file, if you wish to.
-
-If you want to visit the Github page of this software, here you go:
-
-
-You may also like to visit the websites where the Random Item Giver is hosted:
-
-
-
-
-Also, I wanna say thanks to Phoenix SC who originally made the datapack! I asked him if I could continue updating the datapack and he gave me permission! 
-Without him, all of this wouldn't have existed in the first place. Additionally, I need to give credit to the many different people who contributed to the 
-datapack in some way. You can find them in the CREDITS.txt file in the Random Item Giver Datapack.
-
-If you need further help, want to report a bug, or have any other issue, you an always join my discord server!
-
-
-
-Lastly, please note that this software has entered legacy state and was replaced by a newer, more stable version which you can find here. While this version 
-may still be maintained for a bit, it will no longer receive major content updates or support for newer MC versions. It is recommended to switch to the new 
-software as soon as possible.</value>
-  </data>
   <data name="lblIntroduction.Text" xml:space="preserve">
     <value>Welcome to the Random Item Giver Updater Legacy Help Documentation!
 
@@ -186,7 +156,7 @@ The Changelog and About window contain information about updates and general inf
   <data name="lblDescriptionAddItemsBasic.Text" xml:space="preserve">
     <value>When adding new items, the first thing you're gonna do is select the datapack folder and the datapack version.
 
-After that, in the textbox you write all the IDs of the items you want to add. In case you want to add a potion or enchanted book, you can also add a NBT tag.
+After that, in the textbox you write all the IDs of the items you want to add. In case you want to add modded items, you can also specify the prefix.
 
 On the right side, you can specify the types of the items you want to add. You select wether the items are creative-only items or not, and if they are, you can 
 select the type. You can also save and load schemes.
@@ -230,6 +200,36 @@ NBT Tag / Item Stack Component and Prefix. This is useful if you're adding diffe
 enter the prefix 20 different times. You can just load the scheme! As with the Profiles, you will find an option to load a default scheme in the settings menu.
 Schemes don't have their own editor, you will need to edit them through the main menu. There are also a handfull of default schemes which can be restored 
 through the settings menu, if necessary.</value>
+  </data>
+  <data name="lblOther.Text" xml:space="preserve">
+    <value>The Item List Importer allows you to select a file, that contains a list of items. You can use a list that contains prefixes or no prefixes, but not a mix. 
+Depending on this, you will also need to select the correct option in the main menu. It's recommended to use some  kind of mod to generate that
+list. I recommend using the "TellMe" or the "Seeloewen ItemDumper" Mod. If your list contains vanilla items, you can also select to not import them, 
+which is recommended, since the datapack usually already contains those.
+
+The output log contains detailed information about what happens in the software. This can be really useful if you need to debug the software 
+or just want to know what exactly is going on. The colors help you to differentiate the different types of messages, which are INFO, WARNING and 
+ERROR. You can also save the log as a text file, if you wish to.
+
+If you want to visit the Github page of this software, here you go:
+
+
+You may also like to visit the websites where the Random Item Giver is hosted:
+
+
+
+
+Also, I wanna say thanks to Phoenix SC who originally made the datapack! I asked him if I could continue updating the datapack and he gave me permission! 
+Without him, all of this wouldn't have existed in the first place. Additionally, I need to give credit to the many different people who contributed to the 
+datapack in some way. You can find them in the CREDITS.txt file in the Random Item Giver Datapack.
+
+If you need further help, want to report a bug, or have any other issue, you an always join my discord server!
+
+
+
+Lastly, please note that this software has entered legacy state and was replaced by a newer, more stable version which you can find here. While this version 
+may still be maintained for a bit, it will no longer receive major content updates or support for newer MC versions. It is recommended to switch to the new 
+software as soon as possible.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
