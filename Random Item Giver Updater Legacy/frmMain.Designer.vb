@@ -279,7 +279,7 @@ Partial Class frmMain
         Me.tbSamePrefix.Enabled = False
         Me.tbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbSamePrefix.ForeColor = System.Drawing.Color.Black
-        Me.tbSamePrefix.Location = New System.Drawing.Point(42, 612)
+        Me.tbSamePrefix.Location = New System.Drawing.Point(43, 550)
         Me.tbSamePrefix.Name = "tbSamePrefix"
         Me.tbSamePrefix.Size = New System.Drawing.Size(258, 19)
         Me.tbSamePrefix.TabIndex = 75
@@ -293,7 +293,7 @@ Partial Class frmMain
         Me.cbSamePrefix.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cbSamePrefix.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbSamePrefix.ForeColor = System.Drawing.Color.Black
-        Me.cbSamePrefix.Location = New System.Drawing.Point(42, 586)
+        Me.cbSamePrefix.Location = New System.Drawing.Point(43, 527)
         Me.cbSamePrefix.Name = "cbSamePrefix"
         Me.cbSamePrefix.Size = New System.Drawing.Size(214, 20)
         Me.cbSamePrefix.TabIndex = 73
@@ -482,7 +482,7 @@ Partial Class frmMain
         Me.cbCustomNBT.BackColor = System.Drawing.Color.FromArgb(CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer), CType(CType(207, Byte), Integer))
         Me.cbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbCustomNBT.ForeColor = System.Drawing.Color.Black
-        Me.cbCustomNBT.Location = New System.Drawing.Point(42, 532)
+        Me.cbCustomNBT.Location = New System.Drawing.Point(43, 586)
         Me.cbCustomNBT.Name = "cbCustomNBT"
         Me.cbCustomNBT.Size = New System.Drawing.Size(82, 20)
         Me.cbCustomNBT.TabIndex = 79
@@ -497,7 +497,7 @@ Partial Class frmMain
         Me.tbCustomNBT.Enabled = False
         Me.tbCustomNBT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tbCustomNBT.ForeColor = System.Drawing.Color.Black
-        Me.tbCustomNBT.Location = New System.Drawing.Point(42, 558)
+        Me.tbCustomNBT.Location = New System.Drawing.Point(43, 608)
         Me.tbCustomNBT.Multiline = True
         Me.tbCustomNBT.Name = "tbCustomNBT"
         Me.tbCustomNBT.Size = New System.Drawing.Size(258, 20)
