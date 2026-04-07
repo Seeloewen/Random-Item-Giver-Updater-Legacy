@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.Globalization
+Imports System.IO
 
 Public Class frmDuplicateFinder
 
@@ -143,10 +144,11 @@ Public Class frmDuplicateFinder
     Private Sub CheckDatapack()
         'Check the datapack version by reading the pack format in the pack.mcmeta file
         Try
-            Dim version As Integer = File.ReadAllLines($"{tbDatapackPath.Text}/pack.mcmeta")(2).Replace("    ""pack_format"": ", "").Replace(",", "")
+            Dim verString As String = Replace(File.ReadAllLines($"{tbDatapackPath.Text}\pack.mcmeta")(2), "    " + Chr(34) + "pack_format" + Chr(34) + ": ", "").Replace(",", "")
+            Dim version As Double = Convert.ToDouble(verString, New CultureInfo("en-US"))
 
             Select Case version
-                Case 48 To 71
+                Case 48 To 88
                     datapackVersion = "1.21"
                 Case 16 To 47
                     datapackVersion = "1.20.2"
