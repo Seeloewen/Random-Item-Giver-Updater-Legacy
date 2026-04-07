@@ -37,7 +37,7 @@ Partial Class frmAbout
         '
         Me.lblBuild.AutoSize = True
         Me.lblBuild.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblBuild.Location = New System.Drawing.Point(78, 77)
+        Me.lblBuild.Location = New System.Drawing.Point(83, 77)
         Me.lblBuild.Name = "lblBuild"
         Me.lblBuild.Size = New System.Drawing.Size(154, 20)
         Me.lblBuild.TabIndex = 4

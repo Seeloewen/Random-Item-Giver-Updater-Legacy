@@ -6,8 +6,8 @@ Partial Class frmMain
 
     'General variables for the software
     Public appData As String = GetFolderPath(SpecialFolder.ApplicationData) 'Appdata directory
-    Public versionLog As String = "0.5.4 (04.04.2025)" 'Version that gets displayed in the log
-    Public rawVersion As String = "0.5.4"
+    Public versionLog As String = "0.5.5 (07.04.2026)" 'Version that gets displayed in the log
+    Public rawVersion As String = "0.5.5"
     Public settingsVersion As Double = 4 'Current version of the settings file that the app is using
     Dim settingsArray As String() 'Array which the settings will be loaded in
     Dim loadedSettingsVersion As Double 'Version of the settings file that gets loaded

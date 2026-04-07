@@ -27,8 +27,6 @@ Partial Class frmUpdateNews
         Me.lblNewsHeader1 = New System.Windows.Forms.Label()
         Me.lblNewsDesc1 = New System.Windows.Forms.Label()
         Me.llblFullChangelog = New System.Windows.Forms.LinkLabel()
-        Me.lblNewsDesc2 = New System.Windows.Forms.Label()
-        Me.lblNewsHeader2 = New System.Windows.Forms.Label()
         Me.lblNewsDesc3 = New System.Windows.Forms.Label()
         Me.lblNewsHeader3 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -44,7 +42,7 @@ Partial Class frmUpdateNews
         Me.lblHeader.Name = "lblHeader"
         Me.lblHeader.Size = New System.Drawing.Size(307, 25)
         Me.lblHeader.TabIndex = 0
-        Me.lblHeader.Text = "Version 0.5.4 - What's new?"
+        Me.lblHeader.Text = "Version 0.5.5 - What's new?"
         '
         'lblNewsHeader1
         '
@@ -60,66 +58,44 @@ Partial Class frmUpdateNews
         '
         Me.lblNewsDesc1.AutoSize = True
         Me.lblNewsDesc1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewsDesc1.Location = New System.Drawing.Point(17, 82)
+        Me.lblNewsDesc1.Location = New System.Drawing.Point(17, 81)
         Me.lblNewsDesc1.Name = "lblNewsDesc1"
-        Me.lblNewsDesc1.Size = New System.Drawing.Size(430, 32)
+        Me.lblNewsDesc1.Size = New System.Drawing.Size(448, 32)
         Me.lblNewsDesc1.TabIndex = 2
-        Me.lblNewsDesc1.Text = "The software now supports pack formats  27 to 71. This also comes with " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "compatib" &
-    "ility for 1.20.5 to 1.21.5 and support for Item Stack Components."
+        Me.lblNewsDesc1.Text = "The software now supports pack formats  72 to 88. This brings compatibility" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for " &
+    "1.21.6 to 1.21.10."
         '
         'llblFullChangelog
         '
         Me.llblFullChangelog.AutoSize = True
         Me.llblFullChangelog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.llblFullChangelog.Location = New System.Drawing.Point(17, 308)
+        Me.llblFullChangelog.Location = New System.Drawing.Point(17, 217)
         Me.llblFullChangelog.Name = "llblFullChangelog"
-        Me.llblFullChangelog.Size = New System.Drawing.Size(143, 16)
+        Me.llblFullChangelog.Size = New System.Drawing.Size(144, 16)
         Me.llblFullChangelog.TabIndex = 3
         Me.llblFullChangelog.TabStop = True
         Me.llblFullChangelog.Text = "View the full changelog"
-        '
-        'lblNewsDesc2
-        '
-        Me.lblNewsDesc2.AutoSize = True
-        Me.lblNewsDesc2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewsDesc2.Location = New System.Drawing.Point(17, 155)
-        Me.lblNewsDesc2.Name = "lblNewsDesc2"
-        Me.lblNewsDesc2.Size = New System.Drawing.Size(403, 48)
-        Me.lblNewsDesc2.TabIndex = 6
-        Me.lblNewsDesc2.Text = "In cases where 2000+ items are being added, there will now be a " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "recommendation " &
-    "for a seperate script to use. This does not support" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "any settings, but adds item" &
-    "s a lot faster."
-        '
-        'lblNewsHeader2
-        '
-        Me.lblNewsHeader2.AutoSize = True
-        Me.lblNewsHeader2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewsHeader2.Location = New System.Drawing.Point(16, 131)
-        Me.lblNewsHeader2.Name = "lblNewsHeader2"
-        Me.lblNewsHeader2.Size = New System.Drawing.Size(246, 24)
-        Me.lblNewsHeader2.TabIndex = 5
-        Me.lblNewsHeader2.Text = "'Ultra-fast' Item Adding Script"
         '
         'lblNewsDesc3
         '
         Me.lblNewsDesc3.AutoSize = True
         Me.lblNewsDesc3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewsDesc3.Location = New System.Drawing.Point(17, 250)
+        Me.lblNewsDesc3.Location = New System.Drawing.Point(17, 156)
         Me.lblNewsDesc3.Name = "lblNewsDesc3"
-        Me.lblNewsDesc3.Size = New System.Drawing.Size(449, 32)
+        Me.lblNewsDesc3.Size = New System.Drawing.Size(444, 32)
         Me.lblNewsDesc3.TabIndex = 9
-        Me.lblNewsDesc3.Text = "Lastly, many different bugs, some more fatal than others, have been fixed to" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "mak" &
-    "e the software run as smooth as possible before EOL."
+        Me.lblNewsDesc3.Text = "A few edges have been polished and several quality-of-life improvements" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "were mad" &
+    "e to ensure the software runs as smooth as possible."
         '
         'lblNewsHeader3
         '
         Me.lblNewsHeader3.AutoSize = True
         Me.lblNewsHeader3.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNewsHeader3.Location = New System.Drawing.Point(16, 225)
+        Me.lblNewsHeader3.Location = New System.Drawing.Point(16, 131)
         Me.lblNewsHeader3.Name = "lblNewsHeader3"
-        Me.lblNewsHeader3.Size = New System.Drawing.Size(154, 24)
+        Me.lblNewsHeader3.Size = New System.Drawing.Size(197, 24)
         Me.lblNewsHeader3.TabIndex = 8
-        Me.lblNewsHeader3.Text = "Tons of bug fixes"
+        Me.lblNewsHeader3.Text = "Several improvements"
         '
         'PictureBox1
         '
@@ -140,7 +116,7 @@ Partial Class frmUpdateNews
         Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
         Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOK.ForeColor = System.Drawing.Color.Black
-        Me.btnOK.Location = New System.Drawing.Point(367, 304)
+        Me.btnOK.Location = New System.Drawing.Point(367, 213)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(110, 25)
         Me.btnOK.TabIndex = 4
@@ -152,12 +128,10 @@ Partial Class frmUpdateNews
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(489, 342)
+        Me.ClientSize = New System.Drawing.Size(489, 253)
         Me.Controls.Add(Me.lblNewsDesc3)
         Me.Controls.Add(Me.lblNewsHeader3)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.lblNewsDesc2)
-        Me.Controls.Add(Me.lblNewsHeader2)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.llblFullChangelog)
         Me.Controls.Add(Me.lblNewsDesc1)
@@ -169,7 +143,7 @@ Partial Class frmUpdateNews
         Me.MinimizeBox = False
         Me.Name = "frmUpdateNews"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater was successfully installed!"
+        Me.Text = "Random Item Giver Updater has been installed!"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -181,8 +155,6 @@ Partial Class frmUpdateNews
     Friend WithEvents lblNewsDesc1 As Label
     Friend WithEvents llblFullChangelog As LinkLabel
     Friend WithEvents btnOK As Button
-    Friend WithEvents lblNewsDesc2 As Label
-    Friend WithEvents lblNewsHeader2 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lblNewsDesc3 As Label
     Friend WithEvents lblNewsHeader3 As Label

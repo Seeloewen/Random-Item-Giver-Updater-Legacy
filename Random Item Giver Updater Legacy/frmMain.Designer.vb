@@ -113,7 +113,7 @@ Partial Class frmMain
         Me.lblVersion.ForeColor = System.Drawing.Color.Black
         Me.lblVersion.Location = New System.Drawing.Point(34, 229)
         Me.lblVersion.Name = "lblVersion"
-        Me.lblVersion.Size = New System.Drawing.Size(64, 16)
+        Me.lblVersion.Size = New System.Drawing.Size(65, 16)
         Me.lblVersion.TabIndex = 9
         Me.lblVersion.Text = "Version:"
         '
@@ -162,7 +162,7 @@ Partial Class frmMain
         Me.lblSelectDatapack.ForeColor = System.Drawing.Color.Black
         Me.lblSelectDatapack.Location = New System.Drawing.Point(36, 141)
         Me.lblSelectDatapack.Name = "lblSelectDatapack"
-        Me.lblSelectDatapack.Size = New System.Drawing.Size(274, 16)
+        Me.lblSelectDatapack.Size = New System.Drawing.Size(275, 16)
         Me.lblSelectDatapack.TabIndex = 0
         Me.lblSelectDatapack.Text = "Choose the datapack that you want to modify."
         '
@@ -174,7 +174,7 @@ Partial Class frmMain
         Me.cbEnableAdvancedView.ForeColor = System.Drawing.Color.Black
         Me.cbEnableAdvancedView.Location = New System.Drawing.Point(42, 677)
         Me.cbEnableAdvancedView.Name = "cbEnableAdvancedView"
-        Me.cbEnableAdvancedView.Size = New System.Drawing.Size(166, 20)
+        Me.cbEnableAdvancedView.Size = New System.Drawing.Size(167, 20)
         Me.cbEnableAdvancedView.TabIndex = 89
         Me.cbEnableAdvancedView.Text = "Enable Advanced View"
         Me.cbEnableAdvancedView.UseVisualStyleBackColor = False
@@ -200,7 +200,7 @@ Partial Class frmMain
         Me.lblScheme.ForeColor = System.Drawing.Color.Black
         Me.lblScheme.Location = New System.Drawing.Point(417, 345)
         Me.lblScheme.Name = "lblScheme"
-        Me.lblScheme.Size = New System.Drawing.Size(67, 16)
+        Me.lblScheme.Size = New System.Drawing.Size(68, 16)
         Me.lblScheme.TabIndex = 87
         Me.lblScheme.Text = "Scheme:"
         '
@@ -212,7 +212,7 @@ Partial Class frmMain
         Me.cbAddItemsFast.ForeColor = System.Drawing.Color.Black
         Me.cbAddItemsFast.Location = New System.Drawing.Point(42, 651)
         Me.cbAddItemsFast.Name = "cbAddItemsFast"
-        Me.cbAddItemsFast.Size = New System.Drawing.Size(295, 20)
+        Me.cbAddItemsFast.Size = New System.Drawing.Size(296, 20)
         Me.cbAddItemsFast.TabIndex = 84
         Me.cbAddItemsFast.Text = "Enable Fast Item Adding (Not recommended)"
         Me.cbAddItemsFast.UseVisualStyleBackColor = False
@@ -225,7 +225,7 @@ Partial Class frmMain
         Me.cbGoatHorn.ForeColor = System.Drawing.Color.Black
         Me.cbGoatHorn.Location = New System.Drawing.Point(326, 567)
         Me.cbGoatHorn.Name = "cbGoatHorn"
-        Me.cbGoatHorn.Size = New System.Drawing.Size(87, 20)
+        Me.cbGoatHorn.Size = New System.Drawing.Size(88, 20)
         Me.cbGoatHorn.TabIndex = 83
         Me.cbGoatHorn.Text = "Goat Horn"
         Me.cbGoatHorn.UseVisualStyleBackColor = False
@@ -240,7 +240,7 @@ Partial Class frmMain
         Me.cbNormalItem.ForeColor = System.Drawing.Color.Black
         Me.cbNormalItem.Location = New System.Drawing.Point(326, 385)
         Me.cbNormalItem.Name = "cbNormalItem"
-        Me.cbNormalItem.Size = New System.Drawing.Size(98, 20)
+        Me.cbNormalItem.Size = New System.Drawing.Size(99, 20)
         Me.cbNormalItem.TabIndex = 80
         Me.cbNormalItem.Text = "Normal Item"
         Me.cbNormalItem.UseVisualStyleBackColor = False
@@ -268,7 +268,7 @@ Partial Class frmMain
         Me.lblOutput.ForeColor = System.Drawing.Color.Black
         Me.lblOutput.Location = New System.Drawing.Point(40, 712)
         Me.lblOutput.Name = "lblOutput"
-        Me.lblOutput.Size = New System.Drawing.Size(55, 16)
+        Me.lblOutput.Size = New System.Drawing.Size(56, 16)
         Me.lblOutput.TabIndex = 76
         Me.lblOutput.Text = "Output:"
         '
@@ -295,7 +295,7 @@ Partial Class frmMain
         Me.cbSamePrefix.ForeColor = System.Drawing.Color.Black
         Me.cbSamePrefix.Location = New System.Drawing.Point(43, 527)
         Me.cbSamePrefix.Name = "cbSamePrefix"
-        Me.cbSamePrefix.Size = New System.Drawing.Size(214, 20)
+        Me.cbSamePrefix.Size = New System.Drawing.Size(215, 20)
         Me.cbSamePrefix.TabIndex = 73
         Me.cbSamePrefix.Text = "Use the same prefix for all items"
         Me.cbSamePrefix.UseVisualStyleBackColor = False
@@ -309,7 +309,7 @@ Partial Class frmMain
         Me.rbtnCommandBlock.ForeColor = System.Drawing.Color.Black
         Me.rbtnCommandBlock.Location = New System.Drawing.Point(503, 432)
         Me.rbtnCommandBlock.Name = "rbtnCommandBlock"
-        Me.rbtnCommandBlock.Size = New System.Drawing.Size(124, 20)
+        Me.rbtnCommandBlock.Size = New System.Drawing.Size(125, 20)
         Me.rbtnCommandBlock.TabIndex = 72
         Me.rbtnCommandBlock.TabStop = True
         Me.rbtnCommandBlock.Text = "Command Block"
@@ -324,7 +324,7 @@ Partial Class frmMain
         Me.rbtnOtherItem.ForeColor = System.Drawing.Color.Black
         Me.rbtnOtherItem.Location = New System.Drawing.Point(503, 453)
         Me.rbtnOtherItem.Name = "rbtnOtherItem"
-        Me.rbtnOtherItem.Size = New System.Drawing.Size(169, 20)
+        Me.rbtnOtherItem.Size = New System.Drawing.Size(170, 20)
         Me.rbtnOtherItem.TabIndex = 71
         Me.rbtnOtherItem.TabStop = True
         Me.rbtnOtherItem.Text = "Other Creative-Only item"
@@ -339,7 +339,7 @@ Partial Class frmMain
         Me.rbtnSpawnEgg.ForeColor = System.Drawing.Color.Black
         Me.rbtnSpawnEgg.Location = New System.Drawing.Point(503, 411)
         Me.rbtnSpawnEgg.Name = "rbtnSpawnEgg"
-        Me.rbtnSpawnEgg.Size = New System.Drawing.Size(94, 20)
+        Me.rbtnSpawnEgg.Size = New System.Drawing.Size(95, 20)
         Me.rbtnSpawnEgg.TabIndex = 70
         Me.rbtnSpawnEgg.TabStop = True
         Me.rbtnSpawnEgg.Text = "Spawn Egg"
@@ -353,7 +353,7 @@ Partial Class frmMain
         Me.cbSplashPotion.ForeColor = System.Drawing.Color.Black
         Me.cbSplashPotion.Location = New System.Drawing.Point(326, 489)
         Me.cbSplashPotion.Name = "cbSplashPotion"
-        Me.cbSplashPotion.Size = New System.Drawing.Size(109, 20)
+        Me.cbSplashPotion.Size = New System.Drawing.Size(110, 20)
         Me.cbSplashPotion.TabIndex = 69
         Me.cbSplashPotion.Text = "Splash Potion"
         Me.cbSplashPotion.UseVisualStyleBackColor = False
@@ -366,7 +366,7 @@ Partial Class frmMain
         Me.cbLingeringPotion.ForeColor = System.Drawing.Color.Black
         Me.cbLingeringPotion.Location = New System.Drawing.Point(326, 463)
         Me.cbLingeringPotion.Name = "cbLingeringPotion"
-        Me.cbLingeringPotion.Size = New System.Drawing.Size(122, 20)
+        Me.cbLingeringPotion.Size = New System.Drawing.Size(123, 20)
         Me.cbLingeringPotion.TabIndex = 68
         Me.cbLingeringPotion.Text = "Lingering Potion"
         Me.cbLingeringPotion.UseVisualStyleBackColor = False
@@ -379,7 +379,7 @@ Partial Class frmMain
         Me.cbTippedArrow.ForeColor = System.Drawing.Color.Black
         Me.cbTippedArrow.Location = New System.Drawing.Point(326, 515)
         Me.cbTippedArrow.Name = "cbTippedArrow"
-        Me.cbTippedArrow.Size = New System.Drawing.Size(107, 20)
+        Me.cbTippedArrow.Size = New System.Drawing.Size(108, 20)
         Me.cbTippedArrow.TabIndex = 67
         Me.cbTippedArrow.Text = "Tipped Arrow"
         Me.cbTippedArrow.UseVisualStyleBackColor = False
@@ -392,7 +392,7 @@ Partial Class frmMain
         Me.cbSuspiciousStew.ForeColor = System.Drawing.Color.Black
         Me.cbSuspiciousStew.Location = New System.Drawing.Point(326, 541)
         Me.cbSuspiciousStew.Name = "cbSuspiciousStew"
-        Me.cbSuspiciousStew.Size = New System.Drawing.Size(124, 20)
+        Me.cbSuspiciousStew.Size = New System.Drawing.Size(125, 20)
         Me.cbSuspiciousStew.TabIndex = 66
         Me.cbSuspiciousStew.Text = "Suspicious Stew"
         Me.cbSuspiciousStew.UseVisualStyleBackColor = False
@@ -405,7 +405,7 @@ Partial Class frmMain
         Me.cbPotion.ForeColor = System.Drawing.Color.Black
         Me.cbPotion.Location = New System.Drawing.Point(326, 437)
         Me.cbPotion.Name = "cbPotion"
-        Me.cbPotion.Size = New System.Drawing.Size(64, 20)
+        Me.cbPotion.Size = New System.Drawing.Size(65, 20)
         Me.cbPotion.TabIndex = 65
         Me.cbPotion.Text = "Potion"
         Me.cbPotion.UseVisualStyleBackColor = False
@@ -418,7 +418,7 @@ Partial Class frmMain
         Me.cbEnchantedBook.ForeColor = System.Drawing.Color.Black
         Me.cbEnchantedBook.Location = New System.Drawing.Point(326, 411)
         Me.cbEnchantedBook.Name = "cbEnchantedBook"
-        Me.cbEnchantedBook.Size = New System.Drawing.Size(125, 20)
+        Me.cbEnchantedBook.Size = New System.Drawing.Size(126, 20)
         Me.cbEnchantedBook.TabIndex = 64
         Me.cbEnchantedBook.Text = "Enchanted Book"
         Me.cbEnchantedBook.UseVisualStyleBackColor = False
@@ -431,7 +431,7 @@ Partial Class frmMain
         Me.cbCreativeOnly.ForeColor = System.Drawing.Color.Black
         Me.cbCreativeOnly.Location = New System.Drawing.Point(490, 385)
         Me.cbCreativeOnly.Name = "cbCreativeOnly"
-        Me.cbCreativeOnly.Size = New System.Drawing.Size(107, 20)
+        Me.cbCreativeOnly.Size = New System.Drawing.Size(108, 20)
         Me.cbCreativeOnly.TabIndex = 61
         Me.cbCreativeOnly.Text = "Creative-Only"
         Me.cbCreativeOnly.UseVisualStyleBackColor = False
@@ -444,7 +444,7 @@ Partial Class frmMain
         Me.lblAddNewItems.ForeColor = System.Drawing.Color.Black
         Me.lblAddNewItems.Location = New System.Drawing.Point(39, 345)
         Me.lblAddNewItems.Name = "lblAddNewItems"
-        Me.lblAddNewItems.Size = New System.Drawing.Size(261, 16)
+        Me.lblAddNewItems.Size = New System.Drawing.Size(262, 16)
         Me.lblAddNewItems.TabIndex = 56
         Me.lblAddNewItems.Text = "Add new items and blocks to the datapack."
         '
@@ -484,7 +484,7 @@ Partial Class frmMain
         Me.cbCustomNBT.ForeColor = System.Drawing.Color.Black
         Me.cbCustomNBT.Location = New System.Drawing.Point(43, 586)
         Me.cbCustomNBT.Name = "cbCustomNBT"
-        Me.cbCustomNBT.Size = New System.Drawing.Size(82, 20)
+        Me.cbCustomNBT.Size = New System.Drawing.Size(83, 20)
         Me.cbCustomNBT.TabIndex = 79
         Me.cbCustomNBT.Text = "NBT Tag"
         Me.cbCustomNBT.UseVisualStyleBackColor = False
@@ -639,7 +639,7 @@ Partial Class frmMain
         Me.cbPainting.ForeColor = System.Drawing.Color.Black
         Me.cbPainting.Location = New System.Drawing.Point(326, 591)
         Me.cbPainting.Name = "cbPainting"
-        Me.cbPainting.Size = New System.Drawing.Size(74, 20)
+        Me.cbPainting.Size = New System.Drawing.Size(75, 20)
         Me.cbPainting.TabIndex = 99
         Me.cbPainting.Text = "Painting"
         Me.cbPainting.UseVisualStyleBackColor = False
@@ -921,7 +921,7 @@ Partial Class frmMain
         Me.MinimizeBox = False
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Random Item Giver Updater Legacy 0.5.4"
+        Me.Text = "Random Item Giver Updater Legacy 0.5.5"
         Me.gbItemID.ResumeLayout(False)
         Me.cmsHamburgerButton.ResumeLayout(False)
         CType(Me.pbLine, System.ComponentModel.ISupportInitialize).EndInit()

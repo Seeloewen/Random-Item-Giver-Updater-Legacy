@@ -118,7 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtbChangelog.Text" xml:space="preserve">
-    <value>Version 0.5.4 (04.04.2025)
+    <value>Version 0.5.5 (07.04.2026)
++ Added support for pack formats 72 to 88 (1.21.6 - 1.21.10)
+* Switched nbt tag and prefix option in normal view
+* Temp files are now stored in a seperate folder
+* Disabling logging in the settings is no longer "not recommended"
+* Updated help documentation
+
+Version 0.5.4 (04.04.2025)
 + Added support for pack formats 27 to 71 (1.20.5 - 1.21.5)
 + Added support for Item Stack Components in recent datapack versions
 + Added 'last resort' ultra fast item adding method
